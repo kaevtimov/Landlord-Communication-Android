@@ -12,6 +12,12 @@ import source.kevtimov.landlordcommunicationapp.LandlordCommunicationApplication
 
 @Singleton
 @Component(modules = {
+        ServiceModule.class,
+        AgentModule.class,
+        RepositoriesModule.class,
+        ParserModule.class,
+        HttpModule.class,
+        AsyncModule.class,
         ActivityBindingModule.class,
         ApplicationModule.class,
         AndroidSupportInjectionModule.class})
