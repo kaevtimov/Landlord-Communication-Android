@@ -34,7 +34,7 @@
         </activity>
         <activity android:name=".views.login.login.FacebookActivity" />
         <activity android:name=".views.login.signup.SignUpActivity" />
-        <activity android:name=".views.login.finishsignup.FinishSignUpActivity"></activity>
+        <activity android:name=".views.login.placemanagement.PlaceManagementActivity" />
     </application>
 
 </manifest>

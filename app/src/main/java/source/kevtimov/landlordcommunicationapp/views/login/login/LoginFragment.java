@@ -44,6 +44,7 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
     private ContractsLogin.Presenter mPresenter;
     private ContractsLogin.Navigator mNavigator;
     private CallbackManager mFacebookCallbackManager;
+    private String mUserName;
     private String mUserFirstName;
     private String mUserLastName;
     private String mUserEmail;
@@ -180,6 +181,7 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
         fbInfo.putString("fb_last_name", mUserLastName);
         fbInfo.putString("fb_email", mUserEmail);
         fbInfo.putString("fb_prof_pic", mUserProfPic);
+        fbInfo.putString("fb_username", mUserName);
 
         mNavigator.navigateToSignUp(fbInfo);
     }
@@ -229,6 +231,7 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
                                         mUserFirstName = facebookData.getString("first_name");
                                         mUserLastName = facebookData.getString("last_name");
                                         mUserEmail = facebookData.getString("email");
+                                        mUserName = facebookData.getString("email");
                                         mUserProfPic = facebookData.getString("profile_pic");
                                     }
                                 });

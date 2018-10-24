@@ -40,4 +40,20 @@ public class HttpUserService implements UserService{
             return null;
         }
     }
+
+    @Override
+    public User registerUser(User user, String password, String userType) throws IOException, InvalidKeySpecException, NoSuchAlgorithmException {
+
+        User userToRegister = user;
+
+        if(userType.equals("custom")){
+            String passSalt = passwordAgent.getSalt(10);
+            String passHash = passwordAgent.generatePasswordHash(password, passSalt);
+
+            userToRegister.setPasswordSalt(passSalt);
+            userToRegister.setPasswordHash(passHash);
+        }
+
+        return userRepository.registerUser(userToRegister);
+    }
 }

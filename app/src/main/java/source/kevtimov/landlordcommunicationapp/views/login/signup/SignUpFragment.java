@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 import com.muddzdev.styleabletoast.StyleableToast;
 
+import java.util.Objects;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -75,16 +77,20 @@ public class SignUpFragment extends Fragment implements ContractsSignUp.View {
     @BindView(R.id.radiod_select_type)
     RadioGroup mRadioGroup;
 
-    @BindView(R.id.btn_continue)
+    @BindView(R.id.btn_finish)
     Button mButtonContinue;
 
-    @BindView(R.id.btn_continue_2)
+    @BindView(R.id.btn_finish_2)
     Button mButtonContinue2;
+
+    @BindView(R.id.progress_bar)
+    ProgressBar mProgressBar;
 
     private RadioButton radioTypeButton;
     private ContractsSignUp.Presenter mPresenter;
     private ContractsSignUp.Navigator mNavigator;
     private Bundle mUserInfoData;
+    private int radioButtonSelectedId;
 
 
     @Inject
@@ -132,19 +138,47 @@ public class SignUpFragment extends Fragment implements ContractsSignUp.View {
     }
 
     @Override
-    public void proceedToFinish(Bundle data) {
-        mNavigator.navigateToFinishSignUp(data);
+    public void proceedToPlaceManagement(User user) {
+
+        StyleableToast.makeText(getContext(), "Sign Up successful!",
+                Toast.LENGTH_LONG, R.style.accept_login_toast)
+                .show();
+
+        mNavigator.navigateToPlaceManagement(user);
     }
 
     @Override
-    public void setBundleWithUserInfo(Bundle userFacebookInfo) {
-        this.mUserInfoData = userFacebookInfo;
+    public void setBundleWithUserInfo(Bundle userInfo) {
+        this.mUserInfoData = userInfo;
     }
 
-    @OnClick(R.id.btn_continue)
-    public void onClickContinueBottom(View root) {
-        int selectedId = mRadioGroup.getCheckedRadioButtonId();
-        radioTypeButton = root.findViewById(selectedId);
+    @Override
+    public void showLoading() {
+        mProgressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideLoading() {
+        mProgressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void signUpFail() {
+        StyleableToast.makeText(getContext(), "Signing up failed!",
+                Toast.LENGTH_LONG, R.style.reject_login_toast)
+                .show();
+    }
+
+    @Override
+    public void showError(Throwable error) {
+        StyleableToast.makeText(getContext(), error.getMessage(),
+                Toast.LENGTH_LONG, R.style.reject_login_toast)
+                .show();
+    }
+
+    // custom signup
+    @OnClick(R.id.btn_finish)
+    public void onClickFinishBottom(View root) {
 
         if (mEditTextEnterUsername.getText().toString().length() == 0
                 || mEditTextEnterPass.getText().toString().length() == 0
@@ -152,7 +186,7 @@ public class SignUpFragment extends Fragment implements ContractsSignUp.View {
                 || mEditTextEnterEmail.getText().toString().length() == 0
                 || mEditTextEnterFirstName.getText().toString().length() == 0
                 || mEditTextEnterLastName.getText().toString().length() == 0
-                || radioTypeButton.getText().toString().length() == 0) {
+                || radioButtonSelectedId < 0) {
 
             StyleableToast.makeText(getContext(), "Please don't leave blank information!",
                     Toast.LENGTH_LONG, R.style.reject_login_toast)
@@ -164,40 +198,48 @@ public class SignUpFragment extends Fragment implements ContractsSignUp.View {
             StyleableToast.makeText(getContext(), "Please pay attention on all constraints",
                     Toast.LENGTH_LONG, R.style.reject_login_toast)
                     .show();
+        } else if (!mEditTextEnterPass.getText().toString().equals(mEditTextRetypePass.getText().toString())) {
+            StyleableToast.makeText(getContext(), "Failed! There is difference between passwords!",
+                    Toast.LENGTH_LONG, R.style.reject_login_toast)
+                    .show();
         } else {
             mUserInfoData = fillBundleWithUserData();
-            mPresenter.allowNavigationToFinish(mUserInfoData);
+            mPresenter.registerUser(mUserInfoData);
         }
     }
 
-    @OnClick(R.id.btn_continue_2)
-    public void onClickContinueTop(View root) {
+    private boolean getRadioButtonResult() {
 
-        int selectedId = mRadioGroup.getCheckedRadioButtonId();
-        radioTypeButton = root.findViewById(selectedId);
+        radioButtonSelectedId = mRadioGroup.getCheckedRadioButtonId();
+        radioTypeButton = (RadioButton) Objects.requireNonNull(getActivity()).findViewById(radioButtonSelectedId);
 
-        if (radioTypeButton.getText().toString().length() == 0) {
-            StyleableToast.makeText(getContext(), "Please enter type information!",
+        return !radioTypeButton.getText().equals("Tenant");
+    }
+
+
+    //facebook sign up
+    @OnClick(R.id.btn_finish_2)
+    public void onClickFinishTop(View root) {
+
+        boolean isLandlord = getRadioButtonResult();
+
+        if (radioButtonSelectedId < 0) {
+            StyleableToast.makeText(getContext(), "Please choose type information!",
                     Toast.LENGTH_LONG, R.style.reject_login_toast)
                     .show();
-        } else if (radioTypeButton.getText().toString().equals("Tenant")) {
-            mUserInfoData.putBoolean("isLandlord", false);
-        } else {
-            mUserInfoData.putBoolean("isLandlord", true);
         }
 
-        mPresenter.allowNavigationToFinish(mUserInfoData);
+        mUserInfoData.putBoolean("isLandlord", isLandlord);
+        mPresenter.registerUser(mUserInfoData);
     }
 
     private Bundle fillBundleWithUserData() {
 
         Bundle filledBundle = new Bundle();
+        boolean isLandlord = getRadioButtonResult();
 
-        if (radioTypeButton.getText().toString().equals("Tenant")) {
-            filledBundle.putBoolean("isLandlord", false);
-        } else {
-            filledBundle.putBoolean("isLandlord", true);
-        }
+
+        filledBundle.putBoolean("isLandlord", isLandlord);
         filledBundle.putString("username", mEditTextEnterUsername.getText().toString());
         filledBundle.putString("password", mEditTextEnterPass.getText().toString());
         filledBundle.putString("first_name", mEditTextEnterFirstName.getText().toString());

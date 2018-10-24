@@ -19,6 +19,7 @@ public class User implements Serializable {
         //default
     }
 
+
     public User(boolean isLandlord, String username, String picture, String firstName, String lastName, String email,
                 boolean isOnline, String passwordHash, String passwordSalt){
         setUsername(username);

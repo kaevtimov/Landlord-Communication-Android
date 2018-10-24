@@ -41,7 +41,8 @@ public class OkHttpHttpRequester implements HttpRequester {
         Response response = client.newCall(request)
                 .execute();
 
-        return response.body().string();
+        String responseBody = response.body().string();
+        return responseBody;
     }
 
     @Override

@@ -31,4 +31,11 @@ public class SqlUserRepository implements UserRepository {
         String json = mHttpRequester.get(currentUrl);
         return mJsonParser.fromJson(json);
     }
+
+    @Override
+    public User registerUser(User userToRegister) throws IOException {
+        String requestBody = mJsonParser.toJson(userToRegister);
+        String responseBody = mHttpRequester.post(mServerUrl, requestBody);
+        return mJsonParser.fromJson(responseBody);
+    }
 }

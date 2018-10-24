@@ -12,9 +12,17 @@ public interface ContractsSignUp {
 
         void setNavigator(Navigator navigator);
 
-        void proceedToFinish(Bundle data);
+        void proceedToPlaceManagement(User user);
 
         void setBundleWithUserInfo(Bundle userInfo);
+
+        void showLoading();
+
+        void hideLoading();
+
+        void signUpFail();
+
+        void showError(Throwable error);
     }
 
     interface Presenter {
@@ -23,11 +31,11 @@ public interface ContractsSignUp {
 
         void unsubscribe();
 
-        void allowNavigationToFinish(Bundle userData);
+        void registerUser(Bundle userData);
     }
 
     interface Navigator {
 
-        void navigateToFinishSignUp(Bundle userInformation);
+        void navigateToPlaceManagement(User user);
     }
 }

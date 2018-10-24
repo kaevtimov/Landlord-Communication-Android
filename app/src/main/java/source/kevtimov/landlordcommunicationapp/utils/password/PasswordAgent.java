@@ -9,25 +9,17 @@ import java.security.spec.InvalidKeySpecException;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
-public class PasswordAgent implements IPasswordAgent{
+public class PasswordAgent implements IPasswordAgent {
 
     public String generatePasswordHash(String password, String salt) throws NoSuchAlgorithmException, InvalidKeySpecException {
         int iterations = 1000;
         char[] chars = password.toCharArray();
         byte[] salT = salt.getBytes();
-        //Arrays.toString(salT);
 
         PBEKeySpec spec = new PBEKeySpec(chars, salT, iterations, 64 * 8);
         SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
         byte[] hash = skf.generateSecret(spec).getEncoded();
         return toHex(salT) + ":" + toHex(hash);
-    }
-
-    private byte[] getSalt() throws NoSuchAlgorithmException {
-        SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
-        byte[] salt = new byte[16];
-        sr.nextBytes(salt);
-        return salt;
     }
 
     private String toHex(byte[] array) throws NoSuchAlgorithmException {
@@ -39,6 +31,15 @@ public class PasswordAgent implements IPasswordAgent{
         } else {
             return hex;
         }
+    }
+
+    public String getSalt(int count) {
+        StringBuilder builder = new StringBuilder();
+        while (count-- != 0) {
+            int character = (int) (Math.random() * "ABCDEFZ789".length());
+            builder.append("ABCDEFZ789".charAt(character));
+        }
+        return builder.toString();
     }
 }
 
