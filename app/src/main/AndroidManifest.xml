@@ -25,14 +25,16 @@
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name" />
-        <activity android:name=".views.login.LoginActivity">
+        <activity android:name=".views.login.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".views.login.FacebookActivity"></activity>
+        <activity android:name=".views.login.login.FacebookActivity" />
+        <activity android:name=".views.login.signup.SignUpActivity" />
+        <activity android:name=".views.login.finishsignup.FinishSignUpActivity"></activity>
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package source.kevtimov.landlordcommunicationapp.views.login;
+package source.kevtimov.landlordcommunicationapp.views.login.login;
 
 import android.os.Bundle;
 

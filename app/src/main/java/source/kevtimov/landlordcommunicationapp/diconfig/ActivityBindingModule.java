@@ -2,7 +2,8 @@ package source.kevtimov.landlordcommunicationapp.diconfig;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
-import source.kevtimov.landlordcommunicationapp.views.login.LoginActivity;
+import source.kevtimov.landlordcommunicationapp.views.login.login.LoginActivity;
+import source.kevtimov.landlordcommunicationapp.views.login.signup.SignUpActivity;
 
 @Module
 public abstract class ActivityBindingModule {
@@ -11,4 +12,10 @@ public abstract class ActivityBindingModule {
             modules = LogInModule.class
     )
     abstract LoginActivity loginActivity();
+
+    @ActivityScoped
+    @ContributesAndroidInjector(
+            modules = SignUpModule.class
+    )
+    abstract SignUpActivity signUpActivity();
 }

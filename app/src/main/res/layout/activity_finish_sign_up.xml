@@ -4,6 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.login.login.FacebookActivity">
+    tools:context=".views.login.finishsignup.FinishSignUpActivity">
+
+
+    <FrameLayout
+        android:id="@+id/signup_finish_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 
 </android.support.constraint.ConstraintLayout>

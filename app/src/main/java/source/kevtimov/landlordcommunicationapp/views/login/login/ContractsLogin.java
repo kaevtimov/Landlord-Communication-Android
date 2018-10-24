@@ -1,4 +1,6 @@
-package source.kevtimov.landlordcommunicationapp.views.login;
+package source.kevtimov.landlordcommunicationapp.views.login.login;
+
+import android.os.Bundle;
 
 import source.kevtimov.landlordcommunicationapp.models.User;
 
@@ -21,6 +23,10 @@ public interface ContractsLogin {
         void welcomeUser(User user);
 
         void alertUser();
+
+        void facebookRegisterAlert();
+
+        void proceedToSignUp();
     }
 
     interface Presenter {
@@ -32,9 +38,15 @@ public interface ContractsLogin {
         void checkLogin(String username, String password);
 
         void setUser(User user);
+
+        void verifyFacebookLogin(String facebookUsername);
+
+        void allowSignUp();
     }
 
     interface Navigator{
-        void navigateWith(User user);
+        void navigateToSignUp(Bundle facebookBundle);
+
+        void navigateToHome(User user);
     }
 }

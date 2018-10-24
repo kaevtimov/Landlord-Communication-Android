@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".views.login.signup.SignUpFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_choose_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/please_choose_your_type"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <RadioGroup
+            android:id="@+id/radiod_select_type"
+            android:layout_below="@id/tv_choose_type"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp">
+
+            <RadioButton
+                android:id="@+id/rb_tenant"
+                android:layout_marginStart="40dp"
+                android:text="@string/tenant"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"/>
+
+            <RadioButton
+                android:id="@+id/rb_landlord"
+                android:layout_marginStart="40dp"
+                android:text="@string/landlord"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"/>
+
+
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/btn_continue_2"
+            android:layout_below="@id/radiod_select_type"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="140dp"
+            android:text="@string/continue_"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/tv_enter_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/radiod_select_type"
+            android:layout_marginStart="120dp"
+            android:layout_marginTop="15dp"
+            android:text="@string/username_signup"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_username_constraints"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_enter_username"
+            android:layout_marginStart="55dp"
+            android:text="@string/username_must_be_minimum_6_characters" />
+
+        <EditText
+            android:id="@+id/et_enter_username"
+            android:layout_width="210dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_username_constraints"
+            android:layout_marginStart="85dp"
+            android:layout_marginTop="5dp"
+            android:inputType="text" />
+
+        <TextView
+            android:id="@+id/tv_enter_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/et_enter_username"
+            android:layout_marginStart="120dp"
+            android:layout_marginTop="5dp"
+            android:text="@string/password_signup"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_password_constraints"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_enter_password"
+            android:layout_marginStart="55dp"
+            android:text="@string/password_must_be_minimum_6_characters" />
+
+        <EditText
+            android:id="@+id/et_enter_password"
+            android:layout_width="210dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_password_constraints"
+            android:layout_marginStart="85dp"
+            android:layout_marginTop="5dp"
+            android:inputType="text"
+            tools:ignore="TextFields" />
+
+        <TextView
+            android:id="@+id/tv_retype_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/et_enter_password"
+            android:layout_marginStart="75dp"
+            android:layout_marginTop="15dp"
+            android:text="@string/retype_password"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/et_retype_password"
+            android:layout_width="210dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_retype_password"
+            android:layout_marginStart="85dp"
+            android:layout_marginTop="5dp"
+            android:inputType="text"
+            tools:ignore="TextFields" />
+
+
+        <TextView
+            android:id="@+id/tv_first_name"
+            android:text="@string/enter_your_first_name"
+            android:layout_below="@id/et_retype_password"
+            android:textSize="24sp"
+            android:layout_marginStart="75dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/et_enter_first_name"
+            android:layout_below="@id/tv_first_name"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="85dp"
+            android:layout_width="210dp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_last_name"
+            android:text="@string/enter_last_name"
+            android:layout_below="@id/et_enter_first_name"
+            android:textSize="24sp"
+            android:layout_marginStart="75dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/et_enter_last_name"
+            android:layout_below="@id/tv_last_name"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="85dp"
+            android:layout_width="210dp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_enter_email"
+            android:text="@string/enter_your_email_address"
+            android:layout_below="@id/et_enter_last_name"
+            android:textSize="24sp"
+            android:layout_marginStart="75dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/et_enter_email"
+            android:layout_below="@id/tv_enter_email"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="85dp"
+            android:layout_width="210dp"
+            android:layout_height="wrap_content" />
+
+
+        <Button
+            android:id="@+id/btn_continue"
+            android:layout_below="@id/et_enter_email"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="140dp"
+            android:text="@string/continue_"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+
+</ScrollView>

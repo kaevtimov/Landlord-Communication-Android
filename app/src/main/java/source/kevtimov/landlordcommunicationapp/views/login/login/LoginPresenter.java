@@ -1,4 +1,4 @@
-package source.kevtimov.landlordcommunicationapp.views.login;
+package source.kevtimov.landlordcommunicationapp.views.login.login;
 
 import javax.inject.Inject;
 
@@ -17,7 +17,7 @@ public class LoginPresenter implements ContractsLogin.Presenter {
     private User mUser;
 
     @Inject
-    public LoginPresenter(SchedulerProvider provider, UserService service){
+    public LoginPresenter(SchedulerProvider provider, UserService service) {
         this.mSchedulerProvider = provider;
         this.mService = service;
     }
@@ -37,10 +37,14 @@ public class LoginPresenter implements ContractsLogin.Presenter {
     public void checkLogin(String username, String password) {
         mView.showLoading();
 
-        if(password.length() == 0 || username.length() == 0){
+        if (password.length() == 0 || username.length() == 0) {
             mView.hideLoading();
             mView.alertUser();
-        }else{
+        }
+//        else if(true){
+//            //password should be minimum 6 characters long username too
+//        }
+        else {
             Disposable observal = Observable
                     .create((ObservableOnSubscribe<User>) emitter -> {
                         User user = mService.checkUserLogin(username, password);
@@ -52,9 +56,9 @@ public class LoginPresenter implements ContractsLogin.Presenter {
                     .doFinally(mView::hideLoading)
                     .subscribe(user -> processUser(username),
                             error -> {
-                                if(error instanceof NullPointerException){
+                                if (error instanceof NullPointerException) {
                                     mView.cancelLogin();
-                                }else{
+                                } else {
                                     mView.showError(error);
                                 }
                             });
@@ -66,17 +70,33 @@ public class LoginPresenter implements ContractsLogin.Presenter {
         this.mUser = user;
     }
 
-    private void processUser(String username) {
-
-        getUserByUsername(username);
+    @Override
+    public void verifyFacebookLogin(String facebookUsername) {
+        //check if username exists
+        getUserByUsername(facebookUsername);
 
         if(mUser != null){
             mView.welcomeUser(mUser);
         }
     }
 
+    @Override
+    public void allowSignUp() {
+        mView.proceedToSignUp();
+    }
+
+    private void processUser(String username) {
+
+        getUserByUsername(username);
+
+        if (mUser != null) {
+            mView.welcomeUser(mUser);
+        }
+    }
+
     private void getUserByUsername(String username) {
 
+        mView.showLoading();
         Disposable observal = Observable
                 .create((ObservableOnSubscribe<User>) emitter -> {
                     User user = mService.getUserByUsername(username);
@@ -85,7 +105,14 @@ public class LoginPresenter implements ContractsLogin.Presenter {
                 })
                 .subscribeOn(mSchedulerProvider.background())
                 .observeOn(mSchedulerProvider.ui())
+                .doFinally(mView::hideLoading)
                 .subscribe(this::setUser
-                        ,error -> mView.showError(error));
+                        , error -> {
+                            if (error instanceof NullPointerException) {
+                                mView.facebookRegisterAlert();
+                            } else {
+                                mView.showError(error);
+                            }
+                        });
     }
 }
