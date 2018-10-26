@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -91,6 +92,7 @@ public class SignUpFragment extends Fragment implements ContractsSignUp.View {
     private ContractsSignUp.Navigator mNavigator;
     private Bundle mUserInfoData;
     private int radioButtonSelectedId;
+    private int radioButtonResult;
 
 
     @Inject
@@ -106,6 +108,11 @@ public class SignUpFragment extends Fragment implements ContractsSignUp.View {
         View root = inflater.inflate(R.layout.fragment_sign_up, container, false);
 
         ButterKnife.bind(this, root);
+
+        // prevents the keyboard to show when activity starts
+        getActivity()
+                .getWindow()
+                .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         if (mUserInfoData.getString("intent_purpose").equals("facebook")) {
             manageViewVisibility();
@@ -176,9 +183,47 @@ public class SignUpFragment extends Fragment implements ContractsSignUp.View {
                 .show();
     }
 
-    // custom signup
+    @Override
+    public void alertForExistingUsername() {
+        StyleableToast.makeText(getContext(), "This username already exists! Please enter another.",
+                Toast.LENGTH_LONG, R.style.reject_login_toast)
+                .show();
+    }
+
+    @Override
+    public void alertForExistingEmail() {
+        StyleableToast.makeText(getContext(), "This email already exists! Please enter another.",
+                Toast.LENGTH_LONG, R.style.reject_login_toast)
+                .show();
+
+    }
+
+    @Override
+    public void alertForExistingUsernameAndEmail() {
+
+        StyleableToast.makeText(getContext(), "Username and email already exist! Please enter another.",
+                Toast.LENGTH_LONG, R.style.reject_login_toast)
+                .show();
+    }
+
+    @Override
+    public void processCheckResult(User user) {
+        if (user.getUsername().equals("used") && user.getEmail().equals("used")) {
+            alertForExistingUsernameAndEmail();
+        } else if (user.getEmail().equals("used")) {
+            alertForExistingEmail();
+        } else if (user.getUsername().equals("used")) {
+            alertForExistingUsername();
+        } else{
+            mPresenter.registerUser(mUserInfoData);
+        }
+    }
+
+    // custom sign up
     @OnClick(R.id.btn_finish)
     public void onClickFinishBottom(View root) {
+
+        radioButtonResult = getRadioButtonResult();
 
         if (mEditTextEnterUsername.getText().toString().length() == 0
                 || mEditTextEnterPass.getText().toString().length() == 0
@@ -186,7 +231,7 @@ public class SignUpFragment extends Fragment implements ContractsSignUp.View {
                 || mEditTextEnterEmail.getText().toString().length() == 0
                 || mEditTextEnterFirstName.getText().toString().length() == 0
                 || mEditTextEnterLastName.getText().toString().length() == 0
-                || radioButtonSelectedId < 0) {
+                || radioButtonResult == -1) {
 
             StyleableToast.makeText(getContext(), "Please don't leave blank information!",
                     Toast.LENGTH_LONG, R.style.reject_login_toast)
@@ -204,16 +249,8 @@ public class SignUpFragment extends Fragment implements ContractsSignUp.View {
                     .show();
         } else {
             mUserInfoData = fillBundleWithUserData();
-            mPresenter.registerUser(mUserInfoData);
+            mPresenter.checkUsernameAndEmail(mUserInfoData.getString("username"), mUserInfoData.getString("email"));
         }
-    }
-
-    private boolean getRadioButtonResult() {
-
-        radioButtonSelectedId = mRadioGroup.getCheckedRadioButtonId();
-        radioTypeButton = (RadioButton) Objects.requireNonNull(getActivity()).findViewById(radioButtonSelectedId);
-
-        return !radioTypeButton.getText().equals("Tenant");
     }
 
 
@@ -221,23 +258,31 @@ public class SignUpFragment extends Fragment implements ContractsSignUp.View {
     @OnClick(R.id.btn_finish_2)
     public void onClickFinishTop(View root) {
 
-        boolean isLandlord = getRadioButtonResult();
+        radioButtonResult = getRadioButtonResult();
 
-        if (radioButtonSelectedId < 0) {
+        if (radioButtonResult == -1) {
             StyleableToast.makeText(getContext(), "Please choose type information!",
                     Toast.LENGTH_LONG, R.style.reject_login_toast)
                     .show();
-        }
+        } else {
+            boolean isLandlord = false;
+            if (radioButtonResult == 2) {
+                isLandlord = true;
+            }
 
-        mUserInfoData.putBoolean("isLandlord", isLandlord);
-        mPresenter.registerUser(mUserInfoData);
+            mUserInfoData.putBoolean("isLandlord", isLandlord);
+            mPresenter.checkUsernameAndEmail(mUserInfoData.getString("username"), mUserInfoData.getString("email"));
+
+        }
     }
 
     private Bundle fillBundleWithUserData() {
 
         Bundle filledBundle = new Bundle();
-        boolean isLandlord = getRadioButtonResult();
-
+        boolean isLandlord = false;
+        if (radioButtonResult == 2) {
+            isLandlord = true;
+        }
 
         filledBundle.putBoolean("isLandlord", isLandlord);
         filledBundle.putString("username", mEditTextEnterUsername.getText().toString());
@@ -247,6 +292,21 @@ public class SignUpFragment extends Fragment implements ContractsSignUp.View {
         filledBundle.putString("email", mEditTextEnterEmail.getText().toString());
 
         return filledBundle;
+    }
+
+    private int getRadioButtonResult() {
+
+        radioButtonSelectedId = mRadioGroup.getCheckedRadioButtonId();
+        radioTypeButton = (RadioButton) Objects.requireNonNull(getActivity()).findViewById(radioButtonSelectedId);
+
+        if (radioButtonSelectedId == -1) {
+            return -1;
+        } else if (radioTypeButton.getText().equals("Tenant")) {
+            return 1;
+        } else if (radioTypeButton.getText().equals("Landlord")) {
+            return 2;
+        }
+        return -1;
     }
 
     private void manageViewVisibility() {

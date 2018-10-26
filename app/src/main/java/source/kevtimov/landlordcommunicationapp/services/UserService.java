@@ -14,4 +14,7 @@ public interface UserService {
     User checkUserLogin(String username, String password) throws IOException, InvalidKeySpecException, NoSuchAlgorithmException;
 
     User registerUser(User userToRegister, String password, String userType) throws IOException, InvalidKeySpecException, NoSuchAlgorithmException;
+
+    User checkUsernameAndEmail(String username, String email) throws IOException;
+
 }

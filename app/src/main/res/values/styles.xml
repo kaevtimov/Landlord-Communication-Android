@@ -17,8 +17,10 @@
         <item name="stSolidBackground">true</item>
         <item name="stStrokeWidth">5dp</item>
         <item name="stStrokeColor">#fff</item>
-        <item name="stLength">LONG</item> LONG or SHORT
-        <item name="stGravity">center</item> top or center
+        <item name="stLength">LONG</item>
+        LONG or SHORT
+        <item name="stGravity">center</item>
+        top or center
         <item name="stRadius">7dp</item>
     </style>
 
@@ -31,9 +33,11 @@
         <item name="stSolidBackground">true</item>
         <item name="stStrokeWidth">5dp</item>
         <item name="stStrokeColor">#fff</item>
-        <item name="stLength">LONG</item> LONG or SHORT
-        <item name="stGravity">center</item> top or center
-        <item name="stRadius">7dp</item>
+        <item name="stLength">LONG</item>
+        LONG or SHORT
+        <item name="stGravity">center</item>
+        top or center
+        <item name="stRadius">50dp</item>
     </style>
 
     <!--Toast custom style facebook-->
@@ -45,9 +49,29 @@
         <item name="stSolidBackground">true</item>
         <item name="stStrokeWidth">5dp</item>
         <item name="stStrokeColor">#fff</item>
-        <item name="stLength">LONG</item> LONG or SHORT
-        <item name="stGravity">center</item> top or center
-        <item name="stRadius">17dp</item>
+        <item name="stLength">LONG</item>
+        LONG or SHORT
+        <item name="stGravity">center</item>
+        top or center
+        <item name="stRadius">50dp</item>
+
+    </style>
+
+    <!--Toast custom style loading-->
+    <style name="loading_toast">
+        <item name="stTextBold">true</item>
+        <item name="stTextColor">#FFFFFF</item>
+        <item name="stTextSize">24sp</item>
+        <item name="stColorBackground">#8b8989</item>
+        <item name="stSolidBackground">true</item>
+        <item name="stStrokeWidth">5dp</item>
+        <item name="stStrokeColor">#fff</item>
+        <item name="stLength">LONG</item>
+        LONG or SHORT
+        <item name="stGravity">center</item>
+        top or center
+        <item name="stRadius">50dp</item>
+
     </style>
 
 </resources>

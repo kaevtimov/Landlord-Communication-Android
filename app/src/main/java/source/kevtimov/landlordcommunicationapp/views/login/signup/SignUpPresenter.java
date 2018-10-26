@@ -22,6 +22,7 @@ public class SignUpPresenter implements ContractsSignUp.Presenter {
     private UserService mUserService;
     private SchedulerProvider mSchedulerProvider;
 
+
     @Inject
     public SignUpPresenter(UserService service, SchedulerProvider provider) {
         this.mSchedulerProvider = provider;
@@ -41,7 +42,7 @@ public class SignUpPresenter implements ContractsSignUp.Presenter {
     @Override
     public void registerUser(Bundle userData) {
 
-        if(Objects.equals(userData.get("Purpose"), "facebook")){
+        if (Objects.equals(userData.get("Purpose"), "facebook")) {
             String username = userData.getString("fb_username");
             String firstName = userData.getString("fb_first_name");
             String lastName = userData.getString("fb_last_name");
@@ -75,8 +76,7 @@ public class SignUpPresenter implements ContractsSignUp.Presenter {
                                 }
                             });
 
-
-        }else{
+        } else {
             String username = userData.getString("username");
             String firstName = userData.getString("first_name");
             String lastName = userData.getString("last_name");
@@ -94,7 +94,7 @@ public class SignUpPresenter implements ContractsSignUp.Presenter {
 
             Disposable observal = Observable
                     .create((ObservableOnSubscribe<User>) emitter -> {
-                        User user = mUserService.registerUser(customUser, password, "custom"); // tuk vrushta user null
+                        User user = mUserService.registerUser(customUser, password, "custom");
                         emitter.onNext(user);
                         emitter.onComplete();
                     })
@@ -110,5 +110,23 @@ public class SignUpPresenter implements ContractsSignUp.Presenter {
                                 }
                             });
         }
+    }
+
+    @Override
+    public void checkUsernameAndEmail(String username, String email) {
+
+        mView.showLoading();
+
+        Disposable observal = Observable
+                .create((ObservableOnSubscribe<User>) emitter -> {
+                    User response = mUserService.checkUsernameAndEmail(username, email);
+                    emitter.onNext(response);
+                    emitter.onComplete();
+                })
+                .subscribeOn(mSchedulerProvider.background())
+                .observeOn(mSchedulerProvider.ui())
+                .doFinally(mView::hideLoading)
+                .subscribe(user -> mView.processCheckResult(user),
+                        error -> mView.showError(error));
     }
 }

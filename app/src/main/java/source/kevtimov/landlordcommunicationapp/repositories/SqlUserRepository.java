@@ -38,4 +38,18 @@ public class SqlUserRepository implements UserRepository {
         String responseBody = mHttpRequester.post(mServerUrl, requestBody);
         return mJsonParser.fromJson(responseBody);
     }
+
+    @Override
+    public User checkUsernameForExisting(String username) throws IOException {
+        String currentUrl = mServerUrl + "/checkusername/" + username;
+        String json = mHttpRequester.get(currentUrl);
+        return mJsonParser.fromJson(json);
+    }
+
+    @Override
+    public User checkEmailForExisting(String email) throws IOException {
+        String currentUrl = mServerUrl + "/checkemail/" + email;
+        String json = mHttpRequester.get(currentUrl);
+        return mJsonParser.fromJson(json);
+    }
 }

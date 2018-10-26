@@ -23,6 +23,14 @@ public interface ContractsSignUp {
         void signUpFail();
 
         void showError(Throwable error);
+
+        void alertForExistingUsername();
+
+        void alertForExistingEmail();
+
+        void alertForExistingUsernameAndEmail();
+
+        void processCheckResult(User user);
     }
 
     interface Presenter {
@@ -32,6 +40,8 @@ public interface ContractsSignUp {
         void unsubscribe();
 
         void registerUser(Bundle userData);
+
+        void checkUsernameAndEmail(String username, String email);
     }
 
     interface Navigator {

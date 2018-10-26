@@ -12,4 +12,8 @@ public interface UserRepository {
     User getUserHashAndSaltByUsername(String username) throws IOException;
 
     User registerUser(User userToRegister) throws IOException;
+
+    User checkUsernameForExisting(String username) throws IOException;
+
+    User checkEmailForExisting(String email) throws IOException;
 }
