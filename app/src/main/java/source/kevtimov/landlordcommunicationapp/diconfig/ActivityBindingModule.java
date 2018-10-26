@@ -2,6 +2,7 @@ package source.kevtimov.landlordcommunicationapp.diconfig;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
+import source.kevtimov.landlordcommunicationapp.views.login.addplace.AddPlaceActivity;
 import source.kevtimov.landlordcommunicationapp.views.login.login.LoginActivity;
 import source.kevtimov.landlordcommunicationapp.views.login.placemanagement.PlaceManagementActivity;
 import source.kevtimov.landlordcommunicationapp.views.login.signup.SignUpActivity;
@@ -25,4 +26,10 @@ public abstract class ActivityBindingModule {
             modules = PlaceManagementModule.class
     )
     abstract PlaceManagementActivity placeManagementActivity();
+
+    @ActivityScoped
+    @ContributesAndroidInjector(
+            modules = AddPlaceModule.class
+    )
+    abstract AddPlaceActivity addPlaceActivity();
 }

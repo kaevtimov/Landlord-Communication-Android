@@ -31,6 +31,8 @@ public interface ContractsPlaceManagement {
         void fillRentsList(Rent rent);
 
         void setUser(User user);
+
+        void NavigateUserToHome();
     }
 
     interface Presenter {
@@ -40,10 +42,16 @@ public interface ContractsPlaceManagement {
         void unsubscribe();
 
         void loadPlaces(List<Place> places);
+
+        void registerPlaces(List<Place> places);
+
+        void registerRents(List<Rent> rents);
+
+        void allowNavigation();
     }
 
     interface Navigator {
 
-        void navigateToHomeActivity(Bundle userInformation);
+        void navigateToHomeActivity(User userInfo);
     }
 }

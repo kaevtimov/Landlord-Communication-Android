@@ -38,7 +38,11 @@ public class PlaceManagementActivity extends DaggerAppCompatActivity implements 
     }
 
     @Override
-    public void navigateToHomeActivity(Bundle userInformation) {
-
+    public void navigateToHomeActivity(User userInfo) {
+//        Intent intent = new Intent(this, HomeActivity.class);
+//
+//        intent.putExtra("User", userInfo);
+//
+//        startActivity(intent);
     }
 }

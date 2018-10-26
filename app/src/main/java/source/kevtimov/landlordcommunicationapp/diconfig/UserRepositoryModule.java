@@ -12,7 +12,7 @@ import source.kevtimov.landlordcommunicationapp.repositories.UserRepository;
 import source.kevtimov.landlordcommunicationapp.utils.Constants;
 
 @Module
-public class RepositoriesModule {
+public class UserRepositoryModule {
 
     @Provides
     @Singleton

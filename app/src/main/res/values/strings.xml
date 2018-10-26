@@ -30,5 +30,13 @@
     <string name="ready">READY</string>
     <string name="please_enter_you_places_as_landlord">Please enter you places as landlord</string>
     <string name="finish">FINISH</string>
+    <string name="address">Address</string>
+    <string name="description">Description</string>
+    <string name="rent_amount">Rent amount</string>
+    <string name="year">Year</string>
+    <string name="due_date">Due date</string>
+    <string name="month">Month</string>
+    <string name="day">Day</string>
+    <string name="save">SAVE</string>
 
 </resources>

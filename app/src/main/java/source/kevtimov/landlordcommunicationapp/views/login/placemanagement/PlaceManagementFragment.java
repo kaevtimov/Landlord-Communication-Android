@@ -74,7 +74,9 @@ public class PlaceManagementFragment extends Fragment implements ContractsPlaceM
                 android.R.layout.simple_expandable_list_item_1);
         mListViewSelectedPlaces.setAdapter(mPlaceAdapter);
 
-        //if is tenant or landlord diff view
+        if(!mUser.isLandlord()){
+            manageView();
+        }
 
         return root;
     }
@@ -148,13 +150,37 @@ public class PlaceManagementFragment extends Fragment implements ContractsPlaceM
         this.mUser = user;
     }
 
+    @Override
+    public void NavigateUserToHome() {
+        mNavigator.navigateToHomeActivity(mUser);
+    }
+
     @OnClick(R.id.btn_add_place)
     public void onClickAdd(View v){
-
+        // navigate to AddPlaceActivity
     }
 
     @OnClick(R.id.btn_select_place)
     public void onClickSelect(View v){
 
+        // navigate to SelectPlaceActivity
+    }
+
+    @OnClick(R.id.btn_ready)
+    public void onClickReady(View v){
+        if(mUser.isLandlord()){
+            mPresenter.registerPlaces(places);
+            mPresenter.registerRents(rents);
+            mPresenter.allowNavigation();
+        }else{
+            //do smth with selected places(UPDATE)
+
+            mPresenter.allowNavigation();
+        }
+    }
+
+    private void manageView() {
+        mButtonAddPlace.setVisibility(View.GONE);
+        mButtonSelectPlace.setVisibility(View.VISIBLE);
     }
 }

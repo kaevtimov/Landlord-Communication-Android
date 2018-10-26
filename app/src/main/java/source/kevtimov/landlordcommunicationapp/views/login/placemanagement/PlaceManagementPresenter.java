@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import source.kevtimov.landlordcommunicationapp.async.base.SchedulerProvider;
 import source.kevtimov.landlordcommunicationapp.models.Place;
+import source.kevtimov.landlordcommunicationapp.models.Rent;
 import source.kevtimov.landlordcommunicationapp.services.UserService;
 
 public class PlaceManagementPresenter implements ContractsPlaceManagement.Presenter {
@@ -40,5 +41,20 @@ public class PlaceManagementPresenter implements ContractsPlaceManagement.Presen
         } else {
             mView.showPlaces(places);
         }
+    }
+
+    @Override
+    public void registerPlaces(List<Place> places) {
+
+    }
+
+    @Override
+    public void registerRents(List<Rent> rents) {
+
+    }
+
+    @Override
+    public void allowNavigation() {
+        mView.NavigateUserToHome();
     }
 }

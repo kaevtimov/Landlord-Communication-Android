@@ -12,9 +12,13 @@ import source.kevtimov.landlordcommunicationapp.LandlordCommunicationApplication
 
 @Singleton
 @Component(modules = {
-        ServiceModule.class,
+        PlaceRepositoryModule.class,
+        PlaceServiceModule.class,
+        RentRepositoryModule.class,
+        RentServiceModule.class,
+        UserServiceModule.class,
         AgentModule.class,
-        RepositoriesModule.class,
+        UserRepositoryModule.class,
         ParserModule.class,
         HttpModule.class,
         AsyncModule.class,
