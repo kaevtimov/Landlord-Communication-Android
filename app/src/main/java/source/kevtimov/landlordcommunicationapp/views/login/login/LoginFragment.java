@@ -165,8 +165,14 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
     }
 
     @Override
-    public void alertUser() {
+    public void alertUserForBlankInfo() {
         StyleableToast.makeText(getContext(), "Username and password cannot be empty!",
+                Toast.LENGTH_LONG, R.style.reject_login_toast).show();
+    }
+
+    @Override
+    public void alertUserForLengthConstraints() {
+        StyleableToast.makeText(getContext(), "Username and password length should be bigger than 6 characters!",
                 Toast.LENGTH_LONG, R.style.reject_login_toast).show();
     }
 

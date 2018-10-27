@@ -157,7 +157,10 @@ public class PlaceManagementFragment extends Fragment implements ContractsPlaceM
 
     @OnClick(R.id.btn_home)
     public void onClickHome(View v) {
-        
+        StyleableToast.makeText(getContext(), "WELCOME!",
+                Toast.LENGTH_LONG, R.style.accept_login_toast)
+                .show();
+
         mPresenter.allowToHomeActivity();
     }
 

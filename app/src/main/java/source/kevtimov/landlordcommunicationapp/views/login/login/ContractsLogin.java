@@ -22,7 +22,9 @@ public interface ContractsLogin {
 
         void welcomeUser(User user);
 
-        void alertUser();
+        void alertUserForBlankInfo();
+
+        void alertUserForLengthConstraints();
 
         void facebookRegisterAlert();
 

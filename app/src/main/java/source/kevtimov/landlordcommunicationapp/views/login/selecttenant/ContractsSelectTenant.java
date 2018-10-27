@@ -1,6 +1,5 @@
 package source.kevtimov.landlordcommunicationapp.views.login.selecttenant;
 
-import android.os.Bundle;
 
 import java.util.List;
 

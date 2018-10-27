@@ -1,6 +1,5 @@
 package source.kevtimov.landlordcommunicationapp.views.login.addplace;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,7 +10,6 @@ import dagger.android.support.DaggerAppCompatActivity;
 import source.kevtimov.landlordcommunicationapp.R;
 import source.kevtimov.landlordcommunicationapp.models.User;
 import source.kevtimov.landlordcommunicationapp.utils.Constants;
-import source.kevtimov.landlordcommunicationapp.views.login.placemanagement.PlaceManagementActivity;
 import source.kevtimov.landlordcommunicationapp.views.login.selecttenant.SelectTenantActivity;
 
 public class AddPlaceActivity extends DaggerAppCompatActivity implements ContractsAddPlace.Navigator {

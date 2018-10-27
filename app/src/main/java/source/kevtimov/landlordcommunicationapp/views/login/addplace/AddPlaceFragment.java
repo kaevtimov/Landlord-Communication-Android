@@ -50,7 +50,7 @@ public class AddPlaceFragment extends Fragment implements ContractsAddPlace.View
     TextView mTextViewDueDate;
 
     @BindView(R.id.tv_year)
-    TextView mTextViewyear;
+    TextView mTextViewYear;
 
     @BindView(R.id.tv_month)
     TextView mTextViewMonth;

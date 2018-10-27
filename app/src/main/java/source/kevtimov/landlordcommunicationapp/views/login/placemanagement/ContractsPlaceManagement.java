@@ -2,8 +2,6 @@ package source.kevtimov.landlordcommunicationapp.views.login.placemanagement;
 
 import android.os.Bundle;
 
-import java.util.List;
-
 import source.kevtimov.landlordcommunicationapp.models.Place;
 import source.kevtimov.landlordcommunicationapp.models.Rent;
 import source.kevtimov.landlordcommunicationapp.models.User;

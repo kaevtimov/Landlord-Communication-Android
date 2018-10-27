@@ -39,12 +39,10 @@ public class LoginPresenter implements ContractsLogin.Presenter {
 
         if (password.length() == 0 || username.length() == 0) {
             mView.hideLoading();
-            mView.alertUser();
-        }
-//        else if(true){
-//            //password should be minimum 6 characters long username too
-//        }
-        else {
+            mView.alertUserForBlankInfo();
+        } else if (password.length() < 6 || username.length() < 6) {
+            mView.alertUserForLengthConstraints();
+        } else {
             Disposable observal = Observable
                     .create((ObservableOnSubscribe<User>) emitter -> {
                         User user = mService.checkUserLogin(username, password);
