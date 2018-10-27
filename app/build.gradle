@@ -55,4 +55,11 @@ dependencies {
 
     //Social logins
     implementation 'com.facebook.android:facebook-android-sdk:4.6.0'
+
+    //Drawer
+    implementation("com.mikepenz:materialdrawer:6.0.9@aar") {
+        transitive = true
+    }
+
+    //Firebase Messaging
 }

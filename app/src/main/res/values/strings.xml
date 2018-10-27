@@ -13,5 +13,7 @@
     <!--Facebook login-->
     <string name="facebook_app_id">2123429834540963</string>
     <string name="fb_login_protocol_scheme">fb2123429834540963</string>
+    <string name="write_hint">Write a message</string>
+    <string name="other_side_placeholder">How are you doing? This is a long message that should probably wrap.</string>
 
 </resources>

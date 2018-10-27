@@ -18,6 +18,7 @@ import source.kevtimov.landlordcommunicationapp.LandlordCommunicationApplication
         ParserModule.class,
         HttpModule.class,
         AsyncModule.class,
+        ChatModule.class,
         ActivityBindingModule.class,
         ApplicationModule.class,
         AndroidSupportInjectionModule.class})

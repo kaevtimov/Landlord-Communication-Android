@@ -1,7 +1,5 @@
 package source.kevtimov.landlordcommunicationapp;
 
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
 
 import dagger.android.AndroidInjector;
 import dagger.android.DaggerApplication;
