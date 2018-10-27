@@ -5,6 +5,7 @@ import dagger.android.ContributesAndroidInjector;
 import source.kevtimov.landlordcommunicationapp.views.login.addplace.AddPlaceActivity;
 import source.kevtimov.landlordcommunicationapp.views.login.login.LoginActivity;
 import source.kevtimov.landlordcommunicationapp.views.login.placemanagement.PlaceManagementActivity;
+import source.kevtimov.landlordcommunicationapp.views.login.selecttenant.SelectTenantActivity;
 import source.kevtimov.landlordcommunicationapp.views.login.signup.SignUpActivity;
 
 @Module
@@ -32,4 +33,10 @@ public abstract class ActivityBindingModule {
             modules = AddPlaceModule.class
     )
     abstract AddPlaceActivity addPlaceActivity();
+
+    @ActivityScoped
+    @ContributesAndroidInjector(
+            modules = SelectTenantModule.class
+    )
+    abstract SelectTenantActivity selectTenantActivity();
 }

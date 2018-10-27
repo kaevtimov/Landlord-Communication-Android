@@ -1,5 +1,7 @@
 package source.kevtimov.landlordcommunicationapp.views.login.addplace;
 
+import android.os.Bundle;
+
 import javax.inject.Inject;
 
 import source.kevtimov.landlordcommunicationapp.async.base.SchedulerProvider;
@@ -20,8 +22,6 @@ public class AddPlacePresenter implements ContractsAddPlace.Presenter {
         this.mRentService = rentService;
     }
 
-
-
     @Override
     public void subscribe(ContractsAddPlace.View view) {
         this.mView = view;
@@ -30,5 +30,20 @@ public class AddPlacePresenter implements ContractsAddPlace.Presenter {
     @Override
     public void unsubscribe() {
         mView = null;
+    }
+
+    @Override
+    public void allowNavigationOnCancel() {
+        mView.navigateToPlaceManagementOnCancel();
+    }
+
+    @Override
+    public void allowNavigationOnSave(Bundle info) {
+        mView.navigateToPlaceManagementOnSave(info);
+    }
+
+    @Override
+    public void allowNavigateToSelectTenant() {
+        mView.navigateToSelectTenant();
     }
 }

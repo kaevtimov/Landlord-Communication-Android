@@ -7,7 +7,7 @@ public class Rent implements Serializable {
     private int rentID;
     private int placeID;
     private double totalAmount;
-    private double remainingAmount;
+    private double remaining;
     private String dueDate;
     private boolean isPaid;
 
@@ -48,11 +48,11 @@ public class Rent implements Serializable {
     }
 
     public double getRemainingAmount() {
-        return remainingAmount;
+        return remaining;
     }
 
     public void setRemainingAmount(double remainingAmount) {
-        this.remainingAmount = remainingAmount;
+        this.remaining = remainingAmount;
     }
 
     public String getDueDate() {

@@ -101,7 +101,7 @@ public class SignUpPresenter implements ContractsSignUp.Presenter {
                     .subscribeOn(mSchedulerProvider.background())
                     .observeOn(mSchedulerProvider.ui())
                     .doFinally(mView::hideLoading)
-                    .subscribe(user -> mView.proceedToPlaceManagement(user),
+                    .subscribe(mView::proceedToPlaceManagement,
                             error -> {
                                 if (error instanceof NullPointerException) {
                                     mView.signUpFail();
@@ -129,4 +129,5 @@ public class SignUpPresenter implements ContractsSignUp.Presenter {
                 .subscribe(user -> mView.processCheckResult(user),
                         error -> mView.showError(error));
     }
+
 }

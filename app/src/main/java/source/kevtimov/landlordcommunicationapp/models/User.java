@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class User implements Serializable {
 
-    private int userId;
+    private int userID;
     private String username;
     private String firstName;
     private String lastName;
@@ -35,7 +35,11 @@ public class User implements Serializable {
 
 
     public int getUserId() {
-        return userId;
+        return userID;
+    }
+
+    public void setUserId(int userId){
+        this.userID = userId;
     }
 
     public String getUsername() {
@@ -109,4 +113,10 @@ public class User implements Serializable {
     public void setPasswordSalt(String passwordSalt) {
         this.passwordSalt = passwordSalt;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Name: %s, %s", getLastName(), getFirstName());
+    }
+
 }

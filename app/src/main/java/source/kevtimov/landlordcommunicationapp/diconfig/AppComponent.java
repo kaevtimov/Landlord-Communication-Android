@@ -12,6 +12,8 @@ import source.kevtimov.landlordcommunicationapp.LandlordCommunicationApplication
 
 @Singleton
 @Component(modules = {
+        RentParserModule.class,
+        PlaceParserModule.class,
         PlaceRepositoryModule.class,
         PlaceServiceModule.class,
         RentRepositoryModule.class,
@@ -19,7 +21,7 @@ import source.kevtimov.landlordcommunicationapp.LandlordCommunicationApplication
         UserServiceModule.class,
         AgentModule.class,
         UserRepositoryModule.class,
-        ParserModule.class,
+        UserParserModule.class,
         HttpModule.class,
         AsyncModule.class,
         ActivityBindingModule.class,

@@ -9,7 +9,7 @@
         android:name=".LandlordCommunicationApplication"
         android:allowBackup="true"
         android:appComponentFactory="some"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_home_black_24dp"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -35,7 +35,8 @@
         <activity android:name=".views.login.login.FacebookActivity" />
         <activity android:name=".views.login.signup.SignUpActivity" />
         <activity android:name=".views.login.placemanagement.PlaceManagementActivity" />
-        <activity android:name=".views.login.addplace.AddPlaceActivity"></activity>
+        <activity android:name=".views.login.addplace.AddPlaceActivity" />
+        <activity android:name=".views.login.selecttenant.SelectTenantActivity"></activity>
     </application>
 
 </manifest>

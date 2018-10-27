@@ -1,5 +1,8 @@
 package source.kevtimov.landlordcommunicationapp.services;
 
+import java.io.IOException;
+
+import source.kevtimov.landlordcommunicationapp.models.Place;
 import source.kevtimov.landlordcommunicationapp.repositories.PlaceRepository;
 
 public class HttpPlaceService implements PlaceService {
@@ -10,5 +13,9 @@ public class HttpPlaceService implements PlaceService {
         this.placeRepository = repository;
     }
 
+    @Override
+    public Place registerPlace(Place place) throws IOException {
 
+        return placeRepository.registerPlace(place);
+    }
 }

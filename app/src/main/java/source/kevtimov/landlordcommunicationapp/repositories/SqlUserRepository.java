@@ -1,6 +1,7 @@
 package source.kevtimov.landlordcommunicationapp.repositories;
 
 import java.io.IOException;
+import java.util.List;
 
 import source.kevtimov.landlordcommunicationapp.http.HttpRequester;
 import source.kevtimov.landlordcommunicationapp.models.User;
@@ -51,5 +52,12 @@ public class SqlUserRepository implements UserRepository {
         String currentUrl = mServerUrl + "/checkemail/" + email;
         String json = mHttpRequester.get(currentUrl);
         return mJsonParser.fromJson(json);
+    }
+
+    @Override
+    public List<User> getAllTenants() throws IOException {
+        String mServerUrlGet = mServerUrl + "/tenants";
+        String moviesJson = mHttpRequester.get(mServerUrlGet);
+        return mJsonParser.fromJsonArray(moviesJson);
     }
 }

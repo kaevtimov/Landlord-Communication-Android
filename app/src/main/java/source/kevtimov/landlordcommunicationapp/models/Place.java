@@ -28,6 +28,8 @@ public class Place implements Serializable{
         return placeID;
     }
 
+    public void setPlaceID(int placeid){this.placeID = placeid;}
+
     public String getAddress() {
         return address;
     }
@@ -62,6 +64,10 @@ public class Place implements Serializable{
 
     private void setLandlordID(int landlordID) {
         this.landlordID = landlordID;
+    }
+
+    public void setRents(List<String> rents) {
+        this.rents = rents;
     }
 }
 

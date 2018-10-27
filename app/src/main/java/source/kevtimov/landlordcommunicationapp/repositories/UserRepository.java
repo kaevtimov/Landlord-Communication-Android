@@ -16,4 +16,6 @@ public interface UserRepository {
     User checkUsernameForExisting(String username) throws IOException;
 
     User checkEmailForExisting(String email) throws IOException;
+
+    List<User> getAllTenants() throws  IOException;
 }

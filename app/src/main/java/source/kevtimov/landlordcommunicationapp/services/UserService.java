@@ -17,4 +17,6 @@ public interface UserService {
 
     User checkUsernameAndEmail(String username, String email) throws IOException;
 
+    List<User> getAllTenants() throws IOException;
+
 }

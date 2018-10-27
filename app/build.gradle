@@ -55,4 +55,7 @@ dependencies {
 
     //Social logins
     implementation 'com.facebook.android:facebook-android-sdk:4.6.0'
+
+    //AlertDialog
+    implementation 'com.github.Shashank02051997:FancyAlertDialog-Android:0.1'
 }

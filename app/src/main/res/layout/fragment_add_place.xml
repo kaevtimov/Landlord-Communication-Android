@@ -69,7 +69,7 @@
             android:layout_marginStart="75dp"
             android:layout_width="225dp"
             android:layout_height="wrap_content"
-            android:inputType="text" />
+            android:inputType="numberDecimal" />
 
         <TextView
             android:id="@+id/tv_duedate"
@@ -142,14 +142,48 @@
             android:layout_height="wrap_content"
             android:inputType="number" />
 
-        <Button
-            android:id="@+id/btn_save"
+        <TextView
+            android:id="@+id/tv_tenant"
             android:layout_below="@+id/et_enter_month"
-            android:text="@string/save"
-            android:layout_marginTop="40dp"
-            android:layout_marginStart="150dp"
+            android:text="@string/tenant_"
+            android:layout_marginTop="25dp"
+            android:layout_marginStart="30dp"
+            android:textSize="30sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btn_select_tenant"
+            android:layout_below="@+id/tv_tenant"
+            android:text="@string/select_tenant"
+            android:layout_marginTop="40dp"
+            android:layout_marginStart="127dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_below="@+id/btn_select_tenant"
+            android:text="@string/cancel_add"
+            android:layout_marginTop="40dp"
+            android:layout_marginStart="70dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_below="@+id/btn_select_tenant"
+            android:text="@string/save"
+            android:layout_marginTop="40dp"
+            android:layout_marginStart="220dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"/>
 
 
 

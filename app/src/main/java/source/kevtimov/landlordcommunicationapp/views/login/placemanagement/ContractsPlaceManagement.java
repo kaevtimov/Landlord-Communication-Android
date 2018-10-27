@@ -22,17 +22,19 @@ public interface ContractsPlaceManagement {
 
         void showError(Throwable error);
 
-        void showPlaces(List<Place> places);
-
-        void showEmptyList();
-
-        void fillPlacesList(Place place);
-
-        void fillRentsList(Rent rent);
-
         void setUser(User user);
 
-        void NavigateUserToHome();
+        void navigateUserToHome();
+
+        void navigateUserToAddPlace();
+
+        void navigateUserToSelectPlace();
+
+        void addPlaceFail();
+
+        void manageIncomingInformation(Bundle info);
+
+        void registerRent(int placeId);
     }
 
     interface Presenter {
@@ -41,17 +43,23 @@ public interface ContractsPlaceManagement {
 
         void unsubscribe();
 
-        void loadPlaces(List<Place> places);
+        void registerPlace(Place place);
 
-        void registerPlaces(List<Place> places);
+        void registerRent(Rent rent);
 
-        void registerRents(List<Rent> rents);
+        void allowToHomeActivity();
 
-        void allowNavigation();
+        void allowNavigationToAddPlace();
+
+        void allowNavigationToSelectPlace();
     }
 
     interface Navigator {
 
         void navigateToHomeActivity(User userInfo);
+
+        void navigateToAddPlaceActivity();
+
+        void navigateToSelectPlaceActivity();
     }
 }

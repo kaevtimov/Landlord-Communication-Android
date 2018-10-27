@@ -28,7 +28,7 @@
     <string name="add_place">ADD PLACE</string>
     <string name="select_place">SELECT PLACE</string>
     <string name="ready">READY</string>
-    <string name="please_enter_you_places_as_landlord">Please enter you places as landlord</string>
+    <string name="please_enter_your_places_as_landlord">Please enter your places as landlord</string>
     <string name="finish">FINISH</string>
     <string name="address">Address</string>
     <string name="description">Description</string>
@@ -38,5 +38,15 @@
     <string name="month">Month</string>
     <string name="day">Day</string>
     <string name="save">SAVE</string>
+    <string name="select_tenant">SELECT TENANT</string>
+    <string name="cancel">CANCEL</string>
+    <string name="cancel_add">CANCEL</string>
+    <string name="are_you_sure_changes_will_be_saved_to_your_account">ARE YOU SURE? FOLLOWING CHANGES WILL BE SAVED TO YOUR ACCOUNT!</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
+    <string name="tenant_">Tenant:</string>
+    <string name="home">HOME</string>
+    <string name="please_select_tenant_from_the_following">PLEASE SELECT TENANT FROM THE FOLLOWING</string>
+    <string name="done">DONE</string>
 
 </resources>

@@ -1,25 +1,28 @@
 package source.kevtimov.landlordcommunicationapp.views.login.placemanagement;
 
-import android.os.Bundle;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.disposables.Disposable;
 import source.kevtimov.landlordcommunicationapp.async.base.SchedulerProvider;
 import source.kevtimov.landlordcommunicationapp.models.Place;
 import source.kevtimov.landlordcommunicationapp.models.Rent;
-import source.kevtimov.landlordcommunicationapp.services.UserService;
+import source.kevtimov.landlordcommunicationapp.services.PlaceService;
+import source.kevtimov.landlordcommunicationapp.services.RentService;
 
 public class PlaceManagementPresenter implements ContractsPlaceManagement.Presenter {
 
     private ContractsPlaceManagement.View mView;
-    private UserService mService;
+    private PlaceService mPlaceService;
+    private RentService mRentService;
     private SchedulerProvider mSchedulerProvider;
 
     @Inject
-    public PlaceManagementPresenter(UserService userService, SchedulerProvider schedulerProvider){
-        this.mService = userService;
+    public PlaceManagementPresenter(RentService rentService, PlaceService placeService, SchedulerProvider schedulerProvider){
+        this.mPlaceService = placeService;
+        this.mRentService = rentService;
         this.mSchedulerProvider = schedulerProvider;
     }
 
@@ -30,31 +33,70 @@ public class PlaceManagementPresenter implements ContractsPlaceManagement.Presen
 
     @Override
     public void unsubscribe() {
-        mView = null;
+        this.mView = null;
+    }
+
+
+    @Override
+    public void registerPlace(Place place) {
+
+        mView.showLoading();
+        Disposable observal = Observable
+                .create((ObservableOnSubscribe<Place>) emitter -> {
+                    Place placeResponse = mPlaceService.registerPlace(place);
+                    emitter.onNext(placeResponse);
+                    emitter.onComplete();
+                })
+                .subscribeOn(mSchedulerProvider.background())
+                .observeOn(mSchedulerProvider.ui())
+                .doFinally(mView::hideLoading)
+                .subscribe(pl -> mView.registerRent(pl.getPlaceID()),
+                        error -> {
+                            if (error instanceof NullPointerException) {
+                                mView.addPlaceFail();
+                            } else {
+                                mView.showError(error);
+                            }
+                        });
     }
 
     @Override
-    public void loadPlaces(List<Place> places) {
+    public void registerRent(Rent rent) {
+        mView.showLoading();
+        Disposable observal = Observable
+                .create((ObservableOnSubscribe<Rent>) emitter -> {
+                    Rent rentResponse = mRentService.registerRent(rent);
+                    emitter.onNext(rentResponse);
+                    emitter.onComplete();
+                })
+                .subscribeOn(mSchedulerProvider.background())
+                .observeOn(mSchedulerProvider.ui())
+                .doFinally(mView::hideLoading)
+                .subscribe(ren-> {},
+                        error -> {
+                            if (error instanceof NullPointerException) {
+                                // if there is null objects
+                            } else {
+                                mView.showError(error);
+                            }
+                        });
+    }
 
-        if (places.isEmpty()) {
-            mView.showEmptyList();
-        } else {
-            mView.showPlaces(places);
-        }
+
+    @Override
+    public void allowToHomeActivity() {
+        mView.navigateUserToHome();
     }
 
     @Override
-    public void registerPlaces(List<Place> places) {
-
+    public void allowNavigationToAddPlace() {
+        mView.navigateUserToAddPlace();
     }
 
     @Override
-    public void registerRents(List<Rent> rents) {
-
+    public void allowNavigationToSelectPlace() {
+        mView.navigateUserToSelectPlace();
     }
 
-    @Override
-    public void allowNavigation() {
-        mView.NavigateUserToHome();
-    }
+
 }
