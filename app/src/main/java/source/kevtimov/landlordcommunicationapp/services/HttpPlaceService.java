@@ -1,6 +1,7 @@
 package source.kevtimov.landlordcommunicationapp.services;
 
 import java.io.IOException;
+import java.util.List;
 
 import source.kevtimov.landlordcommunicationapp.models.Place;
 import source.kevtimov.landlordcommunicationapp.repositories.PlaceRepository;
@@ -17,5 +18,15 @@ public class HttpPlaceService implements PlaceService {
     public Place registerPlace(Place place) throws IOException {
 
         return placeRepository.registerPlace(place);
+    }
+
+    @Override
+    public List<Place> getAllPlacesWithNoTenants() throws IOException {
+        return placeRepository.getAllPlacesWithNoTenants();
+    }
+
+    @Override
+    public Place updatePlaceTenant(Place place, int placeId) throws IOException {
+        return placeRepository.updatePlaceTenant(place, placeId);
     }
 }

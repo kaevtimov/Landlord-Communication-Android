@@ -41,6 +41,7 @@ public class LoginPresenter implements ContractsLogin.Presenter {
             mView.hideLoading();
             mView.alertUserForBlankInfo();
         } else if (password.length() < 6 || username.length() < 6) {
+            mView.hideLoading();
             mView.alertUserForLengthConstraints();
         } else {
             Disposable observal = Observable
@@ -52,7 +53,7 @@ public class LoginPresenter implements ContractsLogin.Presenter {
                     .subscribeOn(mSchedulerProvider.background())
                     .observeOn(mSchedulerProvider.ui())
                     .doFinally(mView::hideLoading)
-                    .subscribe(user -> processUser(username),
+                    .subscribe(user -> processCustomUser(username),
                             error -> {
                                 if (error instanceof NullPointerException) {
                                     mView.cancelLogin();
@@ -69,9 +70,9 @@ public class LoginPresenter implements ContractsLogin.Presenter {
     }
 
     @Override
-    public void verifyFacebookLogin(String facebookUsername) {
+    public void verifyFacebookLogin(String username) {
         //check if username exists
-        getUserByUsername(facebookUsername);
+        checkFacebookUserByUsername(username);
 
         if(mUser != null){
             mView.welcomeUser(mUser);
@@ -83,16 +84,7 @@ public class LoginPresenter implements ContractsLogin.Presenter {
         mView.proceedToSignUp();
     }
 
-    private void processUser(String username) {
-
-        getUserByUsername(username);
-
-        if (mUser != null) {
-            mView.welcomeUser(mUser);
-        }
-    }
-
-    private void getUserByUsername(String username) {
+    private void checkFacebookUserByUsername(String username) {
 
         mView.showLoading();
         Disposable observal = Observable
@@ -112,5 +104,28 @@ public class LoginPresenter implements ContractsLogin.Presenter {
                                 mView.showError(error);
                             }
                         });
+    }
+
+    private void processCustomUser(String username) {
+        checkCustomUserByUsername(username);
+        if (mUser != null) {
+            mView.welcomeUser(mUser);
+        }
+    }
+
+    private void checkCustomUserByUsername(String username) {
+
+        mView.showLoading();
+        Disposable observal = Observable
+                .create((ObservableOnSubscribe<User>) emitter -> {
+                    User user = mService.getUserByUsername(username);
+                    emitter.onNext(user);
+                    emitter.onComplete();
+                })
+                .subscribeOn(mSchedulerProvider.background())
+                .observeOn(mSchedulerProvider.ui())
+                .doFinally(mView::hideLoading)
+                .subscribe(this::setUser
+                        , error -> mView.showError(error));
     }
 }

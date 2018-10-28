@@ -21,10 +21,6 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
-        <activity
-            android:name="com.facebook.FacebookActivity"
-            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:label="@string/app_name" />
         <activity android:name=".views.login.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,11 +28,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".views.login.login.FacebookActivity" />
         <activity android:name=".views.login.signup.SignUpActivity" />
         <activity android:name=".views.login.placemanagement.PlaceManagementActivity" />
         <activity android:name=".views.login.addplace.AddPlaceActivity" />
-        <activity android:name=".views.login.selecttenant.SelectTenantActivity"></activity>
+        <activity android:name=".views.login.selecttenant.SelectTenantActivity" />
+        <activity android:name=".views.login.selectplace.SelectPlaceActivity" />
+        <activity android:name=".views.login.home.HomeActivity" />
     </application>
 
 </manifest>

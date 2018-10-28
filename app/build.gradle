@@ -58,4 +58,9 @@ dependencies {
 
     //AlertDialog
     implementation 'com.github.Shashank02051997:FancyAlertDialog-Android:0.1'
+
+    //MaterialDrawer
+    implementation("com.mikepenz:materialdrawer:6.0.9@aar") {
+        transitive = true
+    }
 }

@@ -6,4 +6,5 @@ public class Constants {
     public static final int SELECT_TENANT_REQUEST = 2005;
 
     public static final int ADD_PLACE_REQUEST = 20015;
+    public static final int SELECT_PLACE_REQUEST = 200;
 }

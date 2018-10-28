@@ -1,9 +1,10 @@
 package source.kevtimov.landlordcommunicationapp.models;
 
+
 import java.io.Serializable;
 import java.util.List;
 
-public class Place implements Serializable{
+public class Place implements Serializable {
 
     private int placeID;
     private int tenantID;
@@ -34,7 +35,7 @@ public class Place implements Serializable{
         return address;
     }
 
-    private void setAddress(String address) {
+    public void setAddress(String address) {
         this.address = address;
     }
 
@@ -42,7 +43,7 @@ public class Place implements Serializable{
         return description;
     }
 
-    private void setDescription(String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
@@ -54,7 +55,7 @@ public class Place implements Serializable{
         return tenantID;
     }
 
-    private void setTenantID(int tenantID) {
+    public void setTenantID(int tenantID) {
         this.tenantID = tenantID;
     }
 
@@ -62,12 +63,18 @@ public class Place implements Serializable{
         return landlordID;
     }
 
-    private void setLandlordID(int landlordID) {
+    public void setLandlordID(int landlordID) {
         this.landlordID = landlordID;
     }
 
     public void setRents(List<String> rents) {
         this.rents = rents;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Address: %s", getAddress());
+    }
+
 }
 

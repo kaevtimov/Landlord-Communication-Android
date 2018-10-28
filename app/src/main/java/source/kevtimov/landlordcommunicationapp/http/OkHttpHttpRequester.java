@@ -60,7 +60,7 @@ public class OkHttpHttpRequester implements HttpRequester {
     }
 
     @Override
-    public String update(String url, String body, int id) throws IOException {
+    public String update(String url, String body) throws IOException {
         OkHttpClient client = new OkHttpClient();
         RequestBody bodyString = RequestBody.create(
                 MediaType.parse("application/json"),

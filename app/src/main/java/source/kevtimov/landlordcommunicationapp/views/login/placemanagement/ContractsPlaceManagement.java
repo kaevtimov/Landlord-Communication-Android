@@ -2,6 +2,9 @@ package source.kevtimov.landlordcommunicationapp.views.login.placemanagement;
 
 import android.os.Bundle;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import source.kevtimov.landlordcommunicationapp.models.Place;
 import source.kevtimov.landlordcommunicationapp.models.Rent;
 import source.kevtimov.landlordcommunicationapp.models.User;
@@ -30,9 +33,13 @@ public interface ContractsPlaceManagement {
 
         void addPlaceFail();
 
-        void manageIncomingInformation(Bundle info);
+        void updateAddPlaces(Bundle places);
 
         void registerRent(int placeId);
+
+        void updateSelectPlaces(ArrayList<Place> places);
+
+        void updatePlacesInDatabase(ArrayList<Place> places);
     }
 
     interface Presenter {
@@ -50,6 +57,8 @@ public interface ContractsPlaceManagement {
         void allowNavigationToAddPlace();
 
         void allowNavigationToSelectPlace();
+
+        void updatePlaces(Place place, int placeId);
     }
 
     interface Navigator {

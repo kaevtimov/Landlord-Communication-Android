@@ -38,7 +38,6 @@ public class SelectTenantActivity extends DaggerAppCompatActivity implements Con
 
     @Override
     public void navigateToAddPlaceOnDone(User tenant) {
-
         Intent intent = new Intent();
         intent.putExtra("User", tenant);
         setResult(RESULT_OK, intent);

@@ -13,6 +13,7 @@ import javax.inject.Inject;
 import dagger.android.support.DaggerAppCompatActivity;
 import source.kevtimov.landlordcommunicationapp.R;
 import source.kevtimov.landlordcommunicationapp.models.User;
+import source.kevtimov.landlordcommunicationapp.views.login.home.HomeActivity;
 import source.kevtimov.landlordcommunicationapp.views.login.signup.SignUpActivity;
 
 public class LoginActivity extends DaggerAppCompatActivity implements ContractsLogin.Navigator{
@@ -56,8 +57,8 @@ public class LoginActivity extends DaggerAppCompatActivity implements ContractsL
 
     @Override
     public void navigateToHome(User user) {
-//        Intent intent = new Intent(this, HomeActivity.class);
-//        intent.putExtra("User", user);
-//        startActivity(intent);
+        Intent intent = new Intent(this, HomeActivity.class);
+        intent.putExtra("User", user);
+        startActivity(intent);
     }
 }

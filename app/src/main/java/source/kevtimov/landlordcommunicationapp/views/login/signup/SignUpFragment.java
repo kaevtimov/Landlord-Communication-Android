@@ -109,7 +109,6 @@ public class SignUpFragment extends Fragment implements ContractsSignUp.View {
 
         ButterKnife.bind(this, root);
 
-        // prevents the keyboard to show when activity starts
         getActivity()
                 .getWindow()
                 .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);

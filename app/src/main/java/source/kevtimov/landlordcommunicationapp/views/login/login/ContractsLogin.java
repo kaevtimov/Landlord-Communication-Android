@@ -41,7 +41,7 @@ public interface ContractsLogin {
 
         void setUser(User user);
 
-        void verifyFacebookLogin(String facebookUsername);
+        void verifyFacebookLogin(String username);
 
         void allowSignUp();
     }

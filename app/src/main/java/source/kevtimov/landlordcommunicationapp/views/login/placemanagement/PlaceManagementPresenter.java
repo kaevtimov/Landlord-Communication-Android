@@ -1,6 +1,8 @@
 package source.kevtimov.landlordcommunicationapp.views.login.placemanagement;
 
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
@@ -98,5 +100,19 @@ public class PlaceManagementPresenter implements ContractsPlaceManagement.Presen
         mView.navigateUserToSelectPlace();
     }
 
-
+    @Override
+    public void updatePlaces(Place place, int placeId) {
+        mView.showLoading();
+        Disposable disposable = Observable
+                .create((ObservableOnSubscribe<Place>) emitter-> {
+                    Place placeToUpdate = mPlaceService.updatePlaceTenant(place, placeId);
+                    emitter.onNext(placeToUpdate);
+                    emitter.onComplete();
+                })
+                .subscribeOn(mSchedulerProvider.background())
+                .observeOn(mSchedulerProvider.ui())
+                .doFinally(mView::hideLoading)
+                .subscribe(placeUpdated -> {},
+                        mView::showError);
+    }
 }

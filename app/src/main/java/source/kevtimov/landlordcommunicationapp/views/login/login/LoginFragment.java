@@ -19,10 +19,12 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.muddzdev.styleabletoast.StyleableToast;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.MalformedURLException;
@@ -44,11 +46,12 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
     private ContractsLogin.Presenter mPresenter;
     private ContractsLogin.Navigator mNavigator;
     private CallbackManager mFacebookCallbackManager;
-    private String mUserName;
-    private String mUserFirstName;
-    private String mUserLastName;
-    private String mUserEmail;
-    private String mUserProfPic;
+    //    private String mUserName;
+//    private String mUserFirstName;
+//    private String mUserLastName;
+//    private String mUserEmail;
+//    private String mUserProfPic;
+    private Bundle mFacebookData;
 
     @BindView(R.id.fb_login_button)
     LoginButton mFacebookButton;
@@ -69,6 +72,13 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
     ProgressBar mLoadingView;
 
 
+    private String mEmailFacebook;
+    private String mFacebookFirstName;
+    private String mFacebookLastName;
+    private String mProfPicture;
+    private String mUserEmail;
+
+
     @Inject
     public LoginFragment() {
         // Required empty public constructor
@@ -82,14 +92,13 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
 
 
         ButterKnife.bind(this, root);
+        mFacebookButton.setFragment(this);
 
-        // prevents the keyboard to show when activity starts
         getActivity()
                 .getWindow()
                 .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         setUpFacebookLogin();
-        //LoginManager.getInstance().logOut();
 
         return root;
     }
@@ -109,7 +118,7 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
     @Override
     public void onPause() {
         super.onPause();
-        mPresenter.unsubscribe();
+        //mPresenter.unsubscribe();
     }
 
 
@@ -157,7 +166,6 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
     @Override
     public void welcomeUser(User user) {
 
-
         StyleableToast.makeText(getContext(), "WELCOME, " + user.getFirstName() + " " + user.getLastName() + " !",
                 Toast.LENGTH_LONG, R.style.accept_login_toast).show();
 
@@ -183,11 +191,11 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
 
         Bundle fbInfo = new Bundle();
         fbInfo.putString("intent_purpose", "facebook");
-        fbInfo.putString("fb_first_name", mUserFirstName);
-        fbInfo.putString("fb_last_name", mUserLastName);
-        fbInfo.putString("fb_email", mUserEmail);
-        fbInfo.putString("fb_prof_pic", mUserProfPic);
-        fbInfo.putString("fb_username", mUserName);
+        fbInfo.putString("fb_first_name", mFacebookFirstName);
+        fbInfo.putString("fb_last_name", mFacebookLastName);
+        fbInfo.putString("fb_email", mEmailFacebook);
+        fbInfo.putString("fb_prof_pic", mProfPicture);
+        fbInfo.putString("fb_username", mEmailFacebook);
 
         mNavigator.navigateToSignUp(fbInfo);
     }
@@ -234,11 +242,11 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
 
                                         // Getting FB User Data
                                         Bundle facebookData = getFacebookData(jsonObject);
-                                        mUserFirstName = facebookData.getString("first_name");
-                                        mUserLastName = facebookData.getString("last_name");
+                                        mFacebookFirstName = facebookData.getString("first_name");
+                                        mFacebookLastName = facebookData.getString("last_name");
+                                        mEmailFacebook = facebookData.getString("email");
                                         mUserEmail = facebookData.getString("email");
-                                        mUserName = facebookData.getString("email");
-                                        mUserProfPic = facebookData.getString("profile_pic");
+                                        mProfPicture = facebookData.getString("profile_pic");
                                     }
                                 });
 
