@@ -13,6 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.emredavarci.circleprogressbar.CircleProgressBar;
 import com.muddzdev.styleabletoast.StyleableToast;
 
 import java.util.List;
@@ -35,7 +36,7 @@ public class SelectTenantFragment extends Fragment implements ContractsSelectTen
     ListView mListViewSelectTenant;
 
     @BindView(R.id.progress_bar)
-    ProgressBar mProgressBar;
+    CircleProgressBar mProgressBar;
 
 
     private ContractsSelectTenant.Presenter mPresenter;
