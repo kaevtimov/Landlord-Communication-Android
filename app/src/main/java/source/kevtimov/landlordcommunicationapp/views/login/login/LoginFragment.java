@@ -1,4 +1,4 @@
-package source.kevtimov.landlordcommunicationapp.views.login;
+package source.kevtimov.landlordcommunicationapp.views.login.login;
 
 
 import android.content.Intent;
@@ -14,34 +14,31 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.emredavarci.circleprogressbar.CircleProgressBar;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
-import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.muddzdev.styleabletoast.StyleableToast;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
-import java.util.concurrent.Callable;
 
 import javax.inject.Inject;
 
-import butterknife.BindFloat;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import source.kevtimov.landlordcommunicationapp.R;
 import source.kevtimov.landlordcommunicationapp.models.User;
-import source.kevtimov.landlordcommunicationapp.utils.sharedpref.PrefUtil;
-import source.kevtimov.landlordcommunicationapp.views.login.ContractsLogin;
 
 import static com.facebook.GraphRequest.TAG;
 
@@ -50,10 +47,7 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
     private ContractsLogin.Presenter mPresenter;
     private ContractsLogin.Navigator mNavigator;
     private CallbackManager mFacebookCallbackManager;
-    private String mUserFirstName;
-    private String mUserLastName;
-    private String mUserEmail;
-    private String mUserProfPic;
+    private Bundle mFacebookData;
 
     @BindView(R.id.fb_login_button)
     LoginButton mFacebookButton;
@@ -70,8 +64,15 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
     @BindView(R.id.et_password)
     EditText mEditTextPassword;
 
-    @BindView(R.id.loading_bar)
-    ProgressBar mLoadingView;
+    @BindView(R.id.progressBar)
+    CircleProgressBar mLoadingView;
+
+
+    private String mEmailFacebook;
+    private String mFacebookFirstName;
+    private String mFacebookLastName;
+    private String mProfPicture;
+    private String mUserEmail;
 
 
     @Inject
@@ -87,14 +88,13 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
 
 
         ButterKnife.bind(this, root);
+        mFacebookButton.setFragment(this);
 
-        // prevents the keyboard to show when activity starts
         getActivity()
                 .getWindow()
                 .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         setUpFacebookLogin();
-        //LoginManager.getInstance().logOut();
 
         return root;
     }
@@ -114,7 +114,7 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
     @Override
     public void onPause() {
         super.onPause();
-        mPresenter.unsubscribe();
+        //mPresenter.unsubscribe();
     }
 
 
@@ -162,17 +162,45 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
     @Override
     public void welcomeUser(User user) {
 
-
         StyleableToast.makeText(getContext(), "WELCOME, " + user.getFirstName() + " " + user.getLastName() + " !",
                 Toast.LENGTH_LONG, R.style.accept_login_toast).show();
 
-        mNavigator.navigateWith(user);
+        mNavigator.navigateToHome(user);
     }
 
     @Override
-    public void alertUser() {
+    public void alertUserForBlankInfo() {
         StyleableToast.makeText(getContext(), "Username and password cannot be empty!",
                 Toast.LENGTH_LONG, R.style.reject_login_toast).show();
+    }
+
+    @Override
+    public void alertUserForLengthConstraints() {
+        StyleableToast.makeText(getContext(), "Username and password length should be bigger than 6 characters!",
+                Toast.LENGTH_LONG, R.style.reject_login_toast).show();
+    }
+
+    @Override
+    public void facebookRegisterAlert() {
+        StyleableToast.makeText(getContext(), "Please add additional info about you.",
+                Toast.LENGTH_LONG, R.style.facebook_login_toast).show();
+
+        Bundle fbInfo = new Bundle();
+        fbInfo.putString("intent_purpose", "facebook");
+        fbInfo.putString("fb_first_name", mFacebookFirstName);
+        fbInfo.putString("fb_last_name", mFacebookLastName);
+        fbInfo.putString("fb_email", mEmailFacebook);
+        fbInfo.putString("fb_prof_pic", mProfPicture);
+        fbInfo.putString("fb_username", mEmailFacebook);
+
+        mNavigator.navigateToSignUp(fbInfo);
+    }
+
+    @Override
+    public void proceedToSignUp() {
+        Bundle userInfo = new Bundle();
+        userInfo.putString("intent_purpose", "custom");
+        mNavigator.navigateToSignUp(userInfo);
     }
 
 
@@ -184,8 +212,8 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
     }
 
     @OnClick(R.id.btn_signup)
-    public void onClickSignup() {
-
+    public void onClickSignUp() {
+        mPresenter.allowSignUp();
     }
 
     private void setUpFacebookLogin() {
@@ -210,10 +238,11 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
 
                                         // Getting FB User Data
                                         Bundle facebookData = getFacebookData(jsonObject);
-                                        mUserFirstName = facebookData.getString("first_name");
-                                        mUserLastName = facebookData.getString("last_name");
+                                        mFacebookFirstName = facebookData.getString("first_name");
+                                        mFacebookLastName = facebookData.getString("last_name");
+                                        mEmailFacebook = facebookData.getString("email");
                                         mUserEmail = facebookData.getString("email");
-                                        mUserProfPic = facebookData.getString("profile_pic");
+                                        mProfPicture = facebookData.getString("profile_pic");
                                     }
                                 });
 
@@ -221,6 +250,8 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
                         parameters.putString("fields", "id,first_name,last_name,email,gender");
                         request.setParameters(parameters);
                         request.executeAsync();
+
+                        mPresenter.checkFacebookUserByUsername(mUserEmail);
                     }
 
                     @Override

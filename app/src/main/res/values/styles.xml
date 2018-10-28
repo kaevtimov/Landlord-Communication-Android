@@ -1,24 +1,26 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+
+    <!-- Custom application theme. -->
+    <style name="AppThemeCustom" parent="Theme.AppCompat.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/colorPurple</item>
+        <item name="colorPrimaryDark">@color/colorBackground</item>
     </style>
 
     <!--Toast custom style accept-->
     <style name="accept_login_toast">
         <item name="stTextBold">true</item>
         <item name="stTextColor">#FFFFFF</item>
-        <item name="stTextSize">14sp</item>
+        <item name="stTextSize">24sp</item>
         <item name="stColorBackground">#228b22</item>
         <item name="stSolidBackground">true</item>
         <item name="stStrokeWidth">5dp</item>
         <item name="stStrokeColor">#fff</item>
-        <item name="stLength">LONG</item> LONG or SHORT
-        <item name="stGravity">center</item> top or center
+        <item name="stLength">LONG</item>
+        LONG or SHORT
+        <item name="stGravity">center</item>
+        top or center
         <item name="stRadius">7dp</item>
     </style>
 
@@ -26,14 +28,50 @@
     <style name="reject_login_toast">
         <item name="stTextBold">true</item>
         <item name="stTextColor">#FFFFFF</item>
-        <item name="stTextSize">14sp</item>
+        <item name="stTextSize">24sp</item>
         <item name="stColorBackground">#ff0000</item>
         <item name="stSolidBackground">true</item>
         <item name="stStrokeWidth">5dp</item>
         <item name="stStrokeColor">#fff</item>
-        <item name="stLength">LONG</item> LONG or SHORT
-        <item name="stGravity">center</item> top or center
-        <item name="stRadius">7dp</item>
+        <item name="stLength">LONG</item>
+        LONG or SHORT
+        <item name="stGravity">center</item>
+        top or center
+        <item name="stRadius">50dp</item>
+    </style>
+
+    <!--Toast custom style facebook-->
+    <style name="facebook_login_toast">
+        <item name="stTextBold">true</item>
+        <item name="stTextColor">#FFFFFF</item>
+        <item name="stTextSize">24sp</item>
+        <item name="stColorBackground">#000080</item>
+        <item name="stSolidBackground">true</item>
+        <item name="stStrokeWidth">5dp</item>
+        <item name="stStrokeColor">#fff</item>
+        <item name="stLength">LONG</item>
+        LONG or SHORT
+        <item name="stGravity">center</item>
+        top or center
+        <item name="stRadius">50dp</item>
+
+    </style>
+
+    <!--Toast custom style loading-->
+    <style name="loading_toast">
+        <item name="stTextBold">true</item>
+        <item name="stTextColor">#FFFFFF</item>
+        <item name="stTextSize">24sp</item>
+        <item name="stColorBackground">#8b8989</item>
+        <item name="stSolidBackground">true</item>
+        <item name="stStrokeWidth">5dp</item>
+        <item name="stStrokeColor">#fff</item>
+        <item name="stLength">LONG</item>
+        LONG or SHORT
+        <item name="stGravity">center</item>
+        top or center
+        <item name="stRadius">50dp</item>
+
     </style>
 
 </resources>

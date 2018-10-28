@@ -1,4 +1,4 @@
-package source.kevtimov.landlordcommunicationapp.views.login;
+package source.kevtimov.landlordcommunicationapp.views.login.login;
 
 import javax.inject.Inject;
 
@@ -14,10 +14,9 @@ public class LoginPresenter implements ContractsLogin.Presenter {
     private ContractsLogin.View mView;
     private SchedulerProvider mSchedulerProvider;
     private UserService mService;
-    private User mUser;
 
     @Inject
-    public LoginPresenter(SchedulerProvider provider, UserService service){
+    public LoginPresenter(SchedulerProvider provider, UserService service) {
         this.mSchedulerProvider = provider;
         this.mService = service;
     }
@@ -35,12 +34,15 @@ public class LoginPresenter implements ContractsLogin.Presenter {
 
     @Override
     public void checkLogin(String username, String password) {
-        mView.showLoading();
 
-        if(password.length() == 0 || username.length() == 0){
+        mView.showLoading();
+        if (password.length() == 0 || username.length() == 0) {
             mView.hideLoading();
-            mView.alertUser();
-        }else{
+            mView.alertUserForBlankInfo();
+        } else if (password.length() < 6 || username.length() < 6) {
+            mView.hideLoading();
+            mView.alertUserForLengthConstraints();
+        } else {
             Disposable observal = Observable
                     .create((ObservableOnSubscribe<User>) emitter -> {
                         User user = mService.checkUserLogin(username, password);
@@ -49,12 +51,13 @@ public class LoginPresenter implements ContractsLogin.Presenter {
                     })
                     .subscribeOn(mSchedulerProvider.background())
                     .observeOn(mSchedulerProvider.ui())
-                    .doFinally(mView::hideLoading)
-                    .subscribe(user -> processUser(username),
+                    .subscribe(user -> checkCustomUserByUsername(username),
                             error -> {
-                                if(error instanceof NullPointerException){
+                                if (error instanceof NullPointerException) {
+                                    mView.hideLoading();
                                     mView.cancelLogin();
-                                }else{
+                                } else {
+                                    mView.hideLoading();
                                     mView.showError(error);
                                 }
                             });
@@ -62,21 +65,14 @@ public class LoginPresenter implements ContractsLogin.Presenter {
     }
 
     @Override
-    public void setUser(User user) {
-        this.mUser = user;
+    public void allowSignUp() {
+        mView.proceedToSignUp();
     }
 
-    private void processUser(String username) {
+    @Override
+    public void checkFacebookUserByUsername(String username) {
 
-        getUserByUsername(username);
-
-        if(mUser != null){
-            mView.welcomeUser(mUser);
-        }
-    }
-
-    private void getUserByUsername(String username) {
-
+        mView.showLoading();
         Disposable observal = Observable
                 .create((ObservableOnSubscribe<User>) emitter -> {
                     User user = mService.getUserByUsername(username);
@@ -85,7 +81,28 @@ public class LoginPresenter implements ContractsLogin.Presenter {
                 })
                 .subscribeOn(mSchedulerProvider.background())
                 .observeOn(mSchedulerProvider.ui())
-                .subscribe(this::setUser
-                        ,error -> mView.showError(error));
+                .doFinally(mView::hideLoading)
+                .subscribe(mView::welcomeUser
+                        , error -> {
+                            if (error instanceof NullPointerException) {
+                                mView.facebookRegisterAlert();
+                            } else {
+                                mView.showError(error);
+                            }
+                        });
+    }
+
+    private void checkCustomUserByUsername(String username) {
+        Disposable observal = Observable
+                .create((ObservableOnSubscribe<User>) emitter -> {
+                    User user = mService.getUserByUsername(username);
+                    emitter.onNext(user);
+                    emitter.onComplete();
+                })
+                .subscribeOn(mSchedulerProvider.background())
+                .observeOn(mSchedulerProvider.ui())
+                .doFinally(mView::hideLoading)
+                .subscribe(mView::welcomeUser
+                        , error -> mView.showError(error));
     }
 }

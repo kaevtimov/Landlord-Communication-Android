@@ -13,5 +13,41 @@
     <!--Facebook login-->
     <string name="facebook_app_id">2123429834540963</string>
     <string name="fb_login_protocol_scheme">fb2123429834540963</string>
+    <string name="username_signup">USERNAME</string>
+    <string name="password_signup">PASSWORD</string>
+    <string name="password_must_be_minimum_6_characters">(password must be minimum 6 characters)</string>
+    <string name="username_must_be_minimum_6_characters">(username must be minimum 6 characters)</string>
+    <string name="retype_password">RETYPE PASSWORD</string>
+    <string name="please_choose_your_type">Please choose your type</string>
+    <string name="tenant">Tenant</string>
+    <string name="landlord">Landlord</string>
+    <string name="continue_">CONTINUE</string>
+    <string name="enter_your_first_name">Enter your first name</string>
+    <string name="enter_last_name">Enter your last name</string>
+    <string name="enter_your_email_address">Enter your email address</string>
+    <string name="add_place">ADD PLACE</string>
+    <string name="select_place">SELECT PLACE</string>
+    <string name="please_enter_your_places_as_landlord">Please enter your places as landlord</string>
+    <string name="finish">FINISH</string>
+    <string name="address">Address</string>
+    <string name="description">Description</string>
+    <string name="rent_amount">Rent amount</string>
+    <string name="year">Year</string>
+    <string name="due_date">Due date</string>
+    <string name="month">Month</string>
+    <string name="day">Day</string>
+    <string name="save">SAVE</string>
+    <string name="select_tenant">SELECT TENANT</string>
+    <string name="cancel">CANCEL</string>
+    <string name="cancel_add">CANCEL</string>
+    <string name="are_you_sure_changes_will_be_saved_to_your_account">ARE YOU SURE? FOLLOWING CHANGES WILL BE SAVED TO YOUR ACCOUNT!</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
+    <string name="tenant_">Tenant:</string>
+    <string name="home">HOME</string>
+    <string name="please_select_tenant_from_the_following">PLEASE SELECT TENANT FROM THE FOLLOWING</string>
+    <string name="done">DONE</string>
+    <string name="please_select_places_from_bellow">Please select places from bellow</string>
+    <string name="ready">READY</string>
 
 </resources>

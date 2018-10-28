@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".views.login.placemanagement.PlaceManagementFragment">
+
+    <TextView
+        android:id="@+id/tv_enter_places"
+        android:text="@string/please_enter_your_places_as_landlord"
+        android:textStyle="bold"
+        android:textSize="24sp"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ListView
+        android:id="@+id/lv_places"
+        android:layout_below="@+id/tv_enter_places"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:ignore="NestedScrolling" />
+
+    <Button
+        android:id="@+id/btn_add_place"
+        android:text="@string/add_place"
+        android:layout_below="@+id/lv_places"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="135dp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btn_select_place"
+        android:text="@string/select_place"
+        android:layout_below="@+id/lv_places"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="135dp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/btn_home"
+        android:text="@string/home"
+        android:layout_marginTop="450dp"
+        android:layout_marginStart="280dp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <com.emredavarci.circleprogressbar.CircleProgressBar xmlns:cpb="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/progress_bar_manage"
+        android:layout_width="match_parent"
+        android:layout_height="413dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="53dp"
+        cpb:backgroundColor="#e7b330"
+        cpb:backgroundWidth="8"
+        cpb:maxValue="100"
+        cpb:prefix=""
+        cpb:progressColor="#e76130"
+        cpb:progressText="Loading..."
+        cpb:progressTextColor="#f9916b"
+        cpb:roundedCorners="true"
+        cpb:strokeWidth="14"
+        cpb:suffix="%"
+        cpb:textSize="25sp"
+        android:visibility="gone"/>
+
+</RelativeLayout>

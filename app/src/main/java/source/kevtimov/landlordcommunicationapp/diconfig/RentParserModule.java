@@ -2,15 +2,15 @@ package source.kevtimov.landlordcommunicationapp.diconfig;
 
 import dagger.Module;
 import dagger.Provides;
-import source.kevtimov.landlordcommunicationapp.models.User;
+import source.kevtimov.landlordcommunicationapp.models.Rent;
 import source.kevtimov.landlordcommunicationapp.parsers.GsonJsonParser;
 import source.kevtimov.landlordcommunicationapp.parsers.base.JsonParser;
 
 @Module
-public class ParserModule {
+public class RentParserModule {
 
     @Provides
-    public JsonParser<User> userJsonParser() {
-        return new GsonJsonParser<User>(User.class,User[].class);
+    public JsonParser<Rent> rentJsonParser() {
+        return new GsonJsonParser<Rent>(Rent.class,Rent[].class);
     }
 }

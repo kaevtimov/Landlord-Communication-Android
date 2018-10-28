@@ -8,7 +8,7 @@ import source.kevtimov.landlordcommunicationapp.services.UserService;
 import source.kevtimov.landlordcommunicationapp.utils.password.IPasswordAgent;
 
 @Module
-public class ServiceModule {
+public class UserServiceModule {
 
     @Provides
     public UserService getService(UserRepository repo, IPasswordAgent agent){
