@@ -1,14 +1,18 @@
 package source.kevtimov.landlordcommunicationapp.views.login.signup;
 
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -17,6 +21,7 @@ import android.widget.Toast;
 
 import com.muddzdev.styleabletoast.StyleableToast;
 
+import java.io.ByteArrayOutputStream;
 import java.util.Objects;
 
 import javax.inject.Inject;
@@ -26,9 +31,13 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import source.kevtimov.landlordcommunicationapp.R;
 import source.kevtimov.landlordcommunicationapp.models.User;
+import source.kevtimov.landlordcommunicationapp.utils.bitmapcoder.IBitmapAgent;
 
 public class SignUpFragment extends Fragment implements ContractsSignUp.View {
 
+
+    @BindView(R.id.iv_photo)
+    ImageView mImageView;
 
     @BindView(R.id.tv_enter_username)
     TextView mTextViewEnterUsername;
@@ -93,6 +102,10 @@ public class SignUpFragment extends Fragment implements ContractsSignUp.View {
     private Bundle mUserInfoData;
     private int radioButtonSelectedId;
     private int radioButtonResult;
+    private String mSelectedProfilePic;
+
+    @Inject
+    IBitmapAgent mBitmapAgent;
 
 
     @Inject
@@ -275,6 +288,19 @@ public class SignUpFragment extends Fragment implements ContractsSignUp.View {
         }
     }
 
+
+    @OnClick(R.id.btn_gallery)
+    public void onClickGallery(View v){
+        mNavigator.navigateToGallery();
+    }
+
+    @Override
+    public void setImage(Bitmap bitmap){
+        mImageView.setVisibility(View.VISIBLE);
+        mImageView.setImageBitmap(bitmap);
+        mSelectedProfilePic = mBitmapAgent.convertBitmapToString(bitmap);
+    }
+
     private Bundle fillBundleWithUserData() {
 
         Bundle filledBundle = new Bundle();
@@ -289,6 +315,7 @@ public class SignUpFragment extends Fragment implements ContractsSignUp.View {
         filledBundle.putString("first_name", mEditTextEnterFirstName.getText().toString());
         filledBundle.putString("last_name", mEditTextEnterLastName.getText().toString());
         filledBundle.putString("email", mEditTextEnterEmail.getText().toString());
+        filledBundle.putString("profile_pic", mSelectedProfilePic);
 
         return filledBundle;
     }

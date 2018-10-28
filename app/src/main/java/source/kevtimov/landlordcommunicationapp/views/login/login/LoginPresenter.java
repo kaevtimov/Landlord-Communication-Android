@@ -14,7 +14,6 @@ public class LoginPresenter implements ContractsLogin.Presenter {
     private ContractsLogin.View mView;
     private SchedulerProvider mSchedulerProvider;
     private UserService mService;
-    private User mUser;
 
     @Inject
     public LoginPresenter(SchedulerProvider provider, UserService service) {
@@ -35,8 +34,8 @@ public class LoginPresenter implements ContractsLogin.Presenter {
 
     @Override
     public void checkLogin(String username, String password) {
-        mView.showLoading();
 
+        mView.showLoading();
         if (password.length() == 0 || username.length() == 0) {
             mView.hideLoading();
             mView.alertUserForBlankInfo();
@@ -52,30 +51,16 @@ public class LoginPresenter implements ContractsLogin.Presenter {
                     })
                     .subscribeOn(mSchedulerProvider.background())
                     .observeOn(mSchedulerProvider.ui())
-                    .doFinally(mView::hideLoading)
-                    .subscribe(user -> processCustomUser(username),
+                    .subscribe(user -> checkCustomUserByUsername(username),
                             error -> {
                                 if (error instanceof NullPointerException) {
+                                    mView.hideLoading();
                                     mView.cancelLogin();
                                 } else {
+                                    mView.hideLoading();
                                     mView.showError(error);
                                 }
                             });
-        }
-    }
-
-    @Override
-    public void setUser(User user) {
-        this.mUser = user;
-    }
-
-    @Override
-    public void verifyFacebookLogin(String username) {
-        //check if username exists
-        checkFacebookUserByUsername(username);
-
-        if(mUser != null){
-            mView.welcomeUser(mUser);
         }
     }
 
@@ -84,7 +69,8 @@ public class LoginPresenter implements ContractsLogin.Presenter {
         mView.proceedToSignUp();
     }
 
-    private void checkFacebookUserByUsername(String username) {
+    @Override
+    public void checkFacebookUserByUsername(String username) {
 
         mView.showLoading();
         Disposable observal = Observable
@@ -96,7 +82,7 @@ public class LoginPresenter implements ContractsLogin.Presenter {
                 .subscribeOn(mSchedulerProvider.background())
                 .observeOn(mSchedulerProvider.ui())
                 .doFinally(mView::hideLoading)
-                .subscribe(this::setUser
+                .subscribe(mView::welcomeUser
                         , error -> {
                             if (error instanceof NullPointerException) {
                                 mView.facebookRegisterAlert();
@@ -106,16 +92,7 @@ public class LoginPresenter implements ContractsLogin.Presenter {
                         });
     }
 
-    private void processCustomUser(String username) {
-        checkCustomUserByUsername(username);
-        if (mUser != null) {
-            mView.welcomeUser(mUser);
-        }
-    }
-
     private void checkCustomUserByUsername(String username) {
-
-        mView.showLoading();
         Disposable observal = Observable
                 .create((ObservableOnSubscribe<User>) emitter -> {
                     User user = mService.getUserByUsername(username);
@@ -125,7 +102,7 @@ public class LoginPresenter implements ContractsLogin.Presenter {
                 .subscribeOn(mSchedulerProvider.background())
                 .observeOn(mSchedulerProvider.ui())
                 .doFinally(mView::hideLoading)
-                .subscribe(this::setUser
+                .subscribe(mView::welcomeUser
                         , error -> mView.showError(error));
     }
 }

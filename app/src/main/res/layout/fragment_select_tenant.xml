@@ -33,10 +33,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <ProgressBar
+    <com.emredavarci.circleprogressbar.CircleProgressBar xmlns:cpb="http://schemas.android.com/apk/res-auto"
         android:id="@+id/progress_bar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="413dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="53dp"
+        cpb:backgroundColor="#e7b330"
+        cpb:backgroundWidth="8"
+        cpb:maxValue="100"
+        cpb:prefix=""
+        cpb:progressColor="#e76130"
+        cpb:progressText="Loading..."
+        cpb:progressTextColor="#f9916b"
+        cpb:roundedCorners="true"
+        cpb:strokeWidth="14"
+        cpb:suffix="%"
+        cpb:textSize="25sp"
         android:visibility="gone"/>
 
 </RelativeLayout>

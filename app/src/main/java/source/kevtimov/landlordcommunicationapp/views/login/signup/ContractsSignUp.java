@@ -1,5 +1,6 @@
 package source.kevtimov.landlordcommunicationapp.views.login.signup;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import source.kevtimov.landlordcommunicationapp.models.User;
@@ -31,6 +32,8 @@ public interface ContractsSignUp {
         void alertForExistingUsernameAndEmail();
 
         void processCheckResult(User user);
+
+        void setImage(Bitmap bitmap);
     }
 
     interface Presenter {
@@ -47,5 +50,8 @@ public interface ContractsSignUp {
     interface Navigator {
 
         void navigateToPlaceManagement(User user);
+
+        void navigateToGallery();
+
     }
 }

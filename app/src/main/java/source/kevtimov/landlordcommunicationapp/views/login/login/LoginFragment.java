@@ -14,6 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.emredavarci.circleprogressbar.CircleProgressBar;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -46,11 +47,6 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
     private ContractsLogin.Presenter mPresenter;
     private ContractsLogin.Navigator mNavigator;
     private CallbackManager mFacebookCallbackManager;
-    //    private String mUserName;
-//    private String mUserFirstName;
-//    private String mUserLastName;
-//    private String mUserEmail;
-//    private String mUserProfPic;
     private Bundle mFacebookData;
 
     @BindView(R.id.fb_login_button)
@@ -68,8 +64,8 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
     @BindView(R.id.et_password)
     EditText mEditTextPassword;
 
-    @BindView(R.id.loading_bar)
-    ProgressBar mLoadingView;
+    @BindView(R.id.progressBar)
+    CircleProgressBar mLoadingView;
 
 
     private String mEmailFacebook;
@@ -255,7 +251,7 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
                         request.setParameters(parameters);
                         request.executeAsync();
 
-                        mPresenter.verifyFacebookLogin(mUserEmail);
+                        mPresenter.checkFacebookUserByUsername(mUserEmail);
                     }
 
                     @Override

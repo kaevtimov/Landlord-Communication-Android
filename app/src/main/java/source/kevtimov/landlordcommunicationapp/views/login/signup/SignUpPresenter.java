@@ -84,7 +84,7 @@ public class SignUpPresenter implements ContractsSignUp.Presenter {
             String password = userData.getString("password");
             boolean isOnline = true;
             boolean isLandlord = userData.getBoolean("isLandlord");
-            String picture = null;
+            String picture = userData.getString("profile_pic");
 
             //register custom user
             User customUser = new User(isLandlord, username, picture, firstName, lastName, email,

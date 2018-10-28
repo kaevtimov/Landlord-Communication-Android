@@ -39,11 +39,9 @@ public interface ContractsLogin {
 
         void checkLogin(String username, String password);
 
-        void setUser(User user);
-
-        void verifyFacebookLogin(String username);
-
         void allowSignUp();
+
+        void checkFacebookUserByUsername(String username);
     }
 
     interface Navigator{

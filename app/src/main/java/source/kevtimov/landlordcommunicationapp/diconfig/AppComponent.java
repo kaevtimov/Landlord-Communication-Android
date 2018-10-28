@@ -12,6 +12,7 @@ import source.kevtimov.landlordcommunicationapp.LandlordCommunicationApplication
 
 @Singleton
 @Component(modules = {
+        BitmapAgentModule.class,
         RentParserModule.class,
         PlaceParserModule.class,
         PlaceRepositoryModule.class,

@@ -22,6 +22,15 @@ public class PasswordAgent implements IPasswordAgent {
         return toHex(salT) + ":" + toHex(hash);
     }
 
+    public String getSalt(int count) {
+        StringBuilder builder = new StringBuilder();
+        while (count-- != 0) {
+            int character = (int) (Math.random() * "ABCDEFZ789".length());
+            builder.append("ABCDEFZ789".charAt(character));
+        }
+        return builder.toString();
+    }
+
     private String toHex(byte[] array) throws NoSuchAlgorithmException {
         BigInteger bi = new BigInteger(1, array);
         String hex = bi.toString(16);
@@ -31,15 +40,6 @@ public class PasswordAgent implements IPasswordAgent {
         } else {
             return hex;
         }
-    }
-
-    public String getSalt(int count) {
-        StringBuilder builder = new StringBuilder();
-        while (count-- != 0) {
-            int character = (int) (Math.random() * "ABCDEFZ789".length());
-            builder.append("ABCDEFZ789".charAt(character));
-        }
-        return builder.toString();
     }
 }
 

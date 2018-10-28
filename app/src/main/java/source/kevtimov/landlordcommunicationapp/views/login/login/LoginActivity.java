@@ -53,6 +53,8 @@ public class LoginActivity extends DaggerAppCompatActivity implements ContractsL
         intent.putExtra("register_bundle", registerBundle);
 
         startActivity(intent);
+
+        finish();
     }
 
     @Override
@@ -60,5 +62,6 @@ public class LoginActivity extends DaggerAppCompatActivity implements ContractsL
         Intent intent = new Intent(this, HomeActivity.class);
         intent.putExtra("User", user);
         startActivity(intent);
+        finish();
     }
 }

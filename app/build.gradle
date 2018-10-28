@@ -63,4 +63,7 @@ dependencies {
     implementation("com.mikepenz:materialdrawer:6.0.9@aar") {
         transitive = true
     }
+
+    //ProgressBar
+    implementation 'com.emredavarci:circleprogressbar:1.0.4'
 }

@@ -18,6 +18,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.emredavarci.circleprogressbar.CircleProgressBar;
 import com.muddzdev.styleabletoast.StyleableToast;
 import com.shashank.sony.fancydialoglib.Animation;
 import com.shashank.sony.fancydialoglib.FancyAlertDialog;
@@ -80,7 +81,7 @@ public class AddPlaceFragment extends Fragment implements ContractsAddPlace.View
     EditText mEditTextDay;
 
     @BindView(R.id.progress_bar)
-    ProgressBar mProgressBar;
+    CircleProgressBar mLoadingView;
 
 
     private ContractsAddPlace.Presenter mPresenter;
@@ -133,12 +134,12 @@ public class AddPlaceFragment extends Fragment implements ContractsAddPlace.View
 
     @Override
     public void showLoading() {
-        mProgressBar.setVisibility(View.VISIBLE);
+        mLoadingView.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoading() {
-        mProgressBar.setVisibility(View.GONE);
+        mLoadingView.setVisibility(View.GONE);
     }
 
     @Override

@@ -16,6 +16,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.emredavarci.circleprogressbar.CircleProgressBar;
 import com.muddzdev.styleabletoast.StyleableToast;
 
 import java.util.ArrayList;
@@ -54,7 +55,7 @@ public class PlaceManagementFragment extends Fragment implements ContractsPlaceM
     Button mButtonSelectPlace;
 
     @BindView(R.id.progress_bar_manage)
-    ProgressBar mProgressBar;
+    CircleProgressBar mLoadingView;
 
 
     @Inject
@@ -100,12 +101,12 @@ public class PlaceManagementFragment extends Fragment implements ContractsPlaceM
 
     @Override
     public void showLoading() {
-        this.mProgressBar.setVisibility(View.VISIBLE);
+        this.mLoadingView.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoading() {
-        this.mProgressBar.setVisibility(View.GONE);
+        this.mLoadingView.setVisibility(View.GONE);
     }
 
     @Override
