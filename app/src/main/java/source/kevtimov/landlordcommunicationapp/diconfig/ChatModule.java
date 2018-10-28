@@ -5,6 +5,7 @@ import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 import source.kevtimov.landlordcommunicationapp.chat.ChatContracts;
 import source.kevtimov.landlordcommunicationapp.chat.ChatFragment;
+import source.kevtimov.landlordcommunicationapp.chat.ChatPresenter;
 
 @Module
 public abstract class ChatModule {
@@ -14,6 +15,5 @@ public abstract class ChatModule {
 
     @ActivityScoped
     @Binds
-    abstract ChatContracts.Presenter chatPresenter(ChatContracts.Presenter chatPresenter);
-
+    abstract ChatContracts.Presenter chatPresenter(ChatPresenter chatPresenter);
 }

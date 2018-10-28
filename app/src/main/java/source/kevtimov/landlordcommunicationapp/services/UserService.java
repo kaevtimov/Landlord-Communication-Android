@@ -9,6 +9,8 @@ import source.kevtimov.landlordcommunicationapp.models.User;
 
 public interface UserService {
 
+    List<User> getLandlords() throws IOException;
+
     User getUserByUsername(String username) throws IOException;
 
     User checkUserLogin(String username, String password) throws IOException, InvalidKeySpecException, NoSuchAlgorithmException;

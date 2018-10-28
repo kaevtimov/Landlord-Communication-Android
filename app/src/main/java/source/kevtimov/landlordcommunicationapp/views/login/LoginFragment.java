@@ -162,7 +162,6 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
     @Override
     public void welcomeUser(User user) {
 
-
         StyleableToast.makeText(getContext(), "WELCOME, " + user.getFirstName() + " " + user.getLastName() + " !",
                 Toast.LENGTH_LONG, R.style.accept_login_toast).show();
 
@@ -173,6 +172,11 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
     public void alertUser() {
         StyleableToast.makeText(getContext(), "Username and password cannot be empty!",
                 Toast.LENGTH_LONG, R.style.reject_login_toast).show();
+    }
+
+    @Override
+    public void loginUser(User user) {
+        mNavigator.navigateWith(user);
     }
 
 

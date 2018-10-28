@@ -21,6 +21,8 @@ public interface ContractsLogin {
         void welcomeUser(User user);
 
         void alertUser();
+
+        void loginUser(User user);
     }
 
     interface Presenter {
@@ -32,6 +34,7 @@ public interface ContractsLogin {
         void checkLogin(String username, String password);
 
         void setUser(User user);
+
     }
 
     interface Navigator{

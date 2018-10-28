@@ -10,4 +10,6 @@ public interface UserRepository {
     User getUserByUsername(String username) throws IOException;
 
     User getUserHashAndSaltByUsername(String username) throws IOException;
+
+    List<User> getLandlords() throws IOException;
 }

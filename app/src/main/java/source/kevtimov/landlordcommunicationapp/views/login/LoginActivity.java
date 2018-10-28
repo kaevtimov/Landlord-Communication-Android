@@ -10,6 +10,7 @@ import javax.inject.Inject;
 
 import dagger.android.support.DaggerAppCompatActivity;
 import source.kevtimov.landlordcommunicationapp.R;
+import source.kevtimov.landlordcommunicationapp.chat.ChatActivity;
 import source.kevtimov.landlordcommunicationapp.models.User;
 
 public class LoginActivity extends DaggerAppCompatActivity implements ContractsLogin.Navigator{
@@ -41,8 +42,8 @@ public class LoginActivity extends DaggerAppCompatActivity implements ContractsL
 
     @Override
     public void navigateWith(User user) {
-//        Intent intent = new Intent(this, SignUpActivity.class);
-//        intent.putExtra("User", user);
-//        startActivity(intent);
+        Intent intent = new Intent(this, ChatActivity.class);
+        intent.putExtra("User", user);
+        startActivity(intent);
     }
 }

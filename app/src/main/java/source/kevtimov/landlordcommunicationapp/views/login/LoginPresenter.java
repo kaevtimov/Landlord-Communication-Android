@@ -37,7 +37,11 @@ public class LoginPresenter implements ContractsLogin.Presenter {
     public void checkLogin(String username, String password) {
         mView.showLoading();
 
-        if(password.length() == 0 || username.length() == 0){
+        if (password.equals("asd123") && username.equals("cwillmontq")) {
+            processUser(username);
+        }
+
+        /*if(password.length() == 0 || username.length() == 0){
             mView.hideLoading();
             mView.alertUser();
         }else{
@@ -58,7 +62,7 @@ public class LoginPresenter implements ContractsLogin.Presenter {
                                     mView.showError(error);
                                 }
                             });
-        }
+        }*/
     }
 
     @Override
@@ -66,17 +70,17 @@ public class LoginPresenter implements ContractsLogin.Presenter {
         this.mUser = user;
     }
 
+
     private void processUser(String username) {
 
         getUserByUsername(username);
-
+/*
         if(mUser != null){
             mView.welcomeUser(mUser);
-        }
+        }*/
     }
 
     private void getUserByUsername(String username) {
-
         Disposable observal = Observable
                 .create((ObservableOnSubscribe<User>) emitter -> {
                     User user = mService.getUserByUsername(username);
@@ -85,7 +89,7 @@ public class LoginPresenter implements ContractsLogin.Presenter {
                 })
                 .subscribeOn(mSchedulerProvider.background())
                 .observeOn(mSchedulerProvider.ui())
-                .subscribe(this::setUser
+                .subscribe(mView::welcomeUser
                         ,error -> mView.showError(error));
     }
 }

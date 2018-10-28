@@ -1,6 +1,7 @@
 package source.kevtimov.landlordcommunicationapp.http;
 
 import java.io.IOException;
+import java.util.List;
 
 public interface HttpRequester {
     String get(String url) throws IOException;

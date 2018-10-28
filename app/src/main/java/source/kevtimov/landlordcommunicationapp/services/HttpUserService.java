@@ -3,6 +3,7 @@ package source.kevtimov.landlordcommunicationapp.services;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.util.List;
 
 import source.kevtimov.landlordcommunicationapp.models.User;
 import source.kevtimov.landlordcommunicationapp.repositories.UserRepository;
@@ -18,6 +19,11 @@ public class HttpUserService implements UserService{
         this.passwordAgent = passwordAgent;
     }
 
+
+    @Override
+    public List<User> getLandlords() throws IOException {
+        return userRepository.getLandlords();
+    }
 
     @Override
     public User getUserByUsername(String username) throws IOException {
@@ -40,4 +46,5 @@ public class HttpUserService implements UserService{
             return null;
         }
     }
+
 }
