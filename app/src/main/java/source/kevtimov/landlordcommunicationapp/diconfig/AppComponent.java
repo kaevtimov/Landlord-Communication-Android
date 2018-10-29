@@ -9,6 +9,19 @@ import dagger.Component;
 import dagger.android.AndroidInjector;
 import dagger.android.support.AndroidSupportInjectionModule;
 import source.kevtimov.landlordcommunicationapp.LandlordCommunicationApplication;
+import source.kevtimov.landlordcommunicationapp.diconfig.modules.AgentModule;
+import source.kevtimov.landlordcommunicationapp.diconfig.modules.AsyncModule;
+import source.kevtimov.landlordcommunicationapp.diconfig.modules.BitmapAgentModule;
+import source.kevtimov.landlordcommunicationapp.diconfig.modules.HttpModule;
+import source.kevtimov.landlordcommunicationapp.diconfig.modules.PlaceParserModule;
+import source.kevtimov.landlordcommunicationapp.diconfig.modules.PlaceRepositoryModule;
+import source.kevtimov.landlordcommunicationapp.diconfig.modules.PlaceServiceModule;
+import source.kevtimov.landlordcommunicationapp.diconfig.modules.RentParserModule;
+import source.kevtimov.landlordcommunicationapp.diconfig.modules.RentRepositoryModule;
+import source.kevtimov.landlordcommunicationapp.diconfig.modules.RentServiceModule;
+import source.kevtimov.landlordcommunicationapp.diconfig.modules.UserParserModule;
+import source.kevtimov.landlordcommunicationapp.diconfig.modules.UserRepositoryModule;
+import source.kevtimov.landlordcommunicationapp.diconfig.modules.UserServiceModule;
 
 @Singleton
 @Component(modules = {

@@ -49,5 +49,8 @@
     <string name="done">DONE</string>
     <string name="please_select_places_from_bellow">Please select places from bellow</string>
     <string name="ready">READY</string>
+    <string name="pay">PAY</string>
+    <string name="address_">Address:</string>
+    <string name="my_places">MY PLACES</string>
 
 </resources>

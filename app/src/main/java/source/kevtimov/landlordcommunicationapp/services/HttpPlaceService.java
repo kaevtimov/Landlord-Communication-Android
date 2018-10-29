@@ -29,4 +29,9 @@ public class HttpPlaceService implements PlaceService {
     public Place updatePlaceTenant(Place place, int placeId) throws IOException {
         return placeRepository.updatePlaceTenant(place, placeId);
     }
+
+    @Override
+    public List<Place> getAllPlacesByUserId(int userId) throws IOException {
+        return placeRepository.getAllPlacesByUserId(userId);
+    }
 }

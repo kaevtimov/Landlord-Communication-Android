@@ -16,6 +16,8 @@ import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
 import dagger.android.support.DaggerAppCompatActivity;
 import source.kevtimov.landlordcommunicationapp.R;
+import source.kevtimov.landlordcommunicationapp.models.User;
+import source.kevtimov.landlordcommunicationapp.views.login.myplaces.MyPlacesActivity;
 
 
 public abstract class BaseDrawer extends DaggerAppCompatActivity {
@@ -24,12 +26,12 @@ public abstract class BaseDrawer extends DaggerAppCompatActivity {
     private Drawer mDrawer;
 
     public void setupDrawer() {
-//        PrimaryDrawerItem myPlaces = new PrimaryDrawerItem()
-//                .withIdentifier(MyPlacesActivity.IDENTIFIER)
-//                .withName("My places")
-//                .withTextColor(Color.WHITE)
-//                .withSelectedTextColor(Color.BLACK)
-//                .withIcon(R.drawable.);
+        PrimaryDrawerItem myPlaces = new PrimaryDrawerItem()
+                .withIdentifier(MyPlacesActivity.IDENTIFIER)
+                .withName("My places")
+                .withTextColor(Color.WHITE)
+                .withSelectedTextColor(Color.BLACK)
+                .withIcon(R.drawable.ic_home_black_24dp);
 //
 //        SecondaryDrawerItem myConnections = new SecondaryDrawerItem()
 //                .withIdentifier(MyConnectionsActivity.IDENTIFIER)
@@ -54,10 +56,9 @@ public abstract class BaseDrawer extends DaggerAppCompatActivity {
                 .withToolbar(getToolbar())
                 .withSliderBackgroundColor(Color.BLACK)
                 .withAccountHeader(accHeader)
-//                .addDrawerItems(
-//                        myPlaces,
-//                        myConnections
-//                )
+                .addDrawerItems(
+                        myPlaces
+                )
                 .withOnDrawerItemClickListener((view, position, drawerItem) -> {
                     long identifier = drawerItem.getIdentifier();
 
@@ -76,11 +77,11 @@ public abstract class BaseDrawer extends DaggerAppCompatActivity {
     }
 
     private Intent getNextIntent(long identifier) {
-//        if (identifier == MyPlacesActivity.IDENTIFIER) {
-//            return new Intent(BaseDrawer.this, MyPlacesActivity.class);
-//        } else if (identifier == MyConnectionsActivity.IDENTIFIER) {
-//            return new Intent(BaseDrawer.this, MyConnectionsActivity.class);
-//        }
+        if (identifier == MyPlacesActivity.IDENTIFIER) {
+            Intent intent = new Intent(BaseDrawer.this, MyPlacesActivity.class);
+            intent.putExtra("User", getUser());
+            return intent;
+        }
         return null;
     }
 
@@ -99,4 +100,6 @@ public abstract class BaseDrawer extends DaggerAppCompatActivity {
     protected abstract String getEmail();
 
     protected abstract Bitmap getProfilePic();
+
+    protected abstract User getUser();
 }

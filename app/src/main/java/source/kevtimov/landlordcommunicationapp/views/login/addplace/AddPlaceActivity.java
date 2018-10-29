@@ -33,7 +33,6 @@ public class AddPlaceActivity extends DaggerAppCompatActivity implements Contrac
                 .replace(R.id.addplace_content, mAddPlaceFragment)
                 .commit();
 
-
     }
 
 

@@ -1,4 +1,4 @@
-package source.kevtimov.landlordcommunicationapp.diconfig;
+package source.kevtimov.landlordcommunicationapp.diconfig.modules;
 
 import dagger.Module;
 import dagger.Provides;

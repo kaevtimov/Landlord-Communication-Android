@@ -80,4 +80,9 @@ public class HomeActivity extends BaseDrawer implements ContractsHome.Navigator{
     protected Bitmap getProfilePic() {
         return mBitmapAgent.convertStringToBitmap(this.mLogInUser.getPicture());
     }
+
+    @Override
+    protected User getUser() {
+        return this.mLogInUser;
+    }
 }

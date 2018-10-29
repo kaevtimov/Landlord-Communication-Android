@@ -1,24 +1,29 @@
-package source.kevtimov.landlordcommunicationapp.views.login.placemanagement;
+package source.kevtimov.landlordcommunicationapp.views.login.myplaces;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Objects;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import source.kevtimov.landlordcommunicationapp.R;
 import source.kevtimov.landlordcommunicationapp.models.Place;
 
-public class PlacesListAdapter extends ArrayAdapter<Place> {
+public class MyPlacesAdapter extends ArrayAdapter<Place> {
+
 
     @BindView(R.id.iv_house)
     ImageView mImageViewPlaces;
@@ -26,9 +31,13 @@ public class PlacesListAdapter extends ArrayAdapter<Place> {
     @BindView(R.id.tv_place_addresses)
     TextView mTextViewPlacesAddress;
 
-    public PlacesListAdapter(@NonNull Context context, int resource) {
+
+
+    @Inject
+    public MyPlacesAdapter(@NonNull Context context) {
         super(context, -1);
     }
+
 
     @SuppressLint("SetTextI18n")
     @NonNull
@@ -48,4 +57,3 @@ public class PlacesListAdapter extends ArrayAdapter<Place> {
         return view;
     }
 }
-

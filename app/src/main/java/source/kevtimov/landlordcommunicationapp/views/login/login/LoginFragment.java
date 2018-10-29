@@ -14,6 +14,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.emredavarci.circleprogressbar.CircleProgressBar;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -24,6 +26,7 @@ import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.muddzdev.styleabletoast.StyleableToast;
+import com.vstechlab.easyfonts.EasyFonts;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -89,6 +92,8 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
 
         ButterKnife.bind(this, root);
         mFacebookButton.setFragment(this);
+        mTextViewUsername.setTypeface(EasyFonts.funRaiser(getContext()));
+        mTextViewPassword.setTypeface(EasyFonts.funRaiser(getContext()));
 
         getActivity()
                 .getWindow()
@@ -157,6 +162,15 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
 
         StyleableToast.makeText(getContext(), "Incorrect username or password!",
                 Toast.LENGTH_LONG, R.style.reject_login_toast).show();
+        YoYo.with(Techniques.Bounce)
+                .duration(700)
+                .repeat(5)
+                .playOn(mTextViewUsername);
+
+        YoYo.with(Techniques.Bounce)
+                .duration(700)
+                .repeat(5)
+                .playOn(mTextViewPassword);
     }
 
     @Override
@@ -165,6 +179,16 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
         StyleableToast.makeText(getContext(), "WELCOME, " + user.getFirstName() + " " + user.getLastName() + " !",
                 Toast.LENGTH_LONG, R.style.accept_login_toast).show();
 
+        YoYo.with(Techniques.Tada)
+                .duration(700)
+                .repeat(5)
+                .playOn(mTextViewUsername);
+
+        YoYo.with(Techniques.Tada)
+                .duration(700)
+                .repeat(5)
+                .playOn(mTextViewPassword);
+
         mNavigator.navigateToHome(user);
     }
 
@@ -172,12 +196,32 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
     public void alertUserForBlankInfo() {
         StyleableToast.makeText(getContext(), "Username and password cannot be empty!",
                 Toast.LENGTH_LONG, R.style.reject_login_toast).show();
+
+        YoYo.with(Techniques.Flash)
+                .duration(700)
+                .repeat(5)
+                .playOn(mEditTextUsername);
+
+        YoYo.with(Techniques.Flash)
+                .duration(700)
+                .repeat(5)
+                .playOn(mEditTextPassword);
     }
 
     @Override
     public void alertUserForLengthConstraints() {
         StyleableToast.makeText(getContext(), "Username and password length should be bigger than 6 characters!",
                 Toast.LENGTH_LONG, R.style.reject_login_toast).show();
+
+        YoYo.with(Techniques.Flash)
+                .duration(700)
+                .repeat(5)
+                .playOn(mEditTextUsername);
+
+        YoYo.with(Techniques.Flash)
+                .duration(700)
+                .repeat(5)
+                .playOn(mEditTextPassword);
     }
 
     @Override
