@@ -200,15 +200,15 @@ public class AddPlaceFragment extends Fragment implements ContractsAddPlace.View
 
         FancyAlertDialog dialog = new FancyAlertDialog.Builder(getActivity())
                 .setTitle("WARNING")
-                .setBackgroundColor(Color.parseColor("#303F9F"))
+                .setBackgroundColor(Color.parseColor("#FF6600"))
                 .setMessage("ARE YOU SURE? FOLLOWING CHANGES WILL BE SAVE TO YOUR ACCOUNT?")
                 .setNegativeBtnText("Cancel")
-                .setPositiveBtnBackground(Color.parseColor("#FF4081"))
+                .setPositiveBtnBackground(Color.parseColor("#FF6600"))
                 .setPositiveBtnText("Yes")
-                .setNegativeBtnBackground(Color.parseColor("#FFA9A7A8"))
+                .setNegativeBtnBackground(Color.parseColor("#FF0000"))
                 .setAnimation(Animation.POP)
                 .isCancellable(true)
-                .setIcon(R.drawable.ic_star_border_black_24dp, Icon.Visible)
+                .setIcon(R.drawable.ic_error_outline_black_24dp, Icon.Visible)
                 .OnPositiveClicked(new FancyAlertDialogListener() {
                     @Override
                     public void OnClick() {

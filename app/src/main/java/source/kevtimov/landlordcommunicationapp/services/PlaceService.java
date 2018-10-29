@@ -13,4 +13,6 @@ public interface PlaceService {
     List<Place> getAllPlacesWithNoTenants() throws IOException;
 
     Place updatePlaceTenant(Place place, int placeId) throws IOException;
+
+    List<Place> getAllPlacesByUserId(int userId) throws IOException;
 }

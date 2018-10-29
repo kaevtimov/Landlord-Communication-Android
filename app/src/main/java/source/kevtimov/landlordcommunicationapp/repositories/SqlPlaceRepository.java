@@ -40,4 +40,11 @@ public class SqlPlaceRepository implements PlaceRepository {
         String responseBody = mHttpRequester.update(mServerUrlPut, requestBody);
         return mJsonParser.fromJson(responseBody);
     }
+
+    @Override
+    public List<Place> getAllPlacesByUserId(int userId) throws IOException {
+        String mServerUrlGet = mServerUrl + "/user/" + userId;
+        String moviesJson = mHttpRequester.get(mServerUrlGet);
+        return mJsonParser.fromJsonArray(moviesJson);
+    }
 }

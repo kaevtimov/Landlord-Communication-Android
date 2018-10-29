@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.emredavarci.circleprogressbar.CircleProgressBar;
 import com.muddzdev.styleabletoast.StyleableToast;
 import com.shashank.sony.fancydialoglib.Animation;
 import com.shashank.sony.fancydialoglib.FancyAlertDialog;
@@ -40,7 +41,7 @@ public class SelectPlaceFragment extends Fragment implements ContractsSelectPlac
     ListView mListViewNoTenants;
 
     @BindView(R.id.progress_bar)
-    ProgressBar mProgressBar;
+    CircleProgressBar mLoadingView;
 
 
 
@@ -96,12 +97,12 @@ public class SelectPlaceFragment extends Fragment implements ContractsSelectPlac
 
     @Override
     public void showLoading() {
-        mProgressBar.setVisibility(View.VISIBLE);
+        mLoadingView.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoading() {
-        mProgressBar.setVisibility(View.GONE);
+        mLoadingView.setVisibility(View.GONE);
     }
 
     @Override
@@ -145,15 +146,15 @@ public class SelectPlaceFragment extends Fragment implements ContractsSelectPlac
 
         FancyAlertDialog dialog = new FancyAlertDialog.Builder(getActivity())
                 .setTitle("WARNING")
-                .setBackgroundColor(Color.parseColor("#303F9F"))
+                .setBackgroundColor(Color.parseColor("#FF6600"))
                 .setMessage("ARE YOU SURE? FOLLOWING CHANGES WILL BE SAVE TO YOUR ACCOUNT?")
                 .setNegativeBtnText("Cancel")
-                .setPositiveBtnBackground(Color.parseColor("#FF4081"))
+                .setPositiveBtnBackground(Color.parseColor("#FF6600"))
                 .setPositiveBtnText("Yes")
-                .setNegativeBtnBackground(Color.parseColor("#FFA9A7A8"))
+                .setNegativeBtnBackground(Color.parseColor("#FF0000"))
                 .setAnimation(Animation.POP)
                 .isCancellable(true)
-                .setIcon(R.drawable.ic_star_border_black_24dp, Icon.Visible)
+                .setIcon(R.drawable.ic_error_outline_black_24dp, Icon.Visible)
                 .OnPositiveClicked(new FancyAlertDialogListener() {
                     @Override
                     public void OnClick() {

@@ -1,9 +1,11 @@
 package source.kevtimov.landlordcommunicationapp.views.login.placemanagement;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.Toolbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,12 +17,14 @@ import source.kevtimov.landlordcommunicationapp.R;
 import source.kevtimov.landlordcommunicationapp.models.Place;
 import source.kevtimov.landlordcommunicationapp.models.User;
 import source.kevtimov.landlordcommunicationapp.utils.Constants;
+import source.kevtimov.landlordcommunicationapp.utils.bitmapcoder.IBitmapAgent;
+import source.kevtimov.landlordcommunicationapp.utils.drawer.BaseDrawer;
 import source.kevtimov.landlordcommunicationapp.views.login.addplace.AddPlaceActivity;
 import source.kevtimov.landlordcommunicationapp.views.login.home.HomeActivity;
 import source.kevtimov.landlordcommunicationapp.views.login.selectplace.SelectPlaceActivity;
 import source.kevtimov.landlordcommunicationapp.views.login.selecttenant.SelectTenantActivity;
 
-public class PlaceManagementActivity extends DaggerAppCompatActivity implements ContractsPlaceManagement.Navigator {
+public class PlaceManagementActivity extends BaseDrawer implements ContractsPlaceManagement.Navigator {
 
     @Inject
     PlaceManagementFragment mPlaceManagementFragment;
@@ -28,16 +32,26 @@ public class PlaceManagementActivity extends DaggerAppCompatActivity implements 
     @Inject
     ContractsPlaceManagement.Presenter mPresenter;
 
+    @Inject
+    IBitmapAgent mBitmapAgent;
+
+    public static final int IDENTIFIER = 608;
+    private User mUser;
+    private Toolbar mToolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_management);
 
+        mToolbar = this.findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
+
         Intent incoming = getIntent();
 
-        User user = (User) incoming.getSerializableExtra("User");
+        mUser = (User) incoming.getSerializableExtra("User");
 
-        mPlaceManagementFragment.setUser(user);
+        mPlaceManagementFragment.setUser(mUser);
 
         mPlaceManagementFragment.setPresenter(mPresenter);
         mPlaceManagementFragment.setNavigator(this);
@@ -91,5 +105,35 @@ public class PlaceManagementActivity extends DaggerAppCompatActivity implements 
                 mPlaceManagementFragment.updateSelectPlaces(placesList);
             }
         }
+    }
+
+    @Override
+    protected long getIdentifier() {
+        return IDENTIFIER;
+    }
+
+    @Override
+    protected Toolbar getToolbar() {
+        return mToolbar;
+    }
+
+    @Override
+    protected String getUsername() {
+        return mUser.getUsername();
+    }
+
+    @Override
+    protected String getEmail() {
+        return mUser.getEmail();
+    }
+
+    @Override
+    protected Bitmap getProfilePic() {
+        return mBitmapAgent.convertStringToBitmap(this.mUser.getPicture());
+    }
+
+    @Override
+    protected User getUser() {
+        return this.mUser;
     }
 }

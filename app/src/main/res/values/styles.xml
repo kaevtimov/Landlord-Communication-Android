@@ -4,8 +4,9 @@
     <!-- Custom application theme. -->
     <style name="AppThemeCustom" parent="Theme.AppCompat.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPurple</item>
-        <item name="colorPrimaryDark">@color/colorBackground</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:windowBackground">@color/colorPurple</item>
     </style>
 
     <!--Toast custom style accept-->

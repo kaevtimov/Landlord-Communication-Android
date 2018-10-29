@@ -19,6 +19,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.emredavarci.circleprogressbar.CircleProgressBar;
 import com.muddzdev.styleabletoast.StyleableToast;
 
 import java.io.ByteArrayOutputStream;
@@ -94,7 +95,7 @@ public class SignUpFragment extends Fragment implements ContractsSignUp.View {
     Button mButtonContinue2;
 
     @BindView(R.id.progress_bar)
-    ProgressBar mProgressBar;
+    CircleProgressBar mProgressBar;
 
     private RadioButton radioTypeButton;
     private ContractsSignUp.Presenter mPresenter;
