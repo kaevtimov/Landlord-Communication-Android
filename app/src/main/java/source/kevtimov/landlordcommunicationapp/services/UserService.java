@@ -19,5 +19,5 @@ public interface UserService {
 
     List<User> getAllTenants() throws IOException;
 
-
+    User getUserById(int userId) throws IOException;
 }

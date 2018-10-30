@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.emredavarci.circleprogressbar.CircleProgressBar;
 import com.muddzdev.styleabletoast.StyleableToast;
+import com.vstechlab.easyfonts.EasyFonts;
 
 import java.util.List;
 import java.util.Objects;
@@ -55,6 +56,7 @@ public class MyPlacesFragment extends Fragment implements ContractsMyPlaces.View
         mPlacesAdapter = new MyPlacesAdapter(Objects.requireNonNull(getContext()));
         mListViewMyPlaces.setAdapter(mPlacesAdapter);
 
+        initFonts();
 
         return root;
     }
@@ -133,5 +135,9 @@ public class MyPlacesFragment extends Fragment implements ContractsMyPlaces.View
     @OnClick(R.id.btn_plus)
     public void onClickAdd(View v){
         mPresenter.allowNavigationToManagePlaces();
+    }
+
+    private void initFonts() {
+        mTextViewMyPlaces.setTypeface(EasyFonts.droidSerifBold(getContext()));
     }
 }

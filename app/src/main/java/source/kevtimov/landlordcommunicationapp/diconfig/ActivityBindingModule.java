@@ -6,6 +6,8 @@ import source.kevtimov.landlordcommunicationapp.diconfig.modules.AddPlaceModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.HomeModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.LogInModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.MyPlacesModule;
+import source.kevtimov.landlordcommunicationapp.diconfig.modules.PaymentModule;
+import source.kevtimov.landlordcommunicationapp.diconfig.modules.PlaceDetailsModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.PlaceManagementModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.SelectPlaceModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.SelectTenantModule;
@@ -14,6 +16,8 @@ import source.kevtimov.landlordcommunicationapp.views.login.addplace.AddPlaceAct
 import source.kevtimov.landlordcommunicationapp.views.login.home.HomeActivity;
 import source.kevtimov.landlordcommunicationapp.views.login.login.LoginActivity;
 import source.kevtimov.landlordcommunicationapp.views.login.myplaces.MyPlacesActivity;
+import source.kevtimov.landlordcommunicationapp.views.login.payment.PaymentActivity;
+import source.kevtimov.landlordcommunicationapp.views.login.placedetails.PlaceDetailsActivity;
 import source.kevtimov.landlordcommunicationapp.views.login.placemanagement.PlaceManagementActivity;
 import source.kevtimov.landlordcommunicationapp.views.login.selectplace.SelectPlaceActivity;
 import source.kevtimov.landlordcommunicationapp.views.login.selecttenant.SelectTenantActivity;
@@ -68,4 +72,16 @@ public abstract class ActivityBindingModule {
             modules = MyPlacesModule.class
     )
     abstract MyPlacesActivity myPlacesActivity();
+
+    @ActivityScoped
+    @ContributesAndroidInjector(
+            modules = PlaceDetailsModule.class
+    )
+    abstract PlaceDetailsActivity placeDetailsActivity();
+
+    @ActivityScoped
+    @ContributesAndroidInjector(
+            modules = PaymentModule.class
+    )
+    abstract PaymentActivity paymentActivity();
 }

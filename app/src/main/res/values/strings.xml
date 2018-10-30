@@ -49,8 +49,13 @@
     <string name="done">DONE</string>
     <string name="please_select_places_from_bellow">Please select places from bellow</string>
     <string name="ready">READY</string>
-    <string name="pay">PAY</string>
     <string name="address_">Address:</string>
     <string name="my_places">MY PLACES</string>
+    <string name="no_tenant">Tenant: NO TENANT</string>
+    <string name="pay">PAY</string>
+    <string name="landlord_no_landlord">Landlord: NO LANDLORD</string>
+    <string name="address_no_address">Address: NO ADDRESS</string>
+    <string name="description_no_description">Description: NO DESCRIPTION</string>
+    <string name="rent_information_no_information">Rent information: NO INFORMATION</string>
 
 </resources>

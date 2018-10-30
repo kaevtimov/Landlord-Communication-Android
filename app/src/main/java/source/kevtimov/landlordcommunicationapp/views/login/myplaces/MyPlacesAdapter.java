@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.vstechlab.easyfonts.EasyFonts;
+
 import java.util.Objects;
 
 import javax.inject.Inject;
@@ -32,7 +34,6 @@ public class MyPlacesAdapter extends ArrayAdapter<Place> {
     TextView mTextViewPlacesAddress;
 
 
-
     @Inject
     public MyPlacesAdapter(@NonNull Context context) {
         super(context, -1);
@@ -42,7 +43,7 @@ public class MyPlacesAdapter extends ArrayAdapter<Place> {
     @SuppressLint("SetTextI18n")
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent){
+    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View view = convertView;
         if (view == null) {
             LayoutInflater layoutInflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -53,6 +54,8 @@ public class MyPlacesAdapter extends ArrayAdapter<Place> {
 
         Place place = getItem(position);
         mTextViewPlacesAddress.setText("Address: " + Objects.requireNonNull(place).getAddress());
+        mTextViewPlacesAddress.setTypeface(EasyFonts.droidSerifBold(getContext()));
+
 
         return view;
     }

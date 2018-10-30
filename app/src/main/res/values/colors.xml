@@ -5,4 +5,5 @@
     <color name="colorAccent">#D81B60</color>
     <color name="colorPurple">#4a3c5d</color>
     <color name="colorBackground">#fff0b3</color>
+    <color name="colorHeaderBack">#330033</color>
 </resources>

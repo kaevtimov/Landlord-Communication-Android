@@ -32,9 +32,6 @@ public class PlaceManagementActivity extends BaseDrawer implements ContractsPlac
     @Inject
     ContractsPlaceManagement.Presenter mPresenter;
 
-    @Inject
-    IBitmapAgent mBitmapAgent;
-
     public static final int IDENTIFIER = 608;
     private User mUser;
     private Toolbar mToolbar;
@@ -128,8 +125,8 @@ public class PlaceManagementActivity extends BaseDrawer implements ContractsPlac
     }
 
     @Override
-    protected Bitmap getProfilePic() {
-        return mBitmapAgent.convertStringToBitmap(this.mUser.getPicture());
+    protected String getProfilePic() {
+        return this.mUser.getPicture();
     }
 
     @Override

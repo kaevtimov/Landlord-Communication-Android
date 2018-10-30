@@ -17,4 +17,19 @@ public class HttpRentService implements RentService {
     public Rent registerRent(Rent rent) throws IOException {
         return rentRepository.registerRent(rent);
     }
+
+    @Override
+    public Rent getRentByPlaceId(int placeId) throws IOException {
+        return rentRepository.getRentByPlaceId(placeId);
+    }
+
+    @Override
+    public Rent updatePaidStatus(int rentId) throws IOException {
+        return rentRepository.updatePaidStatus(rentId);
+    }
+
+    @Override
+    public Rent updateRentRemainingAmount(int rentId, Rent rent) throws IOException {
+        return rentRepository.updateRentRemainingAmount(rentId, rent);
+    }
 }

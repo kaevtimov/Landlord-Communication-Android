@@ -1,4 +1,4 @@
-package source.kevtimov.landlordcommunicationapp.views.login.myplaces;
+package source.kevtimov.landlordcommunicationapp.views.login.payment;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -13,39 +13,43 @@ import source.kevtimov.landlordcommunicationapp.models.Place;
 import source.kevtimov.landlordcommunicationapp.models.User;
 import source.kevtimov.landlordcommunicationapp.utils.bitmapcoder.IBitmapAgent;
 import source.kevtimov.landlordcommunicationapp.utils.drawer.BaseDrawer;
+import source.kevtimov.landlordcommunicationapp.views.login.myplaces.MyPlacesActivity;
 import source.kevtimov.landlordcommunicationapp.views.login.placedetails.PlaceDetailsActivity;
-import source.kevtimov.landlordcommunicationapp.views.login.placemanagement.PlaceManagementActivity;
 
-public class MyPlacesActivity extends BaseDrawer implements ContractsMyPlaces.Navigator{
-
-    @Inject
-    MyPlacesFragment mMyPlacesFragment;
+public class PaymentActivity extends BaseDrawer implements ContractsPayments.Navigator{
 
     @Inject
-    ContractsMyPlaces.Presenter mPresenter;
+    PaymentFragment mPaymentFragment;
 
+    @Inject
+    ContractsPayments.Presenter mPresenter;
+
+    public static final int IDENTIFIER = 916;
     private Toolbar mToolbar;
-    public static final int IDENTIFIER = 923;
     private User mUser;
+    private Place mPlace;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_places);
-
+        setContentView(R.layout.activity_payment);
         mToolbar = this.findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
-        Intent incomingUser = getIntent();
-        mUser = (User) incomingUser.getSerializableExtra("User");
+        Intent incoming = getIntent();
 
-        mMyPlacesFragment.setNavigator(this);
-        mMyPlacesFragment.setPresenter(mPresenter);
+        mUser = (User) incoming.getSerializableExtra("User");
+        mPlace = (Place) incoming.getSerializableExtra("Place");
+
+        mPresenter.setPlace(mPlace);
         mPresenter.setUser(mUser);
+
+        mPaymentFragment.setNavigator(this);
+        mPaymentFragment.setPresenter(mPresenter);
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.my_places_content, mMyPlacesFragment)
+                .replace(R.id.payment_content, mPaymentFragment)
                 .commit();
     }
 
@@ -71,30 +75,16 @@ public class MyPlacesActivity extends BaseDrawer implements ContractsMyPlaces.Na
 
     @Override
     protected String getProfilePic() {
-        return this.mUser.getPicture();
+        return mUser.getPicture();
     }
 
     @Override
     protected User getUser() {
-        return this.mUser;
+        return mUser;
     }
 
     @Override
-    public void navigateToPlaceDetails(Place place) {
-        Intent intent = new Intent(this, PlaceDetailsActivity.class);
-
-        intent.putExtra("Place", place);
-        intent.putExtra("User", mUser);
-
-        startActivity(intent);
-    }
-
-    @Override
-    public void navigateToManagePlace() {
-        Intent intent = new Intent(this, PlaceManagementActivity.class);
-
-        intent.putExtra("User", mUser);
-
-        startActivity(intent);
+    public void navigateToMyPlacesActivity() {
+        finish();
     }
 }

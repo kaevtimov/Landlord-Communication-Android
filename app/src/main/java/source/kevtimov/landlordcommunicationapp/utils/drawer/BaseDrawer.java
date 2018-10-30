@@ -14,14 +14,19 @@ import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
+import javax.inject.Inject;
+
 import dagger.android.support.DaggerAppCompatActivity;
 import source.kevtimov.landlordcommunicationapp.R;
 import source.kevtimov.landlordcommunicationapp.models.User;
+import source.kevtimov.landlordcommunicationapp.utils.bitmapcoder.IBitmapAgent;
 import source.kevtimov.landlordcommunicationapp.views.login.myplaces.MyPlacesActivity;
 
 
 public abstract class BaseDrawer extends DaggerAppCompatActivity {
 
+    @Inject
+    IBitmapAgent mBitmapAgent;
 
     private Drawer mDrawer;
 
@@ -43,11 +48,11 @@ public abstract class BaseDrawer extends DaggerAppCompatActivity {
         IProfile profile = new ProfileDrawerItem ()
                 .withName (getUsername())
                 .withEmail (getEmail())
-                .withIcon (getProfilePic());
+                .withIcon (mBitmapAgent.convertStringToBitmap(getProfilePic()));
 
         AccountHeader accHeader = new AccountHeaderBuilder()
                 .withActivity(this)
-                .withHeaderBackground(R.color.cardview_dark_background)
+                .withHeaderBackground(R.color.colorHeaderBack)
                 .addProfiles(profile)
                 .build();
 
@@ -65,7 +70,6 @@ public abstract class BaseDrawer extends DaggerAppCompatActivity {
                     if (getIdentifier() == identifier) {
                         return false;
                     }
-
                     Intent intent = getNextIntent(identifier);
                     if (intent == null) {
                         return false;
@@ -99,7 +103,7 @@ public abstract class BaseDrawer extends DaggerAppCompatActivity {
 
     protected abstract String getEmail();
 
-    protected abstract Bitmap getProfilePic();
+    protected abstract String getProfilePic();
 
     protected abstract User getUser();
 }

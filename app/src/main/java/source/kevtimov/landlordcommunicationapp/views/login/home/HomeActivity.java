@@ -26,9 +26,6 @@ public class HomeActivity extends BaseDrawer implements ContractsHome.Navigator{
     private User mLogInUser;
 
     @Inject
-    IBitmapAgent mBitmapAgent;
-
-    @Inject
     HomeFragment mHomeFragment;
 
     @Inject
@@ -77,8 +74,8 @@ public class HomeActivity extends BaseDrawer implements ContractsHome.Navigator{
     }
 
     @Override
-    protected Bitmap getProfilePic() {
-        return mBitmapAgent.convertStringToBitmap(this.mLogInUser.getPicture());
+    protected String getProfilePic() {
+        return this.mLogInUser.getPicture();
     }
 
     @Override

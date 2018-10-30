@@ -35,7 +35,9 @@
         <activity android:name=".views.login.selecttenant.SelectTenantActivity" />
         <activity android:name=".views.login.selectplace.SelectPlaceActivity" />
         <activity android:name=".views.login.home.HomeActivity" />
-        <activity android:name=".views.login.myplaces.MyPlacesActivity"></activity>
+        <activity android:name=".views.login.myplaces.MyPlacesActivity" />
+        <activity android:name=".views.login.placedetails.PlaceDetailsActivity" />
+        <activity android:name=".views.login.payment.PaymentActivity"></activity>
     </application>
 
 </manifest>
