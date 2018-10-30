@@ -21,7 +21,7 @@ public class SqlUserRepository implements UserRepository {
 
     @Override
     public User getUserByUsername(String username) throws IOException {
-        String currentUrl = mServerUrl + "/" + username;
+        String currentUrl = mServerUrl + "/username/" + username;
         String json = mHttpRequester.get(currentUrl);
         return mJsonParser.fromJson(json);
     }
@@ -59,5 +59,12 @@ public class SqlUserRepository implements UserRepository {
         String mServerUrlGet = mServerUrl + "/tenants";
         String moviesJson = mHttpRequester.get(mServerUrlGet);
         return mJsonParser.fromJsonArray(moviesJson);
+    }
+
+    @Override
+    public User getUserById(int userId) throws IOException {
+        String url = mServerUrl + "/" + userId;
+        String responseBody = mHttpRequester.get(url);
+        return mJsonParser.fromJson(responseBody);
     }
 }

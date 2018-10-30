@@ -18,4 +18,6 @@ public interface UserRepository {
     User checkEmailForExisting(String email) throws IOException;
 
     List<User> getAllTenants() throws  IOException;
+
+    User getUserById(int userId) throws IOException;
 }

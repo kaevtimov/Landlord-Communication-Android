@@ -71,4 +71,9 @@ public class HttpUserService implements UserService {
     public List<User> getAllTenants() throws IOException {
         return userRepository.getAllTenants();
     }
+
+    @Override
+    public User getUserById(int userId) throws IOException {
+        return userRepository.getUserById(userId);
+    }
 }

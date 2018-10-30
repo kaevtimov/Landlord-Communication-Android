@@ -24,4 +24,26 @@ public class SqlRentRepository implements RentRepository {
         String responseBody = mHttpRequester.post(mServerUrl, requestBody);
         return mJsonParser.fromJson(responseBody);
     }
+
+    @Override
+    public Rent getRentByPlaceId(int placeId) throws IOException {
+        String currentUrl = mServerUrl + "/" + placeId;
+        String json = mHttpRequester.get(currentUrl);
+        return mJsonParser.fromJson(json);
+    }
+
+    @Override
+    public Rent updatePaidStatus(int rentId) throws IOException {
+        String mServerUrlPut = mServerUrl + "/updatestatus/" + rentId;
+        String responseBody = mHttpRequester.update(mServerUrlPut, "");
+        return mJsonParser.fromJson(responseBody);
+    }
+
+    @Override
+    public Rent updateRentRemainingAmount(int rentId, Rent rent) throws IOException {
+        String requestBody = mJsonParser.toJson(rent);
+        String mServerUrlPut = mServerUrl + "/updateremaining/" + rentId;
+        String responseBody = mHttpRequester.update(mServerUrlPut, requestBody);
+        return mJsonParser.fromJson(responseBody);
+    }
 }

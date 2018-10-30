@@ -91,9 +91,8 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
 
 
         ButterKnife.bind(this, root);
-        mFacebookButton.setFragment(this);
-        mTextViewUsername.setTypeface(EasyFonts.funRaiser(getContext()));
-        mTextViewPassword.setTypeface(EasyFonts.funRaiser(getContext()));
+
+        initFonts();
 
         getActivity()
                 .getWindow()
@@ -339,5 +338,11 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
         }
 
         return bundle;
+    }
+
+    private void initFonts() {
+        mFacebookButton.setFragment(this);
+        mTextViewUsername.setTypeface(EasyFonts.funRaiser(getContext()));
+        mTextViewPassword.setTypeface(EasyFonts.funRaiser(getContext()));
     }
 }
