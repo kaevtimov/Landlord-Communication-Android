@@ -129,5 +129,4 @@ public class SignUpPresenter implements ContractsSignUp.Presenter {
                 .subscribe(user -> mView.processCheckResult(user),
                         error -> mView.showError(error));
     }
-
 }

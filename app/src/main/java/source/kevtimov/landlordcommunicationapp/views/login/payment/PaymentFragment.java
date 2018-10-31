@@ -150,6 +150,11 @@ public class PaymentFragment extends Fragment implements ContractsPayments.View 
     }
 
     @Override
+    public void navigateToCardAdd() {
+        mNavigator.navigateToAddCard();
+    }
+
+    @Override
     public void showError(Throwable error) {
         StyleableToast.makeText(getContext(), error.getMessage(),
                 Toast.LENGTH_LONG, R.style.reject_login_toast)
@@ -205,7 +210,7 @@ public class PaymentFragment extends Fragment implements ContractsPayments.View 
 
     @OnClick(R.id.btn_add_card)
     public void onClickAddCard(View v) {
-
+        mPresenter.allowNavigateToCardAdd();
     }
 
     @OnClick(R.id.btn_view_cards)

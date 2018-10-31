@@ -10,4 +10,6 @@ public interface CardRepository {
     List<Card> getAllCardsByUserId(int userId) throws IOException;
 
     Card updateCardBalance(int cardId, Card card) throws IOException;
+
+    Card registerCard(Card card) throws IOException;
 }

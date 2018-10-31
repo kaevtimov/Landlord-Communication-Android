@@ -7,21 +7,25 @@ import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.disposables.Disposable;
 import source.kevtimov.landlordcommunicationapp.async.base.SchedulerProvider;
 import source.kevtimov.landlordcommunicationapp.models.Place;
+import source.kevtimov.landlordcommunicationapp.models.Rent;
 import source.kevtimov.landlordcommunicationapp.models.User;
+import source.kevtimov.landlordcommunicationapp.services.RentService;
 import source.kevtimov.landlordcommunicationapp.services.UserService;
 
 public class PlaceDetailsPresenter implements ContractsPlaceDetails.Presenter {
 
     private ContractsPlaceDetails.View mView;
     private UserService mUserService;
+    private RentService mRentService;
     private SchedulerProvider mSchedulerProvider;
     private User mUser;
     private Place mPlace;
 
     @Inject
-    public PlaceDetailsPresenter(UserService userService, SchedulerProvider schedulerProvider){
+    public PlaceDetailsPresenter(UserService userService, SchedulerProvider schedulerProvider, RentService rentService){
         this.mSchedulerProvider = schedulerProvider;
         this.mUserService = userService;
+        this.mRentService = rentService;
     }
 
     @Override
@@ -60,6 +64,27 @@ public class PlaceDetailsPresenter implements ContractsPlaceDetails.Presenter {
         }else{
             getNotLogInUser(mPlace.getLandlordID());
         }
+    }
+
+    @Override
+    public void getUnpaidRent() {
+        Disposable observal = Observable
+                .create((ObservableOnSubscribe<Rent>) emitter -> {
+                    Rent rent = mRentService.getRentByPlaceId(mPlace.getPlaceID());
+                    emitter.onNext(rent);
+                    emitter.onComplete();
+                })
+                .subscribeOn(mSchedulerProvider.background())
+                .observeOn(mSchedulerProvider.ui())
+                .doFinally(mView::hideLoading)
+                .subscribe(rent -> mView.viewRent(rent)
+                        , error -> {
+                            if (error instanceof NullPointerException) {
+                                // in case of null pointer exception
+                            } else {
+                                mView.showError(error);
+                            }
+                        });
     }
 
 

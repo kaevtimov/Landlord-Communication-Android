@@ -141,10 +141,15 @@ public class PaymentsPresenter implements ContractsPayments.Presenter {
         mView.navigateToDetailsActivity();
     }
 
+    @Override
+    public void allowNavigateToCardAdd() {
+        mView.navigateToCardAdd();
+    }
+
     private void updateCardBalance(double enteredAmount) {
 
         double newBalance = mCard.getBalance() - enteredAmount;
-        Card outcomeCard = new Card("", "", "", 0, newBalance, mUser.getUserId());
+        Card outcomeCard = new Card("", "", "", "", newBalance, mUser.getUserId());
 
         Disposable observal = Observable
                 .create((ObservableOnSubscribe<Card>) emitter -> {
@@ -242,7 +247,7 @@ public class PaymentsPresenter implements ContractsPayments.Presenter {
     }
 
     private void createNewRent() {
-        Rent newRent = new Rent(mPlace.getPlaceID(), mRent.getTotalAmount(), mRent.getTotalAmount(), "", false);
+        Rent newRent = new Rent(mPlace.getPlaceID(), mRent.getTotalAmount(), mRent.getTotalAmount(), mRent.getDueDate(), false);
 
         Disposable observal = Observable
                 .create((ObservableOnSubscribe<Rent>) emitter -> {

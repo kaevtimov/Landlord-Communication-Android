@@ -1,7 +1,9 @@
 package source.kevtimov.landlordcommunicationapp.views.login.myplaces;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -11,6 +13,8 @@ import javax.inject.Inject;
 import source.kevtimov.landlordcommunicationapp.R;
 import source.kevtimov.landlordcommunicationapp.models.Place;
 import source.kevtimov.landlordcommunicationapp.models.User;
+import source.kevtimov.landlordcommunicationapp.parsers.base.JsonParser;
+import source.kevtimov.landlordcommunicationapp.utils.Constants;
 import source.kevtimov.landlordcommunicationapp.utils.bitmapcoder.IBitmapAgent;
 import source.kevtimov.landlordcommunicationapp.utils.drawer.BaseDrawer;
 import source.kevtimov.landlordcommunicationapp.views.login.placedetails.PlaceDetailsActivity;
@@ -20,6 +24,9 @@ public class MyPlacesActivity extends BaseDrawer implements ContractsMyPlaces.Na
 
     @Inject
     MyPlacesFragment mMyPlacesFragment;
+
+    @Inject
+    JsonParser<User> mJsonParser;
 
     @Inject
     ContractsMyPlaces.Presenter mPresenter;
@@ -37,7 +44,7 @@ public class MyPlacesActivity extends BaseDrawer implements ContractsMyPlaces.Na
         setSupportActionBar(mToolbar);
 
         Intent incomingUser = getIntent();
-        mUser = (User) incomingUser.getSerializableExtra("User");
+        mUser = getUserFromSharedPref();
 
         mMyPlacesFragment.setNavigator(this);
         mMyPlacesFragment.setPresenter(mPresenter);
@@ -84,7 +91,6 @@ public class MyPlacesActivity extends BaseDrawer implements ContractsMyPlaces.Na
         Intent intent = new Intent(this, PlaceDetailsActivity.class);
 
         intent.putExtra("Place", place);
-        intent.putExtra("User", mUser);
 
         startActivity(intent);
     }
@@ -93,8 +99,12 @@ public class MyPlacesActivity extends BaseDrawer implements ContractsMyPlaces.Na
     public void navigateToManagePlace() {
         Intent intent = new Intent(this, PlaceManagementActivity.class);
 
-        intent.putExtra("User", mUser);
-
         startActivity(intent);
+    }
+
+    private User getUserFromSharedPref() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String userInfo = sharedPreferences.getString(Constants.SHARED_PREFERENCES_KEY_USER_INFO, "");
+        return mJsonParser.fromJson(userInfo);
     }
 }

@@ -1,5 +1,9 @@
 package source.kevtimov.landlordcommunicationapp.views.login.login;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
@@ -7,7 +11,9 @@ import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.disposables.Disposable;
 import source.kevtimov.landlordcommunicationapp.async.base.SchedulerProvider;
 import source.kevtimov.landlordcommunicationapp.models.User;
+import source.kevtimov.landlordcommunicationapp.parsers.base.JsonParser;
 import source.kevtimov.landlordcommunicationapp.services.UserService;
+import source.kevtimov.landlordcommunicationapp.utils.Constants;
 
 public class LoginPresenter implements ContractsLogin.Presenter {
 
@@ -91,6 +97,7 @@ public class LoginPresenter implements ContractsLogin.Presenter {
                             }
                         });
     }
+
 
     private void checkCustomUserByUsername(String username) {
         Disposable observal = Observable
