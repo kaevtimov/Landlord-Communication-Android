@@ -23,4 +23,9 @@ public class HttpCardService implements CardService {
     public Card updateCardBalance(int cardId, Card card) throws IOException {
         return cardRepository.updateCardBalance(cardId, card);
     }
+
+    @Override
+    public Card registerCard(Card card) throws IOException {
+        return cardRepository.registerCard(card);
+    }
 }

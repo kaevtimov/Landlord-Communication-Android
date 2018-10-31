@@ -1,11 +1,13 @@
 package source.kevtimov.landlordcommunicationapp.views.login.signup;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 
@@ -16,6 +18,7 @@ import javax.inject.Inject;
 import dagger.android.support.DaggerAppCompatActivity;
 import source.kevtimov.landlordcommunicationapp.R;
 import source.kevtimov.landlordcommunicationapp.models.User;
+import source.kevtimov.landlordcommunicationapp.parsers.base.JsonParser;
 import source.kevtimov.landlordcommunicationapp.utils.Constants;
 import source.kevtimov.landlordcommunicationapp.views.login.placemanagement.PlaceManagementActivity;
 
@@ -26,6 +29,9 @@ public class SignUpActivity extends DaggerAppCompatActivity implements Contracts
 
     @Inject
     ContractsSignUp.Presenter mPresenter;
+
+    @Inject
+    JsonParser<User> mJsonParser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +55,10 @@ public class SignUpActivity extends DaggerAppCompatActivity implements Contracts
 
     @Override
     public void navigateToPlaceManagement(User user) {
+        manageUserInSharedPref(user);
         Intent intent = new Intent(this, PlaceManagementActivity.class);
 
-        intent.putExtra("User", user);
+        //intent.putExtra("User", user);
 
         startActivity(intent);
 
@@ -81,5 +88,14 @@ public class SignUpActivity extends DaggerAppCompatActivity implements Contracts
                 e.printStackTrace();
             }
         }
+    }
+
+    private void manageUserInSharedPref(User user) {
+        String userInfo = mJsonParser.toJson(user);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(Constants.SHARED_PREFERENCES_KEY_USER_INFO, userInfo);
+        editor.apply();
     }
 }

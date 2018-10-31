@@ -8,4 +8,5 @@ public class Constants {
     public static final int ADD_PLACE_REQUEST = 20015;
     public static final int SELECT_PLACE_REQUEST = 200;
     public static final int REQUEST_CODE_GALLERY = 878;
+    public static final String SHARED_PREFERENCES_KEY_USER_INFO = "UserInfo";
 }

@@ -33,4 +33,11 @@ public class SqlCardRepository implements CardRepository {
         String responseBody = mHttpRequester.update(mServerUrlPut, requestBody);
         return mJsonParser.fromJson(responseBody);
     }
+
+    @Override
+    public Card registerCard(Card card) throws IOException {
+        String requestBody = mJsonParser.toJson(card);
+        String responseBody = mHttpRequester.post(mServerUrl, requestBody);
+        return mJsonParser.fromJson(responseBody);
+    }
 }

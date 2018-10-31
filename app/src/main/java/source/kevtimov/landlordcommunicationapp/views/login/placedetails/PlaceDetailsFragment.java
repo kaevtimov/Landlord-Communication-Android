@@ -22,6 +22,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import source.kevtimov.landlordcommunicationapp.R;
 import source.kevtimov.landlordcommunicationapp.models.Place;
+import source.kevtimov.landlordcommunicationapp.models.Rent;
 import source.kevtimov.landlordcommunicationapp.models.User;
 
 public class PlaceDetailsFragment extends Fragment implements ContractsPlaceDetails.View{
@@ -72,6 +73,7 @@ public class PlaceDetailsFragment extends Fragment implements ContractsPlaceDeta
         super.onResume();
         mPresenter.subscribe(this);
         mPresenter.getNotLogInUser();
+        mPresenter.getUnpaidRent();
     }
 
     @Override
@@ -126,17 +128,14 @@ public class PlaceDetailsFragment extends Fragment implements ContractsPlaceDeta
             mTenantInfo.setText("Tenant: " + notLoggedInUser.getFirstName() + " " + notLoggedInUser.getLastName() + "\n"
                     + "Username: " + notLoggedInUser.getUsername());
             mPayButton.setVisibility(View.GONE);
-            if(mPlace.getRents().size() > 0){
-                mRentInfo.setText("Rents information:\n" + mPlace.getRents());
-            }
+
+            mPresenter.getUnpaidRent();
         }else{
             mLandlordInfo.setText("Landlord: " + notLoggedInUser.getFirstName() + " " + notLoggedInUser.getLastName() + "\n"
                     + "Username: " + notLoggedInUser.getUsername());
             mTenantInfo.setText("Tenant: " + loggedInUser.getFirstName() + " " + loggedInUser.getLastName() + "\n"
                     + "Username: " + loggedInUser.getUsername());
-            if(mPlace.getRents().size() > 0){
-                mRentInfo.setText("Rents information:\n" + mPlace.getRents().get(mPlace.getRents().size() - 1));
-            }
+            mPresenter.getUnpaidRent();
         }
         mAddress.setText("Address: " + mPlace.getAddress());
         mDescription.setText("Description: " + mPlace.getDescription());
@@ -154,11 +153,17 @@ public class PlaceDetailsFragment extends Fragment implements ContractsPlaceDeta
         mLandlordInfo.setText("Landlord: " + mLogInUser.getFirstName() + " " + mLogInUser.getLastName() + "\n"
                 + "Username: " + mLogInUser.getUsername());
         mPayButton.setVisibility(View.GONE);
-        if(mPlace.getRents().size() > 0){
-            mRentInfo.setText("Rents information:\n" + mPlace.getRents());
-        }
+
+        mRentInfo.setText("Rents information: NO RENT INFORMATION\n");
+
         mAddress.setText("Address: " + mPlace.getAddress());
         mDescription.setText("Description: " + mPlace.getDescription());
+    }
+
+    @Override
+    public void viewRent(Rent rent) {
+        mRentInfo.setText("Due date: " + rent.getDueDate() + "\n" + "Total amount: " + rent.getTotalAmount() + " leva\n"
+                + "Rem. amount: " + rent.getRemainingAmount() + " leva\n" + "Paid: " + rent.isPaid());
     }
 
     private void initFonts() {

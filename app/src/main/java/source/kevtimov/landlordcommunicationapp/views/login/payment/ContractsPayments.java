@@ -30,6 +30,8 @@ public interface ContractsPayments {
         void alertEnteredAmountBiggerThanRemaining();
 
         void navigateToDetailsActivity();
+
+        void navigateToCardAdd();
     }
 
     interface Presenter {
@@ -51,10 +53,14 @@ public interface ContractsPayments {
         void loadCards();
 
         void managePayment(double enteredAmount);
+
+        void allowNavigateToCardAdd();
     }
 
     interface Navigator {
 
         void navigateToMyPlacesActivity();
+
+        void navigateToAddCard();
     }
 }

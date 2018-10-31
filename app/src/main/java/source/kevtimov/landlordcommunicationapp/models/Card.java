@@ -10,7 +10,7 @@ public class Card implements Serializable {
     private String brand;
     private String type;
     private String cardNumber;
-    private int cvvNumber;
+    private String cvvNumber;
     private double balance;
     private int userID;
     private User user;
@@ -19,7 +19,7 @@ public class Card implements Serializable {
         //default
     }
 
-    public Card(String brand, String type, String cardNumber, int cvvNumber, double balance, int userID) {
+    public Card(String brand, String type, String cardNumber, String cvvNumber, double balance, int userID) {
         setUserID(userID);
         setBrand(brand);
         setType(type);
@@ -60,11 +60,11 @@ public class Card implements Serializable {
         this.cardNumber = cardNumber;
     }
 
-    public int getCvvNumber() {
+    public String getCvvNumber() {
         return cvvNumber;
     }
 
-    public void setCvvNumber(int cvvNumber) {
+    public void setCvvNumber(String cvvNumber) {
         this.cvvNumber = cvvNumber;
     }
 

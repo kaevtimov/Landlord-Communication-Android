@@ -2,6 +2,7 @@ package source.kevtimov.landlordcommunicationapp.diconfig;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
+import source.kevtimov.landlordcommunicationapp.diconfig.modules.AddCardModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.AddPlaceModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.HomeModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.LogInModule;
@@ -12,6 +13,7 @@ import source.kevtimov.landlordcommunicationapp.diconfig.modules.PlaceManagement
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.SelectPlaceModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.SelectTenantModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.SignUpModule;
+import source.kevtimov.landlordcommunicationapp.views.login.addcard.AddCardActivity;
 import source.kevtimov.landlordcommunicationapp.views.login.addplace.AddPlaceActivity;
 import source.kevtimov.landlordcommunicationapp.views.login.home.HomeActivity;
 import source.kevtimov.landlordcommunicationapp.views.login.login.LoginActivity;
@@ -84,4 +86,10 @@ public abstract class ActivityBindingModule {
             modules = PaymentModule.class
     )
     abstract PaymentActivity paymentActivity();
+
+    @ActivityScoped
+    @ContributesAndroidInjector(
+            modules = AddCardModule.class
+    )
+    abstract AddCardActivity addCardActivity();
 }

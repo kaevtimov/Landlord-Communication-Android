@@ -19,6 +19,4 @@ public abstract class AddPlaceModule {
     @ActivityScoped
     @Binds
     abstract ContractsAddPlace.Presenter addPlacePresenter(AddPlacePresenter addPlacePresenter);
-
-
 }

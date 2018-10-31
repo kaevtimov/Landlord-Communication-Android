@@ -1,6 +1,7 @@
 package source.kevtimov.landlordcommunicationapp.views.login.placedetails;
 
 import source.kevtimov.landlordcommunicationapp.models.Place;
+import source.kevtimov.landlordcommunicationapp.models.Rent;
 import source.kevtimov.landlordcommunicationapp.models.User;
 
 public interface ContractsPlaceDetails {
@@ -24,6 +25,8 @@ public interface ContractsPlaceDetails {
         void manageViewsWithTenant(User notLoggedInUser, User loggedInUser, Place place);
 
         void manageViewsWithNoTenant(User user, Place place);
+
+        void viewRent(Rent rent);
     }
 
     interface Presenter {
@@ -39,6 +42,8 @@ public interface ContractsPlaceDetails {
         void allowNavigationToPayRent();
 
         void getNotLogInUser();
+
+        void getUnpaidRent();
     }
 
     interface Navigator {
