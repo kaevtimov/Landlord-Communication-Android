@@ -37,7 +37,7 @@ public class LoginPresenter implements ContractsLogin.Presenter {
     public void checkLogin(String username, String password) {
         mView.showLoading();
 
-        if (password.equals("asd123") && username.equals("cwillmontq")) {
+        if (password.equals("asd123") && username.equals("cbenez0")) {
             processUser(username);
         }
 

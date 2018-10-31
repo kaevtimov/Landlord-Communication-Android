@@ -25,7 +25,7 @@ public class ChatPresenter implements ChatContracts.Presenter {
 
     @Override
     public void selectLandlord(User landlord) {
-
+        mView.openChatRoom(landlord);
     }
 
     @Override

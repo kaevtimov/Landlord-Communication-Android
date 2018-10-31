@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class User implements Serializable {
 
     private int userId;
+    private String token;
     private String username;
     private String firstName;
     private String lastName;
@@ -20,7 +21,8 @@ public class User implements Serializable {
     }
 
     public User(boolean isLandlord, String username, String picture, String firstName, String lastName, String email,
-                boolean isOnline, String passwordHash, String passwordSalt){
+                boolean isOnline, String passwordHash, String passwordSalt, String token){
+        setToken(token);
         setUsername(username);
         setFirstName(firstName);
         setLastName(lastName);
@@ -107,5 +109,13 @@ public class User implements Serializable {
 
     public void setPasswordSalt(String passwordSalt) {
         this.passwordSalt = passwordSalt;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

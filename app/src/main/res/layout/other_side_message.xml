@@ -30,7 +30,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/message_body"
+        android:id="@+id/other_message_body"
         android:layout_below="@+id/name"
         android:layout_alignStart="@+id/name"
         android:background="@drawable/message_from_another"

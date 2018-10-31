@@ -5,14 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".chat.ChatFragment">
 
-    <RelativeLayout
+    <ListView
+        android:id="@+id/lv_landlords"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ListView
-            android:id="@+id/lv_landlords"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </RelativeLayout>
+        android:layout_height="match_parent" />
 
 </FrameLayout>

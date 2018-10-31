@@ -43,7 +43,7 @@ public class LoginActivity extends DaggerAppCompatActivity implements ContractsL
     @Override
     public void navigateWith(User user) {
         Intent intent = new Intent(this, ChatActivity.class);
-        intent.putExtra("User", user);
+        intent.putExtra("user", user);
         startActivity(intent);
     }
 }

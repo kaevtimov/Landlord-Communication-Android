@@ -11,6 +11,8 @@ public interface ChatContracts {
         void subscribe(View view);
 
         void loadLandlords();
+
+
     }
 
     interface View {
@@ -27,6 +29,8 @@ public interface ChatContracts {
         void hideLoading();
 
         void showEmptyLandlordList();
+
+        void openChatRoom(User landlord);
     }
 
     interface Navigator {

@@ -15,14 +15,14 @@ import source.kevtimov.landlordcommunicationapp.utils.drawer.BaseDrawer;
 public class ChatActivity extends BaseDrawer implements ChatContracts.Navigator {
     public static final long IDENTIFIER = 966;
 
-    @BindView(R.id.toolbar)
-    Toolbar mToolbar;
+    private Toolbar mToolbar;
 
     @Inject
     ChatFragment mChatFragment;
 
     @Inject
     ChatContracts.Presenter chatPresenter;
+    private User mLoggedInUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +30,9 @@ public class ChatActivity extends BaseDrawer implements ChatContracts.Navigator 
         setContentView(R.layout.activity_chat);
         mChatFragment.setPresenter(chatPresenter);
         mChatFragment.setNavigator(this);
+        mToolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
+        mLoggedInUser = (User) getIntent().getSerializableExtra("user");
 
         getSupportFragmentManager()
                 .beginTransaction()
@@ -51,6 +54,7 @@ public class ChatActivity extends BaseDrawer implements ChatContracts.Navigator 
     public void navigateToChatRoom(User user) {
         Intent intent = new Intent(this,ChatRoomActivity.class);
         intent.putExtra("chatMate",user);
+        intent.putExtra("chatStarter",mLoggedInUser);
         startActivity(intent);
     }
 }
