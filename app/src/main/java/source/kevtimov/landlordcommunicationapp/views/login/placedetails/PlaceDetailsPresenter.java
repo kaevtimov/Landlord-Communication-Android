@@ -81,6 +81,7 @@ public class PlaceDetailsPresenter implements ContractsPlaceDetails.Presenter {
                         , error -> {
                             if (error instanceof NullPointerException) {
                                 // in case of null pointer exception
+                                mView.viewEmptyRent();
                             } else {
                                 mView.showError(error);
                             }

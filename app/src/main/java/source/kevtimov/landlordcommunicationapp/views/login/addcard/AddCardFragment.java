@@ -97,16 +97,6 @@ public class AddCardFragment extends Fragment implements ContractsAddCard.View {
     }
 
     @Override
-    public void showLoading() {
-
-    }
-
-    @Override
-    public void hideLoading() {
-
-    }
-
-    @Override
     public void showError(Throwable error) {
         StyleableToast.makeText(getContext(), error.getMessage(),
                 Toast.LENGTH_LONG, R.style.accept_login_toast).show();

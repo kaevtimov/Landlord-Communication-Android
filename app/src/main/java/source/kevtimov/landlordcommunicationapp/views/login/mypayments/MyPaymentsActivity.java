@@ -1,4 +1,4 @@
-package source.kevtimov.landlordcommunicationapp.views.login.home;
+package source.kevtimov.landlordcommunicationapp.views.login.mypayments;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -13,39 +13,38 @@ import source.kevtimov.landlordcommunicationapp.parsers.base.JsonParser;
 import source.kevtimov.landlordcommunicationapp.utils.Constants;
 import source.kevtimov.landlordcommunicationapp.utils.drawer.BaseDrawer;
 
-public class HomeActivity extends BaseDrawer implements ContractsHome.Navigator{
+public class MyPaymentsActivity extends BaseDrawer {
 
+    @Inject
+    MyPaymentsFragment mMyPaymentsFragment;
 
-    private static final int IDENTIFIER = 631;
-    private Toolbar mToolbar;
-    private User mLogInUser;
+    @Inject
+    ContractsMyPayments.Presenter mPresenter;
 
     @Inject
     JsonParser<User> mJsonParser;
 
-    @Inject
-    HomeFragment mHomeFragment;
+    private Toolbar mToolbar;
+    private User mLogInUser;
+    public static final int IDENTIFIER = 369;
 
-    @Inject
-    ContractsHome.Presenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_my_payments);
 
         mToolbar = this.findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
         mLogInUser = getUserFromSharedPref();
-        mLogInUser.setOnline(true);
+        mPresenter.setUser(mLogInUser);
 
-        mHomeFragment.setNavigator(this);
-        mHomeFragment.setPresenter(mPresenter);
+        mMyPaymentsFragment.setPresenter(mPresenter);
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.home_content, mHomeFragment)
+                .replace(R.id.my_payments_content, mMyPaymentsFragment)
                 .commit();
     }
 
@@ -61,17 +60,17 @@ public class HomeActivity extends BaseDrawer implements ContractsHome.Navigator{
 
     @Override
     protected String getUsername() {
-        return this.mLogInUser.getUsername();
+        return mLogInUser.getUsername();
     }
 
     @Override
     protected String getEmail() {
-        return this.mLogInUser.getEmail();
+        return mLogInUser.getEmail();
     }
 
     @Override
     protected String getProfilePic() {
-        return this.mLogInUser.getPicture();
+        return mLogInUser.getPicture();
     }
 
     private User getUserFromSharedPref() {

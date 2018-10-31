@@ -127,11 +127,6 @@ public class PlaceManagementActivity extends BaseDrawer implements ContractsPlac
         return this.mUser.getPicture();
     }
 
-    @Override
-    protected User getUser() {
-        return this.mUser;
-    }
-
     private User getUserFromSharedPref() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String userInfo = sharedPreferences.getString(Constants.SHARED_PREFERENCES_KEY_USER_INFO, "");

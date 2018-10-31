@@ -176,7 +176,7 @@ public class PaymentsPresenter implements ContractsPayments.Presenter {
         Date current = new Date();
         @SuppressLint("SimpleDateFormat") SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String paymentDate = format.format(current);
-        Payment payment = new Payment(enteredAmount, paymentDate, mUser.getUserId(), mCard.getCardID(), mRent.getRentID());
+        Payment payment = new Payment(enteredAmount, paymentDate, mUser.getUserId(), mCard.getCardID(), mRent.getRentID(), mPlace.getPlaceID());
 
         Disposable observal = Observable
                 .create((ObservableOnSubscribe<Payment>) emitter -> {

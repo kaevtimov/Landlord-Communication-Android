@@ -86,11 +86,6 @@ public class PaymentActivity extends BaseDrawer implements ContractsPayments.Nav
     }
 
     @Override
-    protected User getUser() {
-        return mUser;
-    }
-
-    @Override
     public void navigateToMyPlacesActivity() {
         finish();
     }

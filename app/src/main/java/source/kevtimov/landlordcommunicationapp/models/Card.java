@@ -13,7 +13,6 @@ public class Card implements Serializable {
     private String cvvNumber;
     private double balance;
     private int userID;
-    private User user;
 
     public Card() {
         //default
@@ -82,14 +81,6 @@ public class Card implements Serializable {
 
     public void setUserID(int userID) {
         this.userID = userID;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     @SuppressLint("DefaultLocale")

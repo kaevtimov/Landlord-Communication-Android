@@ -8,22 +8,26 @@ public class Payment implements Serializable {
     private int userID;
     private int cardID;
     private int rentID;
+    private int placeID;
     private double amount;
     private String date;
     private Card card;
     private Rent rent;
+    private Place place;
+    private User user;
 
 
     public Payment() {
         //default
     }
 
-    public Payment(double amount, String date, int userID, int cardID, int rentID) {
+    public Payment(double amount, String date, int userID, int cardID, int rentID, int placeID) {
         setRentID(rentID);
         setUserID(userID);
         setCardID(cardID);
         setAmount(amount);
         setDate(date);
+        setPlaceID(placeID);
     }
 
     public int getPaymentID() {
@@ -88,6 +92,30 @@ public class Payment implements Serializable {
 
     private void setRentID(int rentID) {
         this.rentID = rentID;
+    }
+
+    public int getPlaceID() {
+        return placeID;
+    }
+
+    public void setPlaceID(int placeID) {
+        this.placeID = placeID;
+    }
+
+    public Place getPlace() {
+        return place;
+    }
+
+    public void setPlace(Place place) {
+        this.place = place;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
 

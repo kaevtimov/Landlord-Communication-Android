@@ -20,6 +20,7 @@ import dagger.android.support.DaggerAppCompatActivity;
 import source.kevtimov.landlordcommunicationapp.R;
 import source.kevtimov.landlordcommunicationapp.models.User;
 import source.kevtimov.landlordcommunicationapp.utils.bitmapcoder.IBitmapAgent;
+import source.kevtimov.landlordcommunicationapp.views.login.mypayments.MyPaymentsActivity;
 import source.kevtimov.landlordcommunicationapp.views.login.myplaces.MyPlacesActivity;
 
 
@@ -37,13 +38,13 @@ public abstract class BaseDrawer extends DaggerAppCompatActivity {
                 .withTextColor(Color.WHITE)
                 .withSelectedTextColor(Color.BLACK)
                 .withIcon(R.drawable.ic_home_black_24dp);
-//
-//        SecondaryDrawerItem myConnections = new SecondaryDrawerItem()
-//                .withIdentifier(MyConnectionsActivity.IDENTIFIER)
-//                .withName("My connections")
-//                .withTextColor(Color.WHITE)
-//                .withSelectedTextColor(Color.BLACK)
-//                .withIcon(R.drawable.);
+
+        SecondaryDrawerItem myPayments = new SecondaryDrawerItem()
+                .withIdentifier(MyPaymentsActivity.IDENTIFIER)
+                .withName("My payments")
+                .withTextColor(Color.WHITE)
+                .withSelectedTextColor(Color.BLACK)
+                .withIcon(R.drawable.money);
 
         IProfile profile = new ProfileDrawerItem ()
                 .withName (getUsername())
@@ -62,7 +63,8 @@ public abstract class BaseDrawer extends DaggerAppCompatActivity {
                 .withSliderBackgroundColor(Color.BLACK)
                 .withAccountHeader(accHeader)
                 .addDrawerItems(
-                        myPlaces
+                        myPlaces,
+                        myPayments
                 )
                 .withOnDrawerItemClickListener((view, position, drawerItem) -> {
                     long identifier = drawerItem.getIdentifier();
@@ -83,7 +85,9 @@ public abstract class BaseDrawer extends DaggerAppCompatActivity {
     private Intent getNextIntent(long identifier) {
         if (identifier == MyPlacesActivity.IDENTIFIER) {
             Intent intent = new Intent(BaseDrawer.this, MyPlacesActivity.class);
-            intent.putExtra("User", getUser());
+            return intent;
+        } else if (identifier == MyPaymentsActivity.IDENTIFIER) {
+            Intent intent = new Intent(BaseDrawer.this, MyPaymentsActivity.class);
             return intent;
         }
         return null;
@@ -104,6 +108,4 @@ public abstract class BaseDrawer extends DaggerAppCompatActivity {
     protected abstract String getEmail();
 
     protected abstract String getProfilePic();
-
-    protected abstract User getUser();
 }

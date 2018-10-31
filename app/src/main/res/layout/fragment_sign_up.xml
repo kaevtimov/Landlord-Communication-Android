@@ -198,7 +198,8 @@
             android:layout_below="@+id/et_enter_email"
             android:layout_width="250dp"
             android:layout_height="250dp"
-            android:visibility="gone"/>
+            android:src="@drawable/prof_pic"
+            android:layout_centerHorizontal="true"/>
 
 
         <Button

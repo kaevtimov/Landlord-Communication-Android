@@ -52,8 +52,6 @@ public class AddCardPresenter implements ContractsAddCard.Presenter {
         } else{
             Card createCard = new Card(cardBrand, cardType, cardNumber, cvvNumber, 1000.00, mUser.getUserId());
 
-            mView.showLoading();
-
             Disposable observal = Observable
                     .create((ObservableOnSubscribe<Card>) emitter -> {
                         Card card = mCardService.registerCard(createCard);
@@ -62,7 +60,6 @@ public class AddCardPresenter implements ContractsAddCard.Presenter {
                     })
                     .subscribeOn(mSchedulerProvider.background())
                     .observeOn(mSchedulerProvider.ui())
-                    .doFinally(mView::hideLoading)
                     .subscribe(c -> mView.navigateBack(),
                             error -> {
                                 if (error instanceof NullPointerException) {

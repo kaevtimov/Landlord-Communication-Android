@@ -70,4 +70,5 @@ public class Rent implements Serializable {
     public void setPaid(boolean paid) {
         isPaid = paid;
     }
+
 }
