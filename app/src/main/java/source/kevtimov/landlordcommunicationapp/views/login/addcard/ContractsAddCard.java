@@ -10,10 +10,6 @@ public interface ContractsAddCard {
 
         void setNavigator(Navigator navigator);
 
-        void showLoading();
-
-        void hideLoading();
-
         void showError(Throwable error);
 
         void navigateBack();

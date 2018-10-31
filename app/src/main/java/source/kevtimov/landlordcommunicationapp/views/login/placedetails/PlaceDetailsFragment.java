@@ -166,6 +166,12 @@ public class PlaceDetailsFragment extends Fragment implements ContractsPlaceDeta
                 + "Rem. amount: " + rent.getRemainingAmount() + " leva\n" + "Paid: " + rent.isPaid());
     }
 
+    @Override
+    public void viewEmptyRent() {
+        mRentInfo.setText("Rents information: NO RENT INFORMATION\n");
+        mPayButton.setVisibility(View.GONE);
+    }
+
     private void initFonts() {
         mAddress.setTypeface(EasyFonts.droidSerifBold(getContext()));
         mDescription.setTypeface(EasyFonts.droidSerifBold(getContext()));

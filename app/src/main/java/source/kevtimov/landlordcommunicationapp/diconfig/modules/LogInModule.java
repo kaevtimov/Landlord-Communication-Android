@@ -19,6 +19,4 @@ public abstract class LogInModule {
     @ActivityScoped
     @Binds
     abstract ContractsLogin.Presenter loginPresenter(LoginPresenter loginPresenter);
-
-
 }

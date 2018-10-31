@@ -27,6 +27,8 @@ public interface ContractsPlaceDetails {
         void manageViewsWithNoTenant(User user, Place place);
 
         void viewRent(Rent rent);
+
+        void viewEmptyRent();
     }
 
     interface Presenter {

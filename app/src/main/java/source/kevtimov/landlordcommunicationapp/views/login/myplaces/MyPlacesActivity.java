@@ -82,11 +82,6 @@ public class MyPlacesActivity extends BaseDrawer implements ContractsMyPlaces.Na
     }
 
     @Override
-    protected User getUser() {
-        return this.mUser;
-    }
-
-    @Override
     public void navigateToPlaceDetails(Place place) {
         Intent intent = new Intent(this, PlaceDetailsActivity.class);
 

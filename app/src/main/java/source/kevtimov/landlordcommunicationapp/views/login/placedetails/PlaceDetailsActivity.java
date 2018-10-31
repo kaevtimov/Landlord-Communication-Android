@@ -88,11 +88,6 @@ public class PlaceDetailsActivity extends BaseDrawer implements ContractsPlaceDe
     }
 
     @Override
-    protected User getUser() {
-        return this.mUser;
-    }
-
-    @Override
     public void navigateToPayRent(Place place) {
         Intent intent = new Intent(this, PaymentActivity.class);
         intent.putExtra("Place", place);

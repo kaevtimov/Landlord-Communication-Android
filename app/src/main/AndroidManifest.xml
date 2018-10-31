@@ -38,7 +38,8 @@
         <activity android:name=".views.login.myplaces.MyPlacesActivity" />
         <activity android:name=".views.login.placedetails.PlaceDetailsActivity" />
         <activity android:name=".views.login.payment.PaymentActivity" />
-        <activity android:name=".views.login.addcard.AddCardActivity"></activity>
+        <activity android:name=".views.login.addcard.AddCardActivity" />
+        <activity android:name=".views.login.mypayments.MyPaymentsActivity"></activity>
     </application>
 
 </manifest>

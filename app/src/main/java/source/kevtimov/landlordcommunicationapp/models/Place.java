@@ -11,7 +11,6 @@ public class Place implements Serializable {
     private int landlordID;
     private String address;
     private String description;
-    private List<String> rents;
 
     public Place() {
         //default
@@ -47,10 +46,6 @@ public class Place implements Serializable {
         this.description = description;
     }
 
-    public List<String> getRents() {
-        return rents;
-    }
-
     public int getTenantID() {
         return tenantID;
     }
@@ -67,9 +62,6 @@ public class Place implements Serializable {
         this.landlordID = landlordID;
     }
 
-    public void setRents(List<String> rents) {
-        this.rents = rents;
-    }
 
     @Override
     public String toString() {

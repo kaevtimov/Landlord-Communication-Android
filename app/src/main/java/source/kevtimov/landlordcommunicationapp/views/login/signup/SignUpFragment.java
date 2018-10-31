@@ -3,6 +3,7 @@ package source.kevtimov.landlordcommunicationapp.views.login.signup;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Base64;
@@ -227,7 +228,7 @@ public class SignUpFragment extends Fragment implements ContractsSignUp.View {
             alertForExistingEmail();
         } else if (user.getUsername().equals("used")) {
             alertForExistingUsername();
-        } else{
+        } else {
             mPresenter.registerUser(mUserInfoData);
         }
     }
@@ -291,13 +292,12 @@ public class SignUpFragment extends Fragment implements ContractsSignUp.View {
 
 
     @OnClick(R.id.btn_gallery)
-    public void onClickGallery(View v){
+    public void onClickGallery(View v) {
         mNavigator.navigateToGallery();
     }
 
     @Override
-    public void setImage(Bitmap bitmap){
-        mImageView.setVisibility(View.VISIBLE);
+    public void setImage(Bitmap bitmap) {
         mImageView.setImageBitmap(bitmap);
         mSelectedProfilePic = mBitmapAgent.convertBitmapToString(bitmap);
     }
@@ -316,6 +316,11 @@ public class SignUpFragment extends Fragment implements ContractsSignUp.View {
         filledBundle.putString("first_name", mEditTextEnterFirstName.getText().toString());
         filledBundle.putString("last_name", mEditTextEnterLastName.getText().toString());
         filledBundle.putString("email", mEditTextEnterEmail.getText().toString());
+
+        if(mSelectedProfilePic == null){
+            Bitmap bm = ((BitmapDrawable) mImageView.getDrawable()).getBitmap();
+            mSelectedProfilePic = mBitmapAgent.convertBitmapToString(bm);
+        }
         filledBundle.putString("profile_pic", mSelectedProfilePic);
 
         return filledBundle;
