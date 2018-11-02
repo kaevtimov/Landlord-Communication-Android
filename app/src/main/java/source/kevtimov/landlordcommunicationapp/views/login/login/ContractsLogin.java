@@ -1,5 +1,6 @@
 package source.kevtimov.landlordcommunicationapp.views.login.login;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import source.kevtimov.landlordcommunicationapp.models.User;
@@ -42,10 +43,12 @@ public interface ContractsLogin {
         void allowSignUp();
 
         void checkFacebookUserByUsername(String username);
+
+        void setBitmapToCache(String userPicture);
     }
 
     interface Navigator{
-        void navigateToSignUp(Bundle facebookBundle);
+        void navigateToSignUp(Bundle facebookBu);
 
         void navigateToHome(User user);
     }

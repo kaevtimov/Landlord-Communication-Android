@@ -4,7 +4,9 @@ package source.kevtimov.landlordcommunicationapp.views.login.placemanagement;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +20,7 @@ import android.widget.Toast;
 
 import com.emredavarci.circleprogressbar.CircleProgressBar;
 import com.muddzdev.styleabletoast.StyleableToast;
+import com.vstechlab.easyfonts.EasyFonts;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,6 +75,7 @@ public class PlaceManagementFragment extends Fragment implements ContractsPlaceM
         ButterKnife.bind(this, root);
 
         manageView();
+        initFont();
 
         return root;
     }
@@ -223,5 +227,23 @@ public class PlaceManagementFragment extends Fragment implements ContractsPlaceM
     private void registerPlace(String address, String description, int tenantId, int landlordId) {
         Place mPlace = new Place(address, description, tenantId, landlordId);
         mPresenter.registerPlace(mPlace);
+    }
+
+    private void initFont() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        int selectedFont = Integer.parseInt(sharedPreferences.getString("font_list", "1"));
+
+        switch (selectedFont) {
+            case 1:
+                mTextViewEnterPlaces.setTypeface(EasyFonts.droidSerifBold(getContext()));
+                break;
+            case 2:
+                mTextViewEnterPlaces.setTypeface(EasyFonts.funRaiser(getContext()));
+                break;
+            case 3:
+                mTextViewEnterPlaces.setTypeface(EasyFonts.walkwayBold(getContext()));
+                break;
+
+        }
     }
 }

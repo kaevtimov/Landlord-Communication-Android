@@ -1,6 +1,10 @@
 package source.kevtimov.landlordcommunicationapp.views.login.addcard;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
 import javax.inject.Inject;
 
 import io.reactivex.Observable;

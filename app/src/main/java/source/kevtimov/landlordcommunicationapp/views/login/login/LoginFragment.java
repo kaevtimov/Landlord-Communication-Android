@@ -50,7 +50,6 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
     private ContractsLogin.Presenter mPresenter;
     private ContractsLogin.Navigator mNavigator;
     private CallbackManager mFacebookCallbackManager;
-    private Bundle mFacebookData;
 
     @BindView(R.id.fb_login_button)
     LoginButton mFacebookButton;
@@ -188,6 +187,7 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
                 .repeat(5)
                 .playOn(mTextViewPassword);
 
+        mPresenter.setBitmapToCache(user.getPicture());
         mNavigator.navigateToHome(user);
     }
 

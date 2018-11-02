@@ -106,9 +106,6 @@ public class SignUpFragment extends Fragment implements ContractsSignUp.View {
     private int radioButtonResult;
     private String mSelectedProfilePic;
 
-    @Inject
-    IBitmapAgent mBitmapAgent;
-
 
     @Inject
     public SignUpFragment() {
@@ -298,8 +295,11 @@ public class SignUpFragment extends Fragment implements ContractsSignUp.View {
 
     @Override
     public void setImage(Bitmap bitmap) {
-        mImageView.setImageBitmap(bitmap);
-        mSelectedProfilePic = mBitmapAgent.convertBitmapToString(bitmap);
+        if(bitmap != null){
+            mImageView.setImageBitmap(bitmap);
+            mSelectedProfilePic = mPresenter.convertBitmapToString(bitmap);
+            mPresenter.setBitmapToCache(bitmap);
+        }
     }
 
     private Bundle fillBundleWithUserData() {
@@ -319,7 +319,8 @@ public class SignUpFragment extends Fragment implements ContractsSignUp.View {
 
         if(mSelectedProfilePic == null){
             Bitmap bm = ((BitmapDrawable) mImageView.getDrawable()).getBitmap();
-            mSelectedProfilePic = mBitmapAgent.convertBitmapToString(bm);
+            mSelectedProfilePic = mPresenter.convertBitmapToString(bm);
+            mPresenter.setBitmapToCache(bm);
         }
         filledBundle.putString("profile_pic", mSelectedProfilePic);
 

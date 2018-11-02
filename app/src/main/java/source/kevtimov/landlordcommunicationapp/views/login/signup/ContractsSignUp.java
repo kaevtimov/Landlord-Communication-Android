@@ -45,6 +45,10 @@ public interface ContractsSignUp {
         void registerUser(Bundle userData);
 
         void checkUsernameAndEmail(String username, String email);
+
+        String convertBitmapToString(Bitmap bitmap);
+
+        void setBitmapToCache(Bitmap bitmap);
     }
 
     interface Navigator {

@@ -5,8 +5,10 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +26,7 @@ import com.shashank.sony.fancydialoglib.Animation;
 import com.shashank.sony.fancydialoglib.FancyAlertDialog;
 import com.shashank.sony.fancydialoglib.FancyAlertDialogListener;
 import com.shashank.sony.fancydialoglib.Icon;
+import com.vstechlab.easyfonts.EasyFonts;
 
 import javax.inject.Inject;
 
@@ -102,6 +105,8 @@ public class AddPlaceFragment extends Fragment implements ContractsAddPlace.View
         View root = inflater.inflate(R.layout.fragment_add_place, container, false);
 
         ButterKnife.bind(this, root);
+
+        initFont();
 
         getActivity()
                 .getWindow()
@@ -230,5 +235,44 @@ public class AddPlaceFragment extends Fragment implements ContractsAddPlace.View
     @SuppressLint("SetTextI18n")
     private void manageTenantName() {
         mTextViewTenantName.setText("Tenant: " + mUserTenant.getFirstName() + " " + mUserTenant.getLastName());
+    }
+
+    private void initFont() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        int selectedFont = Integer.parseInt(sharedPreferences.getString("font_list", "1"));
+
+        switch (selectedFont) {
+            case 1:
+                mTextViewAddress.setTypeface(EasyFonts.droidSerifBold(getContext()));
+                mTextViewDescription.setTypeface(EasyFonts.droidSerifBold(getContext()));
+                mTextViewRentAmount.setTypeface(EasyFonts.droidSerifBold(getContext()));
+                mTextViewDueDate.setTypeface(EasyFonts.droidSerifBold(getContext()));
+                mTextViewYear.setTypeface(EasyFonts.droidSerifBold(getContext()));
+                mTextViewMonth.setTypeface(EasyFonts.droidSerifBold(getContext()));
+                mTextViewDay.setTypeface(EasyFonts.droidSerifBold(getContext()));
+                mTextViewTenantName.setTypeface(EasyFonts.droidSerifBold(getContext()));
+                break;
+            case 2:
+                mTextViewAddress.setTypeface(EasyFonts.funRaiser(getContext()));
+                mTextViewDescription.setTypeface(EasyFonts.funRaiser(getContext()));
+                mTextViewRentAmount.setTypeface(EasyFonts.funRaiser(getContext()));
+                mTextViewDueDate.setTypeface(EasyFonts.funRaiser(getContext()));
+                mTextViewYear.setTypeface(EasyFonts.funRaiser(getContext()));
+                mTextViewMonth.setTypeface(EasyFonts.funRaiser(getContext()));
+                mTextViewDay.setTypeface(EasyFonts.funRaiser(getContext()));
+                mTextViewTenantName.setTypeface(EasyFonts.funRaiser(getContext()));
+                break;
+            case 3:
+                mTextViewAddress.setTypeface(EasyFonts.walkwayBold(getContext()));
+                mTextViewDescription.setTypeface(EasyFonts.walkwayBold(getContext()));
+                mTextViewRentAmount.setTypeface(EasyFonts.walkwayBold(getContext()));
+                mTextViewDueDate.setTypeface(EasyFonts.walkwayBold(getContext()));
+                mTextViewYear.setTypeface(EasyFonts.walkwayBold(getContext()));
+                mTextViewMonth.setTypeface(EasyFonts.walkwayBold(getContext()));
+                mTextViewDay.setTypeface(EasyFonts.walkwayBold(getContext()));
+                mTextViewTenantName.setTypeface(EasyFonts.walkwayBold(getContext()));
+                break;
+
+        }
     }
 }

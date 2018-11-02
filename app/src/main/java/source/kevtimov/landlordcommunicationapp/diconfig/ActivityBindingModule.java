@@ -13,6 +13,7 @@ import source.kevtimov.landlordcommunicationapp.diconfig.modules.PlaceDetailsMod
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.PlaceManagementModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.SelectPlaceModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.SelectTenantModule;
+import source.kevtimov.landlordcommunicationapp.diconfig.modules.SettingsModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.SignUpModule;
 import source.kevtimov.landlordcommunicationapp.views.login.addcard.AddCardActivity;
 import source.kevtimov.landlordcommunicationapp.views.login.addplace.AddPlaceActivity;
@@ -23,6 +24,7 @@ import source.kevtimov.landlordcommunicationapp.views.login.myplaces.MyPlacesAct
 import source.kevtimov.landlordcommunicationapp.views.login.payment.PaymentActivity;
 import source.kevtimov.landlordcommunicationapp.views.login.placedetails.PlaceDetailsActivity;
 import source.kevtimov.landlordcommunicationapp.views.login.placemanagement.PlaceManagementActivity;
+import source.kevtimov.landlordcommunicationapp.views.login.preferences.SettingsActivity;
 import source.kevtimov.landlordcommunicationapp.views.login.selectplace.SelectPlaceActivity;
 import source.kevtimov.landlordcommunicationapp.views.login.selecttenant.SelectTenantActivity;
 import source.kevtimov.landlordcommunicationapp.views.login.signup.SignUpActivity;
@@ -100,4 +102,10 @@ public abstract class ActivityBindingModule {
             modules = MyPaymentsModule.class
     )
     abstract MyPaymentsActivity myPaymentsActivity();
+
+    @ActivityScoped
+    @ContributesAndroidInjector(
+            modules = SettingsModule.class
+    )
+    abstract SettingsActivity settingsActivity();
 }

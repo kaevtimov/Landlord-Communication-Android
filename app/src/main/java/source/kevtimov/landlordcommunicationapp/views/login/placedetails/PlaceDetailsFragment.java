@@ -2,7 +2,9 @@ package source.kevtimov.landlordcommunicationapp.views.login.placedetails;
 
 
 import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,7 +65,7 @@ public class PlaceDetailsFragment extends Fragment implements ContractsPlaceDeta
         View root = inflater.inflate(R.layout.fragment_place_details, container, false);
         ButterKnife.bind(this, root);
 
-        initFonts();
+        initFont();
 
         return root;
     }
@@ -172,11 +174,33 @@ public class PlaceDetailsFragment extends Fragment implements ContractsPlaceDeta
         mPayButton.setVisibility(View.GONE);
     }
 
-    private void initFonts() {
-        mAddress.setTypeface(EasyFonts.droidSerifBold(getContext()));
-        mDescription.setTypeface(EasyFonts.droidSerifBold(getContext()));
-        mLandlordInfo.setTypeface(EasyFonts.droidSerifBold(getContext()));
-        mTenantInfo.setTypeface(EasyFonts.droidSerifBold(getContext()));
-        mRentInfo.setTypeface(EasyFonts.droidSerifBold(getContext()));
+    private void initFont() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        int selectedFont = Integer.parseInt(sharedPreferences.getString("font_list", "1"));
+
+        switch (selectedFont) {
+            case 1:
+                mAddress.setTypeface(EasyFonts.droidSerifBold(getContext()));
+                mDescription.setTypeface(EasyFonts.droidSerifBold(getContext()));
+                mTenantInfo.setTypeface(EasyFonts.droidSerifBold(getContext()));
+                mLandlordInfo.setTypeface(EasyFonts.droidSerifBold(getContext()));
+                mRentInfo.setTypeface(EasyFonts.droidSerifBold(getContext()));
+                break;
+            case 2:
+                mAddress.setTypeface(EasyFonts.funRaiser(getContext()));
+                mDescription.setTypeface(EasyFonts.funRaiser(getContext()));
+                mTenantInfo.setTypeface(EasyFonts.funRaiser(getContext()));
+                mLandlordInfo.setTypeface(EasyFonts.funRaiser(getContext()));
+                mRentInfo.setTypeface(EasyFonts.funRaiser(getContext()));
+                break;
+            case 3:
+                mAddress.setTypeface(EasyFonts.walkwayBold(getContext()));
+                mDescription.setTypeface(EasyFonts.walkwayBold(getContext()));
+                mTenantInfo.setTypeface(EasyFonts.walkwayBold(getContext()));
+                mLandlordInfo.setTypeface(EasyFonts.walkwayBold(getContext()));
+                mRentInfo.setTypeface(EasyFonts.walkwayBold(getContext()));
+                break;
+
+        }
     }
 }

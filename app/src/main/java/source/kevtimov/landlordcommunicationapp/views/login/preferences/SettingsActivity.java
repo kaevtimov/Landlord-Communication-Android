@@ -1,4 +1,4 @@
-package source.kevtimov.landlordcommunicationapp.views.login.selecttenant;
+package source.kevtimov.landlordcommunicationapp.views.login.preferences;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,42 +9,26 @@ import javax.inject.Inject;
 
 import dagger.android.support.DaggerAppCompatActivity;
 import source.kevtimov.landlordcommunicationapp.R;
-import source.kevtimov.landlordcommunicationapp.models.User;
+import source.kevtimov.landlordcommunicationapp.views.login.home.HomeActivity;
 
-public class SelectTenantActivity extends DaggerAppCompatActivity implements ContractsSelectTenant.Navigator {
-
-    @Inject
-    SelectTenantFragment mSelectTenantFragment;
+public class SettingsActivity extends DaggerAppCompatActivity {
 
     @Inject
-    ContractsSelectTenant.Presenter mPresenter;
+    SettingsFragment mSettingsFragment;
+
+    public static final int IDENTIFIER = 901;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_select_tenant);
-
-        mSelectTenantFragment.setNavigator(this);
-        mSelectTenantFragment.setPresenter(mPresenter);
+        setContentView(R.layout.activity_settings);
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.select_tenant_content, mSelectTenantFragment)
+                .replace(R.id.content,  mSettingsFragment)
                 .commit();
-    }
-
-    @Override
-    public void navigateToAddPlaceOnCancel() {
-        this.finish();
-    }
-
-    @Override
-    public void navigateToAddPlaceOnDone(User tenant) {
-        Intent intent = new Intent();
-        intent.putExtra("User", tenant);
-        setResult(RESULT_OK, intent);
-        finish();
     }
 
     private void setTheme(){
@@ -60,5 +44,12 @@ public class SelectTenantActivity extends DaggerAppCompatActivity implements Con
                 break;
 
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(getBaseContext(), HomeActivity.class));
+        finish();
     }
 }

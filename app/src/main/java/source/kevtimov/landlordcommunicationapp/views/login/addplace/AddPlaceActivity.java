@@ -1,7 +1,9 @@
 package source.kevtimov.landlordcommunicationapp.views.login.addplace;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 
 import javax.inject.Inject;
@@ -22,6 +24,7 @@ public class AddPlaceActivity extends DaggerAppCompatActivity implements Contrac
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_place);
 
@@ -70,6 +73,21 @@ public class AddPlaceActivity extends DaggerAppCompatActivity implements Contrac
 
                 mAddPlaceFragment.setUserTenant(incomingTenant);
             }
+        }
+    }
+
+    private void setTheme(){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        int theme =  Integer.parseInt(sharedPreferences.getString("theme_list", "1"));
+
+        switch(theme){
+            case 1:
+                setTheme(R.style.AppThemeCustom);
+                break;
+            case 2:
+                setTheme(R.style.AppThemeCustomDark);
+                break;
+
         }
     }
 }
