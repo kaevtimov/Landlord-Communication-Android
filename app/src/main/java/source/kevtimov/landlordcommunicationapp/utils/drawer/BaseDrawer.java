@@ -21,6 +21,7 @@ import source.kevtimov.landlordcommunicationapp.R;
 import source.kevtimov.landlordcommunicationapp.utils.bitmapcache.BitmapCache;
 import source.kevtimov.landlordcommunicationapp.views.login.mypayments.MyPaymentsActivity;
 import source.kevtimov.landlordcommunicationapp.views.login.myplaces.MyPlacesActivity;
+import source.kevtimov.landlordcommunicationapp.views.login.myusers.MyUsersActivity;
 import source.kevtimov.landlordcommunicationapp.views.login.preferences.SettingsActivity;
 
 
@@ -51,6 +52,13 @@ public abstract class BaseDrawer extends DaggerAppCompatActivity {
                 .withSelectedTextColor(Color.BLACK)
                 .withIcon(R.drawable.ic_settings_black_24dp);
 
+        SecondaryDrawerItem myUsers = new SecondaryDrawerItem()
+                .withIdentifier(MyUsersActivity.IDENTIFIER)
+                .withName("My users")
+                .withTextColor(Color.WHITE)
+                .withSelectedTextColor(Color.BLACK)
+                .withIcon(R.drawable.ic_person_black_24dp);
+
         IProfile profile = new ProfileDrawerItem ()
                 .withName (getUsername())
                 .withEmail (getEmail())
@@ -70,6 +78,7 @@ public abstract class BaseDrawer extends DaggerAppCompatActivity {
                 .addDrawerItems(
                         myPlaces,
                         myPayments,
+                        myUsers,
                         settings
                 )
                 .withOnDrawerItemClickListener((view, position, drawerItem) -> {
@@ -99,7 +108,11 @@ public abstract class BaseDrawer extends DaggerAppCompatActivity {
             return intent;
         } else if (identifier == SettingsActivity.IDENTIFIER) {
             Intent intent = new Intent(BaseDrawer.this, SettingsActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             finish();
+            return intent;
+        } else if (identifier == MyUsersActivity.IDENTIFIER) {
+            Intent intent = new Intent(BaseDrawer.this, MyUsersActivity.class);
             return intent;
         }
         return null;

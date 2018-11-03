@@ -144,6 +144,8 @@ public class SignUpPresenter implements ContractsSignUp.Presenter {
 
     @Override
     public void setBitmapToCache(Bitmap bitmap) {
-        mBitmapCache.getInstance().getLruCache().put("logged_in_user_profile_image", bitmap);
+        if(mBitmapCache.getLruCache().get("logged_in_user_profile_image") == null){
+            mBitmapCache.getLruCache().put("logged_in_user_profile_image", bitmap);
+        }
     }
 }

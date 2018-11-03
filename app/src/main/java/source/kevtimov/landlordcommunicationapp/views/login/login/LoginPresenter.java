@@ -103,7 +103,9 @@ public class LoginPresenter implements ContractsLogin.Presenter {
     @Override
     public void setBitmapToCache(String userPicture) {
         Bitmap profPic = mBitmapAgent.convertStringToBitmap(userPicture);
-        mBitmapCache.getInstance().getLruCache().put("logged_in_user_profile_image", profPic);
+        if(mBitmapCache.getLruCache().get("logged_in_user_profile_image") == null){
+            mBitmapCache.getLruCache().put("logged_in_user_profile_image", profPic);
+        }
     }
 
 

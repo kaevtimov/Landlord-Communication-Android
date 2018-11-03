@@ -41,7 +41,6 @@ public class LoginActivity extends DaggerAppCompatActivity implements ContractsL
 
         setContentView(R.layout.activity_login);
 
-
         mLoginFragment.setPresenter(mPresenter);
         mLoginFragment.setNavigator(this);
 

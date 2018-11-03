@@ -77,4 +77,7 @@ dependencies {
     implementation 'com.daimajia.easing:library:2.0@aar'
     implementation 'com.daimajia.androidanimations:library:2.3@aar'
 
+    //Round image view
+    implementation 'com.makeramen:roundedimageview:2.3.0'
+
 }

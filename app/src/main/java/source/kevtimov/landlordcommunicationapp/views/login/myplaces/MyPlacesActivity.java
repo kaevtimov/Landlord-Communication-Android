@@ -44,7 +44,6 @@ public class MyPlacesActivity extends BaseDrawer implements ContractsMyPlaces.Na
         mToolbar = this.findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
-        Intent incomingUser = getIntent();
         mUser = getUserFromSharedPref();
 
         mMyPlacesFragment.setNavigator(this);

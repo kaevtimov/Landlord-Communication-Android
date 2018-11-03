@@ -1,4 +1,4 @@
-package source.kevtimov.landlordcommunicationapp.views.login.home;
+package source.kevtimov.landlordcommunicationapp.views.login.myusers;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -13,40 +13,40 @@ import source.kevtimov.landlordcommunicationapp.parsers.base.JsonParser;
 import source.kevtimov.landlordcommunicationapp.utils.Constants;
 import source.kevtimov.landlordcommunicationapp.utils.drawer.BaseDrawer;
 
-public class HomeActivity extends BaseDrawer implements ContractsHome.Navigator{
+public class MyUsersActivity extends BaseDrawer implements ContractsMyUsers.Navigator{
 
+    @Inject
+    MyUsersFragment mUsersFragment;
 
-    private static final int IDENTIFIER = 631;
-    private Toolbar mToolbar;
-    private User mLogInUser;
+    @Inject
+    ContractsMyUsers.Presenter mPresenter;
 
     @Inject
     JsonParser<User> mJsonParser;
 
-    @Inject
-    HomeFragment mHomeFragment;
-
-    @Inject
-    ContractsHome.Presenter mPresenter;
+    public static final int IDENTIFIER = 2354;
+    private Toolbar mToolbar;
+    private User mUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_my_users);
 
         mToolbar = this.findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
-        mLogInUser = getUserFromSharedPref();
-        mLogInUser.setOnline(true);
+        mUser = getUserFromSharedPref();
+        mPresenter.setUser(mUser);
 
-        mHomeFragment.setNavigator(this);
-        mHomeFragment.setPresenter(mPresenter);
+        mUsersFragment.setPresenter(mPresenter);
+        mUsersFragment.setNavigator(this);
+
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.home_content, mHomeFragment)
+                .replace(R.id.users_content, mUsersFragment)
                 .commit();
     }
 
@@ -62,17 +62,12 @@ public class HomeActivity extends BaseDrawer implements ContractsHome.Navigator{
 
     @Override
     protected String getUsername() {
-        return this.mLogInUser.getUsername();
+        return mUser.getUsername();
     }
 
     @Override
     protected String getEmail() {
-        return this.mLogInUser.getEmail();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
+        return mUser.getEmail();
     }
 
     private User getUserFromSharedPref() {
@@ -94,5 +89,10 @@ public class HomeActivity extends BaseDrawer implements ContractsHome.Navigator{
                 break;
 
         }
+    }
+
+    @Override
+    public void navigateTo() {
+
     }
 }
