@@ -39,6 +39,7 @@ public class PaymentActivity extends BaseDrawer implements ContractsPayments.Nav
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
         mToolbar = this.findViewById(R.id.toolbar);
@@ -81,11 +82,6 @@ public class PaymentActivity extends BaseDrawer implements ContractsPayments.Nav
     }
 
     @Override
-    protected String getProfilePic() {
-        return mUser.getPicture();
-    }
-
-    @Override
     public void navigateToMyPlacesActivity() {
         finish();
     }
@@ -100,5 +96,20 @@ public class PaymentActivity extends BaseDrawer implements ContractsPayments.Nav
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String userInfo = sharedPreferences.getString(Constants.SHARED_PREFERENCES_KEY_USER_INFO, "");
         return mJsonParser.fromJson(userInfo);
+    }
+
+    private void setTheme(){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        int theme =  Integer.parseInt(sharedPreferences.getString("theme_list", "1"));
+
+        switch(theme){
+            case 1:
+                setTheme(R.style.AppThemeCustom);
+                break;
+            case 2:
+                setTheme(R.style.AppThemeCustomDark);
+                break;
+
+        }
     }
 }

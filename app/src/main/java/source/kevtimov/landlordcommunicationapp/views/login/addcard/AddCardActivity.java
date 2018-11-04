@@ -28,6 +28,7 @@ public class AddCardActivity extends DaggerAppCompatActivity implements Contract
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_card);
 
@@ -54,5 +55,20 @@ public class AddCardActivity extends DaggerAppCompatActivity implements Contract
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String userInfo = sharedPreferences.getString(Constants.SHARED_PREFERENCES_KEY_USER_INFO, "");
         return mJsonParser.fromJson(userInfo);
+    }
+
+    private void setTheme(){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        int theme =  Integer.parseInt(sharedPreferences.getString("theme_list", "1"));
+
+        switch(theme){
+            case 1:
+                setTheme(R.style.AppThemeCustom);
+                break;
+            case 2:
+                setTheme(R.style.AppThemeCustomDark);
+                break;
+
+        }
     }
 }

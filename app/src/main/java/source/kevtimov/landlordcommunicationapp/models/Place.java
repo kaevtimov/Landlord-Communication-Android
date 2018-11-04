@@ -65,7 +65,7 @@ public class Place implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("Address: %s", getAddress());
+        return String.format("Address: %s\n\n", getAddress());
     }
 
 }

@@ -1,8 +1,10 @@
 package source.kevtimov.landlordcommunicationapp.views.login.selectplace;
 
 
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +20,7 @@ import com.shashank.sony.fancydialoglib.Animation;
 import com.shashank.sony.fancydialoglib.FancyAlertDialog;
 import com.shashank.sony.fancydialoglib.FancyAlertDialogListener;
 import com.shashank.sony.fancydialoglib.Icon;
+import com.vstechlab.easyfonts.EasyFonts;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +38,7 @@ public class SelectPlaceFragment extends Fragment implements ContractsSelectPlac
 
 
     @BindView(R.id.tv_select_place)
-    TextView mtextViewSelectPlace;
+    TextView mTextViewSelectPlace;
 
     @BindView(R.id.lv_places_no_tenant)
     ListView mListViewNoTenants;
@@ -68,6 +71,7 @@ public class SelectPlaceFragment extends Fragment implements ContractsSelectPlac
         mPlaces = new ArrayList<>();
         mPlaceAdapter = new CustomPlaceAdapter<>(getContext(), mPlaces);
         mListViewNoTenants.setAdapter(mPlaceAdapter);
+        initFont();
 
         return root;
     }
@@ -172,5 +176,23 @@ public class SelectPlaceFragment extends Fragment implements ContractsSelectPlac
                     }
                 })
                 .build();
+    }
+
+    private void initFont() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        int selectedFont = Integer.parseInt(sharedPreferences.getString("font_list", "1"));
+
+        switch (selectedFont) {
+            case 1:
+                mTextViewSelectPlace.setTypeface(EasyFonts.droidSerifBold(getContext()));
+                break;
+            case 2:
+                mTextViewSelectPlace.setTypeface(EasyFonts.funRaiser(getContext()));
+                break;
+            case 3:
+                mTextViewSelectPlace.setTypeface(EasyFonts.walkwayBold(getContext()));
+                break;
+
+        }
     }
 }

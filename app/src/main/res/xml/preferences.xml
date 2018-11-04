@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ListPreference
+        android:defaultValue="1"
+        android:icon="@drawable/ic_font_download_black_24dp"
+        android:entries="@array/theme_values"
+        android:entryValues="@array/theme_layout_values"
+        android:key="theme_list"
+        android:summary="Please choose one of our custom themes"
+        android:title="Theme" />
+
+    <ListPreference
+        android:defaultValue="1"
+        android:entries="@array/font_values"
+        android:icon="@drawable/ic_color_lens_black_24dp"
+        android:entryValues="@array/font_layout_values"
+        android:key="font_list"
+        android:summary="Please choose one of our custom themes"
+        android:title="Font" />
+
+</PreferenceScreen>

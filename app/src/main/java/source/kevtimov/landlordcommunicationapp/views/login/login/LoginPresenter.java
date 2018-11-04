@@ -1,8 +1,6 @@
 package source.kevtimov.landlordcommunicationapp.views.login.login;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
+import android.graphics.Bitmap;
 
 import javax.inject.Inject;
 
@@ -11,20 +9,24 @@ import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.disposables.Disposable;
 import source.kevtimov.landlordcommunicationapp.async.base.SchedulerProvider;
 import source.kevtimov.landlordcommunicationapp.models.User;
-import source.kevtimov.landlordcommunicationapp.parsers.base.JsonParser;
 import source.kevtimov.landlordcommunicationapp.services.UserService;
-import source.kevtimov.landlordcommunicationapp.utils.Constants;
+import source.kevtimov.landlordcommunicationapp.utils.bitmapcache.BitmapCache;
+import source.kevtimov.landlordcommunicationapp.utils.bitmapcoder.IBitmapAgent;
 
 public class LoginPresenter implements ContractsLogin.Presenter {
 
     private ContractsLogin.View mView;
     private SchedulerProvider mSchedulerProvider;
     private UserService mService;
+    private BitmapCache mBitmapCache;
+    private IBitmapAgent mBitmapAgent;
 
     @Inject
-    public LoginPresenter(SchedulerProvider provider, UserService service) {
+    public LoginPresenter(SchedulerProvider provider, UserService service, IBitmapAgent agent) {
         this.mSchedulerProvider = provider;
         this.mService = service;
+        this.mBitmapAgent = agent;
+        this.mBitmapCache = BitmapCache.getInstance();
     }
 
 
@@ -96,6 +98,14 @@ public class LoginPresenter implements ContractsLogin.Presenter {
                                 mView.showError(error);
                             }
                         });
+    }
+
+    @Override
+    public void setBitmapToCache(String userPicture) {
+        Bitmap profPic = mBitmapAgent.convertStringToBitmap(userPicture);
+        if(mBitmapCache.getLruCache().get("logged_in_user_profile_image") == null){
+            mBitmapCache.getLruCache().put("logged_in_user_profile_image", profPic);
+        }
     }
 
 

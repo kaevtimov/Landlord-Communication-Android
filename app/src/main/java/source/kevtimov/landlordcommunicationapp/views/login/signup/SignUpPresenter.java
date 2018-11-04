@@ -1,6 +1,7 @@
 package source.kevtimov.landlordcommunicationapp.views.login.signup;
 
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import java.util.Objects;
@@ -11,8 +12,12 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.disposables.Disposable;
 import source.kevtimov.landlordcommunicationapp.async.base.SchedulerProvider;
+import source.kevtimov.landlordcommunicationapp.models.Rating;
 import source.kevtimov.landlordcommunicationapp.models.User;
+import source.kevtimov.landlordcommunicationapp.services.RatingService;
 import source.kevtimov.landlordcommunicationapp.services.UserService;
+import source.kevtimov.landlordcommunicationapp.utils.bitmapcache.BitmapCache;
+import source.kevtimov.landlordcommunicationapp.utils.bitmapcoder.IBitmapAgent;
 
 
 public class SignUpPresenter implements ContractsSignUp.Presenter {
@@ -21,12 +26,16 @@ public class SignUpPresenter implements ContractsSignUp.Presenter {
     private ContractsSignUp.View mView;
     private UserService mUserService;
     private SchedulerProvider mSchedulerProvider;
+    private BitmapCache mBitmapCache;
+    private IBitmapAgent mBitmapAgent;
 
 
     @Inject
-    public SignUpPresenter(UserService service, SchedulerProvider provider) {
+    public SignUpPresenter(UserService service, SchedulerProvider provider, IBitmapAgent agent) {
         this.mSchedulerProvider = provider;
         this.mUserService = service;
+        this.mBitmapCache = BitmapCache.getInstance();
+        this.mBitmapAgent = agent;
     }
 
     @Override
@@ -129,4 +138,17 @@ public class SignUpPresenter implements ContractsSignUp.Presenter {
                 .subscribe(user -> mView.processCheckResult(user),
                         error -> mView.showError(error));
     }
+
+    @Override
+    public String convertBitmapToString(Bitmap bitmap) {
+        return mBitmapAgent.convertBitmapToString(bitmap);
+    }
+
+    @Override
+    public void setBitmapToCache(Bitmap bitmap) {
+        if(mBitmapCache.getLruCache().get("logged_in_user_profile_image") == null){
+            mBitmapCache.getLruCache().put("logged_in_user_profile_image", bitmap);
+        }
+    }
+
 }

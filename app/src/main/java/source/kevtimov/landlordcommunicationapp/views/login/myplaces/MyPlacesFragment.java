@@ -1,7 +1,9 @@
 package source.kevtimov.landlordcommunicationapp.views.login.myplaces;
 
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,7 +58,7 @@ public class MyPlacesFragment extends Fragment implements ContractsMyPlaces.View
         mPlacesAdapter = new MyPlacesAdapter(Objects.requireNonNull(getContext()));
         mListViewMyPlaces.setAdapter(mPlacesAdapter);
 
-        initFonts();
+        initFont();
 
         return root;
     }
@@ -137,7 +139,21 @@ public class MyPlacesFragment extends Fragment implements ContractsMyPlaces.View
         mPresenter.allowNavigationToManagePlaces();
     }
 
-    private void initFonts() {
-        mTextViewMyPlaces.setTypeface(EasyFonts.droidSerifBold(getContext()));
+    private void initFont() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        int selectedFont = Integer.parseInt(sharedPreferences.getString("font_list", "1"));
+
+        switch (selectedFont) {
+            case 1:
+                mTextViewMyPlaces.setTypeface(EasyFonts.droidSerifBold(getContext()));
+                break;
+            case 2:
+                mTextViewMyPlaces.setTypeface(EasyFonts.funRaiser(getContext()));
+                break;
+            case 3:
+                mTextViewMyPlaces.setTypeface(EasyFonts.walkwayBold(getContext()));
+                break;
+
+        }
     }
 }

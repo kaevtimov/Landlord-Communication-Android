@@ -29,8 +29,8 @@ public class SqlPlaceRepository implements PlaceRepository {
     @Override
     public List<Place> getAllPlacesWithNoTenants() throws IOException {
         String mServerUrlGet = mServerUrl + "/notenant";
-        String moviesJson = mHttpRequester.get(mServerUrlGet);
-        return mJsonParser.fromJsonArray(moviesJson);
+        String placeJson = mHttpRequester.get(mServerUrlGet);
+        return mJsonParser.fromJsonArray(placeJson);
     }
 
     @Override
@@ -44,7 +44,14 @@ public class SqlPlaceRepository implements PlaceRepository {
     @Override
     public List<Place> getAllPlacesByUserId(int userId) throws IOException {
         String mServerUrlGet = mServerUrl + "/user/" + userId;
-        String moviesJson = mHttpRequester.get(mServerUrlGet);
-        return mJsonParser.fromJsonArray(moviesJson);
+        String placeJson = mHttpRequester.get(mServerUrlGet);
+        return mJsonParser.fromJsonArray(placeJson);
+    }
+
+    @Override
+    public List<Place> getAllByTenantIdAndLandlordId(int tenantId, int landlordId) throws IOException {
+        String mServerUrlGet = mServerUrl + "/commonplace/" + tenantId + "/" + landlordId;
+        String placeJson = mHttpRequester.get(mServerUrlGet);
+        return mJsonParser.fromJsonArray(placeJson);
     }
 }

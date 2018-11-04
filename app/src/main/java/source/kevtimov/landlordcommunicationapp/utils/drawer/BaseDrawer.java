@@ -1,8 +1,10 @@
 package source.kevtimov.landlordcommunicationapp.utils.drawer;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
 
 import com.mikepenz.materialdrawer.AccountHeader;
@@ -14,20 +16,17 @@ import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
-import javax.inject.Inject;
-
 import dagger.android.support.DaggerAppCompatActivity;
 import source.kevtimov.landlordcommunicationapp.R;
-import source.kevtimov.landlordcommunicationapp.models.User;
-import source.kevtimov.landlordcommunicationapp.utils.bitmapcoder.IBitmapAgent;
+import source.kevtimov.landlordcommunicationapp.utils.bitmapcache.BitmapCache;
 import source.kevtimov.landlordcommunicationapp.views.login.mypayments.MyPaymentsActivity;
 import source.kevtimov.landlordcommunicationapp.views.login.myplaces.MyPlacesActivity;
+import source.kevtimov.landlordcommunicationapp.views.login.myusers.MyUsersActivity;
+import source.kevtimov.landlordcommunicationapp.views.login.preferences.SettingsActivity;
 
 
 public abstract class BaseDrawer extends DaggerAppCompatActivity {
 
-    @Inject
-    IBitmapAgent mBitmapAgent;
 
     private Drawer mDrawer;
 
@@ -44,16 +43,30 @@ public abstract class BaseDrawer extends DaggerAppCompatActivity {
                 .withName("My payments")
                 .withTextColor(Color.WHITE)
                 .withSelectedTextColor(Color.BLACK)
-                .withIcon(R.drawable.money);
+                .withIcon(R.drawable.ic_monetization_on_black_24dp);
+
+        SecondaryDrawerItem settings = new SecondaryDrawerItem()
+                .withIdentifier(SettingsActivity.IDENTIFIER)
+                .withName("Settings")
+                .withTextColor(Color.WHITE)
+                .withSelectedTextColor(Color.BLACK)
+                .withIcon(R.drawable.ic_settings_black_24dp);
+
+        SecondaryDrawerItem myUsers = new SecondaryDrawerItem()
+                .withIdentifier(MyUsersActivity.IDENTIFIER)
+                .withName("My users")
+                .withTextColor(Color.WHITE)
+                .withSelectedTextColor(Color.BLACK)
+                .withIcon(R.drawable.ic_supervisor_account_24dp);
 
         IProfile profile = new ProfileDrawerItem ()
                 .withName (getUsername())
                 .withEmail (getEmail())
-                .withIcon (mBitmapAgent.convertStringToBitmap(getProfilePic()));
+                .withIcon (getProfilePicture());
 
         AccountHeader accHeader = new AccountHeaderBuilder()
                 .withActivity(this)
-                .withHeaderBackground(R.color.colorHeaderBack)
+                .withHeaderBackground(getColorHeader())
                 .addProfiles(profile)
                 .build();
 
@@ -64,7 +77,9 @@ public abstract class BaseDrawer extends DaggerAppCompatActivity {
                 .withAccountHeader(accHeader)
                 .addDrawerItems(
                         myPlaces,
-                        myPayments
+                        myPayments,
+                        myUsers,
+                        settings
                 )
                 .withOnDrawerItemClickListener((view, position, drawerItem) -> {
                     long identifier = drawerItem.getIdentifier();
@@ -77,8 +92,10 @@ public abstract class BaseDrawer extends DaggerAppCompatActivity {
                         return false;
                     }
                     startActivity(intent);
+                    mDrawer.closeDrawer();
                     return true;
                 })
+                .withCloseOnClick(true)
                 .build();
     }
 
@@ -88,6 +105,14 @@ public abstract class BaseDrawer extends DaggerAppCompatActivity {
             return intent;
         } else if (identifier == MyPaymentsActivity.IDENTIFIER) {
             Intent intent = new Intent(BaseDrawer.this, MyPaymentsActivity.class);
+            return intent;
+        } else if (identifier == SettingsActivity.IDENTIFIER) {
+            Intent intent = new Intent(BaseDrawer.this, SettingsActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            finish();
+            return intent;
+        } else if (identifier == MyUsersActivity.IDENTIFIER) {
+            Intent intent = new Intent(BaseDrawer.this, MyUsersActivity.class);
             return intent;
         }
         return null;
@@ -107,5 +132,23 @@ public abstract class BaseDrawer extends DaggerAppCompatActivity {
 
     protected abstract String getEmail();
 
-    protected abstract String getProfilePic();
+    private int getColorHeader(){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        int theme =  Integer.parseInt(sharedPreferences.getString("theme_list", "1"));
+
+        switch(theme){
+            case 1:
+                return R.color.colorHeaderBack;
+            case 2:
+                return R.color.md_green_600;
+
+        }
+        return R.color.colorHeaderBack;
+    }
+
+    private Bitmap getProfilePicture(){
+        Bitmap profPicture = (Bitmap) BitmapCache.getInstance().getLruCache().get("logged_in_user_profile_image");
+
+        return profPicture;
+    }
 }

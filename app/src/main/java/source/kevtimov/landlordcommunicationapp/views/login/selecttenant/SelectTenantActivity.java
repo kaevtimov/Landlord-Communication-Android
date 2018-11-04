@@ -1,7 +1,9 @@
 package source.kevtimov.landlordcommunicationapp.views.login.selecttenant;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 
 import javax.inject.Inject;
 
@@ -19,6 +21,7 @@ public class SelectTenantActivity extends DaggerAppCompatActivity implements Con
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_tenant);
 
@@ -42,5 +45,20 @@ public class SelectTenantActivity extends DaggerAppCompatActivity implements Con
         intent.putExtra("User", tenant);
         setResult(RESULT_OK, intent);
         finish();
+    }
+
+    private void setTheme(){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        int theme =  Integer.parseInt(sharedPreferences.getString("theme_list", "1"));
+
+        switch(theme){
+            case 1:
+                setTheme(R.style.AppThemeCustom);
+                break;
+            case 2:
+                setTheme(R.style.AppThemeCustomDark);
+                break;
+
+        }
     }
 }

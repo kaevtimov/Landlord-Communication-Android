@@ -12,6 +12,7 @@
         android:allowBackup="true"
         android:appComponentFactory="some"
         android:icon="@drawable/ic_home_black_24dp"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppThemeCustom"
@@ -39,7 +40,10 @@
         <activity android:name=".views.login.placedetails.PlaceDetailsActivity" />
         <activity android:name=".views.login.payment.PaymentActivity" />
         <activity android:name=".views.login.addcard.AddCardActivity" />
-        <activity android:name=".views.login.mypayments.MyPaymentsActivity"></activity>
+        <activity android:name=".views.login.mypayments.MyPaymentsActivity" />
+        <activity android:name=".views.login.preferences.SettingsActivity" />
+        <activity android:name=".views.login.myusers.MyUsersActivity" />
+        <activity android:name=".views.login.userdetails.UserDetailsActivity"></activity>
     </application>
 
 </manifest>

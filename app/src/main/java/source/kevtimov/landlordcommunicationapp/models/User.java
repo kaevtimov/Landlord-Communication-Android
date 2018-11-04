@@ -119,4 +119,16 @@ public class User implements Serializable {
         return String.format("Name: %s, %s", getLastName(), getFirstName());
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof User)) {
+            return false;
+        }
+        User us = (User)obj;
+
+        return us.username.equals(username);
+    }
 }

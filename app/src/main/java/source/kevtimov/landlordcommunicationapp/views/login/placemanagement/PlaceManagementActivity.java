@@ -44,6 +44,7 @@ public class PlaceManagementActivity extends BaseDrawer implements ContractsPlac
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_management);
         mToolbar = this.findViewById(R.id.toolbar);
@@ -122,14 +123,24 @@ public class PlaceManagementActivity extends BaseDrawer implements ContractsPlac
         return mUser.getEmail();
     }
 
-    @Override
-    protected String getProfilePic() {
-        return this.mUser.getPicture();
-    }
-
     private User getUserFromSharedPref() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String userInfo = sharedPreferences.getString(Constants.SHARED_PREFERENCES_KEY_USER_INFO, "");
         return mJsonParser.fromJson(userInfo);
+    }
+
+    private void setTheme(){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        int theme =  Integer.parseInt(sharedPreferences.getString("theme_list", "1"));
+
+        switch(theme){
+            case 1:
+                setTheme(R.style.AppThemeCustom);
+                break;
+            case 2:
+                setTheme(R.style.AppThemeCustomDark);
+                break;
+
+        }
     }
 }

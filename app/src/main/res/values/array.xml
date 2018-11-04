@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="theme_values">
+        <item name="FunTheme">Fun</item>
+        <item name="DarkTheme">Dark</item>
+    </string-array>
+
+    <string-array name="theme_layout_values">
+        <item name="Fun">1</item>
+        <item name="Dark">2</item>
+    </string-array>
+
+    <string-array name="font_values">
+        <item name="DroidSheriff">Droid</item>
+        <item name="FunRaiser">Fun</item>
+        <item name="Walkway">Walkway</item>
+    </string-array>
+
+    <string-array name="font_layout_values">
+        <item name="Droid">1</item>
+        <item name="Fun">2</item>
+        <item name="Walkway">3</item>
+    </string-array>
+</resources>

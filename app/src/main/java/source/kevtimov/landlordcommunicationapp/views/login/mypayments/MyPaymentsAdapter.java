@@ -2,6 +2,8 @@ package source.kevtimov.landlordcommunicationapp.views.login.mypayments;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -48,12 +50,32 @@ public class MyPaymentsAdapter extends ArrayAdapter<Payment> {
 
 
         Payment payment = getItem(position);
-        mTextViewAmount.setText("Amount: " + Objects.requireNonNull(payment).getAmount());
-        mTextViewAmount.setTypeface(EasyFonts.droidSerifBold(getContext()));
 
+        mTextViewAmount.setText("Amount: " + Objects.requireNonNull(payment).getAmount());
         mTextViewDate.setText("Date: " + payment.getDate());
-        mTextViewDate.setTypeface(EasyFonts.droidSerifBold(getContext()));
+
+        initFont();
 
         return view;
+    }
+    private void initFont() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        int selectedFont = Integer.parseInt(sharedPreferences.getString("font_list", "1"));
+
+        switch (selectedFont) {
+            case 1:
+                mTextViewAmount.setTypeface(EasyFonts.droidSerifBold(getContext()));
+                mTextViewDate.setTypeface(EasyFonts.droidSerifBold(getContext()));
+                break;
+            case 2:
+                mTextViewAmount.setTypeface(EasyFonts.funRaiser(getContext()));
+                mTextViewDate.setTypeface(EasyFonts.funRaiser(getContext()));
+                break;
+            case 3:
+                mTextViewAmount.setTypeface(EasyFonts.walkwayBold(getContext()));
+                mTextViewDate.setTypeface(EasyFonts.walkwayBold(getContext()));
+                break;
+
+        }
     }
 }

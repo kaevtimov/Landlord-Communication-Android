@@ -2,8 +2,10 @@ package source.kevtimov.landlordcommunicationapp.views.login.payment;
 
 
 import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +22,7 @@ import com.shashank.sony.fancydialoglib.Animation;
 import com.shashank.sony.fancydialoglib.FancyAlertDialog;
 import com.shashank.sony.fancydialoglib.FancyAlertDialogListener;
 import com.shashank.sony.fancydialoglib.Icon;
+import com.vstechlab.easyfonts.EasyFonts;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -92,6 +95,7 @@ public class PaymentFragment extends Fragment implements ContractsPayments.View 
         mCardsList = new ArrayList<>();
         mCardAdapter = new CustomCardAdapter<>(getContext(), mCardsList);
         mCards.setAdapter(mCardAdapter);
+        initFont();
 
         return root;
     }
@@ -261,5 +265,38 @@ public class PaymentFragment extends Fragment implements ContractsPayments.View 
                     }
                 })
                 .build();
+    }
+
+    private void initFont() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        int selectedFont = Integer.parseInt(sharedPreferences.getString("font_list", "1"));
+
+        switch (selectedFont) {
+            case 1:
+                mDate.setTypeface(EasyFonts.droidSerifBold(getContext()));
+                mTotalAmount.setTypeface(EasyFonts.droidSerifBold(getContext()));
+                mRemainingAmount.setTypeface(EasyFonts.droidSerifBold(getContext()));
+                mCustomAmount.setTypeface(EasyFonts.droidSerifBold(getContext()));
+                mChooseCard.setTypeface(EasyFonts.droidSerifBold(getContext()));
+                mAmountConstraint.setTypeface(EasyFonts.droidSerifBold(getContext()));
+                break;
+            case 2:
+                mDate.setTypeface(EasyFonts.funRaiser(getContext()));
+                mTotalAmount.setTypeface(EasyFonts.funRaiser(getContext()));
+                mRemainingAmount.setTypeface(EasyFonts.funRaiser(getContext()));
+                mCustomAmount.setTypeface(EasyFonts.funRaiser(getContext()));
+                mChooseCard.setTypeface(EasyFonts.funRaiser(getContext()));
+                mAmountConstraint.setTypeface(EasyFonts.funRaiser(getContext()));
+                break;
+            case 3:
+                mDate.setTypeface(EasyFonts.walkwayBold(getContext()));
+                mTotalAmount.setTypeface(EasyFonts.walkwayBold(getContext()));
+                mRemainingAmount.setTypeface(EasyFonts.walkwayBold(getContext()));
+                mCustomAmount.setTypeface(EasyFonts.walkwayBold(getContext()));
+                mChooseCard.setTypeface(EasyFonts.walkwayBold(getContext()));
+                mAmountConstraint.setTypeface(EasyFonts.walkwayBold(getContext()));
+                break;
+
+        }
     }
 }

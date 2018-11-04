@@ -1,7 +1,9 @@
 package source.kevtimov.landlordcommunicationapp.views.login.selecttenant;
 
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +17,7 @@ import android.widget.Toast;
 
 import com.emredavarci.circleprogressbar.CircleProgressBar;
 import com.muddzdev.styleabletoast.StyleableToast;
+import com.vstechlab.easyfonts.EasyFonts;
 
 import java.util.List;
 
@@ -62,6 +65,7 @@ public class SelectTenantFragment extends Fragment implements ContractsSelectTen
 
         mListViewSelectTenant.setAdapter(mTenantAdapter);
 
+        initFont();
 
         return root;
     }
@@ -140,5 +144,23 @@ public class SelectTenantFragment extends Fragment implements ContractsSelectTen
         User tenant = mTenantAdapter.getItem(position);
 
         mPresenter.allowNavigateOnDone(tenant);
+    }
+
+    private void initFont() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        int selectedFont = Integer.parseInt(sharedPreferences.getString("font_list", "1"));
+
+        switch (selectedFont) {
+            case 1:
+                mTextViewSelectTenant.setTypeface(EasyFonts.droidSerifBold(getContext()));
+                break;
+            case 2:
+                mTextViewSelectTenant.setTypeface(EasyFonts.funRaiser(getContext()));
+                break;
+            case 3:
+                mTextViewSelectTenant.setTypeface(EasyFonts.walkwayBold(getContext()));
+                break;
+
+        }
     }
 }

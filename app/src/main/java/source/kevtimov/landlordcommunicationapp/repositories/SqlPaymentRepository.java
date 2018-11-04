@@ -29,14 +29,14 @@ public class SqlPaymentRepository implements PaymentRepository {
     @Override
     public List<Payment> getAllPaymentsByLandlordId(int landlordId) throws IOException {
         String mServerUrlGet = mServerUrl + "/landlord/" + landlordId ;
-        String moviesJson = mHttpRequester.get(mServerUrlGet);
-        return mJsonParser.fromJsonArray(moviesJson);
+        String paymentJson = mHttpRequester.get(mServerUrlGet);
+        return mJsonParser.fromJsonArray(paymentJson);
     }
 
     @Override
     public List<Payment> getAllPaymentsByTenantId(int tenantId) throws IOException {
         String mServerUrlGet = mServerUrl + "/tenant/" + tenantId;
-        String moviesJson = mHttpRequester.get(mServerUrlGet);
-        return mJsonParser.fromJsonArray(moviesJson);
+        String paymentJson = mHttpRequester.get(mServerUrlGet);
+        return mJsonParser.fromJsonArray(paymentJson);
     }
 }

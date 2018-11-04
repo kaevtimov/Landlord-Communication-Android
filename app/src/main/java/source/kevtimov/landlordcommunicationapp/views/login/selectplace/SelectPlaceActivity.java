@@ -1,6 +1,8 @@
 package source.kevtimov.landlordcommunicationapp.views.login.selectplace;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -22,6 +24,7 @@ public class SelectPlaceActivity extends DaggerAppCompatActivity implements Cont
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_place);
 
@@ -43,5 +46,20 @@ public class SelectPlaceActivity extends DaggerAppCompatActivity implements Cont
         intent.putExtras(bundle);
         setResult(RESULT_OK, intent);
         finish();
+    }
+
+    private void setTheme(){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        int theme =  Integer.parseInt(sharedPreferences.getString("theme_list", "1"));
+
+        switch(theme){
+            case 1:
+                setTheme(R.style.AppThemeCustom);
+                break;
+            case 2:
+                setTheme(R.style.AppThemeCustomDark);
+                break;
+
+        }
     }
 }

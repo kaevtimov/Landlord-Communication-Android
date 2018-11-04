@@ -57,11 +57,7 @@ public class SignUpActivity extends DaggerAppCompatActivity implements Contracts
     public void navigateToPlaceManagement(User user) {
         manageUserInSharedPref(user);
         Intent intent = new Intent(this, PlaceManagementActivity.class);
-
-        //intent.putExtra("User", user);
-
         startActivity(intent);
-
         finish();
     }
 

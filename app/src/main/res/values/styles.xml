@@ -4,9 +4,31 @@
     <!-- Custom application theme. -->
     <style name="AppThemeCustom" parent="Theme.AppCompat.NoActionBar">
         <!-- Customize your theme here. -->
+        <item name="android:actionBarTabStyle">@style/MyActionBarThemeFun</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:windowBackground">@color/colorHeaderBack</item>
+    </style>
+
+    <!-- Custom application theme2. -->
+    <style name="AppThemeCustomDark" parent="Theme.AppCompat.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:actionBarTabStyle">@style/MyActionBarThemeDark</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/md_green_600</item>
+        <item name="android:windowBackground">@color/md_black_1000</item>
+    </style>
+
+    <!--ActionBarDark-->
+    <style name="MyActionBarThemeDark" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">@color/md_black_1000</item>
+        <item name="android:textColor">@color/md_white_1000</item>
+    </style>
+
+    <!--ActionBarFun-->
+    <style name="MyActionBarThemeFun" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">@color/colorPurple</item>
+        <item name="android:textColor">@color/md_black_1000</item>
     </style>
 
     <!--Toast custom style accept-->
