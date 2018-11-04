@@ -22,6 +22,9 @@ import source.kevtimov.landlordcommunicationapp.diconfig.modules.PaymentServiceM
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.PlaceParserModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.PlaceRepositoryModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.PlaceServiceModule;
+import source.kevtimov.landlordcommunicationapp.diconfig.modules.RatingParserModule;
+import source.kevtimov.landlordcommunicationapp.diconfig.modules.RatingRepositoryModule;
+import source.kevtimov.landlordcommunicationapp.diconfig.modules.RatingServiceModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.RentParserModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.RentRepositoryModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.RentServiceModule;
@@ -31,6 +34,9 @@ import source.kevtimov.landlordcommunicationapp.diconfig.modules.UserServiceModu
 
 @Singleton
 @Component(modules = {
+        RatingServiceModule.class,
+        RatingRepositoryModule.class,
+        RatingParserModule.class,
         PaymentParserModule.class,
         CardParserModule.class,
         PaymentServiceModule.class,

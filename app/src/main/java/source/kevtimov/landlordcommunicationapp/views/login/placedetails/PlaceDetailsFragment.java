@@ -162,6 +162,7 @@ public class PlaceDetailsFragment extends Fragment implements ContractsPlaceDeta
         mDescription.setText("Description: " + mPlace.getDescription());
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void viewRent(Rent rent) {
         mRentInfo.setText("Due date: " + rent.getDueDate() + "\n" + "Total amount: " + rent.getTotalAmount() + " leva\n"

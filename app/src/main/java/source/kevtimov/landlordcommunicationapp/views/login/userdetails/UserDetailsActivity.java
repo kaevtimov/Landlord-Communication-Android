@@ -1,4 +1,4 @@
-package source.kevtimov.landlordcommunicationapp.views.login.myusers;
+package source.kevtimov.landlordcommunicationapp.views.login.userdetails;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,44 +13,48 @@ import source.kevtimov.landlordcommunicationapp.models.User;
 import source.kevtimov.landlordcommunicationapp.parsers.base.JsonParser;
 import source.kevtimov.landlordcommunicationapp.utils.Constants;
 import source.kevtimov.landlordcommunicationapp.utils.drawer.BaseDrawer;
-import source.kevtimov.landlordcommunicationapp.views.login.userdetails.UserDetailsActivity;
 
-public class MyUsersActivity extends BaseDrawer implements ContractsMyUsers.Navigator{
-
-    @Inject
-    MyUsersFragment mUsersFragment;
+public class UserDetailsActivity extends BaseDrawer {
 
     @Inject
-    ContractsMyUsers.Presenter mPresenter;
+    UserDetailsFragment mFragment;
+
+    @Inject
+    ContractsUserDetails.Presenter mPresenter;
 
     @Inject
     JsonParser<User> mJsonParser;
 
-    public static final int IDENTIFIER = 2354;
+
     private Toolbar mToolbar;
+    public static final int IDENTIFIER = 349;
     private User mUser;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_users);
+        setContentView(R.layout.activity_user_details);
 
         mToolbar = this.findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
+        Intent incoming = getIntent();
+
+        User income = (User) incoming.getSerializableExtra("User");
         mUser = getUserFromSharedPref();
-        mPresenter.setUser(mUser);
 
-        mUsersFragment.setPresenter(mPresenter);
-        mUsersFragment.setNavigator(this);
-
+        mFragment.setPresenter(mPresenter);
+        mPresenter.setLoggedInUser(mUser);
+        mPresenter.setOtherUser(income);
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.users_content, mUsersFragment)
+                .replace(R.id.details_content, mFragment)
                 .commit();
     }
+
 
     @Override
     protected long getIdentifier() {
@@ -70,13 +74,6 @@ public class MyUsersActivity extends BaseDrawer implements ContractsMyUsers.Navi
     @Override
     protected String getEmail() {
         return mUser.getEmail();
-    }
-
-    @Override
-    public void navigateToDetails(User user) {
-        Intent intent = new Intent(this, UserDetailsActivity.class);
-        intent.putExtra("User", user);
-        startActivity(intent);
     }
 
     private User getUserFromSharedPref() {

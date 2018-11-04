@@ -17,6 +17,8 @@ public interface ContractsMyUsers {
         void showError(Throwable error);
 
         void addUser(User user);
+
+        void navigateToDetails(User user);
     }
 
     interface Presenter {
@@ -28,9 +30,11 @@ public interface ContractsMyUsers {
         void loadUsers();
 
         void setUser(User user);
+
+        void allowNavigation(User user);
     }
 
     interface Navigator {
-        void navigateTo();
+        void navigateToDetails(User user);
     }
 }

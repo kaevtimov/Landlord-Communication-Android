@@ -16,6 +16,7 @@ import source.kevtimov.landlordcommunicationapp.diconfig.modules.SelectPlaceModu
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.SelectTenantModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.SettingsModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.SignUpModule;
+import source.kevtimov.landlordcommunicationapp.diconfig.modules.UserDetailsModule;
 import source.kevtimov.landlordcommunicationapp.views.login.addcard.AddCardActivity;
 import source.kevtimov.landlordcommunicationapp.views.login.addplace.AddPlaceActivity;
 import source.kevtimov.landlordcommunicationapp.views.login.home.HomeActivity;
@@ -30,6 +31,7 @@ import source.kevtimov.landlordcommunicationapp.views.login.preferences.Settings
 import source.kevtimov.landlordcommunicationapp.views.login.selectplace.SelectPlaceActivity;
 import source.kevtimov.landlordcommunicationapp.views.login.selecttenant.SelectTenantActivity;
 import source.kevtimov.landlordcommunicationapp.views.login.signup.SignUpActivity;
+import source.kevtimov.landlordcommunicationapp.views.login.userdetails.UserDetailsActivity;
 
 @Module
 public abstract class ActivityBindingModule {
@@ -116,4 +118,10 @@ public abstract class ActivityBindingModule {
             modules = MyUsersModule.class
     )
     abstract MyUsersActivity myUsersActivity();
+
+    @ActivityScoped
+    @ContributesAndroidInjector(
+            modules = UserDetailsModule.class
+    )
+    abstract UserDetailsActivity UserDetailsActivity();
 }

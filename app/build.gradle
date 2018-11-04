@@ -80,4 +80,7 @@ dependencies {
     //Round image view
     implementation 'com.makeramen:roundedimageview:2.3.0'
 
+    //Rating bar
+    implementation 'com.github.ome450901:SimpleRatingBar:1.4.2'
+
 }

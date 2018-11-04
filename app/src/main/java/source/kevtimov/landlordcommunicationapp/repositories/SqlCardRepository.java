@@ -22,8 +22,8 @@ public class SqlCardRepository implements CardRepository {
     @Override
     public List<Card> getAllCardsByUserId(int userId) throws IOException {
         String mServerUrlGet = mServerUrl + "/" + userId;
-        String moviesJson = mHttpRequester.get(mServerUrlGet);
-        return mJsonParser.fromJsonArray(moviesJson);
+        String cardJson = mHttpRequester.get(mServerUrlGet);
+        return mJsonParser.fromJsonArray(cardJson);
     }
 
     @Override

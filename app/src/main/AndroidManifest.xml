@@ -43,6 +43,7 @@
         <activity android:name=".views.login.mypayments.MyPaymentsActivity" />
         <activity android:name=".views.login.preferences.SettingsActivity" />
         <activity android:name=".views.login.myusers.MyUsersActivity" />
+        <activity android:name=".views.login.userdetails.UserDetailsActivity"></activity>
     </application>
 
 </manifest>

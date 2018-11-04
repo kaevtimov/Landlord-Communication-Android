@@ -57,8 +57,8 @@ public class SqlUserRepository implements UserRepository {
     @Override
     public List<User> getAllTenants() throws IOException {
         String mServerUrlGet = mServerUrl + "/tenants";
-        String moviesJson = mHttpRequester.get(mServerUrlGet);
-        return mJsonParser.fromJsonArray(moviesJson);
+        String userJson = mHttpRequester.get(mServerUrlGet);
+        return mJsonParser.fromJsonArray(userJson);
     }
 
     @Override

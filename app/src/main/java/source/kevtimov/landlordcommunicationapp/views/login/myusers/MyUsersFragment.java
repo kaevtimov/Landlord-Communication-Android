@@ -6,16 +6,22 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.emredavarci.circleprogressbar.CircleProgressBar;
 import com.muddzdev.styleabletoast.StyleableToast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnItemClick;
 import source.kevtimov.landlordcommunicationapp.R;
 import source.kevtimov.landlordcommunicationapp.models.User;
 
@@ -28,9 +34,13 @@ public class MyUsersFragment extends Fragment implements ContractsMyUsers.View{
     @BindView(R.id.iv_users)
     ImageView mImageViewUsers;
 
+    @BindView(R.id.progress_bar)
+    CircleProgressBar mProgressBar;
+
     private ContractsMyUsers.Presenter mPresenter;
     private ContractsMyUsers.Navigator mNavigator;
     private UsersAdapter mArrayAdapterUser;
+    private List<User> users;
 
     @Inject
     public MyUsersFragment() {
@@ -41,6 +51,7 @@ public class MyUsersFragment extends Fragment implements ContractsMyUsers.View{
                              Bundle savedInstanceState) {
         View root =  inflater.inflate(R.layout.fragment_my_users, container, false);
         ButterKnife.bind(this, root);
+        users = new ArrayList<>();
 
         mArrayAdapterUser = new UsersAdapter(getContext());
         mListViewUsers.setAdapter(mArrayAdapterUser);
@@ -53,6 +64,7 @@ public class MyUsersFragment extends Fragment implements ContractsMyUsers.View{
     public void onResume() {
         super.onResume();
         mPresenter.subscribe(this);
+        mArrayAdapterUser.clear();
         mPresenter.loadUsers();
     }
 
@@ -75,12 +87,12 @@ public class MyUsersFragment extends Fragment implements ContractsMyUsers.View{
 
     @Override
     public void showLoading() {
-
+        mProgressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoading() {
-
+        mProgressBar.setVisibility(View.GONE);
     }
 
     @Override
@@ -92,7 +104,21 @@ public class MyUsersFragment extends Fragment implements ContractsMyUsers.View{
 
     @Override
     public void addUser(User user) {
-        mArrayAdapterUser.add(user);
-        mArrayAdapterUser.notifyDataSetChanged();
+        if(!users.contains(user)){
+            users.add(user);
+            mArrayAdapterUser.add(user);
+        }
+    }
+
+    @Override
+    public void navigateToDetails(User user) {
+        mNavigator.navigateToDetails(user);
+    }
+
+    @OnItemClick(R.id.lv_users)
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+        User user = mArrayAdapterUser.getItem(position);
+
+        mPresenter.allowNavigation(user);
     }
 }

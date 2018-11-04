@@ -34,4 +34,9 @@ public class HttpPlaceService implements PlaceService {
     public List<Place> getAllPlacesByUserId(int userId) throws IOException {
         return placeRepository.getAllPlacesByUserId(userId);
     }
+
+    @Override
+    public List<Place> getAllByTenantIdAndLandlordId(int tenantId, int landlordId) throws IOException {
+        return placeRepository.getAllByTenantIdAndLandlordId(tenantId, landlordId);
+    }
 }

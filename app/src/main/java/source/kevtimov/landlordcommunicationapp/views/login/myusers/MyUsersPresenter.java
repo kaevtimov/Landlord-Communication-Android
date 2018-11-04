@@ -36,6 +36,11 @@ public class MyUsersPresenter implements ContractsMyUsers.Presenter {
     }
 
     @Override
+    public void allowNavigation(User user) {
+        mView.navigateToDetails(user);
+    }
+
+    @Override
     public void subscribe(ContractsMyUsers.View view) {
         this.mView = view;
     }

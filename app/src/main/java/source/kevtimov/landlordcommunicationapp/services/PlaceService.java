@@ -15,4 +15,6 @@ public interface PlaceService {
     Place updatePlaceTenant(Place place, int placeId) throws IOException;
 
     List<Place> getAllPlacesByUserId(int userId) throws IOException;
+
+    List<Place> getAllByTenantIdAndLandlordId(int tenantId, int landlordId) throws IOException;
 }

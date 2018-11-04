@@ -12,7 +12,9 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.disposables.Disposable;
 import source.kevtimov.landlordcommunicationapp.async.base.SchedulerProvider;
+import source.kevtimov.landlordcommunicationapp.models.Rating;
 import source.kevtimov.landlordcommunicationapp.models.User;
+import source.kevtimov.landlordcommunicationapp.services.RatingService;
 import source.kevtimov.landlordcommunicationapp.services.UserService;
 import source.kevtimov.landlordcommunicationapp.utils.bitmapcache.BitmapCache;
 import source.kevtimov.landlordcommunicationapp.utils.bitmapcoder.IBitmapAgent;
@@ -148,4 +150,5 @@ public class SignUpPresenter implements ContractsSignUp.Presenter {
             mBitmapCache.getLruCache().put("logged_in_user_profile_image", bitmap);
         }
     }
+
 }

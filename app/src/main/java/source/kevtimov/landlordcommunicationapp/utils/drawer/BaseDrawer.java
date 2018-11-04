@@ -43,7 +43,7 @@ public abstract class BaseDrawer extends DaggerAppCompatActivity {
                 .withName("My payments")
                 .withTextColor(Color.WHITE)
                 .withSelectedTextColor(Color.BLACK)
-                .withIcon(R.drawable.money);
+                .withIcon(R.drawable.ic_monetization_on_black_24dp);
 
         SecondaryDrawerItem settings = new SecondaryDrawerItem()
                 .withIdentifier(SettingsActivity.IDENTIFIER)
@@ -57,7 +57,7 @@ public abstract class BaseDrawer extends DaggerAppCompatActivity {
                 .withName("My users")
                 .withTextColor(Color.WHITE)
                 .withSelectedTextColor(Color.BLACK)
-                .withIcon(R.drawable.ic_person_black_24dp);
+                .withIcon(R.drawable.ic_supervisor_account_24dp);
 
         IProfile profile = new ProfileDrawerItem ()
                 .withName (getUsername())
