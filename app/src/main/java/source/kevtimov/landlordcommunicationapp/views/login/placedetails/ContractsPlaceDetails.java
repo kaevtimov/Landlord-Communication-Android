@@ -46,6 +46,10 @@ public interface ContractsPlaceDetails {
         void getNotLogInUser();
 
         void getUnpaidRent();
+
+        void setRent(Rent rent);
+
+        void editRentAmount(double enteredAmount);
     }
 
     interface Navigator {

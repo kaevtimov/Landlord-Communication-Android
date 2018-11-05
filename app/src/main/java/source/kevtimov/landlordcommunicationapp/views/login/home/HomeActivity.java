@@ -41,6 +41,7 @@ public class HomeActivity extends BaseDrawer implements ContractsHome.Navigator{
         mLogInUser = getUserFromSharedPref();
         mLogInUser.setOnline(true);
 
+        mPresenter.setUser(mLogInUser);
         mHomeFragment.setNavigator(this);
         mHomeFragment.setPresenter(mPresenter);
 
@@ -68,11 +69,6 @@ public class HomeActivity extends BaseDrawer implements ContractsHome.Navigator{
     @Override
     protected String getEmail() {
         return this.mLogInUser.getEmail();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
     }
 
     private User getUserFromSharedPref() {

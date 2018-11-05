@@ -1,8 +1,11 @@
 package source.kevtimov.landlordcommunicationapp.views.login.login;
 
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -42,6 +45,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import source.kevtimov.landlordcommunicationapp.R;
 import source.kevtimov.landlordcommunicationapp.models.User;
+import source.kevtimov.landlordcommunicationapp.parsers.GsonJsonParser;
+import source.kevtimov.landlordcommunicationapp.parsers.base.JsonParser;
+import source.kevtimov.landlordcommunicationapp.utils.Constants;
 
 import static com.facebook.GraphRequest.TAG;
 
@@ -69,6 +75,9 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
     @BindView(R.id.progressBar)
     CircleProgressBar mLoadingView;
 
+    @Inject
+    JsonParser<User> mJsonParser;
+
 
     private String mEmailFacebook;
     private String mFacebookFirstName;
@@ -87,10 +96,7 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_login, container, false);
-
-
         ButterKnife.bind(this, root);
-
         initFonts();
 
         getActivity()
@@ -112,6 +118,8 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
     public void onResume() {
         super.onResume();
         mPresenter.subscribe(this);
+        checkIfNotAlreadyLoggedInUser();
+
     }
 
     @Override
@@ -344,5 +352,15 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
         mFacebookButton.setFragment(this);
         mTextViewUsername.setTypeface(EasyFonts.funRaiser(getContext()));
         mTextViewPassword.setTypeface(EasyFonts.funRaiser(getContext()));
+    }
+
+    private void checkIfNotAlreadyLoggedInUser() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        if(sharedPreferences.getString(Constants.SHARED_PREFERENCES_KEY_USER_INFO, "").length() != 0){
+            User user = mJsonParser.fromJson(sharedPreferences.getString(Constants.SHARED_PREFERENCES_KEY_USER_INFO, ""));
+            welcomeUser(user);
+        }
     }
 }

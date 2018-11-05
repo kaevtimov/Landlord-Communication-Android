@@ -2,14 +2,17 @@ package source.kevtimov.landlordcommunicationapp.views.login.placedetails;
 
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,6 +49,9 @@ public class PlaceDetailsFragment extends Fragment implements ContractsPlaceDeta
 
     @BindView(R.id.btn_pay)
     Button mPayButton;
+
+    @BindView(R.id.btn_edit)
+    Button mEditButton;
 
     @BindView(R.id.progress_bar)
     CircleProgressBar mProgressBar;
@@ -148,6 +154,10 @@ public class PlaceDetailsFragment extends Fragment implements ContractsPlaceDeta
         mPresenter.allowNavigationToPayRent();
     }
 
+    @OnClick(R.id.btn_edit)
+    public void onEditClick(View v) {
+        showDialog();
+    }
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -167,6 +177,7 @@ public class PlaceDetailsFragment extends Fragment implements ContractsPlaceDeta
     public void viewRent(Rent rent) {
         mRentInfo.setText("Due date: " + rent.getDueDate() + "\n" + "Total amount: " + rent.getTotalAmount() + " leva\n"
                 + "Rem. amount: " + rent.getRemainingAmount() + " leva\n" + "Paid: " + rent.isPaid());
+        mPresenter.setRent(rent);
     }
 
     @Override
@@ -203,5 +214,37 @@ public class PlaceDetailsFragment extends Fragment implements ContractsPlaceDeta
                 break;
 
         }
+    }
+
+    private void showDialog() {
+        AlertDialog editPaymentDialog = new AlertDialog.Builder(getContext()).create();
+        LayoutInflater inflater = this.getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.edit_payment_dialog, null);
+
+        EditText mAmountEditText = dialogView.findViewById(R.id.et_amount);
+        FloatingActionButton mButtonCancel = dialogView.findViewById(R.id.btn_cancel);
+        FloatingActionButton mButtonSave = dialogView.findViewById(R.id.btn_save);
+        TextView mTextViewEnterAmount = dialogView.findViewById(R.id.tv_enter_amount);
+
+
+        editPaymentDialog.setView(dialogView);
+        editPaymentDialog.show();
+
+        mButtonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editPaymentDialog.dismiss();
+            }
+        });
+        mButtonSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                double enteredAmount = Double.parseDouble(mAmountEditText.getText().toString());
+
+                mPresenter.editRentAmount(enteredAmount);
+
+                editPaymentDialog.dismiss();
+            }
+        });
     }
 }

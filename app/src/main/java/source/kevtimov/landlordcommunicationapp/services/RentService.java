@@ -13,4 +13,6 @@ public interface RentService {
     Rent updatePaidStatus(int rentId) throws IOException;
 
     Rent updateRentRemainingAmount(int rentId, Rent rent) throws IOException;
+
+    Rent editRent(Rent rent, int rentId) throws IOException;
 }

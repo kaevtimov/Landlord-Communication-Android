@@ -1,7 +1,11 @@
 package source.kevtimov.landlordcommunicationapp.views.login.login;
 
+import android.annotation.SuppressLint;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 
@@ -20,7 +24,7 @@ import source.kevtimov.landlordcommunicationapp.utils.Constants;
 import source.kevtimov.landlordcommunicationapp.views.login.home.HomeActivity;
 import source.kevtimov.landlordcommunicationapp.views.login.signup.SignUpActivity;
 
-public class LoginActivity extends DaggerAppCompatActivity implements ContractsLogin.Navigator{
+public class LoginActivity extends DaggerAppCompatActivity implements ContractsLogin.Navigator {
 
     @Inject
     ContractsLogin.Presenter mPresenter;
@@ -31,6 +35,8 @@ public class LoginActivity extends DaggerAppCompatActivity implements ContractsL
     @Inject
     JsonParser<User> mJsonParser;
 
+    public static final int IDENTIFIER = 238;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +46,6 @@ public class LoginActivity extends DaggerAppCompatActivity implements ContractsL
         AppEventsLogger.activateApp(this);
 
         setContentView(R.layout.activity_login);
-
         mLoginFragment.setPresenter(mPresenter);
         mLoginFragment.setNavigator(this);
 
@@ -48,6 +53,8 @@ public class LoginActivity extends DaggerAppCompatActivity implements ContractsL
                 .beginTransaction()
                 .replace(R.id.login_content, mLoginFragment)
                 .commit();
+
+        manageNotifications();
     }
 
 
@@ -75,5 +82,18 @@ public class LoginActivity extends DaggerAppCompatActivity implements ContractsL
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(Constants.SHARED_PREFERENCES_KEY_USER_INFO, userInfo);
         editor.apply();
+    }
+
+    private void manageNotifications() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "Rent channel notification";
+            String description = "This channel is for sending notifications to users when there are " +
+                    "five days before meeting the rent due date.";
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+            NotificationChannel channel = new NotificationChannel(Constants.CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            Objects.requireNonNull(notificationManager).createNotificationChannel(channel);
+        }
     }
 }
