@@ -6,13 +6,27 @@
     android:orientation="vertical"
     tools:context=".views.login.placedetails.PlaceDetailsFragment">
 
+
     <Button
-        android:id="@+id/btn_pay"
+        android:id="@+id/btn_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="280dp"
-        android:layout_marginBottom="18dp"
+        android:layout_marginBottom="180dp"
+        android:background="@drawable/custom_pay_button"
+        android:text="EDIT"
+        android:textColor="#000000"
+        android:textStyle="bold" />
+
+
+    <Button
+        android:id="@+id/btn_pay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="280dp"
+        android:layout_marginBottom="125dp"
+        android:layout_alignParentBottom="true"
         android:background="@drawable/custom_pay_button"
         android:text="@string/pay"
         android:textColor="#000000"

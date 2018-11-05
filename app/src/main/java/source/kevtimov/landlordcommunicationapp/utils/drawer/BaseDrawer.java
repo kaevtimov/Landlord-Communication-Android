@@ -19,6 +19,7 @@ import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import dagger.android.support.DaggerAppCompatActivity;
 import source.kevtimov.landlordcommunicationapp.R;
 import source.kevtimov.landlordcommunicationapp.utils.bitmapcache.BitmapCache;
+import source.kevtimov.landlordcommunicationapp.views.login.login.LoginActivity;
 import source.kevtimov.landlordcommunicationapp.views.login.mypayments.MyPaymentsActivity;
 import source.kevtimov.landlordcommunicationapp.views.login.myplaces.MyPlacesActivity;
 import source.kevtimov.landlordcommunicationapp.views.login.myusers.MyUsersActivity;
@@ -59,6 +60,12 @@ public abstract class BaseDrawer extends DaggerAppCompatActivity {
                 .withSelectedTextColor(Color.BLACK)
                 .withIcon(R.drawable.ic_supervisor_account_24dp);
 
+        SecondaryDrawerItem logOut = new SecondaryDrawerItem()
+                .withIdentifier(LoginActivity.IDENTIFIER)
+                .withName("Log Out")
+                .withTextColor(Color.WHITE)
+                .withSelectedTextColor(Color.BLACK);
+
         IProfile profile = new ProfileDrawerItem ()
                 .withName (getUsername())
                 .withEmail (getEmail())
@@ -79,7 +86,8 @@ public abstract class BaseDrawer extends DaggerAppCompatActivity {
                         myPlaces,
                         myPayments,
                         myUsers,
-                        settings
+                        settings,
+                        logOut
                 )
                 .withOnDrawerItemClickListener((view, position, drawerItem) -> {
                     long identifier = drawerItem.getIdentifier();
@@ -113,6 +121,14 @@ public abstract class BaseDrawer extends DaggerAppCompatActivity {
             return intent;
         } else if (identifier == MyUsersActivity.IDENTIFIER) {
             Intent intent = new Intent(BaseDrawer.this, MyUsersActivity.class);
+            return intent;
+        } else if (identifier == LoginActivity.IDENTIFIER) {
+            Intent intent = new Intent(BaseDrawer.this, LoginActivity.class);
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            editor.clear();
+            editor.apply();
             return intent;
         }
         return null;

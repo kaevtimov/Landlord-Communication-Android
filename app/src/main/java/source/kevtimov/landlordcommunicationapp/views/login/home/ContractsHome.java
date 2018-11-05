@@ -1,5 +1,8 @@
 package source.kevtimov.landlordcommunicationapp.views.login.home;
 
+import source.kevtimov.landlordcommunicationapp.models.Rent;
+import source.kevtimov.landlordcommunicationapp.models.User;
+
 public interface ContractsHome {
 
     interface View {
@@ -14,6 +17,7 @@ public interface ContractsHome {
 
         void showError(Throwable error);
 
+        void sendNotification(int year, int month, int day, Rent rent);
     }
 
     interface Presenter {
@@ -22,7 +26,9 @@ public interface ContractsHome {
 
         void unsubscribe();
 
+        void manageNotifications();
 
+        void setUser(User user);
     }
 
     interface Navigator {

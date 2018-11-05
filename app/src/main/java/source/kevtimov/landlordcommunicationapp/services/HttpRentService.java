@@ -32,4 +32,9 @@ public class HttpRentService implements RentService {
     public Rent updateRentRemainingAmount(int rentId, Rent rent) throws IOException {
         return rentRepository.updateRentRemainingAmount(rentId, rent);
     }
+
+    @Override
+    public Rent editRent(Rent rent, int rentId) throws IOException {
+        return rentRepository.editRent(rent,rentId);
+    }
 }
