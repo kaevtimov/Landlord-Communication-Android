@@ -1,11 +1,14 @@
 package source.kevtimov.landlordcommunicationapp.views.login;
 
+import android.content.Intent;
+
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.disposables.Disposable;
 import source.kevtimov.landlordcommunicationapp.async.base.SchedulerProvider;
+import source.kevtimov.landlordcommunicationapp.chat.fcm.ChatMessagingService;
 import source.kevtimov.landlordcommunicationapp.models.User;
 import source.kevtimov.landlordcommunicationapp.services.UserService;
 
@@ -47,7 +50,7 @@ public class LoginPresenter implements ContractsLogin.Presenter {
         }else{
             Disposable observal = Observable
                     .create((ObservableOnSubscribe<User>) emitter -> {
-                        User user = mService.checkUserLogin(username, password);
+            c            User user = mService.checkUserLogin(username, password);
                         emitter.onNext(user);
                         emitter.onComplete();
                     })
@@ -72,12 +75,11 @@ public class LoginPresenter implements ContractsLogin.Presenter {
 
 
     private void processUser(String username) {
-
-        getUserByUsername(username);
-/*
         if(mUser != null){
             mView.welcomeUser(mUser);
-        }*/
+        } else {
+            getUserByUsername(username);
+        }
     }
 
     private void getUserByUsername(String username) {

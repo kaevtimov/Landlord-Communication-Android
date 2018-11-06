@@ -36,7 +36,8 @@
         <activity android:name=".chat.ChatActivity" />
         <activity android:name=".chat.chatRooms.ChatRoomActivity" />
         <service
-            android:name=".chat.fcm.ChatMessagingService">
+            android:name=".chat.fcm.ChatMessagingService"
+            android:stopWithTask="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>

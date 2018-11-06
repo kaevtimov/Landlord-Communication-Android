@@ -1,6 +1,7 @@
 package source.kevtimov.landlordcommunicationapp.diconfig;
 
 import dagger.Module;
+import dagger.Provides;
 import dagger.android.ContributesAndroidInjector;
 import source.kevtimov.landlordcommunicationapp.chat.ChatActivity;
 import source.kevtimov.landlordcommunicationapp.chat.chatRooms.ChatRoomActivity;

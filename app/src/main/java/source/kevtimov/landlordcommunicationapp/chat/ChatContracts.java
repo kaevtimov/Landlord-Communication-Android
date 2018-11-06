@@ -6,6 +6,7 @@ import source.kevtimov.landlordcommunicationapp.models.User;
 
 public interface ChatContracts {
     interface Presenter {
+
         void selectLandlord(User landlord);
 
         void subscribe(View view);
@@ -30,7 +31,7 @@ public interface ChatContracts {
 
         void showEmptyLandlordList();
 
-        void openChatRoom(User landlord);
+        void openChatRoom(User user);
     }
 
     interface Navigator {

@@ -24,8 +24,8 @@ import source.kevtimov.landlordcommunicationapp.R;
 import source.kevtimov.landlordcommunicationapp.models.Message;
 
 public class ChatRoomMessageAdapter extends BaseAdapter {
-    List<Message> messages = new ArrayList<>();
-    Context context;
+    private List<Message> messages = new ArrayList<>();
+    private Context context;
 
     public ChatRoomMessageAdapter(Context context) {
         this.context = context;
@@ -70,10 +70,10 @@ public class ChatRoomMessageAdapter extends BaseAdapter {
 
             holder.name.setText(message.getSenderName());
             holder.messageBody.setText(message.getMessageBody());
-            GradientDrawable drawable = (GradientDrawable) holder.avatar.getBackground();
+            //GradientDrawable drawable = (GradientDrawable) holder.avatar.getBackground();
             //drawable.setColor(Color.parseColor(message.getData().getColor()));
         }
-        return null;
+        return convertView;
     }
 
     class MessageViewHolder {

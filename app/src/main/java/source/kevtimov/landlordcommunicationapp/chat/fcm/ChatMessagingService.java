@@ -3,15 +3,21 @@ package source.kevtimov.landlordcommunicationapp.chat.fcm;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 import android.widget.Toast;
 
+import com.google.android.gms.common.util.SharedPreferencesUtils;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.common.net.MediaType;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+
+import org.apache.http.client.methods.HttpPost;
 
 import java.io.IOException;
 import java.util.Map;
@@ -24,42 +30,60 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
+import source.kevtimov.landlordcommunicationapp.chat.chatRooms.ChatRoomActivity;
+import source.kevtimov.landlordcommunicationapp.http.OkHttpHttpRequester;
+import source.kevtimov.landlordcommunicationapp.models.User;
 import source.kevtimov.landlordcommunicationapp.utils.Constants;
+import source.kevtimov.landlordcommunicationapp.views.login.LoginActivity;
 
 public class ChatMessagingService extends FirebaseMessagingService {
     public static final String SERVER_URL = Constants.BASE_SERVER_URL_KRIS + "/users";
+    private User mUser;
 
     @Override
     public void onNewToken(String s) {
-        final String[] newToken = new String[1];
-        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener((Executor) ChatMessagingService.this,
-                instanceIdResult -> newToken[0] = instanceIdResult.getToken());
-        sendTokenToServer(newToken);
+        super.onNewToken(s);
+        sendTokenToServer();
     }
 
-    private void sendTokenToServer(String[] newToken) {
+    private void sendTokenToServer() {
         OkHttpClient client = new OkHttpClient();
-        RequestBody body = new FormBody.Builder()
-                .add("token",newToken[0])
-                .build();
-        Request request = new Request.Builder()
-                .url(SERVER_URL)
-                .post(body)
-                .build();
-
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                Toast.makeText(ChatMessagingService.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                if (!response.isSuccessful()){
-                    throw new IOException("Sorry something went wrong");
-                }
-            }
+        final String[] newToken = new String[1];
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(instanceIdResult -> {
+            newToken[0] = instanceIdResult.getToken();
+            Log.e("newtoken",instanceIdResult.getToken());
         });
+        RequestBody body = null;
+        if (mUser !=null) {
+            String url = SERVER_URL + "/" + mUser.getUsername() + "registrationtoken";
+            body = RequestBody.create(okhttp3.MediaType.parse("application/json"), newToken[0]);
+        }
+        Request request = null;
+        if (body != null) {
+            request = new Request.Builder()
+                    .url(SERVER_URL + "/" + mUser.getUsername() + "/registrationtoken")
+                    .post(body)
+                    .build();
+        }
+
+        if (request != null) {
+            client.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    e.printStackTrace();
+                }
+
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    try(ResponseBody responseBody = response.body()) {
+                        if (!response.isSuccessful()) {
+                            throw new IOException("Something went wrong " + responseBody.string());
+                        }
+                    }
+                }
+            });
+        }
     }
 
     @Override
@@ -81,7 +105,7 @@ public class ChatMessagingService extends FirebaseMessagingService {
             body = notification.getBody();
         }
 
-        Intent intent = new Intent();
+        Intent intent = new Intent(this,ChatRoomActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_ONE_SHOT);
 
@@ -92,5 +116,7 @@ public class ChatMessagingService extends FirebaseMessagingService {
                 .setContentIntent(pendingIntent);
     }
 
-
+    public void setmUser(User mUser) {
+        this.mUser = mUser;
+    }
 }

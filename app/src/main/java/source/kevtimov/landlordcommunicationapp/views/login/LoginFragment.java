@@ -3,6 +3,7 @@ package source.kevtimov.landlordcommunicationapp.views.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,10 +24,16 @@ import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.muddzdev.styleabletoast.StyleableToast;
 
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
@@ -38,8 +45,17 @@ import butterknife.BindFloat;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
 import source.kevtimov.landlordcommunicationapp.R;
+import source.kevtimov.landlordcommunicationapp.chat.fcm.ChatMessagingService;
 import source.kevtimov.landlordcommunicationapp.models.User;
+import source.kevtimov.landlordcommunicationapp.utils.Constants;
 import source.kevtimov.landlordcommunicationapp.utils.sharedpref.PrefUtil;
 import source.kevtimov.landlordcommunicationapp.views.login.ContractsLogin;
 
@@ -54,6 +70,7 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
     private String mUserLastName;
     private String mUserEmail;
     private String mUserProfPic;
+    private ChatMessagingService chatMessagingService;
 
     @BindView(R.id.fb_login_button)
     LoginButton mFacebookButton;
@@ -164,6 +181,7 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
 
         StyleableToast.makeText(getContext(), "WELCOME, " + user.getFirstName() + " " + user.getLastName() + " !",
                 Toast.LENGTH_LONG, R.style.accept_login_toast).show();
+
 
         mNavigator.navigateWith(user);
     }

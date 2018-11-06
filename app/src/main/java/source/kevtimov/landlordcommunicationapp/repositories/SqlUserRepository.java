@@ -8,7 +8,6 @@ import source.kevtimov.landlordcommunicationapp.models.User;
 import source.kevtimov.landlordcommunicationapp.parsers.base.JsonParser;
 
 public class SqlUserRepository implements UserRepository {
-
     private HttpRequester mHttpRequester;
     private JsonParser<User> mJsonParser;
     private String mServerUrl;

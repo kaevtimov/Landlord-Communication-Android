@@ -23,6 +23,7 @@ public interface ContractsLogin {
         void alertUser();
 
         void loginUser(User user);
+
     }
 
     interface Presenter {
@@ -39,5 +40,6 @@ public interface ContractsLogin {
 
     interface Navigator{
         void navigateWith(User user);
+
     }
 }
