@@ -17,9 +17,9 @@ import source.kevtimov.landlordcommunicationapp.models.Payment;
 import source.kevtimov.landlordcommunicationapp.models.Place;
 import source.kevtimov.landlordcommunicationapp.models.Rent;
 import source.kevtimov.landlordcommunicationapp.models.User;
-import source.kevtimov.landlordcommunicationapp.services.CardService;
-import source.kevtimov.landlordcommunicationapp.services.PaymentService;
-import source.kevtimov.landlordcommunicationapp.services.RentService;
+import source.kevtimov.landlordcommunicationapp.services.base.CardService;
+import source.kevtimov.landlordcommunicationapp.services.base.PaymentService;
+import source.kevtimov.landlordcommunicationapp.services.base.RentService;
 
 public class PaymentsPresenter implements ContractsPayments.Presenter {
 

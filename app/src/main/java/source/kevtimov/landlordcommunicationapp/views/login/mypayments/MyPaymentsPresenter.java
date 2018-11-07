@@ -10,7 +10,7 @@ import io.reactivex.disposables.Disposable;
 import source.kevtimov.landlordcommunicationapp.async.base.SchedulerProvider;
 import source.kevtimov.landlordcommunicationapp.models.Payment;
 import source.kevtimov.landlordcommunicationapp.models.User;
-import source.kevtimov.landlordcommunicationapp.services.PaymentService;
+import source.kevtimov.landlordcommunicationapp.services.base.PaymentService;
 
 public class MyPaymentsPresenter implements ContractsMyPayments.Presenter {
 

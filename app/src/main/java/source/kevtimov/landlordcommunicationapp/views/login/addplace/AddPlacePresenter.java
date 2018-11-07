@@ -5,8 +5,8 @@ import android.os.Bundle;
 import javax.inject.Inject;
 
 import source.kevtimov.landlordcommunicationapp.async.base.SchedulerProvider;
-import source.kevtimov.landlordcommunicationapp.services.PlaceService;
-import source.kevtimov.landlordcommunicationapp.services.RentService;
+import source.kevtimov.landlordcommunicationapp.services.base.PlaceService;
+import source.kevtimov.landlordcommunicationapp.services.base.RentService;
 
 public class AddPlacePresenter implements ContractsAddPlace.Presenter {
 
@@ -45,5 +45,29 @@ public class AddPlacePresenter implements ContractsAddPlace.Presenter {
     @Override
     public void allowNavigateToSelectTenant() {
         mView.navigateToSelectTenant();
+    }
+
+    @Override
+    public void checkInputInfo(String address, String description, String total, String year, String month, String day) {
+
+        if(address.length() < 5){
+            mView.alertForAddressConstraint();
+        } else if(description.length() < 10){
+            mView.alertForDescriptionConstraint();
+        } else if(total.length() < 3
+                || Double.parseDouble(total) < 100){
+            mView.alertForTotalAmountConstraint();
+        } else if(year.length() < 4
+                || Integer.parseInt(year) < 2018 || Integer.parseInt(year) > 2050){
+            mView.alertForYearConstraint();
+        } else if(month.length() < 2
+                || Integer.parseInt(month) < 1 || Integer.parseInt(month) > 12){
+            mView.alertForMonthConstraint();
+        } else if(day.length() < 1
+                || Integer.parseInt(day) < 1 || Integer.parseInt(day) > 31){
+            mView.alertForDayConstraint();
+        } else{
+            mView.alertDialogManagement();
+        }
     }
 }

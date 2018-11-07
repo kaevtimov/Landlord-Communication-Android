@@ -13,8 +13,8 @@ import source.kevtimov.landlordcommunicationapp.async.base.SchedulerProvider;
 import source.kevtimov.landlordcommunicationapp.models.Place;
 import source.kevtimov.landlordcommunicationapp.models.Rating;
 import source.kevtimov.landlordcommunicationapp.models.User;
-import source.kevtimov.landlordcommunicationapp.services.PlaceService;
-import source.kevtimov.landlordcommunicationapp.services.RatingService;
+import source.kevtimov.landlordcommunicationapp.services.base.PlaceService;
+import source.kevtimov.landlordcommunicationapp.services.base.RatingService;
 import source.kevtimov.landlordcommunicationapp.utils.bitmapcache.BitmapCache;
 import source.kevtimov.landlordcommunicationapp.utils.bitmapcoder.IBitmapAgent;
 

@@ -26,11 +26,14 @@
 
     <Button
         android:id="@+id/btn_ready"
-        android:layout_marginTop="450dp"
-        android:layout_marginStart="290dp"
-        android:text="@string/ready"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginStart="251dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="25sp"
+        android:background="@drawable/custom_pay_button"
+        android:text="@string/ready"
+        android:textColor="@color/md_black_1000" />
 
     <com.emredavarci.circleprogressbar.CircleProgressBar xmlns:cpb="http://schemas.android.com/apk/res-auto"
         android:id="@+id/progress_bar"

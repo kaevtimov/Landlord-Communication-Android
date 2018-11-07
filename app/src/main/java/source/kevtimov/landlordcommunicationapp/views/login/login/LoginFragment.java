@@ -4,15 +4,20 @@ package source.kevtimov.landlordcommunicationapp.views.login.login;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,11 +25,13 @@ import android.widget.Toast;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.emredavarci.circleprogressbar.CircleProgressBar;
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
@@ -34,9 +41,13 @@ import com.vstechlab.easyfonts.EasyFonts;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
+import java.util.Objects;
 
 import javax.inject.Inject;
 
@@ -75,6 +86,9 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
     @BindView(R.id.progressBar)
     CircleProgressBar mLoadingView;
 
+    @BindView(R.id.iv_login)
+    ImageView mImageViewLogIn;
+
     @Inject
     JsonParser<User> mJsonParser;
 
@@ -83,7 +97,6 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
     private String mFacebookFirstName;
     private String mFacebookLastName;
     private String mProfPicture;
-    private String mUserEmail;
 
 
     @Inject
@@ -108,11 +121,6 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
         return root;
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        mFacebookCallbackManager.onActivityResult(requestCode, resultCode, data);
-        super.onActivityResult(requestCode, resultCode, data);
-    }
 
     @Override
     public void onResume() {
@@ -177,6 +185,12 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
                 .duration(700)
                 .repeat(5)
                 .playOn(mTextViewPassword);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        mFacebookCallbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
@@ -270,39 +284,20 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
     private void setUpFacebookLogin() {
         mFacebookCallbackManager = CallbackManager.Factory.create();
 
+        boolean loggedOut = AccessToken.getCurrentAccessToken() == null;
+
         //for reading permission
-        mFacebookButton.setReadPermissions(Arrays.asList("email"));
-        mFacebookButton.setFragment(this);
+        mFacebookButton.setReadPermissions(Arrays.asList("email", "public_profile"));
 
         mFacebookButton.registerCallback(mFacebookCallbackManager,
                 new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(final LoginResult loginResult) {
-                        String accessToken = loginResult.getAccessToken().getToken();
 
-                        GraphRequest request = GraphRequest.newMeRequest(
-                                loginResult.getAccessToken(),
-                                new GraphRequest.GraphJSONObjectCallback() {
-                                    @Override
-                                    public void onCompleted(JSONObject jsonObject,
-                                                            GraphResponse response) {
 
-                                        // Getting FB User Data
-                                        Bundle facebookData = getFacebookData(jsonObject);
-                                        mFacebookFirstName = facebookData.getString("first_name");
-                                        mFacebookLastName = facebookData.getString("last_name");
-                                        mEmailFacebook = facebookData.getString("email");
-                                        mUserEmail = facebookData.getString("email");
-                                        mProfPicture = facebookData.getString("profile_pic");
-                                    }
-                                });
+                        boolean loggedIn = AccessToken.getCurrentAccessToken() == null;
 
-                        Bundle parameters = new Bundle();
-                        parameters.putString("fields", "id,first_name,last_name,email,gender");
-                        request.setParameters(parameters);
-                        request.executeAsync();
-
-                        mPresenter.checkFacebookUserByUsername(mUserEmail);
+                        getUserProfile(AccessToken.getCurrentAccessToken());
                     }
 
                     @Override
@@ -320,33 +315,34 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
 
     }
 
-    private Bundle getFacebookData(JSONObject object) {
-        Bundle bundle = new Bundle();
+    private void getUserProfile(AccessToken currentAccessToken) {
+        GraphRequest request = GraphRequest.newMeRequest(
+                currentAccessToken, new GraphRequest.GraphJSONObjectCallback() {
+                    @Override
+                    public void onCompleted(JSONObject object, GraphResponse response) {
+                        try {
+                            mFacebookFirstName = object.getString("first_name");
+                            mFacebookLastName = object.getString("last_name");
+                            mEmailFacebook = object.getString("email");
+                            String id = object.getString("id");
+                            mProfPicture = "https://graph.facebook.com/" + id + "/picture?type=normal";
 
-        try {
-            String id = object.getString("id");
-            URL profile_pic;
-            try {
-                profile_pic = new URL("https://graph.facebook.com/" + id + "/picture?type=large");
-                Log.i("profile_pic", profile_pic + "");
-                bundle.putString("profile_pic", profile_pic.toString());
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-                return null;
-            }
-            if (object.has("first_name"))
-                bundle.putString("first_name", object.getString("first_name"));
-            if (object.has("last_name"))
-                bundle.putString("last_name", object.getString("last_name"));
-            if (object.has("email"))
-                bundle.putString("email", object.getString("email"));
+                            mPresenter.checkFacebookUserByUsername(mEmailFacebook);
 
-        } catch (Exception e) {
-            Log.d(TAG, "BUNDLE Exception : " + e.toString());
-        }
 
-        return bundle;
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
+
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", "first_name,last_name,email,id");
+        request.setParameters(parameters);
+        request.executeAsync();
     }
+
 
     private void initFonts() {
         mFacebookButton.setFragment(this);
@@ -358,7 +354,7 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        if(sharedPreferences.getString(Constants.SHARED_PREFERENCES_KEY_USER_INFO, "").length() != 0){
+        if (sharedPreferences.getString(Constants.SHARED_PREFERENCES_KEY_USER_INFO, "").length() != 0) {
             User user = mJsonParser.fromJson(sharedPreferences.getString(Constants.SHARED_PREFERENCES_KEY_USER_INFO, ""));
             welcomeUser(user);
         }

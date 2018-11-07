@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.util.Base64;
 import android.view.LayoutInflater;
@@ -94,6 +95,9 @@ public class SignUpFragment extends Fragment implements ContractsSignUp.View {
 
     @BindView(R.id.btn_finish_2)
     Button mButtonContinue2;
+
+    @BindView(R.id.btn_gallery)
+    FloatingActionButton mButtonGallery;
 
     @BindView(R.id.progress_bar)
     CircleProgressBar mProgressBar;
@@ -247,6 +251,15 @@ public class SignUpFragment extends Fragment implements ContractsSignUp.View {
             StyleableToast.makeText(getContext(), "Please don't leave blank information!",
                     Toast.LENGTH_LONG, R.style.reject_login_toast)
                     .show();
+        } else if (mEditTextEnterEmail.getText().toString().length() < 9
+                || mEditTextEnterFirstName.getText().toString().length() < 3
+                || mEditTextEnterLastName.getText().toString().length() < 3
+                || radioButtonResult == -1) {
+
+            StyleableToast.makeText(getContext(), "Email must be minimum 9 characters long, " +
+                            "first and last name must be minimum 3 characters long!",
+                    Toast.LENGTH_LONG, R.style.reject_login_toast)
+                    .show();
         } else if (mEditTextEnterUsername.getText().toString().length() < 6
                 || mEditTextEnterPass.getText().toString().length() < 6
                 || mEditTextRetypePass.getText().toString().length() < 6) {
@@ -282,7 +295,7 @@ public class SignUpFragment extends Fragment implements ContractsSignUp.View {
             }
 
             mUserInfoData.putBoolean("isLandlord", isLandlord);
-            mPresenter.checkUsernameAndEmail(mUserInfoData.getString("username"), mUserInfoData.getString("email"));
+            mPresenter.checkUsernameAndEmail(mUserInfoData.getString("fb_username"), mUserInfoData.getString("fb_email"));
 
         }
     }
@@ -358,7 +371,10 @@ public class SignUpFragment extends Fragment implements ContractsSignUp.View {
         mEditTextEnterFirstName.setVisibility(View.GONE);
         mEditTextEnterLastName.setVisibility(View.GONE);
         mEditTextEnterEmail.setVisibility(View.GONE);
+        mImageView.setVisibility(View.GONE);
+        mButtonGallery.setVisibility(View.GONE);
         mButtonContinue.setVisibility(View.GONE);
+
         mButtonContinue2.setVisibility(View.VISIBLE);
     }
 }

@@ -3,10 +3,12 @@ package source.kevtimov.landlordcommunicationapp.utils.drawer;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
 
+import com.facebook.login.LoginManager;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -39,9 +41,9 @@ public abstract class BaseDrawer extends DaggerAppCompatActivity {
                 .withSelectedTextColor(Color.BLACK)
                 .withIcon(R.drawable.ic_home_black_24dp);
 
-        SecondaryDrawerItem myPayments = new SecondaryDrawerItem()
+        SecondaryDrawerItem rentPayments = new SecondaryDrawerItem()
                 .withIdentifier(MyPaymentsActivity.IDENTIFIER)
-                .withName("My payments")
+                .withName("Rent payments")
                 .withTextColor(Color.WHITE)
                 .withSelectedTextColor(Color.BLACK)
                 .withIcon(R.drawable.ic_monetization_on_black_24dp);
@@ -84,7 +86,7 @@ public abstract class BaseDrawer extends DaggerAppCompatActivity {
                 .withAccountHeader(accHeader)
                 .addDrawerItems(
                         myPlaces,
-                        myPayments,
+                        rentPayments,
                         myUsers,
                         settings,
                         logOut
@@ -127,6 +129,7 @@ public abstract class BaseDrawer extends DaggerAppCompatActivity {
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
             SharedPreferences.Editor editor = sharedPreferences.edit();
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            LoginManager.getInstance().logOut();
             editor.clear();
             editor.apply();
             return intent;
@@ -165,6 +168,11 @@ public abstract class BaseDrawer extends DaggerAppCompatActivity {
     private Bitmap getProfilePicture(){
         Bitmap profPicture = (Bitmap) BitmapCache.getInstance().getLruCache().get("logged_in_user_profile_image");
 
-        return profPicture;
+        if(profPicture != null){
+            return profPicture;
+        }else{
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.com_facebook_profile_picture_blank_portrait);
+            return bitmap;
+        }
     }
 }

@@ -27,6 +27,8 @@ public class HomeFragment extends Fragment implements ContractsHome.View {
 
     private ContractsHome.Presenter mPresenter;
     private ContractsHome.Navigator mNavigator;
+    private Calendar mCalendar;
+    private AlarmManager mAlarmManager;
 
     @Inject
     public HomeFragment() {
@@ -58,18 +60,18 @@ public class HomeFragment extends Fragment implements ContractsHome.View {
     @Override
     public void sendNotification(int year, int month, int day, Rent rent) {
 
-        Calendar calendar = Calendar.getInstance();
+        mCalendar = Calendar.getInstance();
 
         //calendar.set(2018, 11, 5, 18, 6);
-        calendar.set(Calendar.YEAR, 2018);
-        calendar.set(Calendar.MONTH, month - 1);
-        calendar.set(Calendar.DAY_OF_MONTH, day);
-        calendar.set(Calendar.HOUR_OF_DAY, 1);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
+        mCalendar.set(Calendar.YEAR, 2018);
+        mCalendar.set(Calendar.MONTH, month - 1);
+        mCalendar.set(Calendar.DAY_OF_MONTH, day);
+        mCalendar.set(Calendar.HOUR_OF_DAY, 14);
+        mCalendar.set(Calendar.MINUTE, 12);
+        mCalendar.set(Calendar.SECOND, 0);
 
 
-        if (calendar.getTimeInMillis() > System.currentTimeMillis()) {
+        if (mCalendar.getTimeInMillis() > System.currentTimeMillis()) {
             Intent intent = new Intent(getContext(), ReceiverNotification.class);
             intent.putExtra("TotalAmount", rent.getTotalAmount());
             intent.putExtra("RemainingAmount", rent.getRemainingAmount());
@@ -79,9 +81,9 @@ public class HomeFragment extends Fragment implements ContractsHome.View {
 
             PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), rent.getRentID(), intent, 0);
 
-            AlarmManager alarmManager = (AlarmManager) Objects.requireNonNull(getContext()).getSystemService(Context.ALARM_SERVICE);
+            mAlarmManager = (AlarmManager) Objects.requireNonNull(getContext()).getSystemService(Context.ALARM_SERVICE);
 
-            Objects.requireNonNull(alarmManager).setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+            Objects.requireNonNull(mAlarmManager).setExact(AlarmManager.RTC_WAKEUP, mCalendar.getTimeInMillis(), pendingIntent);
         }
     }
 

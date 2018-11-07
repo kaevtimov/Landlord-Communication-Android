@@ -15,25 +15,38 @@ import source.kevtimov.landlordcommunicationapp.diconfig.modules.BitmapAgentModu
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.CardParserModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.CardRepositoryModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.CardServiceModule;
+import source.kevtimov.landlordcommunicationapp.diconfig.modules.CardValidatorModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.HttpModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.PaymentParserModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.PaymentRepositoryModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.PaymentServiceModule;
+import source.kevtimov.landlordcommunicationapp.diconfig.modules.PaymentValidatorModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.PlaceParserModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.PlaceRepositoryModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.PlaceServiceModule;
+import source.kevtimov.landlordcommunicationapp.diconfig.modules.PlaceValidatorModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.RatingParserModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.RatingRepositoryModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.RatingServiceModule;
+import source.kevtimov.landlordcommunicationapp.diconfig.modules.RatingValidatorModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.RentParserModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.RentRepositoryModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.RentServiceModule;
+import source.kevtimov.landlordcommunicationapp.diconfig.modules.RentValidatorModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.UserParserModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.UserRepositoryModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.UserServiceModule;
+import source.kevtimov.landlordcommunicationapp.diconfig.modules.UserValidatorModule;
+import source.kevtimov.landlordcommunicationapp.validation.UserValidator;
 
 @Singleton
 @Component(modules = {
+        RatingValidatorModule.class,
+        PaymentValidatorModule.class,
+        CardValidatorModule.class,
+        RentValidatorModule.class,
+        PlaceValidatorModule.class,
+        UserValidatorModule.class,
         RatingServiceModule.class,
         RatingRepositoryModule.class,
         RatingParserModule.class,

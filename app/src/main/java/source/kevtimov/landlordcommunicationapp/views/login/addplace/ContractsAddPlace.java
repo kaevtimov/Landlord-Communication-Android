@@ -25,6 +25,20 @@ public interface ContractsAddPlace {
         void navigateToSelectTenant();
 
         void setUserTenant(User tenant);
+
+        void alertDialogManagement();
+
+        void alertForAddressConstraint();
+
+        void alertForDescriptionConstraint();
+
+        void alertForTotalAmountConstraint();
+
+        void alertForYearConstraint();
+
+        void alertForMonthConstraint();
+
+        void alertForDayConstraint();
     }
 
     interface Presenter {
@@ -38,6 +52,8 @@ public interface ContractsAddPlace {
         void allowNavigationOnSave(Bundle info);
 
         void allowNavigateToSelectTenant();
+
+        void checkInputInfo(String address, String description, String total, String year, String month, String day);
     }
 
     interface Navigator {

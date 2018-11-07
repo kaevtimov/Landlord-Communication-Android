@@ -15,8 +15,8 @@
             android:id="@+id/tv_address"
             android:text="@string/address"
             android:layout_marginTop="15dp"
-            android:layout_marginStart="120dp"
-            android:textSize="35sp"
+            android:layout_centerHorizontal="true"
+            android:textSize="30sp"
             android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -27,16 +27,18 @@
             android:layout_marginTop="10dp"
             android:layout_marginStart="75dp"
             android:layout_width="225dp"
-            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/login_edittext_style"
+            android:layout_height="45dp"
             android:inputType="text" />
 
         <TextView
             android:id="@+id/tv_description"
             android:layout_below="@+id/et_enter_address"
             android:layout_marginTop="30dp"
-            android:layout_marginStart="100dp"
             android:text="@string/description"
-            android:textSize="35sp"
+            android:layout_centerHorizontal="true"
+            android:textSize="30sp"
             android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -44,10 +46,11 @@
         <EditText
             android:id="@+id/et_enter_description"
             android:layout_below="@+id/tv_description"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
-            android:layout_marginStart="75dp"
             android:layout_width="225dp"
             android:layout_height="95dp"
+            android:background="@drawable/login_edittext_style"
             android:inputType="text" />
 
 
@@ -56,8 +59,8 @@
             android:text="@string/rent_amount"
             android:layout_below="@+id/et_enter_description"
             android:layout_marginTop="30dp"
-            android:layout_marginStart="90dp"
-            android:textSize="35sp"
+            android:textSize="27sp"
+            android:layout_centerHorizontal="true"
             android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -66,19 +69,19 @@
             android:id="@+id/et_enter_amount"
             android:layout_below="@+id/tv_rent_amount"
             android:layout_marginTop="10dp"
-            android:layout_marginStart="75dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/login_edittext_style"
             android:layout_width="225dp"
-            android:layout_height="wrap_content"
+            android:layout_height="45dp"
             android:inputType="numberDecimal" />
 
         <TextView
             android:id="@+id/tv_duedate"
             android:layout_below="@+id/et_enter_amount"
             android:text="@string/due_date"
-            android:textSize="35sp"
-            android:textStyle="bold"
+            android:textSize="30sp"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
-            android:layout_marginStart="115dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -88,7 +91,7 @@
             android:layout_below="@+id/tv_duedate"
             android:layout_marginTop="10dp"
             android:layout_marginStart="30dp"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -99,7 +102,8 @@
             android:layout_marginTop="5dp"
             android:layout_marginStart="25dp"
             android:layout_width="80dp"
-            android:layout_height="wrap_content"
+            android:background="@drawable/login_edittext_style"
+            android:layout_height="45dp"
             android:inputType="number" />
 
         <TextView
@@ -108,7 +112,7 @@
             android:layout_below="@+id/tv_duedate"
             android:layout_marginTop="10dp"
             android:layout_marginStart="150dp"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -117,9 +121,10 @@
             android:id="@+id/et_enter_month"
             android:layout_below="@+id/tv_month"
             android:layout_marginTop="5dp"
+            android:background="@drawable/login_edittext_style"
             android:layout_marginStart="155dp"
             android:layout_width="80dp"
-            android:layout_height="wrap_content"
+            android:layout_height="45dp"
             android:inputType="number" />
 
         <TextView
@@ -128,7 +133,7 @@
             android:layout_below="@+id/tv_duedate"
             android:layout_marginTop="10dp"
             android:layout_marginStart="295dp"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -139,7 +144,8 @@
             android:layout_marginTop="5dp"
             android:layout_marginStart="290dp"
             android:layout_width="70dp"
-            android:layout_height="wrap_content"
+            android:background="@drawable/login_edittext_style"
+            android:layout_height="45dp"
             android:inputType="number" />
 
         <TextView
@@ -148,23 +154,28 @@
             android:text="@string/tenant_"
             android:layout_marginTop="25dp"
             android:layout_marginStart="30dp"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <Button
             android:id="@+id/btn_select_tenant"
             android:layout_below="@+id/tv_tenant"
+            android:background="@drawable/custom_pay_button"
             android:text="@string/select_tenant"
             android:layout_marginTop="40dp"
-            android:layout_marginStart="127dp"
+            android:padding="15dp"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/md_black_1000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <Button
             android:id="@+id/btn_cancel"
             android:layout_below="@+id/btn_select_tenant"
+            android:background="@drawable/custom_pay_button"
             android:text="@string/cancel_add"
+            android:textColor="@color/md_black_1000"
             android:layout_marginTop="40dp"
             android:layout_marginStart="70dp"
             android:layout_width="wrap_content"
@@ -173,7 +184,9 @@
         <Button
             android:id="@+id/btn_save"
             android:layout_below="@+id/btn_select_tenant"
+            android:background="@drawable/custom_pay_button"
             android:text="@string/save"
+            android:textColor="@color/md_black_1000"
             android:layout_marginTop="40dp"
             android:layout_marginStart="220dp"
             android:layout_width="wrap_content"

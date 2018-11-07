@@ -1,8 +1,6 @@
 package source.kevtimov.landlordcommunicationapp.views.login.placemanagement;
 
 
-import java.util.List;
-
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
@@ -11,8 +9,8 @@ import io.reactivex.disposables.Disposable;
 import source.kevtimov.landlordcommunicationapp.async.base.SchedulerProvider;
 import source.kevtimov.landlordcommunicationapp.models.Place;
 import source.kevtimov.landlordcommunicationapp.models.Rent;
-import source.kevtimov.landlordcommunicationapp.services.PlaceService;
-import source.kevtimov.landlordcommunicationapp.services.RentService;
+import source.kevtimov.landlordcommunicationapp.services.base.PlaceService;
+import source.kevtimov.landlordcommunicationapp.services.base.RentService;
 
 public class PlaceManagementPresenter implements ContractsPlaceManagement.Presenter {
 

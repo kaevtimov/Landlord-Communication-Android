@@ -19,9 +19,9 @@ import source.kevtimov.landlordcommunicationapp.async.base.SchedulerProvider;
 import source.kevtimov.landlordcommunicationapp.models.Place;
 import source.kevtimov.landlordcommunicationapp.models.Rent;
 import source.kevtimov.landlordcommunicationapp.models.User;
-import source.kevtimov.landlordcommunicationapp.services.PlaceService;
-import source.kevtimov.landlordcommunicationapp.services.RentService;
-import source.kevtimov.landlordcommunicationapp.services.UserService;
+import source.kevtimov.landlordcommunicationapp.services.base.PlaceService;
+import source.kevtimov.landlordcommunicationapp.services.base.RentService;
+import source.kevtimov.landlordcommunicationapp.services.base.UserService;
 
 public class HomePresenter implements ContractsHome.Presenter {
 

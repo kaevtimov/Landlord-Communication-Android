@@ -9,7 +9,7 @@ import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.disposables.Disposable;
 import source.kevtimov.landlordcommunicationapp.async.base.SchedulerProvider;
 import source.kevtimov.landlordcommunicationapp.models.User;
-import source.kevtimov.landlordcommunicationapp.services.UserService;
+import source.kevtimov.landlordcommunicationapp.services.base.UserService;
 
 public class SelectTenantPresenter implements ContractsSelectTenant.Presenter{
 

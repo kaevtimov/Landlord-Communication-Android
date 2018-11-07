@@ -1,15 +1,25 @@
 package source.kevtimov.landlordcommunicationapp.views.login.login;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.disposables.Disposable;
+import source.kevtimov.landlordcommunicationapp.R;
 import source.kevtimov.landlordcommunicationapp.async.base.SchedulerProvider;
 import source.kevtimov.landlordcommunicationapp.models.User;
-import source.kevtimov.landlordcommunicationapp.services.UserService;
+import source.kevtimov.landlordcommunicationapp.services.base.UserService;
 import source.kevtimov.landlordcommunicationapp.utils.bitmapcache.BitmapCache;
 import source.kevtimov.landlordcommunicationapp.utils.bitmapcoder.IBitmapAgent;
 
@@ -102,7 +112,7 @@ public class LoginPresenter implements ContractsLogin.Presenter {
 
     @Override
     public void setBitmapToCache(String userPicture) {
-        if(userPicture != null){
+        if (userPicture != null && !userPicture.isEmpty()) {
             Bitmap profPic = mBitmapAgent.convertStringToBitmap(userPicture);
             mBitmapCache.getLruCache().put("logged_in_user_profile_image", profPic);
         }

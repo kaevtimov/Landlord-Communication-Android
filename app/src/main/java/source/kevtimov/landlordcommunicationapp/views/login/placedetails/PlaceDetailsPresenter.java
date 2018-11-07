@@ -6,13 +6,11 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.disposables.Disposable;
 import source.kevtimov.landlordcommunicationapp.async.base.SchedulerProvider;
-import source.kevtimov.landlordcommunicationapp.models.Payment;
 import source.kevtimov.landlordcommunicationapp.models.Place;
 import source.kevtimov.landlordcommunicationapp.models.Rent;
 import source.kevtimov.landlordcommunicationapp.models.User;
-import source.kevtimov.landlordcommunicationapp.services.PaymentService;
-import source.kevtimov.landlordcommunicationapp.services.RentService;
-import source.kevtimov.landlordcommunicationapp.services.UserService;
+import source.kevtimov.landlordcommunicationapp.services.base.RentService;
+import source.kevtimov.landlordcommunicationapp.services.base.UserService;
 
 public class PlaceDetailsPresenter implements ContractsPlaceDetails.Presenter {
 
@@ -52,28 +50,37 @@ public class PlaceDetailsPresenter implements ContractsPlaceDetails.Presenter {
     }
 
     @Override
-    public void editRentAmount(double enteredAmount) {
-        Rent rent = mRent;
-        rent.setTotalAmount(enteredAmount);
-        rent.setRemainingAmount(enteredAmount);
+    public void editRentAmount(String amount) {
 
-        Disposable observal = Observable
-                .create((ObservableOnSubscribe<Rent>) emitter -> {
-                    Rent rentEdit = mRentService.editRent(rent, mRent.getRentID());
-                    emitter.onNext(rentEdit);
-                    emitter.onComplete();
-                })
-                .subscribeOn(mSchedulerProvider.background())
-                .observeOn(mSchedulerProvider.ui())
-                .doFinally(mView::hideLoading)
-                .subscribe(mView::viewRent,
-                        error -> {
-                            if (error instanceof NullPointerException) {
-                                // in case of null pointer exception
-                            } else {
-                                mView.showError(error);
-                            }
-                        });
+
+        if(amount.length() == 0){
+            mView.alertForBlankAmountInfo();
+        } else if(Double.parseDouble(amount) < 50 || Double.parseDouble(amount) > 9000){
+            mView.alertForAmountConstraint();
+        } else{
+            Rent rent = mRent;
+            double enteredAmount = Double.parseDouble(amount);
+            rent.setTotalAmount(enteredAmount);
+            rent.setRemainingAmount(enteredAmount);
+
+            Disposable observal = Observable
+                    .create((ObservableOnSubscribe<Rent>) emitter -> {
+                        Rent rentEdit = mRentService.editRent(rent, mRent.getRentID());
+                        emitter.onNext(rentEdit);
+                        emitter.onComplete();
+                    })
+                    .subscribeOn(mSchedulerProvider.background())
+                    .observeOn(mSchedulerProvider.ui())
+                    .doFinally(mView::hideLoading)
+                    .subscribe(mView::viewRent,
+                            error -> {
+                                if (error instanceof NullPointerException) {
+                                    // in case of null pointer exception
+                                } else {
+                                    mView.showError(error);
+                                }
+                            });
+        }
     }
 
     @Override

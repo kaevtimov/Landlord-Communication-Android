@@ -2,15 +2,17 @@ package source.kevtimov.landlordcommunicationapp.diconfig.modules;
 
 import dagger.Module;
 import dagger.Provides;
-import source.kevtimov.landlordcommunicationapp.repositories.PaymentRepository;
-import source.kevtimov.landlordcommunicationapp.services.HttpPaymentService;
-import source.kevtimov.landlordcommunicationapp.services.PaymentService;
+import source.kevtimov.landlordcommunicationapp.models.Payment;
+import source.kevtimov.landlordcommunicationapp.repositories.base.PaymentRepository;
+import source.kevtimov.landlordcommunicationapp.services.implementation.HttpPaymentService;
+import source.kevtimov.landlordcommunicationapp.services.base.PaymentService;
+import source.kevtimov.landlordcommunicationapp.validation.Validator;
 
 @Module
 public class PaymentServiceModule {
 
     @Provides
-    public PaymentService getService(PaymentRepository repo){
-        return new HttpPaymentService(repo);
+    public PaymentService getService(PaymentRepository repo, Validator<Payment> validator){
+        return new HttpPaymentService(repo, validator);
     }
 }

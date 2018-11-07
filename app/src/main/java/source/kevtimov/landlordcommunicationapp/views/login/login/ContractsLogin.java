@@ -3,6 +3,9 @@ package source.kevtimov.landlordcommunicationapp.views.login.login;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+
 import source.kevtimov.landlordcommunicationapp.models.User;
 
 public interface ContractsLogin {

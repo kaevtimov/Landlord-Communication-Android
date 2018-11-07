@@ -7,8 +7,8 @@ import dagger.Provides;
 import source.kevtimov.landlordcommunicationapp.http.HttpRequester;
 import source.kevtimov.landlordcommunicationapp.models.Payment;
 import source.kevtimov.landlordcommunicationapp.parsers.base.JsonParser;
-import source.kevtimov.landlordcommunicationapp.repositories.PaymentRepository;
-import source.kevtimov.landlordcommunicationapp.repositories.SqlPaymentRepository;
+import source.kevtimov.landlordcommunicationapp.repositories.base.PaymentRepository;
+import source.kevtimov.landlordcommunicationapp.repositories.implementation.SqlPaymentRepository;
 import source.kevtimov.landlordcommunicationapp.utils.Constants;
 
 @Module
