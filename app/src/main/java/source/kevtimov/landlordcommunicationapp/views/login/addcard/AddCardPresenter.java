@@ -1,10 +1,6 @@
 package source.kevtimov.landlordcommunicationapp.views.login.addcard;
 
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
@@ -13,7 +9,7 @@ import io.reactivex.disposables.Disposable;
 import source.kevtimov.landlordcommunicationapp.async.base.SchedulerProvider;
 import source.kevtimov.landlordcommunicationapp.models.Card;
 import source.kevtimov.landlordcommunicationapp.models.User;
-import source.kevtimov.landlordcommunicationapp.services.CardService;
+import source.kevtimov.landlordcommunicationapp.services.base.CardService;
 
 public class AddCardPresenter implements ContractsAddCard.Presenter {
 

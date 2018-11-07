@@ -29,6 +29,10 @@ public interface ContractsPlaceDetails {
         void viewRent(Rent rent);
 
         void viewEmptyRent();
+
+        void alertForBlankAmountInfo();
+
+        void alertForAmountConstraint();
     }
 
     interface Presenter {
@@ -49,7 +53,7 @@ public interface ContractsPlaceDetails {
 
         void setRent(Rent rent);
 
-        void editRentAmount(double enteredAmount);
+        void editRentAmount(String enteredAmount);
     }
 
     interface Navigator {

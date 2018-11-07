@@ -140,7 +140,11 @@ public class SelectPlaceFragment extends Fragment implements ContractsSelectPlac
 
         if(mPlaceAdapter != null) {
             ArrayList<Place> mArrayPlaces = mPlaceAdapter.getCheckedPlaces();
-            alertDialogManagement(mArrayPlaces);
+            if(mArrayPlaces.size() > 0){
+                alertDialogManagement(mArrayPlaces);
+            } else {
+                Objects.requireNonNull(getActivity()).finish();
+            }
         } else{
             Objects.requireNonNull(getActivity()).finish();
         }
@@ -149,9 +153,9 @@ public class SelectPlaceFragment extends Fragment implements ContractsSelectPlac
     private void alertDialogManagement(ArrayList<Place> mPlaces) {
 
         FancyAlertDialog dialog = new FancyAlertDialog.Builder(getActivity())
-                .setTitle("WARNING")
+                .setTitle("WARNING\nARE YOU SURE? FOLLOWING CHANGES WILL BE SAVE TO YOUR ACCOUNT?")
                 .setBackgroundColor(Color.parseColor("#FF6600"))
-                .setMessage("ARE YOU SURE? FOLLOWING CHANGES WILL BE SAVE TO YOUR ACCOUNT?")
+                //.setMessage("ARE YOU SURE? FOLLOWING CHANGES WILL BE SAVE TO YOUR ACCOUNT?")
                 .setNegativeBtnText("Cancel")
                 .setPositiveBtnBackground(Color.parseColor("#FF6600"))
                 .setPositiveBtnText("Yes")

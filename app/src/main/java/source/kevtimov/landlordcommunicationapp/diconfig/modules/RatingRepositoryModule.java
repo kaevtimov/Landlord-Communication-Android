@@ -8,8 +8,8 @@ import dagger.Provides;
 import source.kevtimov.landlordcommunicationapp.http.HttpRequester;
 import source.kevtimov.landlordcommunicationapp.models.Rating;
 import source.kevtimov.landlordcommunicationapp.parsers.base.JsonParser;
-import source.kevtimov.landlordcommunicationapp.repositories.RatingRepository;
-import source.kevtimov.landlordcommunicationapp.repositories.SqlRatingRepository;
+import source.kevtimov.landlordcommunicationapp.repositories.base.RatingRepository;
+import source.kevtimov.landlordcommunicationapp.repositories.implementation.SqlRatingRepository;
 import source.kevtimov.landlordcommunicationapp.utils.Constants;
 
 @Module

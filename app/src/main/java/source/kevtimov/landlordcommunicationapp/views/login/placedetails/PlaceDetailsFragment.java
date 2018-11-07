@@ -186,6 +186,18 @@ public class PlaceDetailsFragment extends Fragment implements ContractsPlaceDeta
         mPayButton.setVisibility(View.GONE);
     }
 
+    @Override
+    public void alertForBlankAmountInfo() {
+        StyleableToast.makeText(getContext(), "Please enter amount!",
+                Toast.LENGTH_LONG, R.style.reject_login_toast).show();
+    }
+
+    @Override
+    public void alertForAmountConstraint() {
+        StyleableToast.makeText(getContext(), "Please enter amount higher than 50.00 leva or lesser than 9000.00 leva!",
+                Toast.LENGTH_LONG, R.style.reject_login_toast).show();
+    }
+
     private void initFont() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         int selectedFont = Integer.parseInt(sharedPreferences.getString("font_list", "1"));
@@ -239,9 +251,8 @@ public class PlaceDetailsFragment extends Fragment implements ContractsPlaceDeta
         mButtonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                double enteredAmount = Double.parseDouble(mAmountEditText.getText().toString());
 
-                mPresenter.editRentAmount(enteredAmount);
+                mPresenter.editRentAmount(mAmountEditText.getText().toString());
 
                 editPaymentDialog.dismiss();
             }

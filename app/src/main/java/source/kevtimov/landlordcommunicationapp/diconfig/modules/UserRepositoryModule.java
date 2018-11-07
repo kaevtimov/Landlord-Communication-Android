@@ -7,8 +7,8 @@ import dagger.Provides;
 import source.kevtimov.landlordcommunicationapp.http.HttpRequester;
 import source.kevtimov.landlordcommunicationapp.models.User;
 import source.kevtimov.landlordcommunicationapp.parsers.base.JsonParser;
-import source.kevtimov.landlordcommunicationapp.repositories.SqlUserRepository;
-import source.kevtimov.landlordcommunicationapp.repositories.UserRepository;
+import source.kevtimov.landlordcommunicationapp.repositories.implementation.SqlUserRepository;
+import source.kevtimov.landlordcommunicationapp.repositories.base.UserRepository;
 import source.kevtimov.landlordcommunicationapp.utils.Constants;
 
 @Module

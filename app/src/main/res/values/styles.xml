@@ -6,8 +6,8 @@
         <!-- Customize your theme here. -->
         <item name="android:actionBarTabStyle">@style/MyActionBarThemeFun</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:windowBackground">@color/colorHeaderBack</item>
+        <item name="android:textColor">@color/colorYellow</item>
+        <item name="android:windowBackground">@drawable/theme_pic</item>
     </style>
 
     <!-- Custom application theme2. -->
@@ -15,8 +15,8 @@
         <!-- Customize your theme here. -->
         <item name="android:actionBarTabStyle">@style/MyActionBarThemeDark</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/md_green_600</item>
-        <item name="android:windowBackground">@color/md_black_1000</item>
+        <item name="android:textColor">@color/colorYellow</item>
+        <item name="android:windowBackground">@drawable/dark_theme</item>
     </style>
 
     <!--ActionBarDark-->

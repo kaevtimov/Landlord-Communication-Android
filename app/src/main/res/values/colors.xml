@@ -7,4 +7,6 @@
     <color name="colorBackground">#fff0b3</color>
     <color name="colorHeaderBack">#330033</color>
     <color name="colorYellow">#ffeb99</color>
+    <color name="colorGray">#8c8c8c</color>
+    <color name="colorDarkGray">#333333</color>
 </resources>

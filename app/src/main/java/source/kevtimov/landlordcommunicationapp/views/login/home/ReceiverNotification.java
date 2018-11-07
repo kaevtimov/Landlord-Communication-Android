@@ -10,16 +10,16 @@ import android.support.v4.app.NotificationManagerCompat;
 import java.util.Objects;
 
 import source.kevtimov.landlordcommunicationapp.R;
-import source.kevtimov.landlordcommunicationapp.models.Rent;
 import source.kevtimov.landlordcommunicationapp.utils.Constants;
 import source.kevtimov.landlordcommunicationapp.views.login.myplaces.MyPlacesActivity;
 
 public class ReceiverNotification extends BroadcastReceiver {
 
+    private NotificationManagerCompat mManager;
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        NotificationManagerCompat manager = NotificationManagerCompat.from(context);
+        mManager = NotificationManagerCompat.from(context);
 
         Intent intentToMyPlaces = new Intent(context, MyPlacesActivity.class);
         intentToMyPlaces.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -41,6 +41,6 @@ public class ReceiverNotification extends BroadcastReceiver {
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setAutoCancel(true);
 
-        Objects.requireNonNull(manager).notify(rentId, notBuilder.build());
+        Objects.requireNonNull(mManager).notify(rentId, notBuilder.build());
     }
 }

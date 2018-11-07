@@ -86,6 +86,6 @@ public class Card implements Serializable {
     @SuppressLint("DefaultLocale")
     @Override
     public String toString() {
-        return String.format("%s, %s, %.2f", getBrand(), getType(), getBalance());
+        return String.format("%s, %s, \nBalance: %.2f", getBrand(), getType(), getBalance());
     }
 }

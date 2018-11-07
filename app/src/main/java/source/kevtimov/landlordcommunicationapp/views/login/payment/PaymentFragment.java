@@ -17,6 +17,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.emredavarci.circleprogressbar.CircleProgressBar;
 import com.muddzdev.styleabletoast.StyleableToast;
 import com.shashank.sony.fancydialoglib.Animation;
 import com.shashank.sony.fancydialoglib.FancyAlertDialog;
@@ -69,6 +70,9 @@ public class PaymentFragment extends Fragment implements ContractsPayments.View 
 
     @BindView(R.id.et_amount)
     EditText mEditTextAmount;
+
+    @BindView(R.id.progress_bar)
+    CircleProgressBar mProgressBar;
 
     private ContractsPayments.Presenter mPresenter;
     private ContractsPayments.Navigator mNavigator;
@@ -126,12 +130,12 @@ public class PaymentFragment extends Fragment implements ContractsPayments.View 
 
     @Override
     public void showLoading() {
-
+        mProgressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoading() {
-
+        mProgressBar.setVisibility(View.GONE);
     }
 
     @Override
@@ -198,8 +202,9 @@ public class PaymentFragment extends Fragment implements ContractsPayments.View 
                 StyleableToast.makeText(getContext(), "Please enter amount!",
                         Toast.LENGTH_LONG, R.style.reject_login_toast)
                         .show();
-            } else if (Double.parseDouble(mEditTextAmount.getText().toString()) < 20) {
-                StyleableToast.makeText(getContext(), "Min available amount is 20.0 leva!",
+            } else if (Double.parseDouble(mEditTextAmount.getText().toString()) < 20
+                    || Double.parseDouble(mEditTextAmount.getText().toString()) > 99999.99) {
+                StyleableToast.makeText(getContext(), "Min available amount is 20.00 leva and max is 99999.99 leva!",
                         Toast.LENGTH_LONG, R.style.reject_login_toast)
                         .show();
             } else {

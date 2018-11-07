@@ -1,6 +1,5 @@
 package source.kevtimov.landlordcommunicationapp.views.login.login;
 
-import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Intent;
@@ -9,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 
+import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 
@@ -36,6 +36,8 @@ public class LoginActivity extends DaggerAppCompatActivity implements ContractsL
     JsonParser<User> mJsonParser;
 
     public static final int IDENTIFIER = 238;
+    private NotificationChannel mNotificationRentChannel;
+    private NotificationManager mNotificationManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +77,19 @@ public class LoginActivity extends DaggerAppCompatActivity implements ContractsL
         finish();
     }
 
+    private void manageNotifications() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "Rent channel notification";
+            String description = "This channel is for sending notifications to users when there are " +
+                    "five days before meeting the rent due date.";
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+            mNotificationRentChannel = new NotificationChannel(Constants.CHANNEL_ID, name, importance);
+            mNotificationRentChannel.setDescription(description);
+            mNotificationManager = getSystemService(NotificationManager.class);
+            Objects.requireNonNull(mNotificationManager).createNotificationChannel(mNotificationRentChannel);
+        }
+    }
+
     private void manageUserInSharedPref(User user) {
         String userInfo = mJsonParser.toJson(user);
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -82,18 +97,5 @@ public class LoginActivity extends DaggerAppCompatActivity implements ContractsL
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(Constants.SHARED_PREFERENCES_KEY_USER_INFO, userInfo);
         editor.apply();
-    }
-
-    private void manageNotifications() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = "Rent channel notification";
-            String description = "This channel is for sending notifications to users when there are " +
-                    "five days before meeting the rent due date.";
-            int importance = NotificationManager.IMPORTANCE_HIGH;
-            NotificationChannel channel = new NotificationChannel(Constants.CHANNEL_ID, name, importance);
-            channel.setDescription(description);
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            Objects.requireNonNull(notificationManager).createNotificationChannel(channel);
-        }
     }
 }

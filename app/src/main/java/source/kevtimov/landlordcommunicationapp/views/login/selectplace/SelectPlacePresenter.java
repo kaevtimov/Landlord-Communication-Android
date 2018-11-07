@@ -10,7 +10,7 @@ import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.disposables.Disposable;
 import source.kevtimov.landlordcommunicationapp.async.base.SchedulerProvider;
 import source.kevtimov.landlordcommunicationapp.models.Place;
-import source.kevtimov.landlordcommunicationapp.services.PlaceService;
+import source.kevtimov.landlordcommunicationapp.services.base.PlaceService;
 
 public class SelectPlacePresenter implements ContractsSelectPlace.Presenter {
 
