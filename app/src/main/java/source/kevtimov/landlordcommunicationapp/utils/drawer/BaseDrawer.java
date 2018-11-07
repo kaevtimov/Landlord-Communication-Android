@@ -68,10 +68,10 @@ public abstract class BaseDrawer extends DaggerAppCompatActivity {
                 .withTextColor(Color.WHITE)
                 .withSelectedTextColor(Color.BLACK);
 
-        IProfile profile = new ProfileDrawerItem ()
-                .withName (getUsername())
-                .withEmail (getEmail())
-                .withIcon (getProfilePicture());
+        IProfile profile = new ProfileDrawerItem()
+                .withName(getUsername())
+                .withEmail(getEmail())
+                .withIcon(getProfilePicture());
 
         AccountHeader accHeader = new AccountHeaderBuilder()
                 .withActivity(this)
@@ -151,11 +151,11 @@ public abstract class BaseDrawer extends DaggerAppCompatActivity {
 
     protected abstract String getEmail();
 
-    private int getColorHeader(){
+    private int getColorHeader() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        int theme =  Integer.parseInt(sharedPreferences.getString("theme_list", "1"));
+        int theme = Integer.parseInt(sharedPreferences.getString("theme_list", "1"));
 
-        switch(theme){
+        switch (theme) {
             case 1:
                 return R.color.colorHeaderBack;
             case 2:
@@ -165,14 +165,9 @@ public abstract class BaseDrawer extends DaggerAppCompatActivity {
         return R.color.colorHeaderBack;
     }
 
-    private Bitmap getProfilePicture(){
+    private Bitmap getProfilePicture() {
         Bitmap profPicture = (Bitmap) BitmapCache.getInstance().getLruCache().get("logged_in_user_profile_image");
 
-        if(profPicture != null){
-            return profPicture;
-        }else{
-            Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.com_facebook_profile_picture_blank_portrait);
-            return bitmap;
-        }
+        return profPicture;
     }
 }

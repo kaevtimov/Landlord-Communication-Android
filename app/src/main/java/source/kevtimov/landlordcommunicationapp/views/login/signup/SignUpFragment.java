@@ -230,6 +230,9 @@ public class SignUpFragment extends Fragment implements ContractsSignUp.View {
         } else if (user.getUsername().equals("used")) {
             alertForExistingUsername();
         } else {
+            if (Objects.equals(mUserInfoData.getString("intent_purpose"), "facebook")) {
+                setFacebookDefaultPic();
+            }
             mPresenter.registerUser(mUserInfoData);
         }
     }
@@ -353,6 +356,15 @@ public class SignUpFragment extends Fragment implements ContractsSignUp.View {
             return 2;
         }
         return -1;
+    }
+
+    private void setFacebookDefaultPic() {
+        Bitmap bitmap = BitmapFactory
+                .decodeResource(getResources(),
+                        R.drawable.com_facebook_profile_picture_blank_portrait);
+        String bitmapString = mPresenter.convertBitmapToString(bitmap);
+        mPresenter.setBitmapToCache(bitmap);
+        mUserInfoData.putString("fb_prof_pic", bitmapString);
     }
 
     private void manageViewVisibility() {

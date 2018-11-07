@@ -255,7 +255,6 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
         fbInfo.putString("fb_first_name", mFacebookFirstName);
         fbInfo.putString("fb_last_name", mFacebookLastName);
         fbInfo.putString("fb_email", mEmailFacebook);
-        fbInfo.putString("fb_prof_pic", mProfPicture);
         fbInfo.putString("fb_username", mEmailFacebook);
 
         mNavigator.navigateToSignUp(fbInfo);
@@ -325,7 +324,7 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
                             mFacebookLastName = object.getString("last_name");
                             mEmailFacebook = object.getString("email");
                             String id = object.getString("id");
-                            mProfPicture = "https://graph.facebook.com/" + id + "/picture?type=normal";
+                            //mProfPicture = "https://graph.facebook.com/" + id + "/picture?type=normal";
 
                             mPresenter.checkFacebookUserByUsername(mEmailFacebook);
 
