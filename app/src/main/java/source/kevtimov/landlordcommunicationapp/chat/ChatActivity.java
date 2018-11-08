@@ -37,7 +37,7 @@ public class ChatActivity extends BaseDrawer implements ChatContracts.Navigator 
 
     @Inject
     ChatContracts.Presenter chatPresenter;
-    private User mLoggedInUser;
+    private static User mLoggedInUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +45,10 @@ public class ChatActivity extends BaseDrawer implements ChatContracts.Navigator 
         setContentView(R.layout.activity_chat);
         mChatFragment.setPresenter(chatPresenter);
         mChatFragment.setNavigator(this);
+        mChatFragment.setUser(mLoggedInUser);
 
-        mLoggedInUser = (User) getIntent().getSerializableExtra("user");
+
+        //mLoggedInUser = (User) getIntent().getSerializableExtra("user");
 
         mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
@@ -68,15 +70,26 @@ public class ChatActivity extends BaseDrawer implements ChatContracts.Navigator 
     }
 
     @Override
+    protected String getUsername() {
+        return null;
+    }
+
+    @Override
+    protected String getEmail() {
+        return null;
+    }
+
+    @Override
     public void navigateToChatRoom(User user) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("chatMate",user);
         bundle.putSerializable("chatStarter",mLoggedInUser);
         Intent intent = new Intent(this,ChatRoomActivity.class);
         intent.putExtras(bundle);
-        /*intent.putExtra("chatMate",user);
-        intent.putExtra("chatStarter",mLoggedInUser);
-        startActivity(intent);*/
         startActivity(intent);
+    }
+
+    public static void setLoggedInUser(User user) {
+        mLoggedInUser = user;
     }
 }

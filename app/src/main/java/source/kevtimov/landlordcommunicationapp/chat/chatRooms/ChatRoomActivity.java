@@ -1,13 +1,11 @@
 package source.kevtimov.landlordcommunicationapp.chat.chatRooms;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
 import javax.inject.Inject;
 
 import source.kevtimov.landlordcommunicationapp.R;
-import source.kevtimov.landlordcommunicationapp.chat.fcm.ChatMessagingService;
 import source.kevtimov.landlordcommunicationapp.models.User;
 import source.kevtimov.landlordcommunicationapp.utils.drawer.BaseDrawer;
 
@@ -34,8 +32,8 @@ public class ChatRoomActivity extends BaseDrawer {
         mLoggedInUser = (User) getIntent().getSerializableExtra("chatStarter");
         mChatMate = (User) getIntent().getSerializableExtra("chatMate");
 
-        mChatRoomFragment.setReceiverUser(mLoggedInUser);
-        mChatRoomFragment.setSendToUser(mChatMate);
+        mChatRoomFragment.setReceiver(mChatMate);
+        mChatRoomFragment.setSender(mLoggedInUser);
 
         getSupportFragmentManager()
                 .beginTransaction()
@@ -51,5 +49,15 @@ public class ChatRoomActivity extends BaseDrawer {
     @Override
     protected Toolbar getToolbar() {
         return mToolbar;
+    }
+
+    @Override
+    protected String getUsername() {
+        return null;
+    }
+
+    @Override
+    protected String getEmail() {
+        return null;
     }
 }

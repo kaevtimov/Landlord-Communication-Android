@@ -6,6 +6,7 @@ public class User implements Serializable {
 
     private int userId;
     private String token;
+    private int userID;
     private String username;
     private String firstName;
     private String lastName;
@@ -19,6 +20,7 @@ public class User implements Serializable {
     public User(){
         //default
     }
+
 
     public User(boolean isLandlord, String username, String picture, String firstName, String lastName, String email,
                 boolean isOnline, String passwordHash, String passwordSalt, String token){
@@ -36,7 +38,11 @@ public class User implements Serializable {
 
 
     public int getUserId() {
-        return userId;
+        return userID;
+    }
+
+    public void setUserId(int userId){
+        this.userID = userId;
     }
 
     public String getUsername() {
@@ -117,5 +123,21 @@ public class User implements Serializable {
 
     public void setToken(String token) {
         this.token = token;
+    }
+    @Override
+    public String toString() {
+        return String.format("Name: %s, %s", getLastName(), getFirstName());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof User)) {
+            return false;
+        }
+        User us = (User)obj;
+        return us.username.equals(username);
     }
 }

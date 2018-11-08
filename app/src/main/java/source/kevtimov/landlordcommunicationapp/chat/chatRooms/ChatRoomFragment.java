@@ -87,22 +87,24 @@ public class ChatRoomFragment extends Fragment implements ChatRoomContracts.View
     }
 
     @Override
-    public void setSendToUser(User user) {
+    public void setSender(User user) {
         mSender = user;
     }
 
     @Override
-    public void setReceiverUser(User user) {
+    public void setReceiver(User user) {
         mReceiver = user;
     }
 
     @Override
     public void onClick(View view) {
-        String message = String.valueOf(mMessageEditText.getText());
+        String messageBody = String.valueOf(mMessageEditText.getText());
+        mMessageEditText.setText("");
         Long tsLong = System.currentTimeMillis()/1000;
-        String ts  = tsLong.toString();
+        Message message = new Message(null,mReceiver.getUserId(),mSender.getUserId(),tsLong,
+                messageBody,true, mReceiver.getToken());
         try {
-            mPresenter.sendMessage(message, mSender);
+            mPresenter.sendMessage(message, mReceiver);
         } catch (IOException e) {
             e.printStackTrace();
         }

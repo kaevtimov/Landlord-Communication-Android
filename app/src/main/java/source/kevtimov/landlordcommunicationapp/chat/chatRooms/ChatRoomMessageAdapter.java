@@ -68,7 +68,7 @@ public class ChatRoomMessageAdapter extends BaseAdapter {
             holder.messageBody = convertView.findViewById(R.id.message_body);
             convertView.setTag(holder);
 
-            holder.name.setText(message.getSenderName());
+            //holder.name.setText(message.getSenderName());
             holder.messageBody.setText(message.getMessageBody());
             //GradientDrawable drawable = (GradientDrawable) holder.avatar.getBackground();
             //drawable.setColor(Color.parseColor(message.getData().getColor()));

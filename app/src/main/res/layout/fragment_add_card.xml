@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".views.login.addcard.AddCardFragment">
+
+    <ImageView
+        android:id="@+id/iv_card"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="37dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/creditcard" />
+
+    <TextView
+        android:id="@+id/tv_enter_type"
+        android:layout_below="@+id/iv_card"
+        android:text="Enter card type: "
+        android:textSize="20sp"
+        android:layout_marginTop="35dp"
+        android:layout_marginStart="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/et_card_type"
+        android:layout_toEndOf="@+id/tv_enter_type"
+        android:layout_alignBottom="@+id/tv_enter_type"
+        android:background="@drawable/login_edittext_style"
+        android:layout_marginStart="15dp"
+        android:layout_width="150dp"
+        android:inputType="text"
+        android:layout_height="35dp" />
+
+    <TextView
+        android:id="@+id/tv_enter_brand"
+        android:layout_below="@+id/et_card_type"
+        android:text="Enter card brand: "
+        android:textSize="20sp"
+        android:layout_marginTop="35dp"
+        android:layout_marginStart="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/et_card_brand"
+        android:inputType="text"
+        android:layout_toEndOf="@+id/tv_enter_brand"
+        android:layout_alignBottom="@+id/tv_enter_brand"
+        android:background="@drawable/login_edittext_style"
+        android:layout_marginStart="15dp"
+        android:layout_width="150dp"
+        android:layout_height="35dp" />
+
+    <TextView
+        android:id="@+id/tv_enter_card_number"
+        android:layout_below="@+id/et_card_brand"
+        android:text="Enter card number: "
+        android:textSize="20sp"
+        android:layout_marginTop="35dp"
+        android:layout_marginStart="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/et_card_number"
+        android:layout_toEndOf="@+id/tv_enter_card_number"
+        android:layout_alignBottom="@+id/tv_enter_card_number"
+        android:background="@drawable/login_edittext_style"
+        android:maxLength="16"
+        android:layout_marginStart="15dp"
+        android:layout_width="150dp"
+        android:inputType="number"
+        android:layout_height="35dp" />
+
+    <TextView
+        android:id="@+id/tv_enter_cvv"
+        android:layout_below="@+id/et_card_number"
+        android:text="Enter card CVV: "
+        android:textSize="20sp"
+        android:layout_marginTop="35dp"
+        android:layout_marginStart="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/et_card_cvv"
+        android:layout_toEndOf="@+id/tv_enter_cvv"
+        android:layout_alignBottom="@+id/tv_enter_cvv"
+        android:background="@drawable/login_edittext_style"
+        android:layout_marginStart="15dp"
+        android:maxLength="3"
+        android:layout_width="150dp"
+        android:inputType="number"
+        android:layout_height="35dp" />
+
+    <Button
+        android:id="@+id/btn_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="29dp"
+        android:background="@drawable/custom_pay_button"
+        android:text="ADD" />
+
+</RelativeLayout>

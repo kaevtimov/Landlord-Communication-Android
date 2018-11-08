@@ -1,26 +1,26 @@
 package source.kevtimov.landlordcommunicationapp.services;
 
+import com.google.gson.JsonObject;
+
 import java.io.IOException;
 
-import source.kevtimov.landlordcommunicationapp.http.HttpRequester;
 import source.kevtimov.landlordcommunicationapp.models.Message;
-import source.kevtimov.landlordcommunicationapp.parsers.base.JsonParser;
+import source.kevtimov.landlordcommunicationapp.repositories.MessageRepository;
 
 public class HttpMessageService implements MessageService {
-    private HttpRequester mHttpRequester;
-    private JsonParser<Message> mMessageParser;
-    private String mServerUrl;
+    private MessageRepository mMessageRepository;
 
-    public HttpMessageService(HttpRequester mHttpRequester, JsonParser<Message> mMessageParser, String mServerUrl) {
-        this.mHttpRequester = mHttpRequester;
-        this.mMessageParser = mMessageParser;
-        this.mServerUrl = mServerUrl;
+    public HttpMessageService(MessageRepository mMessageRepository) {
+        this.mMessageRepository = mMessageRepository;
     }
 
     @Override
-    public void sendMessage(Message message) throws IOException {
-        String url = mServerUrl + "/messages";
-        String json = mMessageParser.toJson(message);
-        mHttpRequester.post(url,json);
+    public Message sendMessage(Message message) throws IOException {
+        return mMessageRepository.sendMessage(message);
+    }
+
+    @Override
+    public Message receiveMessage() throws IOException {
+        return mMessageRepository.receiveMessage();
     }
 }

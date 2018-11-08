@@ -3,39 +3,29 @@ package source.kevtimov.landlordcommunicationapp.chat.fcm;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.google.android.gms.common.util.SharedPreferencesUtils;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.common.net.MediaType;
+import com.google.firebase.FirebaseAppLifecycleListener;
 import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
-import org.apache.http.client.methods.HttpPost;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Map;
-import java.util.concurrent.Executor;
-
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 import source.kevtimov.landlordcommunicationapp.chat.chatRooms.ChatRoomActivity;
-import source.kevtimov.landlordcommunicationapp.http.OkHttpHttpRequester;
+import source.kevtimov.landlordcommunicationapp.models.Message;
 import source.kevtimov.landlordcommunicationapp.models.User;
 import source.kevtimov.landlordcommunicationapp.utils.Constants;
-import source.kevtimov.landlordcommunicationapp.views.login.LoginActivity;
 
 public class ChatMessagingService extends FirebaseMessagingService {
     public static final String SERVER_URL = Constants.BASE_SERVER_URL_KRIS + "/users";
@@ -104,6 +94,11 @@ public class ChatMessagingService extends FirebaseMessagingService {
             title = notification.getTitle();
             body = notification.getBody();
         }
+
+        Message message = new Message();
+        message.setMessageBody(body);
+        message.setSendByMe(false);
+
 
         Intent intent = new Intent(this,ChatRoomActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

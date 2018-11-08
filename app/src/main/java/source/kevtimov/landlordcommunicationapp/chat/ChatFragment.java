@@ -34,6 +34,7 @@ public class ChatFragment extends Fragment implements ChatContracts.View {
 
     private ChatContracts.Navigator mNavigator;
     private ChatContracts.Presenter mPresenter;
+    private User mLoggedUser;
     public static final String NO_LANDLORDS = "Nothing to show";
 
     @Inject
@@ -56,7 +57,11 @@ public class ChatFragment extends Fragment implements ChatContracts.View {
     public void onResume() {
         super.onResume();
         mPresenter.subscribe(this);
-        mPresenter.loadLandlords();
+        if (mLoggedUser.isLandlord()) {
+            mPresenter.loadLandlords(true);
+        } else {
+            mPresenter.loadLandlords(false);
+        }
     }
 
     @Override
@@ -99,6 +104,11 @@ public class ChatFragment extends Fragment implements ChatContracts.View {
     @Override
     public void openChatRoom(User landlord) {
         mNavigator.navigateToChatRoom(landlord);
+    }
+
+    @Override
+    public void setUser(User user) {
+        mLoggedUser = user;
     }
 
     @OnItemClick(R.id.lv_landlords)

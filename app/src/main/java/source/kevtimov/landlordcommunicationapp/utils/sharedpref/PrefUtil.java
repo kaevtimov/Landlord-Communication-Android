@@ -36,7 +36,7 @@ public class PrefUtil {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(activity);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("fcm_token",token);
-        Log.i("token",token);
+        Log.i("FCMtoken",token);
         editor.apply();
         sendTokenToDB(token,username);
     }

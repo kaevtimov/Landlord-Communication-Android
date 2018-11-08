@@ -7,4 +7,6 @@ public interface IPasswordAgent {
 
     String generatePasswordHash(String password, String salt) throws NoSuchAlgorithmException, InvalidKeySpecException;
 
+    String getSalt(int count);
+
 }

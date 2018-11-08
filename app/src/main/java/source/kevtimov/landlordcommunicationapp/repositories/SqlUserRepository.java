@@ -20,7 +20,7 @@ public class SqlUserRepository implements UserRepository {
 
     @Override
     public User getUserByUsername(String username) throws IOException {
-        String currentUrl = mServerUrl + "/" + username;
+        String currentUrl = mServerUrl + "/username/" + username;
         String json = mHttpRequester.get(currentUrl);
         return mJsonParser.fromJson(json);
     }
@@ -34,7 +34,42 @@ public class SqlUserRepository implements UserRepository {
 
     @Override
     public List<User> getLandlords() throws IOException {
-        String landlords = mHttpRequester.get(mServerUrl);
+        String currentUrl = mServerUrl + "/landlords";
+        String landlords = mHttpRequester.get(currentUrl);
         return mJsonParser.fromJsonArray(landlords);
+    }
+
+    public User registerUser(User userToRegister) throws IOException {
+        String requestBody = mJsonParser.toJson(userToRegister);
+        String responseBody = mHttpRequester.post(mServerUrl, requestBody);
+        return mJsonParser.fromJson(responseBody);
+    }
+
+    @Override
+    public User checkUsernameForExisting(String username) throws IOException {
+        String currentUrl = mServerUrl + "/checkusername/" + username;
+        String json = mHttpRequester.get(currentUrl);
+        return mJsonParser.fromJson(json);
+    }
+
+    @Override
+    public User checkEmailForExisting(String email) throws IOException {
+        String currentUrl = mServerUrl + "/checkemail/" + email;
+        String json = mHttpRequester.get(currentUrl);
+        return mJsonParser.fromJson(json);
+    }
+
+    @Override
+    public List<User> getAllTenants() throws IOException {
+        String mServerUrlGet = mServerUrl + "/tenants";
+        String userJson = mHttpRequester.get(mServerUrlGet);
+        return mJsonParser.fromJsonArray(userJson);
+    }
+
+    @Override
+    public User getUserById(int userId) throws IOException {
+        String url = mServerUrl + "/" + userId;
+        String responseBody = mHttpRequester.get(url);
+        return mJsonParser.fromJson(responseBody);
     }
 }

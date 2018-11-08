@@ -35,17 +35,30 @@ public class ChatPresenter implements ChatContracts.Presenter {
     }
 
     @Override
-    public void loadLandlords() {
-        Disposable disposable = io.reactivex.Observable
-                .create((ObservableOnSubscribe<List<User>>) emitter -> {
-                    List<User> landlords = mService.getLandlords();
-                    emitter.onNext(landlords);
-                    emitter.onComplete();
-                })
-                .subscribeOn(mSchedulerProvider.background())
-                .observeOn(mSchedulerProvider.ui())
-                .subscribe(this::presentLandlordsToView,
-                        error->mView.showError(error));
+    public void loadLandlords(boolean isLandlord) {
+        if (isLandlord) {
+            Disposable disposable = io.reactivex.Observable
+                    .create((ObservableOnSubscribe<List<User>>) emitter -> {
+                        List<User> landlords = mService.getAllTenants();
+                        emitter.onNext(landlords);
+                        emitter.onComplete();
+                    })
+                    .subscribeOn(mSchedulerProvider.background())
+                    .observeOn(mSchedulerProvider.ui())
+                    .subscribe(this::presentLandlordsToView,
+                            error -> mView.showError(error));
+        } else {
+            Disposable disposable = io.reactivex.Observable
+                    .create((ObservableOnSubscribe<List<User>>) emitter -> {
+                        List<User> tenants = mService.getLandlords();
+                        emitter.onNext(tenants);
+                        emitter.onComplete();
+                    })
+                    .subscribeOn(mSchedulerProvider.background())
+                    .observeOn(mSchedulerProvider.ui())
+                    .subscribe(this::presentLandlordsToView,
+                            error -> mView.showError(error));
+        }
     }
 
     private void presentLandlordsToView(List<User> landlordList) {

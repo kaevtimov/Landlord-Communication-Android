@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relative_lay"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".views.login.myusers.MyUsersFragment">
+
+    <ImageView
+        android:id="@+id/iv_users"
+        android:scaleType="fitXY"
+        android:src="@drawable/users"
+        android:layout_width="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_height="100dp" />
+
+    <ListView
+        android:id="@+id/lv_users"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:divider="@null"
+        android:layout_below="@+id/iv_users"
+        android:dividerHeight="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"/>
+
+    <com.emredavarci.circleprogressbar.CircleProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+
+</RelativeLayout>

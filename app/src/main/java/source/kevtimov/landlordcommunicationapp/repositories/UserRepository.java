@@ -12,4 +12,14 @@ public interface UserRepository {
     User getUserHashAndSaltByUsername(String username) throws IOException;
 
     List<User> getLandlords() throws IOException;
+
+    User registerUser(User userToRegister) throws IOException;
+
+    User checkUsernameForExisting(String username) throws IOException;
+
+    User checkEmailForExisting(String email) throws IOException;
+
+    List<User> getAllTenants() throws  IOException;
+
+    User getUserById(int userId) throws IOException;
 }

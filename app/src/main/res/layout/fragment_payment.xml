@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".views.login.payment.PaymentFragment">
+
+
+    <ScrollView
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <TextView
+                android:id="@+id/tv_date"
+                android:text="Date: "
+                android:textSize="35sp"
+                android:textStyle="bold"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tv_total_amount"
+                android:text="Total amount: "
+                android:layout_below="@+id/tv_date"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tv_remaining_amount"
+                android:text="Rem. amount: "
+                android:textSize="30sp"
+                android:layout_below="@+id/tv_total_amount"
+                android:textStyle="bold"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tv_custom_amount"
+                android:layout_below="@+id/tv_remaining_amount"
+                android:text="Enter amount"
+                android:layout_centerHorizontal="true"
+                android:textSize="35sp"
+                android:textStyle="bold"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="25dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tv_amount_constraint"
+                android:layout_below="@+id/tv_custom_amount"
+                android:text="(minimum amount 20.00 leva)"
+                android:layout_centerHorizontal="true"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/et_amount"
+                android:layout_below="@+id/tv_amount_constraint"
+                android:layout_centerHorizontal="true"
+                android:inputType="numberDecimal"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/login_edittext_style"
+                android:layout_width="155dp"
+                android:layout_height="45dp" />
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/tv_choose_card"
+        android:layout_below="@+id/scroll"
+        android:text="Choose card: "
+        android:textSize="30sp"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <ListView
+        android:id="@+id/lv_cards"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_below="@+id/tv_choose_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/btn_finish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="296dp"
+        android:layout_marginTop="278dp"
+        android:background="@drawable/custom_pay_button"
+        android:text="FINISH" />
+
+    <Button
+        android:id="@+id/btn_add_card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="296dp"
+        android:layout_marginTop="334dp"
+        android:background="@drawable/custom_pay_button"
+        android:text="ADD CARD" />
+
+    <Button
+        android:id="@+id/btn_view_cards"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tv_choose_card"
+        android:layout_alignBottom="@+id/tv_choose_card"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="-1dp"
+        android:layout_toEndOf="@+id/tv_choose_card"
+        android:background="@drawable/custom_pay_button"
+        android:text="VIEW" />
+
+</RelativeLayout>

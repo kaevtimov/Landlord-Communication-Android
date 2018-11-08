@@ -41,7 +41,8 @@ public class OkHttpHttpRequester implements HttpRequester {
         Response response = client.newCall(request)
                 .execute();
 
-        return response.body().string();
+        String responseBody = response.body().string();
+        return responseBody;
     }
 
     @Override
@@ -59,7 +60,7 @@ public class OkHttpHttpRequester implements HttpRequester {
     }
 
     @Override
-    public String update(String url, String body, int id) throws IOException {
+    public String update(String url, String body) throws IOException {
         OkHttpClient client = new OkHttpClient();
         RequestBody bodyString = RequestBody.create(
                 MediaType.parse("application/json"),

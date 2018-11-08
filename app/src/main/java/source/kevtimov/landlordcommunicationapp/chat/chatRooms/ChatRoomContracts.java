@@ -15,17 +15,17 @@ public interface ChatRoomContracts {
 
         void displayMyMessage(Message message);
 
-        void setSendToUser(User user);
+        void setSender(User user);
 
-        void setReceiverUser(User user);
+        void setReceiver(User user);
     }
 
     interface Presenter {
         void subscribe(View view);
 
-        void sendMessage(String message, User to) throws IOException;
+        void sendMessage(Message message, User to) throws IOException;
 
-        void parseReceivedMessage(Intent intent);
+        void parseReceivedMessage();
 
         void loadConversation(String senderToken, String receiverToken);
     }

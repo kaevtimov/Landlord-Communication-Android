@@ -1,7 +1,8 @@
 package source.kevtimov.landlordcommunicationapp.chat.chatRooms;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
+
+import com.google.gson.JsonObject;
 
 import java.io.IOException;
 import java.util.concurrent.Callable;
@@ -10,6 +11,8 @@ import javax.inject.Inject;
 
 import io.reactivex.Completable;
 import io.reactivex.Observable;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.internal.operators.completable.CompletableFromCallable;
 import source.kevtimov.landlordcommunicationapp.async.base.SchedulerProvider;
 import source.kevtimov.landlordcommunicationapp.models.Message;
@@ -34,27 +37,33 @@ public class ChatRoomPresenter implements ChatRoomContracts.Presenter {
 
     @SuppressLint("CheckResult")
     @Override
-    public void sendMessage(String body, User to) throws IOException {
-        Message message = new Message();
-        message.setSendByMe(true);
-        message.setMessageBody(body);
+    public void sendMessage(Message message, User to) throws IOException {
         message.setReceiverToken(to.getToken());
 
+        Disposable disposable = Observable
+                .create((ObservableOnSubscribe<Message>) emitter ->{
+            Message newMessage = mService.sendMessage(message);
+            emitter.onNext(newMessage);
+            emitter.onComplete();
+        })
+                .observeOn(mSchedulerProvider.background())
+                .subscribeOn(mSchedulerProvider.ui())
+                .subscribe(this::showMessage);
 
-        Completable completable = new CompletableFromCallable(() -> {
-            try {
-                mService.sendMessage(message);
-            } catch (Throwable e) {
-                throw new IOException(e.getMessage());
-            }
-            return null;
-        });
+        //mService.sendMessage(message);
         showMessage(message);
     }
 
     @Override
-    public void parseReceivedMessage(Intent intent) {
-        
+    public void parseReceivedMessage() {
+        Disposable observable = Observable.create((ObservableOnSubscribe<Message>) emitter -> {
+            Message object = mService.receiveMessage();
+            emitter.onNext(object);
+            emitter.onComplete();
+        })
+                .subscribeOn(mSchedulerProvider.background())
+                .observeOn(mSchedulerProvider.ui())
+                .subscribe(this::showReceivedMessage);
     }
 
     @Override
@@ -64,5 +73,10 @@ public class ChatRoomPresenter implements ChatRoomContracts.Presenter {
 
     private void showMessage(Message message) {
         mView.displayMyMessage(message);
+    }
+
+    private void showReceivedMessage(Message message) {
+        String body = message.getMessageBody();
+        mView.displayReceivedMessage(body);
     }
 }
