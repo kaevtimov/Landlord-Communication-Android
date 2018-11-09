@@ -2,6 +2,8 @@ package source.kevtimov.landlordcommunicationapp.views.login.selectplace;
 
 import java.util.ArrayList;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -13,6 +15,8 @@ import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.vstechlab.easyfonts.EasyFonts;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -80,6 +84,7 @@ public class CustomPlaceAdapter<Place> extends BaseAdapter {
         mPlacesBox.setTag(position);
         mPlacesBox.setChecked(mSparseBooleanArray.get(position));
         mPlacesBox.setOnCheckedChangeListener(checkBoxOnChangeListener);
+        initFont();
 
         return view;
     }
@@ -103,5 +108,23 @@ public class CustomPlaceAdapter<Place> extends BaseAdapter {
             }
         }
         return placesSelected;
+    }
+
+    private void initFont() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        int selectedFont = Integer.parseInt(sharedPreferences.getString("font_list", "1"));
+
+        switch (selectedFont) {
+            case 1:
+                mTextViewPlacesAddress.setTypeface(EasyFonts.droidSerifBold(mContext));
+                break;
+            case 2:
+                mTextViewPlacesAddress.setTypeface(EasyFonts.funRaiser(mContext));
+                break;
+            case 3:
+                mTextViewPlacesAddress.setTypeface(EasyFonts.walkwayBold(mContext));
+                break;
+
+        }
     }
 }

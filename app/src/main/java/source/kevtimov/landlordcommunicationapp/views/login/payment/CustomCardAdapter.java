@@ -2,6 +2,8 @@ package source.kevtimov.landlordcommunicationapp.views.login.payment;
 
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,8 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.vstechlab.easyfonts.EasyFonts;
 
 import java.util.ArrayList;
 
@@ -79,6 +83,7 @@ public class CustomCardAdapter<Card> extends BaseAdapter {
         mCardsBox.setTag(position);
         mCardsBox.setChecked(mSparseBooleanArray.get(position));
         mCardsBox.setOnCheckedChangeListener(checkBoxOnChangeListener);
+        initFont();
 
         return view;
     }
@@ -102,5 +107,23 @@ public class CustomCardAdapter<Card> extends BaseAdapter {
             }
         }
         return cardsSelected;
+    }
+
+    private void initFont() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        int selectedFont = Integer.parseInt(sharedPreferences.getString("font_list", "1"));
+
+        switch (selectedFont) {
+            case 1:
+                mTextViewCard.setTypeface(EasyFonts.droidSerifBold(mContext));
+                break;
+            case 2:
+                mTextViewCard.setTypeface(EasyFonts.funRaiser(mContext));
+                break;
+            case 3:
+                mTextViewCard.setTypeface(EasyFonts.walkwayBold(mContext));
+                break;
+
+        }
     }
 }

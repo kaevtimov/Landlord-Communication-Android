@@ -197,6 +197,6 @@ public class UserDetailsPresenter implements ContractsUserDetails.Presenter {
                 rating += rat.getRating();
             }
         }
-        mView.showRating(rating);
+        mView.showRating(rating/ratings.size());
     }
 }
