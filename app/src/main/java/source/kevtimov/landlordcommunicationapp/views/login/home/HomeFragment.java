@@ -5,9 +5,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +19,7 @@ import javax.inject.Inject;
 import butterknife.ButterKnife;
 import source.kevtimov.landlordcommunicationapp.R;
 import source.kevtimov.landlordcommunicationapp.models.Rent;
+import source.kevtimov.landlordcommunicationapp.utils.receiver.ReceiverNotification;
 
 public class HomeFragment extends Fragment implements ContractsHome.View {
 

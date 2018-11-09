@@ -49,7 +49,7 @@
         <activity android:name=".views.login.preferences.SettingsActivity" />
         <activity android:name=".views.login.myusers.MyUsersActivity" />
         <activity android:name=".views.login.userdetails.UserDetailsActivity" />
-        <receiver android:name=".views.login.home.ReceiverNotification" />
+        <receiver android:name=".utils.receiver.ReceiverNotification" />
 
     </application>
 

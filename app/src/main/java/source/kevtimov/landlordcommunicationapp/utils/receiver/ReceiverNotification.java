@@ -1,4 +1,4 @@
-package source.kevtimov.landlordcommunicationapp.views.login.home;
+package source.kevtimov.landlordcommunicationapp.utils.receiver;
 
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
