@@ -84,11 +84,6 @@ public class PlaceManagementPresenter implements ContractsPlaceManagement.Presen
 
 
     @Override
-    public void allowToHomeActivity() {
-        mView.navigateUserToHome();
-    }
-
-    @Override
     public void allowNavigationToAddPlace() {
         mView.navigateUserToAddPlace();
     }

@@ -24,13 +24,13 @@ import source.kevtimov.landlordcommunicationapp.models.Place;
 
 public class PlacesListAdapter extends ArrayAdapter<Place> {
 
-    @BindView(R.id.iv_house)
+    @BindView(R.id.iv_accept)
     ImageView mImageViewPlaces;
 
     @BindView(R.id.tv_place_addresses)
     TextView mTextViewPlacesAddress;
 
-    public PlacesListAdapter(@NonNull Context context, int resource) {
+    public PlacesListAdapter(@NonNull Context context) {
         super(context, -1);
     }
 
@@ -41,7 +41,7 @@ public class PlacesListAdapter extends ArrayAdapter<Place> {
         View view = convertView;
         if (view == null) {
             LayoutInflater layoutInflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = layoutInflater.inflate(R.layout.custom_my_places_adapter, parent, false);
+            view = layoutInflater.inflate(R.layout.custom_place_adapter, parent, false);
         }
         ButterKnife.bind(this, view);
 

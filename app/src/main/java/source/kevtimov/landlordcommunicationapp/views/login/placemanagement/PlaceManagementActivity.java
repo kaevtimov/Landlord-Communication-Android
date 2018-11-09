@@ -65,13 +65,6 @@ public class PlaceManagementActivity extends BaseDrawer implements ContractsPlac
     }
 
     @Override
-    public void navigateToHomeActivity(User user) {
-        Intent intent = new Intent(this, HomeActivity.class);
-        startActivity(intent);
-        finish();
-    }
-
-    @Override
     public void navigateToAddPlaceActivity() {
         Intent intent = new Intent(this, AddPlaceActivity.class);
         startActivityForResult(intent, Constants.ADD_PLACE_REQUEST);
