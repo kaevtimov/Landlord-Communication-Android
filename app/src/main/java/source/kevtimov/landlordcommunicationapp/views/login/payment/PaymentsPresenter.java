@@ -251,7 +251,7 @@ public class PaymentsPresenter implements ContractsPayments.Presenter {
 
         Disposable observal = Observable
                 .create((ObservableOnSubscribe<Rent>) emitter -> {
-                    Rent rent = mRentService.registerRent(newRent);
+                    Rent rent = mRentService.registerNextRent(newRent);
                     emitter.onNext(rent);
                     emitter.onComplete();
                 })

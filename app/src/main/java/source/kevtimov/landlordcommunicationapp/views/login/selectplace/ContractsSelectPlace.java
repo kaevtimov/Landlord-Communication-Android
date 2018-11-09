@@ -1,6 +1,5 @@
 package source.kevtimov.landlordcommunicationapp.views.login.selectplace;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,9 +33,11 @@ public interface ContractsSelectPlace {
 
         void unsubscribe();
 
-        void navigateBackToPlaceManagement(ArrayList<Place> mArrayPlaces);
-
         void getAllPlacesWhereNoTenant();
+
+        void updatePlaceTenant(ArrayList<Place> places);
+
+        void setUser(User user);
     }
 
     interface Navigator {

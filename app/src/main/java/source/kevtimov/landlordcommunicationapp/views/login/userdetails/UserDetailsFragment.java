@@ -144,6 +144,7 @@ public class UserDetailsFragment extends Fragment implements ContractsUserDetail
     public void showInfo(Rating rating) {
         StyleableToast.makeText(getContext(), "VOTE ADDED! YOUR VOTE IS " + rating.getRating() + "!",
                 Toast.LENGTH_LONG, R.style.accept_login_toast).show();
+        showRating(rating.getRating());
     }
 
     @Override

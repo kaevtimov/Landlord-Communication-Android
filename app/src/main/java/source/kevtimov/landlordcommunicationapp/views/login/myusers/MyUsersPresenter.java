@@ -70,17 +70,19 @@ public class MyUsersPresenter implements ContractsMyUsers.Presenter {
     private void loadOtherUsers(List<Place> places) {
         if(mUser.isLandlord()){
             for (Place place:places) {
-                Disposable observal = Observable
-                        .create((ObservableOnSubscribe<User>) emitter -> {
-                            User user = mUserService.getUserById(place.getTenantID());
-                            emitter.onNext(user);
-                            emitter.onComplete();
-                        })
-                        .subscribeOn(mSchedulerProvider.background())
-                        .observeOn(mSchedulerProvider.ui())
-                        .doFinally(mView::hideLoading)
-                        .subscribe(mView::addUser,
-                                error -> mView.showError(error));
+                if(place.getTenantID() != 0){
+                    Disposable observal = Observable
+                            .create((ObservableOnSubscribe<User>) emitter -> {
+                                User user = mUserService.getUserById(place.getTenantID());
+                                emitter.onNext(user);
+                                emitter.onComplete();
+                            })
+                            .subscribeOn(mSchedulerProvider.background())
+                            .observeOn(mSchedulerProvider.ui())
+                            .doFinally(mView::hideLoading)
+                            .subscribe(mView::addUser,
+                                    error -> mView.showError(error));
+                }
             }
         }else{
             for (Place place:places) {

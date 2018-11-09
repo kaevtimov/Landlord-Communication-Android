@@ -65,7 +65,7 @@ public class PlaceManagementPresenter implements ContractsPlaceManagement.Presen
         mView.showLoading();
         Disposable observal = Observable
                 .create((ObservableOnSubscribe<Rent>) emitter -> {
-                    Rent rentResponse = mRentService.registerRent(rent);
+                    Rent rentResponse = mRentService.registerFirstRent(rent);
                     emitter.onNext(rentResponse);
                     emitter.onComplete();
                 })
@@ -98,19 +98,4 @@ public class PlaceManagementPresenter implements ContractsPlaceManagement.Presen
         mView.navigateUserToSelectPlace();
     }
 
-    @Override
-    public void updatePlaces(Place place, int placeId) {
-        mView.showLoading();
-        Disposable disposable = Observable
-                .create((ObservableOnSubscribe<Place>) emitter-> {
-                    Place placeToUpdate = mPlaceService.updatePlaceTenant(place, placeId);
-                    emitter.onNext(placeToUpdate);
-                    emitter.onComplete();
-                })
-                .subscribeOn(mSchedulerProvider.background())
-                .observeOn(mSchedulerProvider.ui())
-                .doFinally(mView::hideLoading)
-                .subscribe(placeUpdated -> {},
-                        mView::showError);
-    }
 }

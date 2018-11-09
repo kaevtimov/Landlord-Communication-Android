@@ -20,9 +20,18 @@ public class SqlRentRepository implements RentRepository {
     }
 
     @Override
-    public Rent registerRent(Rent rent) throws IOException {
+    public Rent registerNextRent(Rent rent) throws IOException {
         String requestBody = mJsonParser.toJson(rent);
-        String responseBody = mHttpRequester.post(mServerUrl, requestBody);
+        String currentUrl = mServerUrl + "/next";
+        String responseBody = mHttpRequester.post(currentUrl, requestBody);
+        return mJsonParser.fromJson(responseBody);
+    }
+
+    @Override
+    public Rent registerFirstRent(Rent rent) throws IOException {
+        String requestBody = mJsonParser.toJson(rent);
+        String currentUrl = mServerUrl + "/first";
+        String responseBody = mHttpRequester.post(currentUrl, requestBody);
         return mJsonParser.fromJson(responseBody);
     }
 

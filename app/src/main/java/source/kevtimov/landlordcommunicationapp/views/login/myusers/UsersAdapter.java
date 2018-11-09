@@ -2,23 +2,24 @@ package source.kevtimov.landlordcommunicationapp.views.login.myusers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.preference.PreferenceManager;
+import android.support.v4.content.res.ResourcesCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.vstechlab.easyfonts.EasyFonts;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
-import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -42,6 +43,9 @@ public class UsersAdapter  extends ArrayAdapter<User> {
 
     @BindView(R.id.iv_user)
     RoundedImageView mImageView;
+
+    @BindView(R.id.relative_layout)
+    RelativeLayout mRelativeLayout;
 
     public UsersAdapter(Context context) {
         super(context, -1);
@@ -87,6 +91,7 @@ public class UsersAdapter  extends ArrayAdapter<User> {
             mImageView.setImageBitmap(profilePic);
         }
 
+        initView();
         return view;
     }
 
@@ -106,6 +111,22 @@ public class UsersAdapter  extends ArrayAdapter<User> {
             case 3:
                 mFirstName.setTypeface(EasyFonts.walkwayBold(getContext()));
                 mLastName.setTypeface(EasyFonts.walkwayBold(getContext()));
+                break;
+
+        }
+
+        int theme =  Integer.parseInt(sharedPreferences.getString("theme_list", "1"));
+
+        switch(theme){
+            case 1:
+                Resources res = getContext().getResources();
+                Drawable drawable = ResourcesCompat.getDrawable(res, R.drawable.list_view_selector_purple, null);
+                mRelativeLayout.setBackground(drawable);
+                break;
+            case 2:
+                Resources res2 = getContext().getResources();
+                Drawable drawable2 = ResourcesCompat.getDrawable(res2, R.drawable.list_view_selector_green, null);
+                mRelativeLayout.setBackground(drawable2);
                 break;
 
         }

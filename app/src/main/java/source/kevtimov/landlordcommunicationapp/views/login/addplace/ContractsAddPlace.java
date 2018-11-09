@@ -24,15 +24,15 @@ public interface ContractsAddPlace {
 
         void navigateToSelectTenant();
 
-        void setUserTenant(User tenant);
-
-        void alertDialogManagement();
+        void alertDialogManagement(Bundle placeAndRentInfo);
 
         void alertForAddressConstraint();
 
         void alertForDescriptionConstraint();
 
         void alertForTotalAmountConstraint();
+
+        void manageTenantName(User user);
 
         void alertForYearConstraint();
 
@@ -50,6 +50,8 @@ public interface ContractsAddPlace {
         void allowNavigationOnCancel();
 
         void allowNavigationOnSave(Bundle info);
+
+        void setUserTenant(User tenant);
 
         void allowNavigateToSelectTenant();
 

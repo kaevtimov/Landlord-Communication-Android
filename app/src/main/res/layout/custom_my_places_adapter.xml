@@ -8,14 +8,14 @@
 
     <ImageView
         android:id="@+id/iv_house"
-        android:background="@color/md_black_1000"
         android:src="@drawable/ic_home_black_24dp"
-        android:layout_width="75dp"
-        android:layout_height="75dp" />
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:padding="10dp"/>
 
     <TextView
         android:id="@+id/tv_place_addresses"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="3dp"
         android:textSize="18sp"
         android:layout_toEndOf="@+id/iv_house"
         android:layout_width="260dp"

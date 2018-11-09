@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -45,6 +46,9 @@ public class SelectPlaceFragment extends Fragment implements ContractsSelectPlac
 
     @BindView(R.id.progress_bar)
     CircleProgressBar mLoadingView;
+
+    @BindView(R.id.btn_ready)
+    Button mButtonReady;
 
 
 
@@ -126,6 +130,7 @@ public class SelectPlaceFragment extends Fragment implements ContractsSelectPlac
         StyleableToast.makeText(getContext(), "No places found!",
                 Toast.LENGTH_LONG, R.style.reject_login_toast)
                 .show();
+        mButtonReady.setVisibility(View.GONE);
     }
 
     @Override
@@ -155,7 +160,6 @@ public class SelectPlaceFragment extends Fragment implements ContractsSelectPlac
         FancyAlertDialog dialog = new FancyAlertDialog.Builder(getActivity())
                 .setTitle("WARNING\nARE YOU SURE? FOLLOWING CHANGES WILL BE SAVE TO YOUR ACCOUNT?")
                 .setBackgroundColor(Color.parseColor("#FF6600"))
-                //.setMessage("ARE YOU SURE? FOLLOWING CHANGES WILL BE SAVE TO YOUR ACCOUNT?")
                 .setNegativeBtnText("Cancel")
                 .setPositiveBtnBackground(Color.parseColor("#FF6600"))
                 .setPositiveBtnText("Yes")
@@ -168,7 +172,7 @@ public class SelectPlaceFragment extends Fragment implements ContractsSelectPlac
                     public void OnClick() {
                         StyleableToast.makeText(getContext(), "SAVED!",
                                 Toast.LENGTH_LONG, R.style.accept_login_toast).show();
-                        mPresenter.navigateBackToPlaceManagement(mPlaces);
+                        mPresenter.updatePlaceTenant(mPlaces);
                     }
                 })
                 .OnNegativeClicked(new FancyAlertDialogListener() {

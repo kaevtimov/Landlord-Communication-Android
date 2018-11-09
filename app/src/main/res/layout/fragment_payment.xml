@@ -15,7 +15,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
 
             <TextView
@@ -89,10 +89,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/et_amount"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="222dp"
-                android:layout_marginTop="309dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="-44dp"
+                android:layout_marginEnd="13dp"
                 android:background="@drawable/custom_pay_button"
                 android:text="@string/finish"
                 android:textColor="@color/md_black_1000" />
@@ -102,10 +101,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/et_amount"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="78dp"
-                android:layout_marginTop="309dp"
+                android:layout_alignStart="@+id/tv_date"
+                android:layout_marginTop="-44dp"
                 android:background="@drawable/custom_pay_button"
                 android:text="@string/add_card"
                 android:textColor="@color/md_black_1000" />
@@ -118,7 +115,7 @@
         android:layout_below="@+id/scroll"
         android:text="@string/choose_card"
         android:textSize="20sp"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="20dp"
         android:layout_marginStart="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>

@@ -184,6 +184,7 @@ public class PlaceDetailsFragment extends Fragment implements ContractsPlaceDeta
     public void viewEmptyRent() {
         mRentInfo.setText("Rents information: NO RENT INFORMATION\n");
         mPayButton.setVisibility(View.GONE);
+        mEditButton.setVisibility(View.GONE);
     }
 
     @Override
