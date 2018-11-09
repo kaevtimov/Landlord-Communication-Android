@@ -8,7 +8,9 @@ import source.kevtimov.landlordcommunicationapp.models.Rent;
 
 public interface RentRepository {
 
-    Rent registerRent(Rent rent) throws IOException;
+    Rent registerNextRent(Rent rent) throws IOException;
+
+    Rent registerFirstRent(Rent rent) throws IOException;
 
     Rent getRentByPlaceId(int placeId) throws IOException;
 

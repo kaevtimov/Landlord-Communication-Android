@@ -10,7 +10,7 @@ public class PlaceValidator implements Validator<Place> {
     @Override
     public boolean isObjectValid(Place place) {
         return place != null && isAddressValid(place) && isDescriptionValid(place)
-                && isTenantIdValid(place) && isLandlordIdValid(place);
+                && isLandlordIdValid(place);
     }
 
     private boolean isAddressValid(Place place){
@@ -21,10 +21,6 @@ public class PlaceValidator implements Validator<Place> {
     private boolean isDescriptionValid(Place place){
         return place.getDescription().length() >= Constants.PLACE_DESCRIPTION_MINIMUM_LENGTH
                 && place.getDescription().length() <= Constants.PLACE_DESCRIPTION_MAXIMUM_LENGTH;
-    }
-
-    private boolean isTenantIdValid(Place place){
-        return place.getTenantID() >= Constants.PLACE_TENANTID_MINIMUM_LENGTH;
     }
 
     private boolean isLandlordIdValid(Place place){

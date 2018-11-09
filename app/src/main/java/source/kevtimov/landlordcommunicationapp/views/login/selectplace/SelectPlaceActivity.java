@@ -13,6 +13,9 @@ import javax.inject.Inject;
 import dagger.android.support.DaggerAppCompatActivity;
 import source.kevtimov.landlordcommunicationapp.R;
 import source.kevtimov.landlordcommunicationapp.models.Place;
+import source.kevtimov.landlordcommunicationapp.models.User;
+import source.kevtimov.landlordcommunicationapp.parsers.base.JsonParser;
+import source.kevtimov.landlordcommunicationapp.utils.Constants;
 
 public class SelectPlaceActivity extends DaggerAppCompatActivity implements ContractsSelectPlace.Navigator{
 
@@ -22,11 +25,20 @@ public class SelectPlaceActivity extends DaggerAppCompatActivity implements Cont
     @Inject
     ContractsSelectPlace.Presenter mPresenter;
 
+    @Inject
+    JsonParser<User> mJsonParser;
+
+    private User mUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_place);
+
+        mUser = getUserFromSharedPref();
+
+        mPresenter.setUser(mUser);
 
         mSelectFragment.setNavigator(this);
         mSelectFragment.setPresenter(mPresenter);
@@ -46,6 +58,12 @@ public class SelectPlaceActivity extends DaggerAppCompatActivity implements Cont
         intent.putExtras(bundle);
         setResult(RESULT_OK, intent);
         finish();
+    }
+
+    private User getUserFromSharedPref() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String userInfo = sharedPreferences.getString(Constants.SHARED_PREFERENCES_KEY_USER_INFO, "");
+        return mJsonParser.fromJson(userInfo);
     }
 
     private void setTheme(){

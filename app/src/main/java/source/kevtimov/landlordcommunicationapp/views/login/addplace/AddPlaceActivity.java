@@ -42,11 +42,9 @@ public class AddPlaceActivity extends DaggerAppCompatActivity implements Contrac
     @Override
     public void navigateToPlaceManagementActivity(Bundle info) {
         Intent intent = new Intent();
-
         intent.putExtra("PlaceAndRent", info);
 
         setResult(RESULT_OK, intent);
-
         finish();
     }
 
@@ -71,7 +69,8 @@ public class AddPlaceActivity extends DaggerAppCompatActivity implements Contrac
 
                 User incomingTenant = (User) data.getSerializableExtra("User");
 
-                mAddPlaceFragment.setUserTenant(incomingTenant);
+                mAddPlaceFragment.manageTenantName(incomingTenant);
+                mPresenter.setUserTenant(incomingTenant);
             }
         }
     }

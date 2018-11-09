@@ -230,9 +230,8 @@ public class PaymentFragment extends Fragment implements ContractsPayments.View 
 
     private void alertDialogNoCard() {
         FancyAlertDialog dialog = new FancyAlertDialog.Builder(getActivity())
-                .setTitle("WARNING")
+                .setTitle("WARNING!\nPLEASE CHOOSE A CARD OR ADD ONE!")
                 .setBackgroundColor(Color.parseColor("#FF6600"))
-                .setMessage("PLEASE CHOOSE A CARD OR ADD ONE!")
                 .setAnimation(Animation.POP)
                 .isCancellable(true)
                 .setIcon(R.drawable.ic_error_outline_black_24dp, Icon.Visible)
@@ -241,9 +240,8 @@ public class PaymentFragment extends Fragment implements ContractsPayments.View 
 
     private void alertDialogManagement() {
         FancyAlertDialog dialog = new FancyAlertDialog.Builder(getActivity())
-                .setTitle("WARNING")
+                .setTitle("WARNING!\nARE YOU SURE? THE PAYMENT WILL BE PROCESSED")
                 .setBackgroundColor(Color.parseColor("#FF6600"))
-                .setMessage("ARE YOU SURE? THE PAYMENT WILL BE PROCESSED")
                 .setNegativeBtnText("Cancel")
                 .setPositiveBtnBackground(Color.parseColor("#FF6600"))
                 .setPositiveBtnText("Yes")

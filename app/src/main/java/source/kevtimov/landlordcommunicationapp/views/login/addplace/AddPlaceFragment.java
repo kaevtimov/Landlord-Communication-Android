@@ -89,8 +89,6 @@ public class AddPlaceFragment extends Fragment implements ContractsAddPlace.View
 
     private ContractsAddPlace.Presenter mPresenter;
     private ContractsAddPlace.Navigator mNavigator;
-    private User mUserTenant;
-    private Bundle mPlaceAndRentInfo;
 
 
     @Inject
@@ -171,16 +169,6 @@ public class AddPlaceFragment extends Fragment implements ContractsAddPlace.View
 
     @OnClick(R.id.btn_save)
     public void onClickSave(View v) {
-
-        mPlaceAndRentInfo = new Bundle();
-
-        mPlaceAndRentInfo.putString("address", mEditTextAddress.getText().toString());
-        mPlaceAndRentInfo.putString("description", mEditTextDescription.getText().toString());
-        mPlaceAndRentInfo.putString("total_amount", mEditTextAmount.getText().toString());
-        mPlaceAndRentInfo.putString("due_date", mEditTextYear.getText().toString() + "-"
-                + mEditTextMonth.getText().toString() + "-" + mEditTextDay.getText().toString());
-        mPlaceAndRentInfo.putSerializable("tenant", mUserTenant);
-
         mPresenter.checkInputInfo(mEditTextAddress.getText().toString(), mEditTextDescription.getText().toString(),
                 mEditTextAmount.getText().toString(), mEditTextYear.getText().toString(), mEditTextMonth.getText().toString(),
                 mEditTextDay.getText().toString());
@@ -199,19 +187,11 @@ public class AddPlaceFragment extends Fragment implements ContractsAddPlace.View
     }
 
     @Override
-    public void setUserTenant(User tenant){
-        this.mUserTenant = tenant;
-        manageTenantName();
-    }
-
-
-
-    public void alertDialogManagement() {
+    public void alertDialogManagement(Bundle placeAndRentInfo) {
 
         FancyAlertDialog dialog = new FancyAlertDialog.Builder(getActivity())
-                .setTitle("WARNING")
+                .setTitle("WARNING!\nARE YOU SURE? FOLLOWING CHANGES WILL BE SAVE TO YOUR ACCOUNT?")
                 .setBackgroundColor(Color.parseColor("#FF6600"))
-                .setMessage("ARE YOU SURE? FOLLOWING CHANGES WILL BE SAVE TO YOUR ACCOUNT?")
                 .setNegativeBtnText("Cancel")
                 .setPositiveBtnBackground(Color.parseColor("#FF6600"))
                 .setPositiveBtnText("Yes")
@@ -224,13 +204,13 @@ public class AddPlaceFragment extends Fragment implements ContractsAddPlace.View
                     public void OnClick() {
                         StyleableToast.makeText(getContext(), "SAVED!",
                                 Toast.LENGTH_LONG, R.style.accept_login_toast).show();
-                        mPresenter.allowNavigationOnSave(mPlaceAndRentInfo);
+                        mPresenter.allowNavigationOnSave(placeAndRentInfo);
                     }
                 })
                 .OnNegativeClicked(new FancyAlertDialogListener() {
                     @Override
                     public void OnClick() {
-                        StyleableToast.makeText(getContext(),"CANCELED",
+                        StyleableToast.makeText(getContext(), "CANCELED",
                                 Toast.LENGTH_LONG, R.style.reject_login_toast).show();
                     }
                 })
@@ -240,42 +220,43 @@ public class AddPlaceFragment extends Fragment implements ContractsAddPlace.View
     @Override
     public void alertForAddressConstraint() {
         StyleableToast.makeText(getContext(), "Please enter address with minimum length of 5 characters!",
-                Toast.LENGTH_LONG, R.style.accept_login_toast).show();
+                Toast.LENGTH_LONG, R.style.reject_login_toast).show();
     }
 
     @Override
     public void alertForDescriptionConstraint() {
         StyleableToast.makeText(getContext(), "Please enter description with minimum length of 10 characters!",
-                Toast.LENGTH_LONG, R.style.accept_login_toast).show();
+                Toast.LENGTH_LONG, R.style.reject_login_toast).show();
     }
 
     @Override
     public void alertForTotalAmountConstraint() {
         StyleableToast.makeText(getContext(), "Rent amount must be minimum 100.00!",
-                Toast.LENGTH_LONG, R.style.accept_login_toast).show();
+                Toast.LENGTH_LONG, R.style.reject_login_toast).show();
     }
 
     @Override
     public void alertForYearConstraint() {
         StyleableToast.makeText(getContext(), "Year must be minimum 2018 and maximum 2050!",
-                Toast.LENGTH_LONG, R.style.accept_login_toast).show();
+                Toast.LENGTH_LONG, R.style.reject_login_toast).show();
     }
 
     @Override
     public void alertForMonthConstraint() {
         StyleableToast.makeText(getContext(), "Month must be minimum 1 and maximum 12!",
-                Toast.LENGTH_LONG, R.style.accept_login_toast).show();
+                Toast.LENGTH_LONG, R.style.reject_login_toast).show();
     }
 
     @Override
     public void alertForDayConstraint() {
         StyleableToast.makeText(getContext(), "Day must be minimum 1 and maximum 31!",
-                Toast.LENGTH_LONG, R.style.accept_login_toast).show();
+                Toast.LENGTH_LONG, R.style.reject_login_toast).show();
     }
 
     @SuppressLint("SetTextI18n")
-    private void manageTenantName() {
-        mTextViewTenantName.setText("Tenant: " + mUserTenant.getFirstName() + " " + mUserTenant.getLastName());
+    @Override
+    public void manageTenantName(User user) {
+        mTextViewTenantName.setText("Tenant: " + user.getFirstName() + " " + user.getLastName());
     }
 
     private void initFont() {

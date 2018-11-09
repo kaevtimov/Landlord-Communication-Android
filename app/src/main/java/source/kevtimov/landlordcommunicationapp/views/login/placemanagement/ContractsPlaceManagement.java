@@ -38,8 +38,6 @@ public interface ContractsPlaceManagement {
         void registerRent(int placeId);
 
         void updateSelectPlaces(ArrayList<Place> places);
-
-        void updatePlacesInDatabase(ArrayList<Place> places);
     }
 
     interface Presenter {
@@ -57,8 +55,6 @@ public interface ContractsPlaceManagement {
         void allowNavigationToAddPlace();
 
         void allowNavigationToSelectPlace();
-
-        void updatePlaces(Place place, int placeId);
     }
 
     interface Navigator {

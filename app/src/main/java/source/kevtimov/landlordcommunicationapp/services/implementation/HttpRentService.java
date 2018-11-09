@@ -18,13 +18,23 @@ public class HttpRentService implements RentService {
     }
 
     @Override
-    public Rent registerRent(Rent rent) throws IOException {
+    public Rent registerNextRent(Rent rent) throws IOException {
 
         if(!mValidator.isObjectValid(rent)){
             throw new IllegalArgumentException("Cannot add rent, because it is not with required information!");
         }
 
-        return rentRepository.registerRent(rent);
+        return rentRepository.registerNextRent(rent);
+    }
+
+    @Override
+    public Rent registerFirstRent(Rent rent) throws IOException {
+
+        if(!mValidator.isObjectValid(rent)){
+            throw new IllegalArgumentException("Cannot add rent, because it is not with required information!");
+        }
+
+        return rentRepository.registerFirstRent(rent);
     }
 
     @Override

@@ -10,6 +10,7 @@ import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.disposables.Disposable;
 import source.kevtimov.landlordcommunicationapp.async.base.SchedulerProvider;
 import source.kevtimov.landlordcommunicationapp.models.Place;
+import source.kevtimov.landlordcommunicationapp.models.User;
 import source.kevtimov.landlordcommunicationapp.services.base.PlaceService;
 
 public class SelectPlacePresenter implements ContractsSelectPlace.Presenter {
@@ -17,6 +18,7 @@ public class SelectPlacePresenter implements ContractsSelectPlace.Presenter {
     private ContractsSelectPlace.View mView;
     private PlaceService mPlaceService;
     private SchedulerProvider mSchedulerProvider;
+    private User mUser;
 
     @Inject
     public SelectPlacePresenter(PlaceService placeService, SchedulerProvider schedulerProvider) {
@@ -36,8 +38,8 @@ public class SelectPlacePresenter implements ContractsSelectPlace.Presenter {
     }
 
     @Override
-    public void navigateBackToPlaceManagement(ArrayList<Place> mArrayPlaces) {
-        mView.navigateToPlaceManagement(mArrayPlaces);
+    public void setUser(User user) {
+        this.mUser = user;
     }
 
     @Override
@@ -54,6 +56,26 @@ public class SelectPlacePresenter implements ContractsSelectPlace.Presenter {
                 .doFinally(mView::hideLoading)
                 .subscribe(this::viewPlaces,
                         error -> mView.showError(error));
+    }
+
+    @Override
+    public void updatePlaceTenant(ArrayList<Place> places) {
+        mView.showLoading();
+        for (Place pl:places) {
+            pl.setTenantID(mUser.getUserId());
+            Disposable observal = Observable
+                    .create((ObservableOnSubscribe<Place>) emitter -> {
+                        Place sendingPlace = mPlaceService.updatePlaceTenant(pl, pl.getPlaceID());
+                        emitter.onNext(sendingPlace);
+                        emitter.onComplete();
+                    })
+                    .subscribeOn(mSchedulerProvider.background())
+                    .observeOn(mSchedulerProvider.ui())
+                    .doFinally(mView::hideLoading)
+                    .subscribe(place -> {},
+                            error -> mView.showError(error));
+        }
+        mView.navigateToPlaceManagement(places);
     }
 
     private void viewPlaces(List<Place> places) {

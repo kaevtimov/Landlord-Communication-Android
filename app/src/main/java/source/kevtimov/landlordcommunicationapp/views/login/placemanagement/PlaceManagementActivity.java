@@ -97,7 +97,6 @@ public class PlaceManagementActivity extends BaseDrawer implements ContractsPlac
             if (resultCode == RESULT_OK) {
                 Bundle bundle = data.getExtras();
                 ArrayList<Place> placesList = (ArrayList<Place>) bundle.getSerializable("places");
-                mPlaceManagementFragment.updatePlacesInDatabase(placesList);
                 mPlaceManagementFragment.updateSelectPlaces(placesList);
             }
         }

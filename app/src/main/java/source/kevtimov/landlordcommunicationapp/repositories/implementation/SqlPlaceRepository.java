@@ -37,7 +37,7 @@ public class SqlPlaceRepository implements PlaceRepository {
     @Override
     public Place updatePlaceTenant(Place place, int placeId) throws IOException {
         String requestBody = mJsonParser.toJson(place);
-        String mServerUrlPut = mServerUrl + "/" + placeId;
+        String mServerUrlPut = mServerUrl + "/place/" + placeId;
         String responseBody = mHttpRequester.update(mServerUrlPut, requestBody);
         return mJsonParser.fromJson(responseBody);
     }

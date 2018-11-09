@@ -3,21 +3,19 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:paddingTop="10dp"
-    android:paddingLeft="15dp"
-    android:paddingRight="15dp"
-    android:paddingBottom="10dp"
+    android:paddingTop="7dp"
     android:descendantFocusability="beforeDescendants">
 
     <RelativeLayout
         android:orientation="vertical"
+        android:id="@+id/relative_layout"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:paddingLeft="15dp"
+        android:layout_height="100dp"
+        android:paddingLeft="5dp"
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
-        android:paddingRight="15dp"
-        android:background="@drawable/list_view_selector"
+        android:paddingRight="5dp"
+        android:background="@drawable/list_view_selector_purple"
         android:descendantFocusability="afterDescendants">
 
         <com.makeramen.roundedimageview.RoundedImageView
@@ -34,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/iv_user"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="5dp"
             android:layout_marginStart="20dp"
             android:textSize="20sp"
             android:layout_toEndOf="@+id/iv_user"
@@ -47,7 +45,7 @@
             android:textSize="20sp"
             android:layout_below="@+id/tv_first_name"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="4dp"
             android:layout_toEndOf="@+id/iv_user"
             android:text="Last name: " />
 

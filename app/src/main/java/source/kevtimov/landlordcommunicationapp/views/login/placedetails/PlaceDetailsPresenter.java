@@ -35,6 +35,11 @@ public class PlaceDetailsPresenter implements ContractsPlaceDetails.Presenter {
     }
 
     @Override
+    public void unsubscribe() {
+        mView = null;
+    }
+
+    @Override
     public void setUser(User user) {
         this.mUser = user;
     }
@@ -83,10 +88,6 @@ public class PlaceDetailsPresenter implements ContractsPlaceDetails.Presenter {
         }
     }
 
-    @Override
-    public void unsubscribe() {
-        mView = null;
-    }
 
     @Override
     public void allowNavigationToPayRent() {
