@@ -33,6 +33,7 @@ import butterknife.ButterKnife;
 import butterknife.OnItemClick;
 import source.kevtimov.landlordcommunicationapp.R;
 import source.kevtimov.landlordcommunicationapp.models.Payment;
+import source.kevtimov.landlordcommunicationapp.utils.Constants;
 
 public class MyPaymentsFragment extends Fragment implements ContractsMyPayments.View {
 
@@ -113,7 +114,7 @@ public class MyPaymentsFragment extends Fragment implements ContractsMyPayments.
 
     @Override
     public void showEmptyList() {
-        StyleableToast.makeText(getContext(), "NO PAYMENTS",
+        StyleableToast.makeText(getContext(), Constants.NO_PAYMENTS_FOUND,
                 Toast.LENGTH_LONG, R.style.reject_login_toast).show();
     }
 
@@ -128,16 +129,16 @@ public class MyPaymentsFragment extends Fragment implements ContractsMyPayments.
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        builder.setMessage("Payment amount: " + payment.getAmount() + "\n" + "Date: " + payment.getDate() + "\n" + "Card number: "
-                + payment.getCard().getCardNumber() + "\n" + "Place: " + payment.getPlace().getAddress() + "\n"
-                + "Tenant: " + payment.getUser().getFirstName() + " " + payment.getUser().getLastName() + "\n")
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        builder.setMessage(Constants.PAYMENT_AMOUNT + payment.getAmount() + "\n" + Constants.DATE + payment.getDate() + "\n" + Constants.CARD_NUMBER
+                + payment.getCard().getCardNumber() + "\n" + Constants.PLACE + payment.getPlace().getAddress() + "\n"
+                + Constants.TENANT + payment.getUser().getFirstName() + " " + payment.getUser().getLastName() + "\n")
+                .setPositiveButton(Constants.OK, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 
                         dialog.dismiss();
                     }
                 })
-                .setTitle("Payment information")
+                .setTitle(Constants.PAYMENT_INFORMATION)
                 .setIcon(R.drawable.money)
                 .show();
 

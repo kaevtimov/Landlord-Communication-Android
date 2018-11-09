@@ -35,6 +35,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import source.kevtimov.landlordcommunicationapp.R;
 import source.kevtimov.landlordcommunicationapp.models.User;
+import source.kevtimov.landlordcommunicationapp.utils.Constants;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
@@ -181,7 +182,7 @@ public class AddPlaceFragment extends Fragment implements ContractsAddPlace.View
 
     @OnClick(R.id.btn_cancel)
     public void onClickCancel(View v) {
-        StyleableToast.makeText(getContext(), "No places added!",
+        StyleableToast.makeText(getContext(), Constants.NO_PLACES_ADDED,
                 Toast.LENGTH_LONG, R.style.accept_login_toast).show();
         mPresenter.allowNavigationOnCancel();
     }
@@ -190,11 +191,11 @@ public class AddPlaceFragment extends Fragment implements ContractsAddPlace.View
     public void alertDialogManagement(Bundle placeAndRentInfo) {
 
         FancyAlertDialog dialog = new FancyAlertDialog.Builder(getActivity())
-                .setTitle("WARNING!\nARE YOU SURE? FOLLOWING CHANGES WILL BE SAVE TO YOUR ACCOUNT?")
+                .setTitle(Constants.ADD_PLACE_WARNING_MSG)
                 .setBackgroundColor(Color.parseColor("#FF6600"))
-                .setNegativeBtnText("Cancel")
+                .setNegativeBtnText(Constants.CANCEL)
                 .setPositiveBtnBackground(Color.parseColor("#FF6600"))
-                .setPositiveBtnText("Yes")
+                .setPositiveBtnText(Constants.YES)
                 .setNegativeBtnBackground(Color.parseColor("#FF0000"))
                 .setAnimation(Animation.POP)
                 .isCancellable(true)
@@ -202,7 +203,7 @@ public class AddPlaceFragment extends Fragment implements ContractsAddPlace.View
                 .OnPositiveClicked(new FancyAlertDialogListener() {
                     @Override
                     public void OnClick() {
-                        StyleableToast.makeText(getContext(), "SAVED!",
+                        StyleableToast.makeText(getContext(), Constants.ADD_PLACE_SAVED,
                                 Toast.LENGTH_LONG, R.style.accept_login_toast).show();
                         mPresenter.allowNavigationOnSave(placeAndRentInfo);
                     }
@@ -210,7 +211,7 @@ public class AddPlaceFragment extends Fragment implements ContractsAddPlace.View
                 .OnNegativeClicked(new FancyAlertDialogListener() {
                     @Override
                     public void OnClick() {
-                        StyleableToast.makeText(getContext(), "CANCELED",
+                        StyleableToast.makeText(getContext(), Constants.ADD_PLACE_CANCELED,
                                 Toast.LENGTH_LONG, R.style.reject_login_toast).show();
                     }
                 })
@@ -219,49 +220,49 @@ public class AddPlaceFragment extends Fragment implements ContractsAddPlace.View
 
     @Override
     public void alertForAddressConstraint() {
-        StyleableToast.makeText(getContext(), "Please enter address with minimum length of 5 characters!",
+        StyleableToast.makeText(getContext(), Constants.ADD_PLACE_ADDRESS_CONSTRAINT,
                 Toast.LENGTH_LONG, R.style.reject_login_toast).show();
     }
 
     @Override
     public void alertForDescriptionConstraint() {
-        StyleableToast.makeText(getContext(), "Please enter description with minimum length of 10 characters!",
+        StyleableToast.makeText(getContext(), Constants.ADD_PLACE_DESCRIPTION_CONSTRAINT,
                 Toast.LENGTH_LONG, R.style.reject_login_toast).show();
     }
 
     @Override
     public void alertForTotalAmountConstraint() {
-        StyleableToast.makeText(getContext(), "Rent amount must be minimum 100.00!",
+        StyleableToast.makeText(getContext(), Constants.RENT_AMOUNT_MIN_AMOUNT,
                 Toast.LENGTH_LONG, R.style.reject_login_toast).show();
     }
 
     @Override
     public void alertForYearConstraint() {
-        StyleableToast.makeText(getContext(), "Year must be minimum 2018 and maximum 2050!",
+        StyleableToast.makeText(getContext(), Constants.YEAR_CONSTRAINT,
                 Toast.LENGTH_LONG, R.style.reject_login_toast).show();
     }
 
     @Override
     public void alertForMonthConstraint() {
-        StyleableToast.makeText(getContext(), "Month must be minimum 1 and maximum 12!",
+        StyleableToast.makeText(getContext(), Constants.MONTH_CONSTRAINT,
                 Toast.LENGTH_LONG, R.style.reject_login_toast).show();
     }
 
     @Override
     public void alertForDayConstraint() {
-        StyleableToast.makeText(getContext(), "Day must be minimum 1 and maximum 31!",
+        StyleableToast.makeText(getContext(), Constants.DAY_CONSTRAINT,
                 Toast.LENGTH_LONG, R.style.reject_login_toast).show();
     }
 
     @SuppressLint("SetTextI18n")
     @Override
     public void manageTenantName(User user) {
-        mTextViewTenantName.setText("Tenant: " + user.getFirstName() + " " + user.getLastName());
+        mTextViewTenantName.setText(Constants.TENANT + user.getFirstName() + " " + user.getLastName());
     }
 
     private void initFont() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        int selectedFont = Integer.parseInt(sharedPreferences.getString("font_list", "1"));
+        int selectedFont = Integer.parseInt(sharedPreferences.getString(Constants.FONT_LIST, "1"));
 
         switch (selectedFont) {
             case 1:

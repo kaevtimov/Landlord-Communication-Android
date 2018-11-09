@@ -174,7 +174,7 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
     @Override
     public void cancelLogin() {
 
-        StyleableToast.makeText(getContext(), "Incorrect username or password!",
+        StyleableToast.makeText(getContext(), Constants.INCORRECT_USERNAME_OR_PASSWORD,
                 Toast.LENGTH_LONG, R.style.reject_login_toast).show();
         YoYo.with(Techniques.Bounce)
                 .duration(700)
@@ -196,7 +196,7 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
     @Override
     public void welcomeUser(User user) {
 
-        StyleableToast.makeText(getContext(), "WELCOME, " + user.getFirstName() + " " + user.getLastName() + " !",
+        StyleableToast.makeText(getContext(), Constants.WELCOME + user.getFirstName() + " " + user.getLastName() + " !",
                 Toast.LENGTH_LONG, R.style.accept_login_toast).show();
 
         YoYo.with(Techniques.Tada)
@@ -215,7 +215,7 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
 
     @Override
     public void alertUserForBlankInfo() {
-        StyleableToast.makeText(getContext(), "Username and password cannot be empty!",
+        StyleableToast.makeText(getContext(), Constants.USERNAME_AND_PASSWORD_EMPTY,
                 Toast.LENGTH_LONG, R.style.reject_login_toast).show();
 
         YoYo.with(Techniques.Flash)
@@ -231,7 +231,7 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
 
     @Override
     public void alertUserForLengthConstraints() {
-        StyleableToast.makeText(getContext(), "Username and password length should be bigger than 6 characters!",
+        StyleableToast.makeText(getContext(), Constants.USERNAME_AND_PASSWORD_LENGTH_CONSTRAINT,
                 Toast.LENGTH_LONG, R.style.reject_login_toast).show();
 
         YoYo.with(Techniques.Flash)
@@ -247,7 +247,7 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
 
     @Override
     public void facebookRegisterAlert() {
-        StyleableToast.makeText(getContext(), "Please add additional info about you.",
+        StyleableToast.makeText(getContext(), Constants.ADD_ADDITIONAL_INFO_ABOUT_USER,
                 Toast.LENGTH_LONG, R.style.facebook_login_toast).show();
 
         Bundle fbInfo = new Bundle();
@@ -301,13 +301,11 @@ public class LoginFragment extends Fragment implements ContractsLogin.View {
 
                     @Override
                     public void onCancel() {
-                        Log.d(TAG, "Login attempt cancelled.");
                     }
 
                     @Override
                     public void onError(FacebookException error) {
                         error.printStackTrace();
-                        Log.d(TAG, "Login attempt failed.");
                     }
                 }
         );

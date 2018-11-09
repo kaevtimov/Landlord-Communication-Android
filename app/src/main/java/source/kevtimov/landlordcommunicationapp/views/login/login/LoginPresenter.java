@@ -20,6 +20,7 @@ import source.kevtimov.landlordcommunicationapp.R;
 import source.kevtimov.landlordcommunicationapp.async.base.SchedulerProvider;
 import source.kevtimov.landlordcommunicationapp.models.User;
 import source.kevtimov.landlordcommunicationapp.services.base.UserService;
+import source.kevtimov.landlordcommunicationapp.utils.Constants;
 import source.kevtimov.landlordcommunicationapp.utils.bitmapcache.BitmapCache;
 import source.kevtimov.landlordcommunicationapp.utils.bitmapcoder.IBitmapAgent;
 
@@ -114,7 +115,7 @@ public class LoginPresenter implements ContractsLogin.Presenter {
     public void setBitmapToCache(String userPicture) {
         if (userPicture != null && !userPicture.isEmpty()) {
             Bitmap profPic = mBitmapAgent.convertStringToBitmap(userPicture);
-            mBitmapCache.getLruCache().put("logged_in_user_profile_image", profPic);
+            mBitmapCache.getLruCache().put(Constants.LOGGED_IN_PROF_IMAGE, profPic);
         }
     }
 

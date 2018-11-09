@@ -25,6 +25,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import source.kevtimov.landlordcommunicationapp.R;
 import source.kevtimov.landlordcommunicationapp.models.Place;
+import source.kevtimov.landlordcommunicationapp.utils.Constants;
 
 public class MyPlacesAdapter extends ArrayAdapter<Place> {
 
@@ -55,7 +56,7 @@ public class MyPlacesAdapter extends ArrayAdapter<Place> {
 
 
         Place place = getItem(position);
-        mTextViewPlacesAddress.setText("Address: " + Objects.requireNonNull(place).getAddress());
+        mTextViewPlacesAddress.setText(Constants.ADDRESS + Objects.requireNonNull(place).getAddress());
         initFont();
 
 
@@ -64,7 +65,7 @@ public class MyPlacesAdapter extends ArrayAdapter<Place> {
 
     private void initFont() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        int selectedFont = Integer.parseInt(sharedPreferences.getString("font_list", "1"));
+        int selectedFont = Integer.parseInt(sharedPreferences.getString(Constants.FONT_LIST, "1"));
 
         switch (selectedFont) {
             case 1:

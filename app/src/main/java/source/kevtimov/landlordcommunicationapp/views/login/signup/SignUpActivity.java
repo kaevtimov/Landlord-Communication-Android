@@ -67,7 +67,7 @@ public class SignUpActivity extends DaggerAppCompatActivity implements Contracts
     @Override
     public void navigateToGallery() {
         Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-        photoPickerIntent.setType("image/*");
+        photoPickerIntent.setType(Constants.IMAGE);
         startActivityForResult(photoPickerIntent, Constants.REQUEST_CODE_GALLERY);
     }
 

@@ -23,6 +23,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import source.kevtimov.landlordcommunicationapp.R;
+import source.kevtimov.landlordcommunicationapp.utils.Constants;
 
 public class AddCardFragment extends Fragment implements ContractsAddCard.View {
 
@@ -108,20 +109,20 @@ public class AddCardFragment extends Fragment implements ContractsAddCard.View {
 
     @Override
     public void navigateBack() {
-        StyleableToast.makeText(getContext(), "Card added successfully!",
+        StyleableToast.makeText(getContext(), Constants.CARD_ADDED_SUCCESSFULLY,
                 Toast.LENGTH_LONG, R.style.accept_login_toast).show();
         mNavigator.navigateBack();
     }
 
     @Override
     public void alertForConstraints() {
-        StyleableToast.makeText(getContext(), "Warning! Card number must be exactly 16 digits and CVV number must be exactly 3 digits!",
+        StyleableToast.makeText(getContext(), Constants.CARD_NUMBER_CONSTRAINT,
                 Toast.LENGTH_LONG, R.style.reject_login_toast).show();
     }
 
     @Override
     public void alertEmptyFields() {
-        StyleableToast.makeText(getContext(), "Warning! Please Don't leave empty fields!",
+        StyleableToast.makeText(getContext(), Constants.EMPTY_FIELD_CONSTRAINT,
                 Toast.LENGTH_LONG, R.style.reject_login_toast).show();
     }
 
@@ -137,7 +138,7 @@ public class AddCardFragment extends Fragment implements ContractsAddCard.View {
 
     private void initFont() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        int selectedFont = Integer.parseInt(sharedPreferences.getString("font_list", "1"));
+        int selectedFont = Integer.parseInt(sharedPreferences.getString(Constants.FONT_LIST, "1"));
 
         switch (selectedFont) {
             case 1:

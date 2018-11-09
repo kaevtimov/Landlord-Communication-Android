@@ -34,6 +34,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import source.kevtimov.landlordcommunicationapp.R;
 import source.kevtimov.landlordcommunicationapp.models.User;
+import source.kevtimov.landlordcommunicationapp.utils.Constants;
 import source.kevtimov.landlordcommunicationapp.utils.bitmapcoder.IBitmapAgent;
 
 public class SignUpFragment extends Fragment implements ContractsSignUp.View {
@@ -162,7 +163,7 @@ public class SignUpFragment extends Fragment implements ContractsSignUp.View {
     @Override
     public void proceedToPlaceManagement(User user) {
 
-        StyleableToast.makeText(getContext(), "Sign Up successful!",
+        StyleableToast.makeText(getContext(), Constants.SIGN_UP_SUCCESSFUL,
                 Toast.LENGTH_LONG, R.style.accept_login_toast)
                 .show();
 
@@ -186,7 +187,7 @@ public class SignUpFragment extends Fragment implements ContractsSignUp.View {
 
     @Override
     public void signUpFail() {
-        StyleableToast.makeText(getContext(), "Signing up failed!",
+        StyleableToast.makeText(getContext(), Constants.SIGN_UP_FAILED,
                 Toast.LENGTH_LONG, R.style.reject_login_toast)
                 .show();
     }
@@ -200,14 +201,14 @@ public class SignUpFragment extends Fragment implements ContractsSignUp.View {
 
     @Override
     public void alertForExistingUsername() {
-        StyleableToast.makeText(getContext(), "This username already exists! Please enter another.",
+        StyleableToast.makeText(getContext(), Constants.USERNAME_EXISTS,
                 Toast.LENGTH_LONG, R.style.reject_login_toast)
                 .show();
     }
 
     @Override
     public void alertForExistingEmail() {
-        StyleableToast.makeText(getContext(), "This email already exists! Please enter another.",
+        StyleableToast.makeText(getContext(), Constants.EMAIL_EXISTS,
                 Toast.LENGTH_LONG, R.style.reject_login_toast)
                 .show();
 
@@ -216,7 +217,7 @@ public class SignUpFragment extends Fragment implements ContractsSignUp.View {
     @Override
     public void alertForExistingUsernameAndEmail() {
 
-        StyleableToast.makeText(getContext(), "Username and email already exist! Please enter another.",
+        StyleableToast.makeText(getContext(), Constants.USERNAME_AND_EMAIL_EXIST,
                 Toast.LENGTH_LONG, R.style.reject_login_toast)
                 .show();
     }
@@ -251,7 +252,7 @@ public class SignUpFragment extends Fragment implements ContractsSignUp.View {
                 || mEditTextEnterLastName.getText().toString().length() == 0
                 || radioButtonResult == -1) {
 
-            StyleableToast.makeText(getContext(), "Please don't leave blank information!",
+            StyleableToast.makeText(getContext(), Constants.DONT_LEAVE_BLANK_INFORMATION,
                     Toast.LENGTH_LONG, R.style.reject_login_toast)
                     .show();
         } else if (mEditTextEnterEmail.getText().toString().length() < 9
@@ -259,19 +260,18 @@ public class SignUpFragment extends Fragment implements ContractsSignUp.View {
                 || mEditTextEnterLastName.getText().toString().length() < 3
                 || radioButtonResult == -1) {
 
-            StyleableToast.makeText(getContext(), "Email must be minimum 9 characters long, " +
-                            "first and last name must be minimum 3 characters long!",
+            StyleableToast.makeText(getContext(), Constants.EMAIL_FIRST_LAST_NAME_CONSTRAINT,
                     Toast.LENGTH_LONG, R.style.reject_login_toast)
                     .show();
         } else if (mEditTextEnterUsername.getText().toString().length() < 6
                 || mEditTextEnterPass.getText().toString().length() < 6
                 || mEditTextRetypePass.getText().toString().length() < 6) {
 
-            StyleableToast.makeText(getContext(), "Please pay attention on all constraints",
+            StyleableToast.makeText(getContext(), Constants.PAY_ATTENTION_ON_ALL_CONSTRAINTS,
                     Toast.LENGTH_LONG, R.style.reject_login_toast)
                     .show();
         } else if (!mEditTextEnterPass.getText().toString().equals(mEditTextRetypePass.getText().toString())) {
-            StyleableToast.makeText(getContext(), "Failed! There is difference between passwords!",
+            StyleableToast.makeText(getContext(), Constants.DIFF_BETWEEN_PASSWORDS,
                     Toast.LENGTH_LONG, R.style.reject_login_toast)
                     .show();
         } else {
@@ -288,7 +288,7 @@ public class SignUpFragment extends Fragment implements ContractsSignUp.View {
         radioButtonResult = getRadioButtonResult();
 
         if (radioButtonResult == -1) {
-            StyleableToast.makeText(getContext(), "Please choose type information!",
+            StyleableToast.makeText(getContext(), Constants.CHOOSE_TYPE_INFORMATION,
                     Toast.LENGTH_LONG, R.style.reject_login_toast)
                     .show();
         } else {

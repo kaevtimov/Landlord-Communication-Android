@@ -29,6 +29,7 @@ import butterknife.OnClick;
 import butterknife.OnItemClick;
 import source.kevtimov.landlordcommunicationapp.R;
 import source.kevtimov.landlordcommunicationapp.models.User;
+import source.kevtimov.landlordcommunicationapp.utils.Constants;
 
 public class SelectTenantFragment extends Fragment implements ContractsSelectTenant.View{
 
@@ -79,7 +80,7 @@ public class SelectTenantFragment extends Fragment implements ContractsSelectTen
 
     @Override
     public void showEmptyList(){
-        StyleableToast.makeText(getContext(), "No tenants found!",
+        StyleableToast.makeText(getContext(), Constants.NO_TENANTS_FOUND,
                 Toast.LENGTH_LONG, R.style.reject_login_toast)
                 .show();
     }
@@ -148,7 +149,7 @@ public class SelectTenantFragment extends Fragment implements ContractsSelectTen
 
     private void initFont() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        int selectedFont = Integer.parseInt(sharedPreferences.getString("font_list", "1"));
+        int selectedFont = Integer.parseInt(sharedPreferences.getString(Constants.FONT_LIST, "1"));
 
         switch (selectedFont) {
             case 1:

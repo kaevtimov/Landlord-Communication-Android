@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import source.kevtimov.landlordcommunicationapp.R;
+import source.kevtimov.landlordcommunicationapp.utils.Constants;
 
 public class CustomCardAdapter<Card> extends BaseAdapter {
 
@@ -111,7 +112,7 @@ public class CustomCardAdapter<Card> extends BaseAdapter {
 
     private void initFont() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-        int selectedFont = Integer.parseInt(sharedPreferences.getString("font_list", "1"));
+        int selectedFont = Integer.parseInt(sharedPreferences.getString(Constants.FONT_LIST, "1"));
 
         switch (selectedFont) {
             case 1:
