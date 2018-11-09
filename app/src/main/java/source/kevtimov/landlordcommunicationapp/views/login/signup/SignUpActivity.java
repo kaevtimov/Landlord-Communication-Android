@@ -2,9 +2,7 @@ package source.kevtimov.landlordcommunicationapp.views.login.signup;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -20,6 +18,7 @@ import source.kevtimov.landlordcommunicationapp.R;
 import source.kevtimov.landlordcommunicationapp.models.User;
 import source.kevtimov.landlordcommunicationapp.parsers.base.JsonParser;
 import source.kevtimov.landlordcommunicationapp.utils.Constants;
+import source.kevtimov.landlordcommunicationapp.utils.bitmaprotator.IBitmapRotator;
 import source.kevtimov.landlordcommunicationapp.views.login.placemanagement.PlaceManagementActivity;
 
 public class SignUpActivity extends DaggerAppCompatActivity implements ContractsSignUp.Navigator {
@@ -30,8 +29,12 @@ public class SignUpActivity extends DaggerAppCompatActivity implements Contracts
     @Inject
     ContractsSignUp.Presenter mPresenter;
 
+
     @Inject
     JsonParser<User> mJsonParser;
+
+    @Inject
+    IBitmapRotator mBitmapRotator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +82,7 @@ public class SignUpActivity extends DaggerAppCompatActivity implements Contracts
             Uri uri = data.getData();
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
+                bitmap = mBitmapRotator.rotateImageIfRequired(bitmap, this, uri);
                 mSignUpFragment.setImage(bitmap);
             } catch (IOException e) {
                 e.printStackTrace();

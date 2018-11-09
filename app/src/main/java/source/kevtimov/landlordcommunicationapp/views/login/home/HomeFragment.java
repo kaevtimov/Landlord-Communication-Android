@@ -65,8 +65,8 @@ public class HomeFragment extends Fragment implements ContractsHome.View {
         mCalendar.set(Calendar.YEAR, 2018);
         mCalendar.set(Calendar.MONTH, month - 1);
         mCalendar.set(Calendar.DAY_OF_MONTH, day);
-        mCalendar.set(Calendar.HOUR_OF_DAY, 14);
-        mCalendar.set(Calendar.MINUTE, 12);
+        mCalendar.set(Calendar.HOUR_OF_DAY, 20);
+        mCalendar.set(Calendar.MINUTE, 10);
         mCalendar.set(Calendar.SECOND, 0);
 
 
