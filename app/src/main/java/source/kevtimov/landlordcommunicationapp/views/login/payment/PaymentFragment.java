@@ -41,6 +41,7 @@ import source.kevtimov.landlordcommunicationapp.models.Card;
 import source.kevtimov.landlordcommunicationapp.models.Place;
 import source.kevtimov.landlordcommunicationapp.models.Rent;
 import source.kevtimov.landlordcommunicationapp.models.User;
+import source.kevtimov.landlordcommunicationapp.utils.Constants;
 
 public class PaymentFragment extends Fragment implements ContractsPayments.View {
 
@@ -140,14 +141,14 @@ public class PaymentFragment extends Fragment implements ContractsPayments.View 
 
     @Override
     public void alertNotEnoughMoney() {
-        StyleableToast.makeText(getContext(), "Sorry! Not enough money in card!",
+        StyleableToast.makeText(getContext(), Constants.NOT_ENOUGH_MONEY_IN_CARD,
                 Toast.LENGTH_LONG, R.style.reject_login_toast)
                 .show();
     }
 
     @Override
     public void alertEnteredAmountBiggerThanRemaining() {
-        StyleableToast.makeText(getContext(), "Warning! Entered amount is bigger than remaining!",
+        StyleableToast.makeText(getContext(), Constants.ENTERED_AMOUNT_BIGGER_THAN_REMAINING,
                 Toast.LENGTH_LONG, R.style.reject_login_toast)
                 .show();
     }
@@ -184,9 +185,9 @@ public class PaymentFragment extends Fragment implements ContractsPayments.View 
         Date current = new Date();
         @SuppressLint("SimpleDateFormat") SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String paymentDate = format.format(current);
-        mDate.setText("Date: " + paymentDate);
-        mTotalAmount.setText("Total amount: " + String.valueOf(rent.getTotalAmount()));
-        mRemainingAmount.setText("Rem. amount: " + String.valueOf(rent.getRemainingAmount()));
+        mDate.setText(Constants.DATE + paymentDate);
+        mTotalAmount.setText(Constants.TOTAL_AMOUNT + String.valueOf(rent.getTotalAmount()));
+        mRemainingAmount.setText(Constants.REMAINING_AMOUNT + String.valueOf(rent.getRemainingAmount()));
     }
 
     @OnClick(R.id.btn_finish)
@@ -195,16 +196,16 @@ public class PaymentFragment extends Fragment implements ContractsPayments.View 
         if (mCardAdapter != null) {
             ArrayList<Card> mArrayCards = mCardAdapter.getCheckedCards();
             if (mArrayCards.size() > 1 || mArrayCards.size() == 0) {
-                StyleableToast.makeText(getContext(), "Please choose one card!",
+                StyleableToast.makeText(getContext(), Constants.CHOOSE_A_CARD,
                         Toast.LENGTH_LONG, R.style.reject_login_toast)
                         .show();
             } else if (mEditTextAmount.getText().toString().length() == 0) {
-                StyleableToast.makeText(getContext(), "Please enter amount!",
+                StyleableToast.makeText(getContext(), Constants.ENTER_AMOUNT,
                         Toast.LENGTH_LONG, R.style.reject_login_toast)
                         .show();
             } else if (Double.parseDouble(mEditTextAmount.getText().toString()) < 20
                     || Double.parseDouble(mEditTextAmount.getText().toString()) > 99999.99) {
-                StyleableToast.makeText(getContext(), "Min available amount is 20.00 leva and max is 99999.99 leva!",
+                StyleableToast.makeText(getContext(), Constants.MIN_MAX_AMOUNT_CONSTRAINT,
                         Toast.LENGTH_LONG, R.style.reject_login_toast)
                         .show();
             } else {
@@ -230,7 +231,7 @@ public class PaymentFragment extends Fragment implements ContractsPayments.View 
 
     private void alertDialogNoCard() {
         FancyAlertDialog dialog = new FancyAlertDialog.Builder(getActivity())
-                .setTitle("WARNING!\nPLEASE CHOOSE A CARD OR ADD ONE!")
+                .setTitle(Constants.CHOOSE_A_CARD_OR_ADD)
                 .setBackgroundColor(Color.parseColor("#FF6600"))
                 .setAnimation(Animation.POP)
                 .isCancellable(true)
@@ -240,11 +241,11 @@ public class PaymentFragment extends Fragment implements ContractsPayments.View 
 
     private void alertDialogManagement() {
         FancyAlertDialog dialog = new FancyAlertDialog.Builder(getActivity())
-                .setTitle("WARNING!\nARE YOU SURE? THE PAYMENT WILL BE PROCESSED")
+                .setTitle(Constants.WARNING_PAYMENT_SAVED)
                 .setBackgroundColor(Color.parseColor("#FF6600"))
-                .setNegativeBtnText("Cancel")
+                .setNegativeBtnText(Constants.CANCEL)
                 .setPositiveBtnBackground(Color.parseColor("#FF6600"))
-                .setPositiveBtnText("Yes")
+                .setPositiveBtnText(Constants.YES)
                 .setNegativeBtnBackground(Color.parseColor("#FF0000"))
                 .setAnimation(Animation.POP)
                 .isCancellable(true)
@@ -252,7 +253,7 @@ public class PaymentFragment extends Fragment implements ContractsPayments.View 
                 .OnPositiveClicked(new FancyAlertDialogListener() {
                     @Override
                     public void OnClick() {
-                        StyleableToast.makeText(getContext(), "PAYMENT MADE!",
+                        StyleableToast.makeText(getContext(), Constants.PAYMENT_MADE,
                                 Toast.LENGTH_LONG, R.style.accept_login_toast).show();
 
                         // presenter manage payment
@@ -262,7 +263,7 @@ public class PaymentFragment extends Fragment implements ContractsPayments.View 
                 .OnNegativeClicked(new FancyAlertDialogListener() {
                     @Override
                     public void OnClick() {
-                        StyleableToast.makeText(getContext(),"CANCELED",
+                        StyleableToast.makeText(getContext(),Constants.ADD_PLACE_CANCELED,
                                 Toast.LENGTH_LONG, R.style.reject_login_toast).show();
                         Objects.requireNonNull(getActivity()).finish();
                     }
@@ -272,7 +273,7 @@ public class PaymentFragment extends Fragment implements ContractsPayments.View 
 
     private void initFont() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        int selectedFont = Integer.parseInt(sharedPreferences.getString("font_list", "1"));
+        int selectedFont = Integer.parseInt(sharedPreferences.getString(Constants.FONT_LIST, "1"));
 
         switch (selectedFont) {
             case 1:

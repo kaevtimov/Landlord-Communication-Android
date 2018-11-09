@@ -14,6 +14,7 @@ import io.reactivex.disposables.Disposable;
 import source.kevtimov.landlordcommunicationapp.async.base.SchedulerProvider;
 import source.kevtimov.landlordcommunicationapp.models.User;
 import source.kevtimov.landlordcommunicationapp.services.base.UserService;
+import source.kevtimov.landlordcommunicationapp.utils.Constants;
 import source.kevtimov.landlordcommunicationapp.utils.bitmapcache.BitmapCache;
 import source.kevtimov.landlordcommunicationapp.utils.bitmapcoder.IBitmapAgent;
 
@@ -144,7 +145,7 @@ public class SignUpPresenter implements ContractsSignUp.Presenter {
 
     @Override
     public void setBitmapToCache(Bitmap bitmap) {
-        mBitmapCache.getLruCache().put("logged_in_user_profile_image", bitmap);
+        mBitmapCache.getLruCache().put(Constants.LOGGED_IN_PROF_IMAGE, bitmap);
     }
 
 }

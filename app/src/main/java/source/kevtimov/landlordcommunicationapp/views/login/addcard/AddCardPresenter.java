@@ -10,6 +10,7 @@ import source.kevtimov.landlordcommunicationapp.async.base.SchedulerProvider;
 import source.kevtimov.landlordcommunicationapp.models.Card;
 import source.kevtimov.landlordcommunicationapp.models.User;
 import source.kevtimov.landlordcommunicationapp.services.base.CardService;
+import source.kevtimov.landlordcommunicationapp.utils.Constants;
 
 public class AddCardPresenter implements ContractsAddCard.Presenter {
 
@@ -50,7 +51,7 @@ public class AddCardPresenter implements ContractsAddCard.Presenter {
         } else if(cardNumber.length() < 16 || cvvNumber.length() < 3){
             mView.alertForConstraints();
         } else{
-            Card createCard = new Card(cardBrand, cardType, cardNumber, cvvNumber, 1000.00, mUser.getUserId());
+            Card createCard = new Card(cardBrand, cardType, cardNumber, cvvNumber, Constants.CARD_DEFAULT_ADD_BALANCE, mUser.getUserId());
 
             Disposable observal = Observable
                     .create((ObservableOnSubscribe<Card>) emitter -> {

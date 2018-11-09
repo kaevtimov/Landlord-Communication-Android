@@ -25,6 +25,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import source.kevtimov.landlordcommunicationapp.R;
 import source.kevtimov.landlordcommunicationapp.models.User;
+import source.kevtimov.landlordcommunicationapp.utils.Constants;
 import source.kevtimov.landlordcommunicationapp.utils.bitmapcache.BitmapCache;
 import source.kevtimov.landlordcommunicationapp.utils.bitmapcoder.BitmapAgent;
 import source.kevtimov.landlordcommunicationapp.utils.bitmapcoder.IBitmapAgent;
@@ -97,7 +98,7 @@ public class UsersAdapter  extends ArrayAdapter<User> {
 
     private void initView() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        int selectedFont = Integer.parseInt(sharedPreferences.getString("font_list", "1"));
+        int selectedFont = Integer.parseInt(sharedPreferences.getString(Constants.FONT_LIST, "1"));
 
         switch (selectedFont) {
             case 1:
@@ -115,7 +116,7 @@ public class UsersAdapter  extends ArrayAdapter<User> {
 
         }
 
-        int theme =  Integer.parseInt(sharedPreferences.getString("theme_list", "1"));
+        int theme =  Integer.parseInt(sharedPreferences.getString(Constants.THEME_LIST, "1"));
 
         switch(theme){
             case 1:

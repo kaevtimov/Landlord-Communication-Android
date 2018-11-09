@@ -79,9 +79,8 @@ public class LoginActivity extends DaggerAppCompatActivity implements ContractsL
 
     private void manageNotifications() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = "Rent channel notification";
-            String description = "This channel is for sending notifications to users when there are " +
-                    "five days before meeting the rent due date.";
+            CharSequence name = Constants.CHANNEL_NAME;
+            String description = Constants.CHANNEL_DESCRIPTION;
             int importance = NotificationManager.IMPORTANCE_HIGH;
             mNotificationRentChannel = new NotificationChannel(Constants.CHANNEL_ID, name, importance);
             mNotificationRentChannel.setDescription(description);

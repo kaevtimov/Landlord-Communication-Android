@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
 
 import javax.inject.Inject;
@@ -42,7 +43,7 @@ public class AddPlaceActivity extends DaggerAppCompatActivity implements Contrac
     @Override
     public void navigateToPlaceManagementActivity(Bundle info) {
         Intent intent = new Intent();
-        intent.putExtra("PlaceAndRent", info);
+        intent.putExtra(Constants.PLACE_AND_RENT, info);
 
         setResult(RESULT_OK, intent);
         finish();
@@ -77,7 +78,7 @@ public class AddPlaceActivity extends DaggerAppCompatActivity implements Contrac
 
     private void setTheme(){
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        int theme =  Integer.parseInt(sharedPreferences.getString("theme_list", "1"));
+        int theme =  Integer.parseInt(sharedPreferences.getString(Constants.THEME_LIST, "1"));
 
         switch(theme){
             case 1:

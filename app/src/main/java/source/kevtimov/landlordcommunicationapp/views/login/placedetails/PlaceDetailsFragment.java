@@ -20,6 +20,8 @@ import com.emredavarci.circleprogressbar.CircleProgressBar;
 import com.muddzdev.styleabletoast.StyleableToast;
 import com.vstechlab.easyfonts.EasyFonts;
 
+import org.apache.http.params.CoreConnectionPNames;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -29,6 +31,7 @@ import source.kevtimov.landlordcommunicationapp.R;
 import source.kevtimov.landlordcommunicationapp.models.Place;
 import source.kevtimov.landlordcommunicationapp.models.Rent;
 import source.kevtimov.landlordcommunicationapp.models.User;
+import source.kevtimov.landlordcommunicationapp.utils.Constants;
 
 public class PlaceDetailsFragment extends Fragment implements ContractsPlaceDetails.View{
 
@@ -118,7 +121,7 @@ public class PlaceDetailsFragment extends Fragment implements ContractsPlaceDeta
 
     @Override
     public void showEmptyDetails() {
-        StyleableToast.makeText(getContext(), "Empty!",
+        StyleableToast.makeText(getContext(), Constants.EMPTY,
                 Toast.LENGTH_LONG, R.style.accept_login_toast).show();
     }
 
@@ -131,22 +134,22 @@ public class PlaceDetailsFragment extends Fragment implements ContractsPlaceDeta
     @Override
     public void manageViewsWithTenant(User notLoggedInUser, User loggedInUser, Place mPlace) {
         if(loggedInUser.isLandlord()){
-            mLandlordInfo.setText("Landlord: " + loggedInUser.getFirstName() + " " + loggedInUser.getLastName() + "\n"
-                    + "Username: " + loggedInUser.getUsername());
-            mTenantInfo.setText("Tenant: " + notLoggedInUser.getFirstName() + " " + notLoggedInUser.getLastName() + "\n"
-                    + "Username: " + notLoggedInUser.getUsername());
+            mLandlordInfo.setText(Constants.LANDLORD + loggedInUser.getFirstName() + " " + loggedInUser.getLastName() + "\n"
+                    + Constants.USERNAME + loggedInUser.getUsername());
+            mTenantInfo.setText(Constants.TENANT + notLoggedInUser.getFirstName() + " " + notLoggedInUser.getLastName() + "\n"
+                    + Constants.USERNAME + notLoggedInUser.getUsername());
             mPayButton.setVisibility(View.GONE);
 
             mPresenter.getUnpaidRent();
         }else{
-            mLandlordInfo.setText("Landlord: " + notLoggedInUser.getFirstName() + " " + notLoggedInUser.getLastName() + "\n"
-                    + "Username: " + notLoggedInUser.getUsername());
-            mTenantInfo.setText("Tenant: " + loggedInUser.getFirstName() + " " + loggedInUser.getLastName() + "\n"
-                    + "Username: " + loggedInUser.getUsername());
+            mLandlordInfo.setText(Constants.LANDLORD + notLoggedInUser.getFirstName() + " " + notLoggedInUser.getLastName() + "\n"
+                    + Constants.USERNAME + notLoggedInUser.getUsername());
+            mTenantInfo.setText(Constants.TENANT + loggedInUser.getFirstName() + " " + loggedInUser.getLastName() + "\n"
+                    + Constants.USERNAME + loggedInUser.getUsername());
             mPresenter.getUnpaidRent();
         }
-        mAddress.setText("Address: " + mPlace.getAddress());
-        mDescription.setText("Description: " + mPlace.getDescription());
+        mAddress.setText(Constants.ADDRESS + mPlace.getAddress());
+        mDescription.setText(Constants.DESCRIPTION + mPlace.getDescription());
     }
 
     @OnClick(R.id.btn_pay)
@@ -162,46 +165,46 @@ public class PlaceDetailsFragment extends Fragment implements ContractsPlaceDeta
     @SuppressLint("SetTextI18n")
     @Override
     public void manageViewsWithNoTenant(User mLogInUser, Place mPlace) {
-        mLandlordInfo.setText("Landlord: " + mLogInUser.getFirstName() + " " + mLogInUser.getLastName() + "\n"
-                + "Username: " + mLogInUser.getUsername());
+        mLandlordInfo.setText(Constants.LANDLORD + mLogInUser.getFirstName() + " " + mLogInUser.getLastName() + "\n"
+                + Constants.USERNAME + mLogInUser.getUsername());
         mPayButton.setVisibility(View.GONE);
 
-        mRentInfo.setText("Rents information: NO RENT INFORMATION\n");
+        mRentInfo.setText(Constants.NO_RENT_INFORMATION);
 
-        mAddress.setText("Address: " + mPlace.getAddress());
-        mDescription.setText("Description: " + mPlace.getDescription());
+        mAddress.setText(Constants.ADDRESS + mPlace.getAddress());
+        mDescription.setText(Constants.DESCRIPTION + mPlace.getDescription());
     }
 
     @SuppressLint("SetTextI18n")
     @Override
     public void viewRent(Rent rent) {
-        mRentInfo.setText("Due date: " + rent.getDueDate() + "\n" + "Total amount: " + rent.getTotalAmount() + " leva\n"
-                + "Rem. amount: " + rent.getRemainingAmount() + " leva\n" + "Paid: " + rent.isPaid());
+        mRentInfo.setText(Constants.DUE_DATE_RENT + rent.getDueDate() + "\n" + Constants.TOTAL_AMOUNT + rent.getTotalAmount() + Constants.LEVA
+                + Constants.REMAINING_AMOUNT + rent.getRemainingAmount() + Constants.LEVA + Constants.IS_RENT_PAID + rent.isPaid());
         mPresenter.setRent(rent);
     }
 
     @Override
     public void viewEmptyRent() {
-        mRentInfo.setText("Rents information: NO RENT INFORMATION\n");
+        mRentInfo.setText(Constants.NO_RENT_INFORMATION);
         mPayButton.setVisibility(View.GONE);
         mEditButton.setVisibility(View.GONE);
     }
 
     @Override
     public void alertForBlankAmountInfo() {
-        StyleableToast.makeText(getContext(), "Please enter amount!",
+        StyleableToast.makeText(getContext(), Constants.ENTER_AMOUNT,
                 Toast.LENGTH_LONG, R.style.reject_login_toast).show();
     }
 
     @Override
     public void alertForAmountConstraint() {
-        StyleableToast.makeText(getContext(), "Please enter amount higher than 50.00 leva or lesser than 9000.00 leva!",
+        StyleableToast.makeText(getContext(), Constants.EDIT_RENT_CONSTRAINTS,
                 Toast.LENGTH_LONG, R.style.reject_login_toast).show();
     }
 
     private void initFont() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        int selectedFont = Integer.parseInt(sharedPreferences.getString("font_list", "1"));
+        int selectedFont = Integer.parseInt(sharedPreferences.getString(Constants.FONT_LIST, "1"));
 
         switch (selectedFont) {
             case 1:

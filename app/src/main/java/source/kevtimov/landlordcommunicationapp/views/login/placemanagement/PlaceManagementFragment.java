@@ -35,6 +35,7 @@ import source.kevtimov.landlordcommunicationapp.R;
 import source.kevtimov.landlordcommunicationapp.models.Place;
 import source.kevtimov.landlordcommunicationapp.models.Rent;
 import source.kevtimov.landlordcommunicationapp.models.User;
+import source.kevtimov.landlordcommunicationapp.utils.Constants;
 
 public class PlaceManagementFragment extends Fragment implements ContractsPlaceManagement.View {
 
@@ -136,7 +137,7 @@ public class PlaceManagementFragment extends Fragment implements ContractsPlaceM
 
     @Override
     public void addPlaceFail() {
-        StyleableToast.makeText(getContext(), "Adding place failed!",
+        StyleableToast.makeText(getContext(), Constants.ADD_PLACE_FAILED,
                 Toast.LENGTH_LONG, R.style.reject_login_toast)
                 .show();
     }
@@ -190,13 +191,13 @@ public class PlaceManagementFragment extends Fragment implements ContractsPlaceM
 
             mButtonAddPlace.setVisibility(View.GONE);
             mButtonSelectPlace.setVisibility(View.VISIBLE);
-            mTextViewEnterPlaces.setText("Please select places where you pay rent");
+            mTextViewEnterPlaces.setText(Constants.SELECT_PLACES_WHERE_YOU_PAY_RENT);
         } else {
             mPlaceAdapter = new PlacesListAdapter(Objects.requireNonNull(getContext()));
             mListViewSelectedPlaces.setAdapter(mPlaceAdapter);
             mButtonAddPlace.setVisibility(View.VISIBLE);
             mButtonSelectPlace.setVisibility(View.GONE);
-            mTextViewEnterPlaces.setText("Please enter your places as landlord");
+            mTextViewEnterPlaces.setText(Constants.ENTER_LANDLORD_PLACES);
         }
     }
 
@@ -208,7 +209,7 @@ public class PlaceManagementFragment extends Fragment implements ContractsPlaceM
 
     private void initFont() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        int selectedFont = Integer.parseInt(sharedPreferences.getString("font_list", "1"));
+        int selectedFont = Integer.parseInt(sharedPreferences.getString(Constants.FONT_LIST, "1"));
 
         switch (selectedFont) {
             case 1:

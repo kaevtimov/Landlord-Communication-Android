@@ -100,7 +100,7 @@ public class PaymentActivity extends BaseDrawer implements ContractsPayments.Nav
 
     private void setTheme(){
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        int theme =  Integer.parseInt(sharedPreferences.getString("theme_list", "1"));
+        int theme =  Integer.parseInt(sharedPreferences.getString(Constants.THEME_LIST, "1"));
 
         switch(theme){
             case 1:

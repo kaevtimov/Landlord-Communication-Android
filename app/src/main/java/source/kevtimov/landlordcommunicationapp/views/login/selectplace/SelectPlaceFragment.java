@@ -34,6 +34,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import source.kevtimov.landlordcommunicationapp.R;
 import source.kevtimov.landlordcommunicationapp.models.Place;
+import source.kevtimov.landlordcommunicationapp.utils.Constants;
 
 public class SelectPlaceFragment extends Fragment implements ContractsSelectPlace.View{
 
@@ -127,7 +128,7 @@ public class SelectPlaceFragment extends Fragment implements ContractsSelectPlac
 
     @Override
     public void showEmptyList() {
-        StyleableToast.makeText(getContext(), "No places found!",
+        StyleableToast.makeText(getContext(), Constants.NO_PLACES_FOUND,
                 Toast.LENGTH_LONG, R.style.reject_login_toast)
                 .show();
         mButtonReady.setVisibility(View.GONE);
@@ -158,11 +159,11 @@ public class SelectPlaceFragment extends Fragment implements ContractsSelectPlac
     private void alertDialogManagement(ArrayList<Place> mPlaces) {
 
         FancyAlertDialog dialog = new FancyAlertDialog.Builder(getActivity())
-                .setTitle("WARNING\nARE YOU SURE? FOLLOWING CHANGES WILL BE SAVE TO YOUR ACCOUNT?")
+                .setTitle(Constants.UPDATE_TENANT_WARNING)
                 .setBackgroundColor(Color.parseColor("#FF6600"))
-                .setNegativeBtnText("Cancel")
+                .setNegativeBtnText(Constants.CANCEL)
                 .setPositiveBtnBackground(Color.parseColor("#FF6600"))
-                .setPositiveBtnText("Yes")
+                .setPositiveBtnText(Constants.YES)
                 .setNegativeBtnBackground(Color.parseColor("#FF0000"))
                 .setAnimation(Animation.POP)
                 .isCancellable(true)
@@ -170,7 +171,7 @@ public class SelectPlaceFragment extends Fragment implements ContractsSelectPlac
                 .OnPositiveClicked(new FancyAlertDialogListener() {
                     @Override
                     public void OnClick() {
-                        StyleableToast.makeText(getContext(), "SAVED!",
+                        StyleableToast.makeText(getContext(), Constants.ADD_PLACE_SAVED,
                                 Toast.LENGTH_LONG, R.style.accept_login_toast).show();
                         mPresenter.updatePlaceTenant(mPlaces);
                     }
@@ -178,7 +179,7 @@ public class SelectPlaceFragment extends Fragment implements ContractsSelectPlac
                 .OnNegativeClicked(new FancyAlertDialogListener() {
                     @Override
                     public void OnClick() {
-                        StyleableToast.makeText(getContext(),"CANCELED",
+                        StyleableToast.makeText(getContext(),Constants.ADD_PLACE_CANCELED,
                                 Toast.LENGTH_LONG, R.style.reject_login_toast).show();
                     }
                 })
@@ -187,7 +188,7 @@ public class SelectPlaceFragment extends Fragment implements ContractsSelectPlac
 
     private void initFont() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        int selectedFont = Integer.parseInt(sharedPreferences.getString("font_list", "1"));
+        int selectedFont = Integer.parseInt(sharedPreferences.getString(Constants.FONT_LIST, "1"));
 
         switch (selectedFont) {
             case 1:

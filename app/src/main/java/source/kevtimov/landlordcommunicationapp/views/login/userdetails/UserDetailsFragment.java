@@ -27,6 +27,7 @@ import source.kevtimov.landlordcommunicationapp.R;
 import source.kevtimov.landlordcommunicationapp.models.Place;
 import source.kevtimov.landlordcommunicationapp.models.Rating;
 import source.kevtimov.landlordcommunicationapp.models.User;
+import source.kevtimov.landlordcommunicationapp.utils.Constants;
 import source.kevtimov.landlordcommunicationapp.utils.bitmapcache.BitmapCache;
 import source.kevtimov.landlordcommunicationapp.views.login.myusers.ContractsMyUsers;
 
@@ -129,20 +130,20 @@ public class UserDetailsFragment extends Fragment implements ContractsUserDetail
         if(mBitmapCache.getLruCache().get(user.getUsername() + "_profile_image") != null){
             mImageView.setImageBitmap((Bitmap) mBitmapCache.getLruCache().get(user.getUsername() + "_profile_image"));
         }
-        mUserEmail.setText("EMAIL: " + user.getEmail());
-        mUserUserName.setText("USERNAME: " + user.getUsername());
-        mUserName.setText("FULL NAME: " + user.getFirstName() + " " + user.getLastName());
+        mUserEmail.setText(Constants.EMAIL_UPPERCASE + user.getEmail());
+        mUserUserName.setText(Constants.USERNAME_UPPERCASE + user.getUsername());
+        mUserName.setText(Constants.FULLNAME_UPPERCASE + user.getFirstName() + " " + user.getLastName());
     }
 
     @Override
     public void alertAlreadyVoted() {
-        StyleableToast.makeText(getContext(), "ALREADY VOTED!",
+        StyleableToast.makeText(getContext(), Constants.ALREADY_VOTED,
                 Toast.LENGTH_LONG, R.style.reject_login_toast).show();
     }
 
     @Override
     public void showInfo(Rating rating) {
-        StyleableToast.makeText(getContext(), "VOTE ADDED! YOUR VOTE IS " + rating.getRating() + "!",
+        StyleableToast.makeText(getContext(), Constants.VOTE_READY + rating.getRating() + "!",
                 Toast.LENGTH_LONG, R.style.accept_login_toast).show();
         mPresenter.getRating();
     }
@@ -152,7 +153,7 @@ public class UserDetailsFragment extends Fragment implements ContractsUserDetail
         if(places.size() > 0){
             mPlaceInfo.setText("");
             for (Place pl:places) {
-                mPlaceInfo.append("Place information:\n");
+                mPlaceInfo.append(Constants.PLACE_INFORMATION);
                 mPlaceInfo.append(pl.toString());
             }
         }

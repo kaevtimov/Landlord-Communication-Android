@@ -21,6 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import source.kevtimov.landlordcommunicationapp.R;
 import source.kevtimov.landlordcommunicationapp.models.Payment;
+import source.kevtimov.landlordcommunicationapp.utils.Constants;
 
 public class MyPaymentsAdapter extends ArrayAdapter<Payment> {
 
@@ -51,8 +52,8 @@ public class MyPaymentsAdapter extends ArrayAdapter<Payment> {
 
         Payment payment = getItem(position);
 
-        mTextViewAmount.setText("Amount: " + Objects.requireNonNull(payment).getAmount());
-        mTextViewDate.setText("Date: " + payment.getDate());
+        mTextViewAmount.setText(Constants.AMOUNT + Objects.requireNonNull(payment).getAmount());
+        mTextViewDate.setText(Constants.DATE + payment.getDate());
 
         initFont();
 
@@ -60,7 +61,7 @@ public class MyPaymentsAdapter extends ArrayAdapter<Payment> {
     }
     private void initFont() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        int selectedFont = Integer.parseInt(sharedPreferences.getString("font_list", "1"));
+        int selectedFont = Integer.parseInt(sharedPreferences.getString(Constants.FONT_LIST, "1"));
 
         switch (selectedFont) {
             case 1:

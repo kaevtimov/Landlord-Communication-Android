@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import dagger.android.support.DaggerAppCompatActivity;
 import source.kevtimov.landlordcommunicationapp.R;
 import source.kevtimov.landlordcommunicationapp.models.User;
+import source.kevtimov.landlordcommunicationapp.utils.Constants;
 
 public class SelectTenantActivity extends DaggerAppCompatActivity implements ContractsSelectTenant.Navigator {
 
@@ -49,7 +50,7 @@ public class SelectTenantActivity extends DaggerAppCompatActivity implements Con
 
     private void setTheme(){
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        int theme =  Integer.parseInt(sharedPreferences.getString("theme_list", "1"));
+        int theme =  Integer.parseInt(sharedPreferences.getString(Constants.THEME_LIST, "1"));
 
         switch(theme){
             case 1:

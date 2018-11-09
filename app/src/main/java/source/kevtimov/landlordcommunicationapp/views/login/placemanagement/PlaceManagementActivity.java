@@ -83,7 +83,7 @@ public class PlaceManagementActivity extends BaseDrawer implements ContractsPlac
         mPresenter.subscribe(mPlaceManagementFragment);
         if (requestCode == Constants.ADD_PLACE_REQUEST) {
             if (resultCode == RESULT_OK) {
-                Bundle incomingInfo = data.getBundleExtra("PlaceAndRent");
+                Bundle incomingInfo = data.getBundleExtra(Constants.PLACE_AND_RENT);
                 mPlaceManagementFragment.updateAddPlaces(incomingInfo);
             }
         } else if (requestCode == Constants.SELECT_PLACE_REQUEST) {
@@ -123,7 +123,7 @@ public class PlaceManagementActivity extends BaseDrawer implements ContractsPlac
 
     private void setTheme(){
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        int theme =  Integer.parseInt(sharedPreferences.getString("theme_list", "1"));
+        int theme =  Integer.parseInt(sharedPreferences.getString(Constants.THEME_LIST, "1"));
 
         switch(theme){
             case 1:
