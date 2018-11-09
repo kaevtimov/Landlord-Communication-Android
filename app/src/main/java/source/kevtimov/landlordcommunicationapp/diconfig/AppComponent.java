@@ -12,6 +12,7 @@ import source.kevtimov.landlordcommunicationapp.LandlordCommunicationApplication
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.AgentModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.AsyncModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.BitmapAgentModule;
+import source.kevtimov.landlordcommunicationapp.diconfig.modules.BitmapRotatorModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.CardParserModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.CardRepositoryModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.CardServiceModule;
@@ -41,6 +42,7 @@ import source.kevtimov.landlordcommunicationapp.validation.UserValidator;
 
 @Singleton
 @Component(modules = {
+        BitmapRotatorModule.class,
         RatingValidatorModule.class,
         PaymentValidatorModule.class,
         CardValidatorModule.class,
