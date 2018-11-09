@@ -25,8 +25,6 @@ public interface ContractsPlaceManagement {
 
         void setUser(User user);
 
-        void navigateUserToHome();
-
         void navigateUserToAddPlace();
 
         void navigateUserToSelectPlace();
@@ -50,16 +48,12 @@ public interface ContractsPlaceManagement {
 
         void registerRent(Rent rent);
 
-        void allowToHomeActivity();
-
         void allowNavigationToAddPlace();
 
         void allowNavigationToSelectPlace();
     }
 
     interface Navigator {
-
-        void navigateToHomeActivity(User userInfo);
 
         void navigateToAddPlaceActivity();
 

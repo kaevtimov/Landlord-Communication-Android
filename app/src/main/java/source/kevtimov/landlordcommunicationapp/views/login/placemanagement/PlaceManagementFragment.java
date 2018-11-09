@@ -40,8 +40,7 @@ public class PlaceManagementFragment extends Fragment implements ContractsPlaceM
 
     private ContractsPlaceManagement.Presenter mPresenter;
     private ContractsPlaceManagement.Navigator mNavigator;
-    private ArrayAdapter<String> mPlaceAdapter;
-    private ArrayAdapter<Place> mSelectedPlaceAdapter;
+    private PlacesListAdapter mPlaceAdapter;
     private User mUser;  // user incoming from previous activity
     private Bundle mIncomingPlaceAndRentInfo;
 
@@ -126,11 +125,6 @@ public class PlaceManagementFragment extends Fragment implements ContractsPlaceM
     }
 
     @Override
-    public void navigateUserToHome() {
-        mNavigator.navigateToHomeActivity(mUser);
-    }
-
-    @Override
     public void navigateUserToAddPlace() {
         mNavigator.navigateToAddPlaceActivity();
     }
@@ -158,41 +152,22 @@ public class PlaceManagementFragment extends Fragment implements ContractsPlaceM
     }
 
 
-    @OnClick(R.id.btn_home)
-    public void onClickHome(View v) {
-        mPresenter.allowToHomeActivity();
-    }
-
-
     @Override
     public void updateAddPlaces(Bundle incomingInfo) {
         mIncomingPlaceAndRentInfo = incomingInfo;
-        double totalAmount = Double.parseDouble(Objects.requireNonNull(incomingInfo.getString("total_amount")));
         User incomingTenant = (User) incomingInfo.getSerializable("tenant");
         String address = incomingInfo.getString("address");
         String description = incomingInfo.getString("description");
-        String dueDate = incomingInfo.getString("due_date");
-        StringBuilder adapterPlaceInfoView = new StringBuilder();
-        if(incomingTenant != null){
-            adapterPlaceInfoView
-                    .append("Address: ")
-                    .append(address).append("\n")
-                    .append("Tenant: ")
-                    .append(incomingTenant.getFirstName())
-                    .append(" ")
-                    .append(incomingTenant.getLastName());
-            mPlaceAdapter.add(adapterPlaceInfoView.toString());
+        if (incomingTenant != null) {
             registerPlace(address, description, incomingTenant.getUserId(), mUser.getUserId());
-        } else{
-            adapterPlaceInfoView.append("Address: ").append(address).append("\n").append("Tenant: No tenant");
-            mPlaceAdapter.add(adapterPlaceInfoView.toString());
+        } else {
             registerPlace(address, description, 0, mUser.getUserId());
         }
     }
 
     @Override
     public void updateSelectPlaces(ArrayList<Place> places) {
-        mSelectedPlaceAdapter.addAll(places);
+        mPlaceAdapter.addAll(places);
     }
 
 
@@ -210,16 +185,14 @@ public class PlaceManagementFragment extends Fragment implements ContractsPlaceM
     private void manageView() {
 
         if (!mUser.isLandlord()) {
-            mSelectedPlaceAdapter = new ArrayAdapter<>(Objects.requireNonNull(getContext()),
-                    android.R.layout.simple_expandable_list_item_1);
-            mListViewSelectedPlaces.setAdapter(mSelectedPlaceAdapter);
+            mPlaceAdapter = new PlacesListAdapter(Objects.requireNonNull(getContext()));
+            mListViewSelectedPlaces.setAdapter(mPlaceAdapter);
 
             mButtonAddPlace.setVisibility(View.GONE);
             mButtonSelectPlace.setVisibility(View.VISIBLE);
             mTextViewEnterPlaces.setText("Please select places where you pay rent");
         } else {
-            mPlaceAdapter = new ArrayAdapter<>(Objects.requireNonNull(getContext()),
-                    android.R.layout.simple_expandable_list_item_1);
+            mPlaceAdapter = new PlacesListAdapter(Objects.requireNonNull(getContext()));
             mListViewSelectedPlaces.setAdapter(mPlaceAdapter);
             mButtonAddPlace.setVisibility(View.VISIBLE);
             mButtonSelectPlace.setVisibility(View.GONE);
@@ -229,6 +202,7 @@ public class PlaceManagementFragment extends Fragment implements ContractsPlaceM
 
     private void registerPlace(String address, String description, int tenantId, int landlordId) {
         Place mPlace = new Place(address, description, tenantId, landlordId);
+        mPlaceAdapter.add(mPlace);
         mPresenter.registerPlace(mPlace);
     }
 
@@ -238,13 +212,13 @@ public class PlaceManagementFragment extends Fragment implements ContractsPlaceM
 
         switch (selectedFont) {
             case 1:
-                mTextViewEnterPlaces.setTypeface(EasyFonts.droidSerifBold(getContext()));
+                mTextViewEnterPlaces.setTypeface(EasyFonts.droidSerifBold(Objects.requireNonNull(getContext())));
                 break;
             case 2:
-                mTextViewEnterPlaces.setTypeface(EasyFonts.funRaiser(getContext()));
+                mTextViewEnterPlaces.setTypeface(EasyFonts.funRaiser(Objects.requireNonNull(getContext())));
                 break;
             case 3:
-                mTextViewEnterPlaces.setTypeface(EasyFonts.walkwayBold(getContext()));
+                mTextViewEnterPlaces.setTypeface(EasyFonts.walkwayBold(Objects.requireNonNull(getContext())));
                 break;
 
         }

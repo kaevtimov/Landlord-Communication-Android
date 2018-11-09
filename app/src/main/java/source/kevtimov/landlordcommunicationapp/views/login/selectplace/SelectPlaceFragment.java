@@ -180,7 +180,6 @@ public class SelectPlaceFragment extends Fragment implements ContractsSelectPlac
                     public void OnClick() {
                         StyleableToast.makeText(getContext(),"CANCELED",
                                 Toast.LENGTH_LONG, R.style.reject_login_toast).show();
-                        Objects.requireNonNull(getActivity()).finish();
                     }
                 })
                 .build();
