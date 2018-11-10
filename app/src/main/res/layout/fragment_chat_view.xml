@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <FrameLayout
+        android:layout_above="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/chat_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_marginTop="45dp"
+            android:padding="15dp"
+            android:layout_height="match_parent" />
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/layout"
+        android:orientation="horizontal"
+        android:gravity="bottom"
+        android:layout_marginTop="5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/chat_input_msg"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:background="@drawable/login_edittext_style"
+            android:hint="@string/input_message"
+            android:layout_weight="1"
+            android:maxLines="2"/>
+
+        <Button
+            android:id="@+id/chat_send_msg"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:background="@drawable/custom_pay_button"
+            android:textColor="@color/md_black_1000"
+            android:text="@string/send"
+            android:textAllCaps="false"/>
+
+    </LinearLayout>
+
+    <com.emredavarci.circleprogressbar.CircleProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+
+</RelativeLayout>

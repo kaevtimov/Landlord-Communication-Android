@@ -24,10 +24,11 @@
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
-        <activity android:name="com.facebook.FacebookActivity"
+
+        <activity
+            android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name" />
-
         <activity android:name=".views.login.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -49,8 +50,12 @@
         <activity android:name=".views.login.preferences.SettingsActivity" />
         <activity android:name=".views.login.myusers.MyUsersActivity" />
         <activity android:name=".views.login.userdetails.UserDetailsActivity" />
+
         <receiver android:name=".utils.receiver.ReceiverNotification" />
 
+        <activity android:name=".chat.sessions.ChatSessionActivity" />
+        <activity android:name=".chat.chatview.ChatActivity"
+            android:windowSoftInputMode="adjustPan"/>
     </application>
 
 </manifest>

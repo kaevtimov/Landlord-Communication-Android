@@ -2,8 +2,12 @@ package source.kevtimov.landlordcommunicationapp.diconfig;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
+import source.kevtimov.landlordcommunicationapp.chat.chatview.ChatActivity;
+import source.kevtimov.landlordcommunicationapp.chat.sessions.ChatSessionActivity;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.AddCardModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.AddPlaceModule;
+import source.kevtimov.landlordcommunicationapp.diconfig.modules.MessageModule;
+import source.kevtimov.landlordcommunicationapp.diconfig.modules.ChatSessionModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.HomeModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.LogInModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.MyPaymentsModule;
@@ -124,4 +128,16 @@ public abstract class ActivityBindingModule {
             modules = UserDetailsModule.class
     )
     abstract UserDetailsActivity UserDetailsActivity();
+
+    @ActivityScoped
+    @ContributesAndroidInjector(
+            modules = ChatSessionModule.class
+    )
+    abstract ChatSessionActivity ChatSessionActivity();
+
+    @ActivityScoped
+    @ContributesAndroidInjector(
+            modules = MessageModule.class
+    )
+    abstract ChatActivity chatActivity();
 }

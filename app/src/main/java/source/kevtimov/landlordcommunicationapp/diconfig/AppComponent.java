@@ -17,7 +17,13 @@ import source.kevtimov.landlordcommunicationapp.diconfig.modules.CardParserModul
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.CardRepositoryModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.CardServiceModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.CardValidatorModule;
+import source.kevtimov.landlordcommunicationapp.diconfig.modules.MessageParserModule;
+import source.kevtimov.landlordcommunicationapp.diconfig.modules.ChatSessionParserModule;
+import source.kevtimov.landlordcommunicationapp.diconfig.modules.ChatSessionRepositoryModule;
+import source.kevtimov.landlordcommunicationapp.diconfig.modules.ChatSessionServiceModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.HttpModule;
+import source.kevtimov.landlordcommunicationapp.diconfig.modules.MessageRepositoryModule;
+import source.kevtimov.landlordcommunicationapp.diconfig.modules.MessageServiceModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.PaymentParserModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.PaymentRepositoryModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.PaymentServiceModule;
@@ -38,10 +44,15 @@ import source.kevtimov.landlordcommunicationapp.diconfig.modules.UserParserModul
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.UserRepositoryModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.UserServiceModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.UserValidatorModule;
-import source.kevtimov.landlordcommunicationapp.validation.UserValidator;
 
 @Singleton
 @Component(modules = {
+        MessageServiceModule.class,
+        MessageRepositoryModule.class,
+        MessageParserModule.class,
+        ChatSessionServiceModule.class,
+        ChatSessionRepositoryModule.class,
+        ChatSessionParserModule.class,
         BitmapRotatorModule.class,
         RatingValidatorModule.class,
         PaymentValidatorModule.class,
