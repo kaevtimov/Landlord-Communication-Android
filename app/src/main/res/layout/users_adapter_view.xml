@@ -34,7 +34,7 @@
             android:layout_alignTop="@+id/iv_user"
             android:layout_marginTop="5dp"
             android:layout_marginStart="20dp"
-            android:textSize="20sp"
+            android:textSize="14sp"
             android:layout_toEndOf="@+id/iv_user"
             android:text="First name: " />
 
@@ -42,7 +42,7 @@
             android:id="@+id/tv_last_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="14sp"
             android:layout_below="@+id/tv_first_name"
             android:layout_marginStart="20dp"
             android:layout_marginTop="4dp"
