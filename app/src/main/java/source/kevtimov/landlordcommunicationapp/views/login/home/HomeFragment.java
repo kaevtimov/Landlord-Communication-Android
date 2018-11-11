@@ -10,19 +10,43 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.emredavarci.circleprogressbar.CircleProgressBar;
+import com.muddzdev.styleabletoast.StyleableToast;
+import com.vstechlab.easyfonts.EasyFonts;
 
 import java.util.Calendar;
 import java.util.Objects;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import source.kevtimov.landlordcommunicationapp.R;
 import source.kevtimov.landlordcommunicationapp.models.Rent;
 import source.kevtimov.landlordcommunicationapp.utils.receiver.ReceiverNotification;
 
 public class HomeFragment extends Fragment implements ContractsHome.View {
 
+
+    @BindView(R.id.iv_chats)
+    ImageView mImageViewChats;
+
+    @BindView(R.id.iv_payments)
+    ImageView mImageViewPayments;
+
+    @BindView(R.id.iv_users)
+    ImageView mImageViewUsers;
+
+    @BindView(R.id.iv_places)
+    ImageView mImageViewPlaces;
+
+    @BindView(R.id.progress_bar)
+    CircleProgressBar mProgressBar;
 
     private ContractsHome.Presenter mPresenter;
     private ContractsHome.Navigator mNavigator;
@@ -39,6 +63,7 @@ public class HomeFragment extends Fragment implements ContractsHome.View {
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, root);
+
 
         return root;
     }
@@ -61,7 +86,6 @@ public class HomeFragment extends Fragment implements ContractsHome.View {
 
         mCalendar = Calendar.getInstance();
 
-        //calendar.set(2018, 11, 5, 18, 6);
         mCalendar.set(Calendar.YEAR, 2018);
         mCalendar.set(Calendar.MONTH, month - 1);
         mCalendar.set(Calendar.DAY_OF_MONTH, day);
@@ -86,6 +110,26 @@ public class HomeFragment extends Fragment implements ContractsHome.View {
         }
     }
 
+    @Override
+    public void navigateToChats() {
+        mNavigator.navigateToChats();
+    }
+
+    @Override
+    public void navigateToPayments() {
+        mNavigator.navigateToPayments();
+    }
+
+    @Override
+    public void navigateToUsers() {
+        mNavigator.navigateToUsers();
+    }
+
+    @Override
+    public void navigateToPlaces() {
+        mNavigator.navigateToPlaces();
+    }
+
 
     @Override
     public void setPresenter(ContractsHome.Presenter presenter) {
@@ -94,21 +138,42 @@ public class HomeFragment extends Fragment implements ContractsHome.View {
 
     @Override
     public void showLoading() {
-
+        mProgressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoading() {
-
+        mProgressBar.setVisibility(View.GONE);
     }
 
     @Override
     public void setNavigator(ContractsHome.Navigator navigator) {
-        this.mNavigator = navigator;
+        mNavigator = navigator;
     }
 
     @Override
     public void showError(Throwable error) {
+        StyleableToast.makeText(getContext(), error.getMessage(),
+                Toast.LENGTH_LONG, R.style.accept_login_toast).show();
+    }
 
+    @OnClick(R.id.btn_chat)
+    public void onClickChat(View v){
+        mPresenter.allowNavigationToChats();
+    }
+
+    @OnClick(R.id.btn_payments)
+    public void onClickPayments(View v){
+        mPresenter.allowNavigationToPayments();
+    }
+
+    @OnClick(R.id.btn_users)
+    public void onClickUsers(View v){
+        mPresenter.allowNavigationToUsers();
+    }
+
+    @OnClick(R.id.btn_places)
+    public void onClickPlaces(View v){
+        mPresenter.allowNavigationToPlaces();
     }
 }
