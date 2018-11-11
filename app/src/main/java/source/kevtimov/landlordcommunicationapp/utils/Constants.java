@@ -140,4 +140,6 @@ public class Constants {
     public static final String CHOOSE_A_CARD_OR_ADD = "WARNING!\nPLEASE CHOOSE A CARD OR ADD ONE!";
     public static final String PLACE_AND_RENT = "PlaceAndRent";
     public static final String IMAGE = "image/*";
+    public static final String NO_SESSIONS_FOUND = "No sessions found!";
+    public static final String NO_MESSAGES_FOUND = "No messages found!";
 }

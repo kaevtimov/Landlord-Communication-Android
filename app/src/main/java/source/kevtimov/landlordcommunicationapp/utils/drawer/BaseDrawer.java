@@ -3,7 +3,6 @@ package source.kevtimov.landlordcommunicationapp.utils.drawer;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
@@ -20,6 +19,7 @@ import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
 import dagger.android.support.DaggerAppCompatActivity;
 import source.kevtimov.landlordcommunicationapp.R;
+import source.kevtimov.landlordcommunicationapp.chat.sessions.ChatSessionActivity;
 import source.kevtimov.landlordcommunicationapp.utils.bitmapcache.BitmapCache;
 import source.kevtimov.landlordcommunicationapp.views.login.login.LoginActivity;
 import source.kevtimov.landlordcommunicationapp.views.login.mypayments.MyPaymentsActivity;
@@ -62,6 +62,13 @@ public abstract class BaseDrawer extends DaggerAppCompatActivity {
                 .withSelectedTextColor(Color.BLACK)
                 .withIcon(R.drawable.ic_supervisor_account_24dp);
 
+        SecondaryDrawerItem myChats = new SecondaryDrawerItem()
+                .withIdentifier(ChatSessionActivity.IDENTIFIER)
+                .withName("My chats")
+                .withTextColor(Color.WHITE)
+                .withSelectedTextColor(Color.BLACK)
+                .withIcon(R.drawable.ic_supervisor_account_24dp);
+
         SecondaryDrawerItem logOut = new SecondaryDrawerItem()
                 .withIdentifier(LoginActivity.IDENTIFIER)
                 .withName("Log Out")
@@ -86,6 +93,7 @@ public abstract class BaseDrawer extends DaggerAppCompatActivity {
                 .withAccountHeader(accHeader)
                 .addDrawerItems(
                         myPlaces,
+                        myChats,
                         rentPayments,
                         myUsers,
                         settings,
@@ -132,6 +140,9 @@ public abstract class BaseDrawer extends DaggerAppCompatActivity {
             LoginManager.getInstance().logOut();
             editor.clear();
             editor.apply();
+            return intent;
+        } else if (identifier == ChatSessionActivity.IDENTIFIER) {
+            Intent intent = new Intent(BaseDrawer.this, ChatSessionActivity.class);
             return intent;
         }
         return null;
