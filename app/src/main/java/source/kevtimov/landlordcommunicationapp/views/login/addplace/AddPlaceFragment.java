@@ -150,7 +150,7 @@ public class AddPlaceFragment extends Fragment implements ContractsAddPlace.View
     @Override
     public void showError(Throwable error) {
         StyleableToast.makeText(getContext(), error.getMessage(),
-                Toast.LENGTH_LONG, R.style.accept_login_toast).show();
+                Toast.LENGTH_LONG, R.style.reject_login_toast).show();
     }
 
     @Override

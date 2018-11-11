@@ -27,15 +27,13 @@ public class HomePresenter implements ContractsHome.Presenter {
 
     private ContractsHome.View mView;
     private SchedulerProvider mSchedulerProvider;
-    private UserService mUserService;
     private RentService mRentService;
     private PlaceService mPlaceService;
     private User mUser;
 
 
     @Inject
-    public HomePresenter(UserService userService, SchedulerProvider schedulerProvider, RentService rentService, PlaceService placeService) {
-        this.mUserService = userService;
+    public HomePresenter(SchedulerProvider schedulerProvider, RentService rentService, PlaceService placeService) {
         this.mSchedulerProvider = schedulerProvider;
         this.mRentService = rentService;
         this.mPlaceService = placeService;
@@ -73,6 +71,26 @@ public class HomePresenter implements ContractsHome.Presenter {
                             error -> mView.showError(error));
 
         }
+    }
+
+    @Override
+    public void allowNavigationToChats() {
+        mView.navigateToChats();
+    }
+
+    @Override
+    public void allowNavigationToPayments() {
+        mView.navigateToPayments();
+    }
+
+    @Override
+    public void allowNavigationToUsers() {
+        mView.navigateToUsers();
+    }
+
+    @Override
+    public void allowNavigationToPlaces() {
+        mView.navigateToPlaces();
     }
 
     private void getRentsByPlace(List<Place> places) {

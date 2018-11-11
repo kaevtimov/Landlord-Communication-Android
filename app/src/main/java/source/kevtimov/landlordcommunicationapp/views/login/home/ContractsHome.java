@@ -18,6 +18,14 @@ public interface ContractsHome {
         void showError(Throwable error);
 
         void sendNotification(int year, int month, int day, Rent rent);
+
+        void navigateToChats();
+
+        void navigateToPayments();
+
+        void navigateToUsers();
+
+        void navigateToPlaces();
     }
 
     interface Presenter {
@@ -28,11 +36,26 @@ public interface ContractsHome {
 
         void manageNotifications();
 
+        void allowNavigationToChats();
+
+        void allowNavigationToPayments();
+
+        void allowNavigationToUsers();
+
+        void allowNavigationToPlaces();
+
         void setUser(User user);
     }
 
     interface Navigator {
 
+        void navigateToChats();
+
+        void navigateToPayments();
+
+        void navigateToUsers();
+
+        void navigateToPlaces();
 
     }
 

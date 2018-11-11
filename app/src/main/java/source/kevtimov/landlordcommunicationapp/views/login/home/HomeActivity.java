@@ -1,5 +1,6 @@
 package source.kevtimov.landlordcommunicationapp.views.login.home;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -8,10 +9,14 @@ import android.support.v7.widget.Toolbar;
 import javax.inject.Inject;
 
 import source.kevtimov.landlordcommunicationapp.R;
+import source.kevtimov.landlordcommunicationapp.chat.sessions.ChatSessionActivity;
 import source.kevtimov.landlordcommunicationapp.models.User;
 import source.kevtimov.landlordcommunicationapp.parsers.base.JsonParser;
 import source.kevtimov.landlordcommunicationapp.utils.Constants;
 import source.kevtimov.landlordcommunicationapp.utils.drawer.BaseDrawer;
+import source.kevtimov.landlordcommunicationapp.views.login.mypayments.MyPaymentsActivity;
+import source.kevtimov.landlordcommunicationapp.views.login.myplaces.MyPlacesActivity;
+import source.kevtimov.landlordcommunicationapp.views.login.myusers.MyUsersActivity;
 
 public class HomeActivity extends BaseDrawer implements ContractsHome.Navigator{
 
@@ -69,6 +74,30 @@ public class HomeActivity extends BaseDrawer implements ContractsHome.Navigator{
     @Override
     protected String getEmail() {
         return this.mLogInUser.getEmail();
+    }
+
+    @Override
+    public void navigateToChats() {
+        Intent intent = new Intent(this, ChatSessionActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void navigateToPayments() {
+        Intent intent = new Intent(this, MyPaymentsActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void navigateToUsers() {
+        Intent intent = new Intent(this, MyUsersActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void navigateToPlaces() {
+        Intent intent = new Intent(this, MyPlacesActivity.class);
+        startActivity(intent);
     }
 
     private User getUserFromSharedPref() {
