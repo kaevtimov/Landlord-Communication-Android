@@ -92,7 +92,7 @@ public class ChatPresenter implements ContractsChat.Presenter {
                 }
             }
         };
-        mTimer.scheduleAtFixedRate(mTimerTask, 0, 5000);
+        mTimer.scheduleAtFixedRate(mTimerTask, 0, 3000);
     }
 
 
@@ -121,5 +121,10 @@ public class ChatPresenter implements ContractsChat.Presenter {
                                 mView.showError(error);
                             }
                         });
+    }
+
+    @Override
+    public void allowNavigationToTemplateMessages() {
+        mView.navigateToMessageTemplates();
     }
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import source.kevtimov.landlordcommunicationapp.models.Payment;
 import source.kevtimov.landlordcommunicationapp.repositories.base.PaymentRepository;
 import source.kevtimov.landlordcommunicationapp.services.base.PaymentService;
+import source.kevtimov.landlordcommunicationapp.utils.Constants;
 import source.kevtimov.landlordcommunicationapp.validation.Validator;
 
 public class HttpPaymentService implements PaymentService {
@@ -22,7 +23,7 @@ public class HttpPaymentService implements PaymentService {
     public Payment createPayment(Payment payment) throws IOException {
 
         if(!mValidator.isObjectValid(payment)){
-            throw new IllegalArgumentException("Cannot register payment, because it is not with valid information!");
+            throw new IllegalArgumentException(Constants.PAYMENT_VALIDATOR_MESSAGE);
         }
 
         return paymentRepository.createPayment(payment);

@@ -67,8 +67,6 @@
     <string name="total_amount">Total amount:</string>
     <string name="gallery">GALLERY</string>
     <string name="input_message">Input message.</string>
-    <string name="first_name">First name:</string>
-    <string name="last_name">Last name:</string>
     <string name="send">Send</string>
     <string name="landlord_communication">Landlord communication</string>
     <string name="we_will_make_your_communication_better_but_we_will_not_pay_your_rents_it_is_up_to_you">We will make your communication better, but we will not pay your rents. It is up to you.</string>
@@ -76,5 +74,9 @@
     <string name="payments">PAYMENTS</string>
     <string name="users">USERS</string>
     <string name="places">PLACES</string>
+    <string name="template_message">TEMPLATE MESSAGE</string>
+    <string name="please_choose_message">Please choose message</string>
+    <string name="first_name">First name:</string>
+    <string name="last_name">Last name:</string>
 
 </resources>

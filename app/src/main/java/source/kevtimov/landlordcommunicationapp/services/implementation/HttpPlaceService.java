@@ -6,6 +6,7 @@ import java.util.List;
 import source.kevtimov.landlordcommunicationapp.models.Place;
 import source.kevtimov.landlordcommunicationapp.repositories.base.PlaceRepository;
 import source.kevtimov.landlordcommunicationapp.services.base.PlaceService;
+import source.kevtimov.landlordcommunicationapp.utils.Constants;
 import source.kevtimov.landlordcommunicationapp.validation.Validator;
 
 public class HttpPlaceService implements PlaceService {
@@ -22,7 +23,7 @@ public class HttpPlaceService implements PlaceService {
     public Place registerPlace(Place place) throws IOException {
 
         if(!mValidator.isObjectValid(place)){
-            throw new IllegalArgumentException("Cannot add place, because it is not with valid information!");
+            throw new IllegalArgumentException(Constants.PLACE_VALIDATOR_MESSAGE);
         }
 
         return placeRepository.registerPlace(place);

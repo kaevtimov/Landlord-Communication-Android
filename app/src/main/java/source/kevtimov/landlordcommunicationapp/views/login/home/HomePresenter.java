@@ -116,7 +116,7 @@ public class HomePresenter implements ContractsHome.Presenter {
         LocalDateTime currentLocalDateTime = LocalDateTime.parse(rent.getDueDate());
         LocalDateTime beforeFiveDays = currentLocalDateTime.minusDays(5);
 
-        // this is the data 5 days before rent due date
+        // this is the date 5 days before rent due date
         Date dateForNotification = beforeFiveDays.toDate();
         @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String strDate = dateFormat.format(dateForNotification);

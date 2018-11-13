@@ -4,6 +4,7 @@ import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 import source.kevtimov.landlordcommunicationapp.chat.chatview.ChatActivity;
 import source.kevtimov.landlordcommunicationapp.chat.sessions.ChatSessionActivity;
+import source.kevtimov.landlordcommunicationapp.chat.templatemessage.TemplateMessageActivity;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.AddCardModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.AddPlaceModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.MessageModule;
@@ -20,6 +21,7 @@ import source.kevtimov.landlordcommunicationapp.diconfig.modules.SelectPlaceModu
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.SelectTenantModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.SettingsModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.SignUpModule;
+import source.kevtimov.landlordcommunicationapp.diconfig.modules.TemplateMessageModule;
 import source.kevtimov.landlordcommunicationapp.diconfig.modules.UserDetailsModule;
 import source.kevtimov.landlordcommunicationapp.views.login.addcard.AddCardActivity;
 import source.kevtimov.landlordcommunicationapp.views.login.addplace.AddPlaceActivity;
@@ -140,4 +142,10 @@ public abstract class ActivityBindingModule {
             modules = MessageModule.class
     )
     abstract ChatActivity chatActivity();
+
+    @ActivityScoped
+    @ContributesAndroidInjector(
+            modules = TemplateMessageModule.class
+    )
+    abstract TemplateMessageActivity templateMessageActivity();
 }

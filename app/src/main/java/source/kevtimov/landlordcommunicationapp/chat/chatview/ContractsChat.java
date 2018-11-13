@@ -18,8 +18,13 @@ public interface ContractsChat {
 
         void showError(Throwable error);
 
+        void setNavigator(ContractsChat.Navigator navigator);
+
+        void navigateToMessageTemplates();
+
         void showMessages(List<Message> messages);
 
+        void sendTemplateMessage(String incomingTemplateMessage);
     }
 
     interface Presenter {
@@ -37,5 +42,11 @@ public interface ContractsChat {
         void setSession(int chatSessionId);
 
         void createMessage(String msgContent);
+
+        void allowNavigationToTemplateMessages();
+    }
+
+    interface Navigator{
+        void navigateToTemplateMessageChoose();
     }
 }
