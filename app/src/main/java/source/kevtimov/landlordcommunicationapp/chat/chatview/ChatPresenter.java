@@ -1,5 +1,7 @@
 package source.kevtimov.landlordcommunicationapp.chat.chatview;
 
+import android.graphics.Bitmap;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -7,9 +9,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Handler;
-import java.util.logging.LogRecord;
 
 import javax.inject.Inject;
 
@@ -18,22 +17,30 @@ import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.disposables.Disposable;
 import source.kevtimov.landlordcommunicationapp.async.base.SchedulerProvider;
 import source.kevtimov.landlordcommunicationapp.models.Message;
+import source.kevtimov.landlordcommunicationapp.models.User;
 import source.kevtimov.landlordcommunicationapp.services.base.MessageService;
+import source.kevtimov.landlordcommunicationapp.utils.bitmapcache.BitmapCache;
+import source.kevtimov.landlordcommunicationapp.utils.bitmapcoder.BitmapAgent;
+import source.kevtimov.landlordcommunicationapp.utils.bitmapcoder.IBitmapAgent;
 
 public class ChatPresenter implements ContractsChat.Presenter {
 
     private ContractsChat.View mView;
     private SchedulerProvider mSchedulerProvider;
     private MessageService mMessageService;
-    private int mLoggedInUser;
-    private int mOtherUser;
+    private User mLoggedInUser;
+    private User mOtherUser;
     private int mCurrentSession;
+    private IBitmapAgent mAgent;
+    private BitmapCache mCacher;
 
 
     @Inject
     public ChatPresenter(SchedulerProvider schedulerProvider, MessageService messageService) {
         this.mSchedulerProvider = schedulerProvider;
         this.mMessageService = messageService;
+        this.mCacher = BitmapCache.getInstance();
+        this.mAgent = new BitmapAgent();
     }
 
     @Override
@@ -47,13 +54,13 @@ public class ChatPresenter implements ContractsChat.Presenter {
     }
 
     @Override
-    public void setLoggedInUser(int userId) {
-        this.mLoggedInUser = userId;
+    public void setLoggedInUser(User user) {
+        this.mLoggedInUser = user;
     }
 
     @Override
-    public void setOtherUser(int userId) {
-        this.mOtherUser = userId;
+    public void setOtherUser(User user) {
+        this.mOtherUser = user;
     }
 
     @Override
@@ -102,7 +109,7 @@ public class ChatPresenter implements ContractsChat.Presenter {
         Date date = Calendar.getInstance().getTime();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String strDate = dateFormat.format(date);
-        Message message = new Message(strDate, msgContent, mLoggedInUser, mOtherUser, mCurrentSession);
+        Message message = new Message(strDate, msgContent, mLoggedInUser.getUserId(), mOtherUser.getUserId(), mCurrentSession);
 
         Disposable observal = Observable
                 .create((ObservableOnSubscribe<Message>) emitter -> {
@@ -127,4 +134,16 @@ public class ChatPresenter implements ContractsChat.Presenter {
     public void allowNavigationToTemplateMessages() {
         mView.navigateToMessageTemplates();
     }
+
+    @Override
+    public Bitmap setOtherUserPicture() {
+        Bitmap bitmap = mAgent.convertStringToBitmap(mOtherUser.getPicture());
+
+        if(mCacher.getLruCache().get(mOtherUser.getUsername() + "_profile_image") == null){
+            mCacher.getLruCache().put(mOtherUser.getUsername() + "_profile_image", bitmap);
+        }
+
+        return bitmap;
+    }
+
 }

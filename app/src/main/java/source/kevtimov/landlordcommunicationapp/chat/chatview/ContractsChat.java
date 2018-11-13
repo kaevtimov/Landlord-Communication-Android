@@ -1,5 +1,7 @@
 package source.kevtimov.landlordcommunicationapp.chat.chatview;
 
+import android.graphics.Bitmap;
+
 import java.util.List;
 
 import source.kevtimov.landlordcommunicationapp.models.ChatSession;
@@ -35,15 +37,18 @@ public interface ContractsChat {
 
         void getAllMessagesByChatId();
 
-        void setLoggedInUser(int userId);
+        void setLoggedInUser(User user);
 
-        void setOtherUser(int userId);
+        void setOtherUser(User user);
 
         void setSession(int chatSessionId);
 
         void createMessage(String msgContent);
 
         void allowNavigationToTemplateMessages();
+
+        Bitmap setOtherUserPicture();
+
     }
 
     interface Navigator{

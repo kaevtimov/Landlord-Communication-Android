@@ -1,7 +1,5 @@
 package source.kevtimov.landlordcommunicationapp.chat.sessions;
 
-import java.util.List;
-
 import source.kevtimov.landlordcommunicationapp.models.ChatSession;
 import source.kevtimov.landlordcommunicationapp.models.User;
 
@@ -21,11 +19,9 @@ public interface ContractsChatSession {
 
         void addUser(User user);
 
-        //void showSessions(List<ChatSession> chatSessions);
-
         void showEmptyList();
 
-        void navigateToMessageView(ChatSession chat);
+        void navigateToMessageView(ChatSession chat, User otherUser);
     }
 
     interface Presenter {
@@ -34,11 +30,7 @@ public interface ContractsChatSession {
 
         void unsubscribe();
 
-        //void getAllByLoggedInUserId();
-
         void setUser(User user);
-
-        void allowNavigationToMessageView(ChatSession chat);
 
         void loadUsers();
 
@@ -47,6 +39,6 @@ public interface ContractsChatSession {
 
     interface Navigator {
 
-        void navigateToMessageView(ChatSession chat);
+        void navigateToMessageView(ChatSession chat, User otherUser);
     }
 }

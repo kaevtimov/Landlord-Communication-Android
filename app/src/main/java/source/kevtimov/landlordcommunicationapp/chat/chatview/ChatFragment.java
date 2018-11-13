@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.emredavarci.circleprogressbar.CircleProgressBar;
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.muddzdev.styleabletoast.StyleableToast;
 
 import java.util.ArrayList;
@@ -37,6 +38,9 @@ import source.kevtimov.landlordcommunicationapp.utils.Constants;
 
 public class ChatFragment extends Fragment implements ContractsChat.View{
 
+
+    @BindView(R.id.iv_other_user)
+    RoundedImageView mImageViewOtherUser;
 
     @BindView(R.id.chat_recycler_view)
     RecyclerView mRecyclerView;
@@ -66,13 +70,7 @@ public class ChatFragment extends Fragment implements ContractsChat.View{
         setHasOptionsMenu(true);
         ButterKnife.bind(this, root);
 
-        mLinearLayoutManager = new LinearLayoutManager(getContext());
-        mLinearLayoutManager.setStackFromEnd(true);
-        mRecyclerView.setLayoutManager(mLinearLayoutManager);
-        mMessageList = new ArrayList<>();
-
-        mChatAdapter = new ChatMessageAdapter(mMessageList, getContext());
-        mRecyclerView.setAdapter(mChatAdapter);
+        initViews();
 
         return root;
     }
@@ -166,5 +164,16 @@ public class ChatFragment extends Fragment implements ContractsChat.View{
 
             mEditTextSendMsg.setText("");
         }
+    }
+
+    private void initViews() {
+        mImageViewOtherUser.setImageBitmap(mPresenter.setOtherUserPicture());
+        mLinearLayoutManager = new LinearLayoutManager(getContext());
+        mLinearLayoutManager.setStackFromEnd(true);
+        mRecyclerView.setLayoutManager(mLinearLayoutManager);
+        mMessageList = new ArrayList<>();
+
+        mChatAdapter = new ChatMessageAdapter(mMessageList, getContext());
+        mRecyclerView.setAdapter(mChatAdapter);
     }
 }

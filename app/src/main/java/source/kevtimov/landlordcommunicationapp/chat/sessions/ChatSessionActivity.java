@@ -75,10 +75,11 @@ public class ChatSessionActivity extends BaseDrawer implements ContractsChatSess
     }
 
     @Override
-    public void navigateToMessageView(ChatSession chat) {
+    public void navigateToMessageView(ChatSession chat, User otherUser) {
         Intent intent = new Intent(this, ChatActivity.class);
 
         intent.putExtra("ChatSession", chat);
+        intent.putExtra("OtherUser", otherUser);
 
         startActivity(intent);
     }
