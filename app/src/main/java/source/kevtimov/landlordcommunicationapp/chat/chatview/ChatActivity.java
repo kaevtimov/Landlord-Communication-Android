@@ -50,16 +50,13 @@ public class ChatActivity extends BaseDrawer implements ContractsChat.Navigator{
         setSupportActionBar(mToolbar);
 
         ChatSession incomingChatSession = (ChatSession) getIntent().getSerializableExtra("ChatSession");
+        User otherUser = (User) getIntent().getSerializableExtra("OtherUser");
 
         mChatFragment.setNavigator(this);
         mLogInUser = getUserFromSharedPref();
-        mPresenter.setLoggedInUser(mLogInUser.getUserId());
+        mPresenter.setLoggedInUser(mLogInUser);
         mPresenter.setSession(incomingChatSession.getChatsessionId());
-        if(incomingChatSession.getLandlordID() == mLogInUser.getUserId()){
-            mPresenter.setOtherUser(incomingChatSession.getTenantID());
-        } else if(incomingChatSession.getTenantID() == mLogInUser.getUserId()){
-            mPresenter.setOtherUser(incomingChatSession.getLandlordID());
-        }
+        mPresenter.setOtherUser(otherUser);
 
         mChatFragment.setPresenter(mPresenter);
 

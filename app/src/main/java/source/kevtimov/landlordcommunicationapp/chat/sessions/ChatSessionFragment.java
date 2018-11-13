@@ -119,8 +119,8 @@ public class ChatSessionFragment extends Fragment implements ContractsChatSessio
     }
 
     @Override
-    public void navigateToMessageView(ChatSession chat) {
-        mNavigator.navigateToMessageView(chat);
+    public void navigateToMessageView(ChatSession chat, User other) {
+        mNavigator.navigateToMessageView(chat, other);
     }
 
 

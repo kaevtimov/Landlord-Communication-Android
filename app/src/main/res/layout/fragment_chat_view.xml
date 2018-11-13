@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    android:orientation="vertical"
+<RelativeLayout android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/transparent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:id="@+id/iv_other_user"
+        android:scaleType="fitCenter"
+        app:riv_corner_radius="20dip"
+        app:riv_oval="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"/>
 
     <FrameLayout
+        android:layout_below="@+id/iv_other_user"
         android:layout_above="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -14,7 +25,7 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/chat_recycler_view"
             android:layout_width="match_parent"
-            android:layout_marginTop="45dp"
+            android:layout_marginTop="15dp"
             android:padding="15dp"
             android:layout_height="match_parent" />
 

@@ -44,11 +44,6 @@ public class ChatSessionPresenter implements ContractsChatSession.Presenter {
     }
 
     @Override
-    public void allowNavigationToMessageView(ChatSession chat) {
-        mView.navigateToMessageView(chat);
-    }
-
-    @Override
     public void subscribe(ContractsChatSession.View view) {
         this.mView = view;
     }
@@ -123,10 +118,10 @@ public class ChatSessionPresenter implements ContractsChatSession.Presenter {
                     .subscribeOn(mSchedulerProvider.background())
                     .observeOn(mSchedulerProvider.ui())
                     .doFinally(mView::hideLoading)
-                    .subscribe(mView::navigateToMessageView,
+                    .subscribe(chat -> mView.navigateToMessageView(chat, landlord),
                             error -> mView.showError(error));
         }else{
-            mView.navigateToMessageView(chatSessions.get(0));
+            mView.navigateToMessageView(chatSessions.get(0), landlord);
         }
     }
 
@@ -148,10 +143,10 @@ public class ChatSessionPresenter implements ContractsChatSession.Presenter {
                     .subscribeOn(mSchedulerProvider.background())
                     .observeOn(mSchedulerProvider.ui())
                     .doFinally(mView::hideLoading)
-                    .subscribe(mView::navigateToMessageView,
+                    .subscribe(chat -> mView.navigateToMessageView(chat, tenant),
                             error -> mView.showError(error));
         }else{
-            mView.navigateToMessageView(chatSessions.get(0));
+            mView.navigateToMessageView(chatSessions.get(0), tenant);
         }
     }
 
