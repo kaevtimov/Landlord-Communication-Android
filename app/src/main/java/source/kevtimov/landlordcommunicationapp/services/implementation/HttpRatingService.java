@@ -6,6 +6,7 @@ import java.util.List;
 import source.kevtimov.landlordcommunicationapp.models.Rating;
 import source.kevtimov.landlordcommunicationapp.repositories.base.RatingRepository;
 import source.kevtimov.landlordcommunicationapp.services.base.RatingService;
+import source.kevtimov.landlordcommunicationapp.utils.Constants;
 import source.kevtimov.landlordcommunicationapp.validation.Validator;
 
 public class HttpRatingService implements RatingService {
@@ -22,7 +23,7 @@ public class HttpRatingService implements RatingService {
     public Rating addRating(Rating rating) throws IOException {
 
         if(!mValidator.isObjectValid(rating)){
-            throw new IllegalArgumentException("Cannot register vote, because it is not with valid information!");
+            throw new IllegalArgumentException(Constants.RATING_VALIDATOR_SERVICE);
         }
 
         return ratingRepository.addRating(rating);

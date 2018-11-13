@@ -6,6 +6,7 @@ import java.util.List;
 import source.kevtimov.landlordcommunicationapp.models.Card;
 import source.kevtimov.landlordcommunicationapp.repositories.base.CardRepository;
 import source.kevtimov.landlordcommunicationapp.services.base.CardService;
+import source.kevtimov.landlordcommunicationapp.utils.Constants;
 import source.kevtimov.landlordcommunicationapp.validation.Validator;
 
 public class HttpCardService implements CardService {
@@ -32,7 +33,7 @@ public class HttpCardService implements CardService {
     public Card registerCard(Card card) throws IOException {
 
         if(!mValidator.isObjectValid(card)){
-            throw new IllegalArgumentException("Cannot register card, because it is not with valid information!");
+            throw new IllegalArgumentException(Constants.CARD_VALIDATOR_SERVICE);
         }
 
         return cardRepository.registerCard(card);

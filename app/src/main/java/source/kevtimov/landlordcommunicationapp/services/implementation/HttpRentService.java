@@ -5,6 +5,7 @@ import java.io.IOException;
 import source.kevtimov.landlordcommunicationapp.models.Rent;
 import source.kevtimov.landlordcommunicationapp.repositories.base.RentRepository;
 import source.kevtimov.landlordcommunicationapp.services.base.RentService;
+import source.kevtimov.landlordcommunicationapp.utils.Constants;
 import source.kevtimov.landlordcommunicationapp.validation.Validator;
 
 public class HttpRentService implements RentService {
@@ -21,7 +22,7 @@ public class HttpRentService implements RentService {
     public Rent registerNextRent(Rent rent) throws IOException {
 
         if(!mValidator.isObjectValid(rent)){
-            throw new IllegalArgumentException("Cannot add rent, because it is not with required information!");
+            throw new IllegalArgumentException(Constants.RENT_VALIDATOR_MESSAGE);
         }
 
         return rentRepository.registerNextRent(rent);
@@ -31,7 +32,7 @@ public class HttpRentService implements RentService {
     public Rent registerFirstRent(Rent rent) throws IOException {
 
         if(!mValidator.isObjectValid(rent)){
-            throw new IllegalArgumentException("Cannot add rent, because it is not with required information!");
+            throw new IllegalArgumentException(Constants.RENT_VALIDATOR_MESSAGE);
         }
 
         return rentRepository.registerFirstRent(rent);

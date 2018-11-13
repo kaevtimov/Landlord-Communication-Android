@@ -1,23 +1,30 @@
 package source.kevtimov.landlordcommunicationapp.chat.chatview;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+
+import java.util.Objects;
 
 import javax.inject.Inject;
 
 import source.kevtimov.landlordcommunicationapp.R;
 import source.kevtimov.landlordcommunicationapp.chat.sessions.ChatSessionFragment;
 import source.kevtimov.landlordcommunicationapp.chat.sessions.ContractsChatSession;
+import source.kevtimov.landlordcommunicationapp.chat.templatemessage.TemplateMessageActivity;
 import source.kevtimov.landlordcommunicationapp.models.ChatSession;
 import source.kevtimov.landlordcommunicationapp.models.User;
 import source.kevtimov.landlordcommunicationapp.parsers.base.JsonParser;
 import source.kevtimov.landlordcommunicationapp.utils.Constants;
 import source.kevtimov.landlordcommunicationapp.utils.drawer.BaseDrawer;
 
-public class ChatActivity extends BaseDrawer {
+public class ChatActivity extends BaseDrawer implements ContractsChat.Navigator{
 
     @Inject
     ChatFragment mChatFragment;
@@ -44,6 +51,7 @@ public class ChatActivity extends BaseDrawer {
 
         ChatSession incomingChatSession = (ChatSession) getIntent().getSerializableExtra("ChatSession");
 
+        mChatFragment.setNavigator(this);
         mLogInUser = getUserFromSharedPref();
         mPresenter.setLoggedInUser(mLogInUser.getUserId());
         mPresenter.setSession(incomingChatSession.getChatsessionId());
@@ -79,6 +87,24 @@ public class ChatActivity extends BaseDrawer {
     @Override
     protected String getEmail() {
         return mLogInUser.getEmail();
+    }
+
+    @Override
+    public void navigateToTemplateMessageChoose() {
+        Intent intent = new Intent(this, TemplateMessageActivity.class);
+        startActivityForResult(intent, Constants.REQUEST_CODE_SELECT_TEMPLATE_MESSAGE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == Constants.REQUEST_CODE_SELECT_TEMPLATE_MESSAGE) {
+            if (resultCode == RESULT_OK) {
+                String incomingTemplateMessage = Objects.requireNonNull(data).getStringExtra(Constants.TEMPLATE_MESSAGE);
+
+                mChatFragment.sendTemplateMessage(incomingTemplateMessage);
+            }
+        }
     }
 
     private User getUserFromSharedPref() {

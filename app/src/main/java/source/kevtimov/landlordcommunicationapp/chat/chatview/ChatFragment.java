@@ -7,6 +7,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -46,6 +49,7 @@ public class ChatFragment extends Fragment implements ContractsChat.View{
 
 
     private ContractsChat.Presenter mPresenter;
+    private ContractsChat.Navigator mNavigator;
     private ChatMessageAdapter mChatAdapter;
     private ArrayList<Message> mMessageList;
     private LinearLayoutManager mLinearLayoutManager;
@@ -59,6 +63,7 @@ public class ChatFragment extends Fragment implements ContractsChat.View{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root =  inflater.inflate(R.layout.fragment_chat_view, container, false);
+        setHasOptionsMenu(true);
         ButterKnife.bind(this, root);
 
         mLinearLayoutManager = new LinearLayoutManager(getContext());
@@ -86,6 +91,29 @@ public class ChatFragment extends Fragment implements ContractsChat.View{
     }
 
     @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater
+                .inflate(R.menu.chat_menu, menu);
+
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int itemId = item.getItemId();
+
+        switch (itemId){
+            case R.id.menu_message_template:
+                mPresenter.allowNavigationToTemplateMessages();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
+
+    @Override
     public void setPresenter(ContractsChat.Presenter presenter) {
         this.mPresenter = presenter;
     }
@@ -107,11 +135,26 @@ public class ChatFragment extends Fragment implements ContractsChat.View{
     }
 
     @Override
+    public void setNavigator(ContractsChat.Navigator navigator) {
+        this.mNavigator = navigator;
+    }
+
+    @Override
+    public void navigateToMessageTemplates() {
+        mNavigator.navigateToTemplateMessageChoose();
+    }
+
+    @Override
     public void showMessages(List<Message> messages) {
         mMessageList.clear();
         mMessageList.addAll(messages);
         mChatAdapter.notifyDataSetChanged();
         mRecyclerView.scrollToPosition(mChatAdapter.getItemCount()-1);
+    }
+
+    @Override
+    public void sendTemplateMessage(String incomingTemplateMessage) {
+        mEditTextSendMsg.setText(incomingTemplateMessage);
     }
 
     @OnClick(R.id.chat_send_msg)

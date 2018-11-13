@@ -8,6 +8,7 @@ import java.util.List;
 import source.kevtimov.landlordcommunicationapp.models.User;
 import source.kevtimov.landlordcommunicationapp.repositories.base.UserRepository;
 import source.kevtimov.landlordcommunicationapp.services.base.UserService;
+import source.kevtimov.landlordcommunicationapp.utils.Constants;
 import source.kevtimov.landlordcommunicationapp.utils.password.IPasswordAgent;
 import source.kevtimov.landlordcommunicationapp.validation.Validator;
 
@@ -58,7 +59,7 @@ public class HttpUserService implements UserService {
         }
 
         if(!mValidator.isObjectValid(user)){
-            throw new IllegalArgumentException("Cannot register user, because he is not with valid information!");
+            throw new IllegalArgumentException(Constants.USER_VALIDATOR_MESSAGE);
         }
         return userRepository.registerUser(user);
     }

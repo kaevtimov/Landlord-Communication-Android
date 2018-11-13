@@ -1,7 +1,7 @@
 package source.kevtimov.landlordcommunicationapp.utils;
 
 public class Constants {
-    public static final String BASE_SERVER_URL_KRIS = "http://192.168.100.4:9090/api";
+    public static final String BASE_SERVER_URL_KRIS = "http://192.168.137.1:9090/api";
 
     public static final int SELECT_TENANT_REQUEST = 2005;
 
@@ -142,4 +142,22 @@ public class Constants {
     public static final String IMAGE = "image/*";
     public static final String NO_SESSIONS_FOUND = "No sessions found!";
     public static final String NO_MESSAGES_FOUND = "No messages found!";
+    public static final String USER_VALIDATOR_MESSAGE = "Cannot register user, because he is not with valid information!";
+    public static final String RENT_VALIDATOR_MESSAGE = "Cannot add rent, because it is not with required information!";
+    public static final String RATING_VALIDATOR_SERVICE = "Cannot register vote, because it is not with valid information!";
+    public static final String PLACE_VALIDATOR_MESSAGE = "Cannot add place, because it is not with valid information!";
+    public static final String PAYMENT_VALIDATOR_MESSAGE = "Cannot register payment, because it is not with valid information!";
+    public static final String CARD_VALIDATOR_SERVICE = "Cannot register card, because it is not with valid information!";
+    public static final int REQUEST_CODE_SELECT_TEMPLATE_MESSAGE = 1168;
+    public static final String TEMPLATE_MESSAGE = "TemplateMessage";
+    public static final String RUNNING_A_FEW_MINUTES_LATE = "Running a few minutes late but on my way!";
+    public static final String SOUNDS_GOOD_TEMPL_MESSAGE = "Sounds good. Will get back in touch later to talk more.";
+    public static final String WONT_BE_ABLE_TO_MAKE_IT = "Won't be able to make it today but thanks for checking in.";
+    public static final String I_WILL_BE_THERE_IN_5_MINS = "I will be there in 5 minutes!";
+    public static final String IN_MEETING_AT_THE_MOMENT = "I am busy in a meeting at that moment, I will call you soon.";
+    public static final String PLEASE_CALL_ME = "Please call me when you can. It is important!";
+    public static final String THANK_YOU_FOR_EVERYTHING = "Thank you for everything!";
+    public static final String MEET_ME_IN_THE_APARTMENT = "Meet me in the apartment at 18:00";
+    public static final String DIFFICULT_TO_TALK = "It is difficult to talk right now. Sorry.";
+    public static final String THAT_SOUNDS_AWESOME = "That sounds awesome!";
 }
