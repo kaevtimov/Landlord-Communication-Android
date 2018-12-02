@@ -1,13 +1,15 @@
 package source.kevtimov.landlordcommunicationapp.chat.templatemessage;
 
 
+import java.util.List;
+
 public interface ContractsTemplateMessage {
 
     interface View {
 
         void setPresenter(ContractsTemplateMessage.Presenter presenter);
 
-        void showMessages(String message);
+        void showMessages(List<String> messages);
 
         void navigateToChat(String message);
 
@@ -24,6 +26,8 @@ public interface ContractsTemplateMessage {
         void allowNavigationToChat(String message);
 
         void loadTemplateMessages();
+
+        void addTemplateMessage(String message);
     }
 
     interface Navigator{

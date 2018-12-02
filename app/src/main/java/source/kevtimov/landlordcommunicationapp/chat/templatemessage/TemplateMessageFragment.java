@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -18,6 +19,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.OnItemClick;
 import source.kevtimov.landlordcommunicationapp.R;
 
@@ -29,6 +31,9 @@ public class TemplateMessageFragment extends Fragment implements ContractsTempla
 
     @BindView(R.id.lv_templ_messages)
     ListView mListViewTemplMessages;
+
+    @BindView(R.id.et_add_message)
+    EditText mEditTextAdd;
 
     private ContractsTemplateMessage.Presenter mPresenter;
     private ContractsTemplateMessage.Navigator mNavigator;
@@ -46,7 +51,6 @@ public class TemplateMessageFragment extends Fragment implements ContractsTempla
         ButterKnife.bind(this, root);
         mMessageAdapter = new TemplateMessageAdapter(getContext());
         mListViewTemplMessages.setAdapter(mMessageAdapter);
-
 
         return root;
     }
@@ -70,8 +74,9 @@ public class TemplateMessageFragment extends Fragment implements ContractsTempla
     }
 
     @Override
-    public void showMessages(String message) {
-        mMessageAdapter.add(message);
+    public void showMessages(List<String> message) {
+        mMessageAdapter.clear();
+        mMessageAdapter.addAll(message);
         mMessageAdapter.notifyDataSetChanged();
     }
 
@@ -90,5 +95,11 @@ public class TemplateMessageFragment extends Fragment implements ContractsTempla
         String templateMessage = mMessageAdapter.getItem(position);
 
         mPresenter.allowNavigationToChat(templateMessage);
+    }
+
+    @OnClick(R.id.btn_add)
+    public void onAddClick(View v){
+        String message = mEditTextAdd.getText().toString();
+        mPresenter.addTemplateMessage(message);
     }
 }

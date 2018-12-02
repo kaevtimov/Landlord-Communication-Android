@@ -1,6 +1,7 @@
 package source.kevtimov.landlordcommunicationapp.chat.templatemessage;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import butterknife.BindView;
@@ -29,6 +31,12 @@ public class TemplateMessageAdapter extends ArrayAdapter<String> {
     public void add(String object) {
         messages.add(object);
         super.add(object);
+    }
+
+    @Override
+    public void addAll(@NonNull Collection<? extends String> collection) {
+        messages.addAll(collection);
+        super.addAll(collection);
     }
 
     @Override
@@ -56,5 +64,11 @@ public class TemplateMessageAdapter extends ArrayAdapter<String> {
         mTextViewMessage.setText(message);
 
         return view;
+    }
+
+    @Override
+    public void clear() {
+        messages.clear();
+        super.clear();
     }
 }
