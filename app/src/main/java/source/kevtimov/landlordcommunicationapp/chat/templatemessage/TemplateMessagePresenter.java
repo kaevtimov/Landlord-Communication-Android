@@ -1,5 +1,7 @@
 package source.kevtimov.landlordcommunicationapp.chat.templatemessage;
 
+import android.database.Cursor;
+
 import javax.inject.Inject;
 
 import source.kevtimov.landlordcommunicationapp.services.base.TemplateMessageService;
@@ -30,8 +32,8 @@ public class TemplateMessagePresenter implements ContractsTemplateMessage.Presen
     }
 
     @Override
-    public void loadTemplateMessages() {
-        mView.showMessages(mTemplateMessageService.getAllTemplateMessages());
+    public Cursor loadTemplateMessages() {
+        return mTemplateMessageService.getAllTemplateMessages();
     }
 
     @Override

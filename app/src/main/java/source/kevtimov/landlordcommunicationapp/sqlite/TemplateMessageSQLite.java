@@ -1,10 +1,12 @@
 package source.kevtimov.landlordcommunicationapp.sqlite;
 
+import android.database.Cursor;
+
 import java.util.List;
 
 public interface TemplateMessageSQLite {
 
-    List<String> getAllTemplateMessages();
+    Cursor getAllTemplateMessages();
 
     boolean addTemplateMessage(String message);
 }

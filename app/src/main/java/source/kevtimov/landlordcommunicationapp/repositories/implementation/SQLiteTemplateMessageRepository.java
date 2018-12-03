@@ -1,5 +1,7 @@
 package source.kevtimov.landlordcommunicationapp.repositories.implementation;
 
+import android.database.Cursor;
+
 import java.util.List;
 
 import source.kevtimov.landlordcommunicationapp.repositories.base.TemplateMessageRepository;
@@ -14,7 +16,7 @@ public class SQLiteTemplateMessageRepository implements TemplateMessageRepositor
     }
 
     @Override
-    public List<String> getAllTemplateMessages() {
+    public Cursor getAllTemplateMessages() {
         return mTemplateMessageSQLite.getAllTemplateMessages();
     }
 

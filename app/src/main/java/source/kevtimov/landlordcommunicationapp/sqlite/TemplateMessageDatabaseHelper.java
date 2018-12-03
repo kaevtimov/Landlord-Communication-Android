@@ -16,20 +16,20 @@ public class TemplateMessageDatabaseHelper extends SQLiteOpenHelper implements T
     private static final int DATABASE_VERSION = 1;
     private static final String TABLE_NAME = "template_messages";
     private static final String SECOND_COL = "template_message_text";
-    private List<String> mMessages;
+    //private List<String> mMessages;
     private SQLiteDatabase mDatabase;
     private ContentValues mContentValues;
 
     public TemplateMessageDatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        mMessages = new ArrayList<>();
+        //mMessages = new ArrayList<>();
         mDatabase = this.getWritableDatabase();
         mContentValues = new ContentValues();
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + TABLE_NAME + " (template_message_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+        db.execSQL("CREATE TABLE " + TABLE_NAME + " (_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 " template_message_text TEXT)");
     }
 
@@ -40,16 +40,16 @@ public class TemplateMessageDatabaseHelper extends SQLiteOpenHelper implements T
     }
 
     @Override
-    public List<String> getAllTemplateMessages() {
-        mMessages.clear();
+    public Cursor getAllTemplateMessages() {
+        //mMessages.clear();
         Cursor result = mDatabase.rawQuery("SELECT * FROM " + TABLE_NAME, null);
 
-        if(result.getCount() > 0){
-            while(result.moveToNext()){
-                mMessages.add(result.getString(1));
-            }
-        }
-        return mMessages;
+//        if(result.getCount() > 0){
+//            while(result.moveToNext()){
+//                mMessages.add(result.getString(1));
+//            }
+//        }
+        return result;
     }
 
     @Override

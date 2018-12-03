@@ -79,5 +79,6 @@
     <string name="first_name">First name:</string>
     <string name="last_name">Last name:</string>
     <string name="add">ADD</string>
+    <string name="add_template_message">ADD TEMPLATE MESSAGE</string>
 
 </resources>
