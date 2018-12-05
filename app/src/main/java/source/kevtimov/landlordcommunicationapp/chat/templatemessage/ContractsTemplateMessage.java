@@ -26,6 +26,8 @@ public interface ContractsTemplateMessage {
         Cursor loadTemplateMessages();
 
         void addTemplateMessage(String message);
+
+        void closeCursorAndDatabase();
     }
 
     interface Navigator{

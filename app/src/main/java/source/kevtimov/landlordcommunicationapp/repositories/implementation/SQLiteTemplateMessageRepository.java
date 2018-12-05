@@ -24,4 +24,9 @@ public class SQLiteTemplateMessageRepository implements TemplateMessageRepositor
     public void addTemplateMessage(String message) {
         mTemplateMessageSQLite.addTemplateMessage(message);
     }
+
+    @Override
+    public void closeCursorAndDatabase() {
+        mTemplateMessageSQLite.closeCursorAndDatabase();
+    }
 }

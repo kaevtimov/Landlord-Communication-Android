@@ -40,4 +40,9 @@ public class TemplateMessagePresenter implements ContractsTemplateMessage.Presen
     public void addTemplateMessage(String message) {
         mTemplateMessageService.addTemplateMessage(message);
     }
+
+    @Override
+    public void closeCursorAndDatabase() {
+        mTemplateMessageService.closeCursorAndDatabase();
+    }
 }

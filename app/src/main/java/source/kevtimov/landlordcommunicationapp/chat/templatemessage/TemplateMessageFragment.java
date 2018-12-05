@@ -66,6 +66,12 @@ public class TemplateMessageFragment extends Fragment implements ContractsTempla
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mPresenter.closeCursorAndDatabase();
+    }
+
+    @Override
     public void setPresenter(ContractsTemplateMessage.Presenter presenter) {
         this.mPresenter = presenter;
     }

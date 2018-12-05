@@ -16,13 +16,12 @@ public class TemplateMessageDatabaseHelper extends SQLiteOpenHelper implements T
     private static final int DATABASE_VERSION = 1;
     private static final String TABLE_NAME = "template_messages";
     private static final String SECOND_COL = "template_message_text";
-    //private List<String> mMessages;
     private SQLiteDatabase mDatabase;
+    private Cursor mCursor;
     private ContentValues mContentValues;
 
     public TemplateMessageDatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        //mMessages = new ArrayList<>();
         mDatabase = this.getWritableDatabase();
         mContentValues = new ContentValues();
     }
@@ -41,15 +40,9 @@ public class TemplateMessageDatabaseHelper extends SQLiteOpenHelper implements T
 
     @Override
     public Cursor getAllTemplateMessages() {
-        //mMessages.clear();
-        Cursor result = mDatabase.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+        mCursor = mDatabase.rawQuery("SELECT * FROM " + TABLE_NAME, null);
 
-//        if(result.getCount() > 0){
-//            while(result.moveToNext()){
-//                mMessages.add(result.getString(1));
-//            }
-//        }
-        return result;
+        return mCursor;
     }
 
     @Override
@@ -59,5 +52,11 @@ public class TemplateMessageDatabaseHelper extends SQLiteOpenHelper implements T
         long insertionResult = mDatabase.insert(TABLE_NAME, null, mContentValues);
 
         return insertionResult != -1;
+    }
+
+    @Override
+    public void closeCursorAndDatabase() {
+        mCursor.close();
+        mDatabase.close();
     }
 }
