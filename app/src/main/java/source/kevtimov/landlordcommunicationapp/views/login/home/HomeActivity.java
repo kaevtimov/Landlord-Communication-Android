@@ -22,6 +22,7 @@ import source.kevtimov.landlordcommunicationapp.parsers.base.JsonParser;
 import source.kevtimov.landlordcommunicationapp.utils.Constants;
 import source.kevtimov.landlordcommunicationapp.utils.drawer.BaseDrawer;
 import source.kevtimov.landlordcommunicationapp.utils.androidservices.MyNotificationService;
+import source.kevtimov.landlordcommunicationapp.utils.receiver.ReceiverNotification;
 import source.kevtimov.landlordcommunicationapp.views.login.mypayments.MyPaymentsActivity;
 import source.kevtimov.landlordcommunicationapp.views.login.myplaces.MyPlacesActivity;
 import source.kevtimov.landlordcommunicationapp.views.login.myusers.MyUsersActivity;
@@ -111,18 +112,21 @@ public class HomeActivity extends BaseDrawer implements ContractsHome.Navigator{
 
     @Override
     public void sendNotification(Rent rent, Calendar mCalendar) {
-        Intent intent = new Intent(this, MyNotificationService.class);
+        Intent intent = new Intent(this, ReceiverNotification.class);
         intent.putExtra("TotalAmount", rent.getTotalAmount());
         intent.putExtra("RemainingAmount", rent.getRemainingAmount());
         intent.putExtra("DueDate", rent.getDueDate());
         intent.putExtra("RentId", rent.getRentID());
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
-        PendingIntent pendingIntent = PendingIntent.getService(this, rent.getRentID(), intent, 0);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, rent.getRentID(),
+                intent, 0);
 
-        mAlarmManager = (AlarmManager) Objects.requireNonNull(this).getSystemService(Context.ALARM_SERVICE);
+        mAlarmManager = (AlarmManager) Objects.requireNonNull(this)
+                .getSystemService(Context.ALARM_SERVICE);
 
-        Objects.requireNonNull(mAlarmManager).setExact(AlarmManager.RTC_WAKEUP, mCalendar.getTimeInMillis(), pendingIntent);
+        Objects.requireNonNull(mAlarmManager).setExact(AlarmManager.RTC_WAKEUP,
+                mCalendar.getTimeInMillis(), pendingIntent);
     }
 
     private User getUserFromSharedPref() {
