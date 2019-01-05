@@ -7,8 +7,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import source.kevtimov.landlordcommunicationapp.async.base.SchedulerProvider
 
-class AsyncSchedulerProvider @Inject
-constructor() : SchedulerProvider {
+class AsyncSchedulerProvider @Inject constructor() : SchedulerProvider {
 
     override fun background(): Scheduler {
         return Schedulers.io()
