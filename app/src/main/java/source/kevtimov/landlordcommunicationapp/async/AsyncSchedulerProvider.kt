@@ -28,7 +28,4 @@ class AsyncSchedulerProvider @Inject constructor() : SchedulerProvider {
                 return instance as SchedulerProvider
             }
     }
-
-    //for test1
-    //for devvv
 }
